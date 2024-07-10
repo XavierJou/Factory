@@ -22,6 +22,7 @@ public class Cours {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cours")
 	private int id;
+	private String titre;
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
 	private boolean videoproj;
@@ -79,6 +80,14 @@ public class Cours {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
 	}
 
 	public LocalDateTime getDateDebut() {
