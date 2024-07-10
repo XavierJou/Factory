@@ -10,6 +10,6 @@ public interface IDAOPrerequis extends JpaRepository<Prerequis, Integer> {
 
 	public List<Prerequis> findAllByNom(String nom);
 
-	public List<Prerequis> findByNameContaining(String recherche);
+	public List<Prerequis> findByNomContaining(String recherche);
 
 }

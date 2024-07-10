@@ -10,6 +10,6 @@ public interface IDAOVideoprojecteur extends JpaRepository<Videoprojecteur, Inte
 
 	public List<Videoprojecteur> findAllByNom(String nom);
 
-	public List<Videoprojecteur> findByNameContaining(String recherche);
+	public List<Videoprojecteur> findByNomContaining(String recherche);
 
 }

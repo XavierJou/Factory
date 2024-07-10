@@ -8,8 +8,5 @@ import factory.model.Formateur;
 
 public interface IDAOFormateur extends JpaRepository<Formateur, Integer> {
 
-	public List<Formateur> findAllByNom(String nom);
-
-	public List<Formateur> findByNameContaining(String recherche);
 
 }

@@ -10,6 +10,6 @@ public interface IDAOUtilisateur extends JpaRepository<Utilisateur, Integer> {
 
 	public List<Utilisateur> findAllByNom(String nom);
 
-	public List<Utilisateur> findByNameContaining(String recherche);
+	public List<Utilisateur> findByNomContaining(String recherche);
 
 }

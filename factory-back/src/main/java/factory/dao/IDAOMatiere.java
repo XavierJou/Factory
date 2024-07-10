@@ -10,6 +10,6 @@ public interface IDAOMatiere extends JpaRepository<Matiere, Integer> {
 
 	public List<Matiere> findAllByTitre(String titre);
 
-	public List<Matiere> findByTitleContaining(String recherche);
+	public List<Matiere> findByTitreContaining(String recherche);
 
 }

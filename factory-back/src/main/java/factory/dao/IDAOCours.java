@@ -10,6 +10,6 @@ public interface IDAOCours extends JpaRepository<Cours, Integer> {
 
 	public List<Cours> findAllByTitre(String titre);
 
-	public List<Cours> findByTitleContaining(String recherche);
+	public List<Cours> findByTitreContaining(String recherche);
 
 }

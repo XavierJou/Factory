@@ -10,6 +10,6 @@ public interface IDAOFormation extends JpaRepository<Formation, Integer> {
 
 	public List<Formation> findAllByTitre(String titre);
 
-	public List<Formation> findByTitleContaining(String recherche);
+	public List<Formation> findByTitreContaining(String recherche);
 
 }
