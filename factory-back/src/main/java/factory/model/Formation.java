@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "formation")
@@ -28,7 +29,7 @@ public class Formation {
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
 	private int capacite;
-
+	@Transient
 	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
 	private List<Cours> cours;
 

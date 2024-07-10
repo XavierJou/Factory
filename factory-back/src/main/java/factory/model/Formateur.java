@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "formateur")
@@ -21,7 +22,7 @@ public class Formateur {
 
     private String nom;
     private String prenom;
-
+    @Transient
     @OneToMany(mappedBy = "formateur")
     private List<Cours> cours;
 

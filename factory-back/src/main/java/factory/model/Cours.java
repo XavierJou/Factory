@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "cours")
@@ -27,17 +28,17 @@ public class Cours {
 	private boolean videoprojecteur;
 	private boolean ordiFormateur;
 	private boolean ordiStagiaire;
-
+	@Transient
 	private Matiere matiere;
-
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "formateur", nullable = false)
 	private Formateur formateur;
-
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "formation", nullable = false)
 	private Formation formation;
-
+	@Transient
 	@OneToMany(mappedBy = "cours", fetch = FetchType.LAZY)
 	private List<Ordinateur> ordinateurs;
 
