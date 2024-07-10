@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Prerequis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "prerequis")
+	@Column(name = "id_prerequis")
 	private int id;
 
 	private String nom;

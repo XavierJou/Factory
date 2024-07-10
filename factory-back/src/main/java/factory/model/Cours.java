@@ -34,11 +34,11 @@ public class Cours {
 	private Matiere matiere;
 
 	@ManyToOne
-	@JoinColumn(name = "formateur", nullable = false)
+	@JoinColumn(name = "id_formateur", nullable = false)
 	private Formateur formateur;
 	
 	@ManyToOne
-	@JoinColumn(name = "formation", nullable = false)
+	@JoinColumn(name = "id_formation", nullable = false)
 	private Formation formation;
 
 	@OneToMany(mappedBy = "cours", fetch = FetchType.LAZY)
