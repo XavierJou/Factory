@@ -40,7 +40,7 @@ public class FormationService {
 		if (formation.getTitre() == null) {
 			throw new RuntimeException("Impossible d'insert Formation sans titre");
 		}
-		return daoFormation.save(Formation);
+		return daoFormation.save(formation);
 	}
 
 	public void deleteById(Integer id) {

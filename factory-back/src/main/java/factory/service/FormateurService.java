@@ -30,7 +30,7 @@ public class FormateurService {
 	}
 
 	public Formateur insert(Formateur formateur) {
-		if (Formateur.getNom() == null) {
+		if (formateur.getNom() == null) {
 			throw new RuntimeException("Impossible d'insert Formateur sans nom");
 		}
 		return daoFormateur.save(formateur);
