@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -20,19 +22,27 @@ public class Formateur {
 	@Column(name = "id_formateur")
 	private int id;
 
-    private String nom;
-    private String prenom;
-    @Transient
+    
     @OneToMany(mappedBy = "formateur")
     private List<Cours> cours;
-
+    
+    
+    @OneToMany(mappedBy = "formateur")
+    private List<CompetenceFormateur> competences;
+ 
+   
+    @OneToMany(mappedBy = "formateur")
+    private List<DisponibiliteFormateur> dispos;
+    
+    @OneToOne
+    @JoinColumn(name="id_utilisateur")
+    private Utilisateur utilisateur;
+    
+    
     public Formateur() {
     }
 
-    public Formateur(String nom, String prenom) {
-        this.nom = nom;
-        this.prenom = prenom;
-    }
+    
 
 	public int getId() {
 		return id;
@@ -42,21 +52,6 @@ public class Formateur {
 		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
 
 	public List<Cours> getCours() {
 		return cours;
@@ -64,6 +59,30 @@ public class Formateur {
 
 	public void setCours(List<Cours> cours) {
 		this.cours = cours;
+	}
+
+	public List<CompetenceFormateur> getCompetences() {
+		return competences;
+	}
+
+	public void setCompetences(List<CompetenceFormateur> competences) {
+		this.competences = competences;
+	}
+
+	public List<DisponibiliteFormateur> getDispos() {
+		return dispos;
+	}
+
+	public void setDispos(List<DisponibiliteFormateur> dispos) {
+		this.dispos = dispos;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
     
     

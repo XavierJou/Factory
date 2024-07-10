@@ -29,9 +29,17 @@ public class Formation {
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
 	private int capacite;
-	@Transient
+	
 	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
 	private List<Cours> cours;
+	
+	
+	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
+	private List<Prerequis> prerequis;
+	
+	
+	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
+	private List<Stagiaire> stagiaires;
 
 	public Formation() {
 	}
@@ -107,6 +115,22 @@ public class Formation {
 
 	public void setCours(List<Cours> cours) {
 		this.cours = cours;
+	}
+
+	public List<Prerequis> getPrerequis() {
+		return prerequis;
+	}
+
+	public void setPrerequis(List<Prerequis> prerequis) {
+		this.prerequis = prerequis;
+	}
+
+	public List<Stagiaire> getStagiaires() {
+		return stagiaires;
+	}
+
+	public void setStagiaires(List<Stagiaire> stagiaires) {
+		this.stagiaires = stagiaires;
 	}
 	
 	

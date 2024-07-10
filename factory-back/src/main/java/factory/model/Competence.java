@@ -1,10 +1,15 @@
 package factory.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,12 +22,73 @@ public class Competence {
 	private int id;
 
     private String nom;
+    
+    @OneToMany(mappedBy="competence")
+    private List<CompetenceFormateur> competenceFormateurs;
+   
+    @OneToMany(mappedBy="competence")
+    private List<CompetenceMatiere> competenceMatieres;
 
     public Competence() {
     }
 
-    public Competence(String nom) {
-        this.nom = nom;
-    }
+   
+
+
+
+	public Competence(String nom, List<CompetenceFormateur> competenceFormateurs,
+			List<CompetenceMatiere> competenceMatieres) {
+		super();
+		this.nom = nom;
+		this.competenceFormateurs = competenceFormateurs;
+		this.competenceMatieres = competenceMatieres;
+	}
+
+
+
+
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+
+	public List<CompetenceFormateur> getCompetenceFormateurs() {
+		return competenceFormateurs;
+	}
+
+	public void setCompetenceFormateurs(List<CompetenceFormateur> competenceFormateurs) {
+		this.competenceFormateurs = competenceFormateurs;
+	}
+
+
+
+
+
+	public List<CompetenceMatiere> getCompetenceMatieres() {
+		return competenceMatieres;
+	}
+
+
+
+
+
+	public void setCompetenceMatieres(List<CompetenceMatiere> competenceMatieres) {
+		this.competenceMatieres = competenceMatieres;
+	}
+
+	
 
 }

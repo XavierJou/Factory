@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,11 +18,15 @@ public class Prerequis {
 	private int id;
 
 	private String nom;
-
+	
+	@ManyToOne
+	@JoinColumn(name="id_formation")
+	private Formation formation;
+	
 	public Prerequis() {
 	}
 
-	public Prerequis(String nom) {
+	public Prerequis(String nom, Formation formation) {
 		this.nom = nom;
 	}
 
@@ -38,6 +44,14 @@ public class Prerequis {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public Formation getFormation() {
+		return formation;
+	}
+
+	public void setFormation(Formation formation) {
+		this.formation = formation;
 	}
 	
 	

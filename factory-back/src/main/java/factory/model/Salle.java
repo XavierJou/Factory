@@ -1,6 +1,5 @@
 package factory.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -13,34 +12,30 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "videoprojecteur")
-public class Videoprojecteur {
+@Table(name = "salle")
+public class Salle {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_videoprojecteur")
+	@Column(name = "id_salle")
 	private int id;
 
 	private String nom;
-	private String marque;
-	@Column(name = "date_achat")
-	private LocalDate dateAchat;
-	@OneToMany(mappedBy="videoprojecteur")
+	private Integer capacite;
+
+
+	@OneToMany(mappedBy="salle")
 	private List<Cours> cours;
-	
 
-	public Videoprojecteur() {
-	}
 
 	
-	public Videoprojecteur(String nom, String marque, LocalDate dateAchat, List<Cours> cours) {
+	public Salle(int id, String nom, Integer capacite, List<Cours> cours) {
 		super();
+		this.id = id;
 		this.nom = nom;
-		this.marque = marque;
-		this.dateAchat = dateAchat;
+		this.capacite = capacite;
 		this.cours = cours;
 	}
-
 
 	public int getId() {
 		return id;
@@ -58,32 +53,21 @@ public class Videoprojecteur {
 		this.nom = nom;
 	}
 
-	public String getMarque() {
-		return marque;
+	public Integer getCapacite() {
+		return capacite;
 	}
 
-	public void setMarque(String marque) {
-		this.marque = marque;
+	public void setCapacite(Integer capacite) {
+		this.capacite = capacite;
 	}
-
-	public LocalDate getDateAchat() {
-		return dateAchat;
-	}
-
-	public void setDateAchat(LocalDate dateAchat) {
-		this.dateAchat = dateAchat;
-	}
-
 
 	public List<Cours> getCours() {
 		return cours;
 	}
 
-
 	public void setCours(List<Cours> cours) {
 		this.cours = cours;
 	}
-	
-	
 
+	
 }

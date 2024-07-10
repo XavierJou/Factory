@@ -1,10 +1,13 @@
 package factory.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,16 +23,29 @@ public class Matiere {
 	private int duree;
 	private String objectif;
 	private String contenu;
+	
+	@OneToMany(mappedBy="matiere")
+	private List<CompetenceMatiere> compMatiere;
+	
+	
+	@OneToMany(mappedBy="matiere")
+	private List<Cours> cours;
+	
 
 	public Matiere() {
 	}
 
-	public Matiere(String titre, int duree, String objectif, String contenu) {
+	
+	public Matiere(String titre, int duree, String objectif, String contenu, List<CompetenceMatiere> compMatiere,
+			List<Cours> cours) {
 		this.titre = titre;
 		this.duree = duree;
 		this.objectif = objectif;
 		this.contenu = contenu;
+		this.compMatiere = compMatiere;
+		this.cours = cours;
 	}
+
 
 	public int getId() {
 		return id;
@@ -69,6 +85,22 @@ public class Matiere {
 
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
+	}
+
+	public List<CompetenceMatiere> getCompMatiere() {
+		return compMatiere;
+	}
+
+	public void setCompMatiere(List<CompetenceMatiere> compMatiere) {
+		this.compMatiere = compMatiere;
+	}
+
+	public List<Cours> getCours() {
+		return cours;
+	}
+
+	public void setCours(List<Cours> cours) {
+		this.cours = cours;
 	}
 	
 	

@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
@@ -17,18 +20,18 @@ public class Stagiaire {
 	@Column(name = "id_stagiaire")
 	private int id;
 
-    private String nom;
-    private String prenom;
-    @Transient
+ 
+    @ManyToOne
+    @JoinColumn(name="id_formation")
 	private Formation formation;
+    
+    @OneToOne
+    @JoinColumn(name="id_utilisateur")
+    private Utilisateur utilisateur;
 
     public Stagiaire() {
     }
 
-	public Stagiaire(String nom, String prenom) {
-		this.nom = nom;
-		this.prenom = prenom;
-	}
 
 	public int getId() {
 		return id;
@@ -38,28 +41,20 @@ public class Stagiaire {
 		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
 	public Formation getFormation() {
 		return formation;
 	}
 
 	public void setFormation(Formation formation) {
 		this.formation = formation;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 	
 	

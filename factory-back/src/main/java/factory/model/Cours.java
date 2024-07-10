@@ -25,34 +25,54 @@ public class Cours {
 	private int id;
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
-	private boolean videoprojecteur;
+	private boolean videoproj;
 	private boolean ordiFormateur;
 	private boolean ordiStagiaire;
-	@Transient
+	
+	@ManyToOne
+	@JoinColumn(name="id_matiere")
 	private Matiere matiere;
-	@Transient
+
 	@ManyToOne
 	@JoinColumn(name = "formateur", nullable = false)
 	private Formateur formateur;
-	@Transient
+	
 	@ManyToOne
 	@JoinColumn(name = "formation", nullable = false)
 	private Formation formation;
-	@Transient
+
 	@OneToMany(mappedBy = "cours", fetch = FetchType.LAZY)
-	private List<Ordinateur> ordinateurs;
+	private List<CoursOrdinateurs> ordinateurs;
+	
+	@ManyToOne
+	@JoinColumn(name="id_videoprojecteur")
+	private Videoprojecteur videoprojecteur;
+	
+
+	
+	@ManyToOne
+	@JoinColumn(name="id_salle")
+	private Salle salle;
 
 	public Cours() {
 	}
 
-	public Cours(LocalDateTime dateDebut, boolean videoprojecteur, boolean ordiFormateur, boolean ordiStagiaire,
-			Matiere matiere) {
+	public Cours(LocalDateTime dateDebut, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire,
+			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
+			Videoprojecteur videoprojecteur, Salle salle) {
+		super();
 		this.dateDebut = dateDebut;
-		this.videoprojecteur = videoprojecteur;
+		this.videoproj = videoproj;
 		this.ordiFormateur = ordiFormateur;
 		this.ordiStagiaire = ordiStagiaire;
 		this.matiere = matiere;
+		this.formateur = formateur;
+		this.formation = formation;
+		this.ordinateurs = ordinateurs;
+		this.videoprojecteur = videoprojecteur;
+		this.salle = salle;
 	}
+
 
 	public int getId() {
 		return id;
@@ -70,12 +90,12 @@ public class Cours {
 		this.dateDebut = dateDebut;
 	}
 
-	public boolean isVideoprojecteur() {
-		return videoprojecteur;
+	public boolean isVideoproj() {
+		return videoproj;
 	}
 
-	public void setVideoprojecteur(boolean videoprojecteur) {
-		this.videoprojecteur = videoprojecteur;
+	public void setVideoproj(boolean videoproj) {
+		this.videoproj = videoproj;
 	}
 
 	public boolean isOrdiFormateur() {
@@ -118,4 +138,21 @@ public class Cours {
 		this.formation = formation;
 	}
 
+	public List<CoursOrdinateurs> getCoursOrdinateurs() {
+		return ordinateurs;
+	}
+
+	public void setCoursOrdinateurs(List<CoursOrdinateurs> ordinateurs) {
+		this.ordinateurs = ordinateurs;
+	}
+
+	public Salle getSalle() {
+		return salle;
+	}
+
+	public void setSalle(Salle salle) {
+		this.salle = salle;
+	}
+
+	
 }
