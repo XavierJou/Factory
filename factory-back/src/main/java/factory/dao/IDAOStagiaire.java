@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import factory.model.Stagiaire;
 
-public interface IDAOPrerequis extends JpaRepository<Stagiaire, Integer> {
+public interface IDAOStagiaire extends JpaRepository<Stagiaire, Integer> {
 
 	public List<Stagiaire> findAllByNom(String nom);
 
