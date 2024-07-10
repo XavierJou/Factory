@@ -22,6 +22,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @EnableJpaRepositories("factory.dao")
+@ComponentScan("factory.service")
 @PropertySource("classpath:infos.properties")
 public class AppConfig {
 
