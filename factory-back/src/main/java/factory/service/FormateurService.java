@@ -24,22 +24,15 @@ public class FormateurService {
 	public List<Formateur> getAll() {
 		return daoFormateur.findAll();
 	}
-
-	public List<Formateur> getAllByNom(String nom) {
-		return daoFormateur.findAllByNom(nom);
-	}
+	
 
 	public Formateur insert(Formateur formateur) {
-		if (formateur.getNom() == null) {
-			throw new RuntimeException("Impossible d'insert Formateur sans nom");
-		}
+		
 		return daoFormateur.save(formateur);
 	}
 
 	public Formateur update(Formateur formateur) {
-		if (formateur.getNom() == null) {
-			throw new RuntimeException("Impossible d'insert Formateur sans nom");
-		}
+		
 		return daoFormateur.save(formateur);
 	}
 

@@ -25,20 +25,17 @@ public class CompetenceService {
 		return daoCompetence.findAll();
 	}
 
-	public List<Competence> getAllByTitre(String titre) {
-		return daoCompetence.findAllByTitre(titre);
-	}
 
 	public Competence insert(Competence competence) {
-		if (competence.getTitre() == null) {
-			throw new RuntimeException("Impossible d'insert Competence sans titre");
+		if (competence.getNom() == null) {
+			throw new RuntimeException("Impossible d'insert Competence sans nom");
 		}
 		return daoCompetence.save(competence);
 	}
 
 	public Competence update(Competence competence) {
-		if (competence.getTitre() == null) {
-			throw new RuntimeException("Impossible d'insert Competence sans titre");
+		if (competence.getNom() == null) {
+			throw new RuntimeException("Impossible de mettre Competence sans titre");
 		}
 		return daoCompetence.save(competence);
 	}
