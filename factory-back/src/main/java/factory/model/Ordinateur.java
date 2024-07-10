@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "ordinateur")
@@ -25,7 +26,7 @@ public class Ordinateur {
 	private String os;
 	@Column(name = "date_achat")
 	private LocalDate dateAchat;
-
+	@Transient
 	@ManyToOne
 	@JoinColumn(name = "cours", nullable = false)
 	private Cours cours;
