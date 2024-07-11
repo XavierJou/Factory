@@ -24,11 +24,14 @@ public class Stagiaire {
     @JoinColumn(name="id_formation")
 	private Formation formation;
     
-    @OneToOne
-    @JoinColumn(name="id_utilisateur")
+    @OneToOne(mappedBy="stagiaire") 
     private Utilisateur utilisateur;
 
     public Stagiaire() {
+    }
+    
+    public Stagiaire(Formation formation) {
+    	this.formation=formation;
     }
 
 

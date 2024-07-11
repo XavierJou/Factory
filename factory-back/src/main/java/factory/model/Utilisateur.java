@@ -7,6 +7,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -25,11 +26,14 @@ public class Utilisateur {
     private String nom;
     private String prenom;
    
-    @OneToOne(mappedBy="utilisateur")
+    @OneToOne
+    @JoinColumn(name="id_formateur")
     private Formateur formateur;
    
-    @OneToOne(mappedBy="utilisateur")
+    @OneToOne
+    @JoinColumn(name="id_stagiaire")
     private Stagiaire stagiaire;
+    
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -42,6 +46,7 @@ public class Utilisateur {
         this.username= username;
         this.email=email;
         this.formateur = formateur;
+        this.role=role;
     }
     
     public Utilisateur(String nom, String prenom, String username,String password, String email, Stagiaire stagiaire, Role role) {
@@ -50,6 +55,7 @@ public class Utilisateur {
         this.username= username;
         this.email=email;
         this.stagiaire = stagiaire;
+        this.role=role;
     }
     
     public Utilisateur(String nom, String prenom, String username,String password, String email, Role role) {
@@ -57,6 +63,7 @@ public class Utilisateur {
         this.prenom = prenom;
         this.username= username;
         this.email=email;
+        this.role=role;
     }
 
 	public Integer getId() {
