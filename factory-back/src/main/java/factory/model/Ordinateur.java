@@ -19,7 +19,7 @@ public class Ordinateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ordinateur")
-	private int id;
+	private Integer id;
 
 	private String nom;
 	private String marque;
@@ -43,14 +43,23 @@ public class Ordinateur {
 		this.dateAchat = dateAchat;
 		this.cours = cours;
 	}
+	
+	public Ordinateur(String nom, String marque, String os, LocalDate dateAchat) {
+		super();
+		this.nom = nom;
+		this.marque = marque;
+		this.os = os;
+		this.dateAchat = dateAchat;		
+	}
 
 
 
-	public int getId() {
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

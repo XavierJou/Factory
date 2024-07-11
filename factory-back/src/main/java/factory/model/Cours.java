@@ -21,7 +21,7 @@ public class Cours {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cours")
-	private int id;
+	private Integer id;
 	private String titre;
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
@@ -57,11 +57,12 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(LocalDateTime dateDebut, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire,
+	public Cours(LocalDateTime dateDebut,String titre, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire,
 			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
 			Videoprojecteur videoprojecteur, Salle salle) {
-		super();
+		
 		this.dateDebut = dateDebut;
+		this.titre=titre;
 		this.videoproj = videoproj;
 		this.ordiFormateur = ordiFormateur;
 		this.ordiStagiaire = ordiStagiaire;
@@ -72,13 +73,23 @@ public class Cours {
 		this.videoprojecteur = videoprojecteur;
 		this.salle = salle;
 	}
+	
+	public Cours(LocalDateTime dateDebut,String titre, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire) {
+		
+		this.dateDebut = dateDebut;
+		this.titre=titre;
+		this.videoproj = videoproj;
+		this.ordiFormateur = ordiFormateur;
+		this.ordiStagiaire = ordiStagiaire;
+		
+	}
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

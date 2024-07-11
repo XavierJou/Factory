@@ -15,7 +15,7 @@ public class Prerequis {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_prerequis")
-	private int id;
+	private Integer id;
 
 	private String nom;
 	
@@ -28,13 +28,18 @@ public class Prerequis {
 
 	public Prerequis(String nom, Formation formation) {
 		this.nom = nom;
+		this.formation=formation;
+	}
+	
+	public Prerequis(String nom) {
+		this.nom = nom;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

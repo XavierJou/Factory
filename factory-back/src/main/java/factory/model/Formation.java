@@ -19,15 +19,15 @@ public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_formation")
-	private int id;
+	private Integer id;
 
 	private String titre;
-	private int duree;
+	private Integer duree;
 	private String objectif;
 	private String contenu;
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
-	private int capacite;
+	private Integer capacite;
 	
 	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
 	private List<Cours> cours;
@@ -43,7 +43,7 @@ public class Formation {
 	public Formation() {
 	}
 
-	public Formation(String titre, int duree, String objectif, String contenu, LocalDateTime dateDebut, int capacite) {
+	public Formation(String titre, Integer duree, String objectif, String contenu, LocalDateTime dateDebut, Integer capacite) {
 		this.titre = titre;
 		this.duree = duree;
 		this.objectif = objectif;
@@ -51,12 +51,14 @@ public class Formation {
 		this.dateDebut = dateDebut;
 		this.capacite = capacite;
 	}
+	
+	
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -68,11 +70,11 @@ public class Formation {
 		this.titre = titre;
 	}
 
-	public int getDuree() {
+	public Integer getDuree() {
 		return duree;
 	}
 
-	public void setDuree(int duree) {
+	public void setDuree(Integer duree) {
 		this.duree = duree;
 	}
 
@@ -100,11 +102,11 @@ public class Formation {
 		this.dateDebut = dateDebut;
 	}
 
-	public int getCapacite() {
+	public Integer getCapacite() {
 		return capacite;
 	}
 
-	public void setCapacite(int capacite) {
+	public void setCapacite(Integer capacite) {
 		this.capacite = capacite;
 	}
 

@@ -25,4 +25,45 @@ public class CompetenceFormateur {
 	@ManyToOne
 	@JoinColumn(name="id_formateur")
 	private Formateur formateur;
+
+	public CompetenceFormateur(Integer id, Competence competence, Formateur formateur) {
+		this.id = id;
+		this.competence = competence;
+		this.formateur = formateur;
+	}
+	
+	public CompetenceFormateur( Competence competence, Formateur formateur) {
+			this.competence = competence;
+		this.formateur = formateur;
+	}
+
+	public CompetenceFormateur() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Competence getCompetence() {
+		return competence;
+	}
+
+	public void setCompetence(Competence competence) {
+		this.competence = competence;
+	}
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+	
+	
+	
 }

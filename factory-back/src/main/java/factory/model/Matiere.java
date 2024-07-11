@@ -17,10 +17,10 @@ public class Matiere {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_matiere")
-	private int id;
+	private Integer id;
 
 	private String titre;
-	private int duree;
+	private Integer duree;
 	private String objectif;
 	private String contenu;
 	
@@ -36,7 +36,7 @@ public class Matiere {
 	}
 
 	
-	public Matiere(String titre, int duree, String objectif, String contenu, List<CompetenceMatiere> compMatiere,
+	public Matiere(String titre, Integer duree, String objectif, String contenu, List<CompetenceMatiere> compMatiere,
 			List<Cours> cours) {
 		this.titre = titre;
 		this.duree = duree;
@@ -45,13 +45,20 @@ public class Matiere {
 		this.compMatiere = compMatiere;
 		this.cours = cours;
 	}
+	
+	public Matiere(String titre, Integer duree, String objectif, String contenu) {
+		this.titre = titre;
+		this.duree = duree;
+		this.objectif = objectif;
+		this.contenu = contenu;		
+	}
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,11 +70,11 @@ public class Matiere {
 		this.titre = titre;
 	}
 
-	public int getDuree() {
+	public Integer getDuree() {
 		return duree;
 	}
 
-	public void setDuree(int duree) {
+	public void setDuree(Integer duree) {
 		this.duree = duree;
 	}
 

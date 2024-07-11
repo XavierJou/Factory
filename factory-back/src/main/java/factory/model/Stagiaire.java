@@ -17,7 +17,7 @@ public class Stagiaire {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_stagiaire")
-	private int id;
+	private Integer id;
 
  
     @ManyToOne
@@ -32,11 +32,11 @@ public class Stagiaire {
     }
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -17,7 +17,7 @@ public class Competence {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_competence")
-	private int id;
+	private Integer id;
 
     private String nom;
     
@@ -36,21 +36,25 @@ public class Competence {
 
 	public Competence(String nom, List<CompetenceFormateur> competenceFormateurs,
 			List<CompetenceMatiere> competenceMatieres) {
-		super();
-		this.nom = nom;
+				this.nom = nom;
 		this.competenceFormateurs = competenceFormateurs;
 		this.competenceMatieres = competenceMatieres;
 	}
+	
+	public Competence(String nom) {
+				this.nom = nom;
+		
+	}
 
 
 
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -23,4 +23,48 @@ public class CompetenceMatiere {
 	@ManyToOne
 	@JoinColumn(name="id_matiere")
 	private	Matiere matiere;
+	
+	
+	public CompetenceMatiere(Competence competence, Matiere matiere) {
+		this.competence = competence;
+		this.matiere = matiere;
+	}
+
+
+	public CompetenceMatiere() {
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+	public Competence getCompetence() {
+		return competence;
+	}
+
+
+	public void setCompetence(Competence competence) {
+		this.competence = competence;
+	}
+
+
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+	
+	
+	
+	
 }

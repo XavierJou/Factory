@@ -25,5 +25,35 @@ public class CoursOrdinateurs {
 	@ManyToOne
 	@JoinColumn(name="id_ordinateur")
 	private Ordinateur ordinateur;
+
+	public CoursOrdinateurs() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Cours getCours() {
+		return cours;
+	}
+
+	public void setCours(Cours cours) {
+		this.cours = cours;
+	}
+
+	public Ordinateur getOrdinateur() {
+		return ordinateur;
+	}
+
+	public void setOrdinateur(Ordinateur ordinateur) {
+		this.ordinateur = ordinateur;
+	}
+	
+	
+	
 }
 

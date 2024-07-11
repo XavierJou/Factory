@@ -17,7 +17,7 @@ public class Salle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_salle")
-	private int id;
+	private Integer id;
 
 	private String nom;
 	private Integer capacite;
@@ -28,19 +28,29 @@ public class Salle {
 
 
 	
-	public Salle(int id, String nom, Integer capacite, List<Cours> cours) {
-		super();
-		this.id = id;
+	public Salle( String nom, Integer capacite, List<Cours> cours) {
+		
 		this.nom = nom;
 		this.capacite = capacite;
 		this.cours = cours;
 	}
+	
+	public Salle( String nom, Integer capacite) {
+		
+		this.nom = nom;
+		this.capacite = capacite;	
+	}
+	
+public Salle( ) {
+		
+		
+	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

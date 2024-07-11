@@ -17,9 +17,10 @@ public class Utilisateur {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_utilisateur")
-	private int id;
+	private Integer id;
 
     private String username;
+    private String password;
     private String email;
     private String nom;
     private String prenom;
@@ -35,7 +36,7 @@ public class Utilisateur {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String username, String email, Formateur formateur, Role role) {
+    public Utilisateur(String nom, String prenom, String username,String password, String email, Formateur formateur, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.username= username;
@@ -43,7 +44,7 @@ public class Utilisateur {
         this.formateur = formateur;
     }
     
-    public Utilisateur(String nom, String prenom, String username, String email, Stagiaire stagiaire, Role role) {
+    public Utilisateur(String nom, String prenom, String username,String password, String email, Stagiaire stagiaire, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.username= username;
@@ -51,18 +52,18 @@ public class Utilisateur {
         this.stagiaire = stagiaire;
     }
     
-    public Utilisateur(String nom, String prenom, String username, String email, Role role) {
+    public Utilisateur(String nom, String prenom, String username,String password, String email, Role role) {
         this.nom = nom;
         this.prenom = prenom;
         this.username= username;
         this.email=email;
     }
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -120,6 +121,14 @@ public class Utilisateur {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
     
     

@@ -18,7 +18,7 @@ public class Videoprojecteur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_videoprojecteur")
-	private int id;
+	private Integer id;
 
 	private String nom;
 	private String marque;
@@ -33,19 +33,27 @@ public class Videoprojecteur {
 
 	
 	public Videoprojecteur(String nom, String marque, LocalDate dateAchat, List<Cours> cours) {
-		super();
+		
 		this.nom = nom;
 		this.marque = marque;
 		this.dateAchat = dateAchat;
 		this.cours = cours;
 	}
+	
+	public Videoprojecteur(String nom, String marque, LocalDate dateAchat) {
+		
+		this.nom = nom;
+		this.marque = marque;
+		this.dateAchat = dateAchat;
+		
+	}
 
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
