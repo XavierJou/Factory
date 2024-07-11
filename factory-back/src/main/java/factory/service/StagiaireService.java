@@ -9,9 +9,6 @@ import factory.dao.IDAOStagiaire;
 import factory.model.Stagiaire;
 
 
-
-
-
 @Service
 public class StagiaireService {
 

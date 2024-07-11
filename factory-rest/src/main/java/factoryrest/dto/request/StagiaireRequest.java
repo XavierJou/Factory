@@ -4,11 +4,9 @@ import jakarta.validation.constraints.NotNull;
 
 public class StagiaireRequest {
 	private Integer id;
-	private String prenom;
-	private String nom;
-	private String email;
+
 	@NotNull
-	private Integer idFiliere;
+	private Integer idFormation;
 
 	public StagiaireRequest() {
 
@@ -22,36 +20,12 @@ public class StagiaireRequest {
 		this.id = id;
 	}
 
-	public String getPrenom() {
-		return prenom;
+	public Integer getIdFormation() {
+		return idFormation;
 	}
 
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Integer getIdFiliere() {
-		return idFiliere;
-	}
-
-	public void setIdFiliere(Integer idFiliere) {
-		this.idFiliere = idFiliere;
+	public void setIdFormation(Integer idFormation) {
+		this.idFormation = idFormation;
 	}
 
 }
