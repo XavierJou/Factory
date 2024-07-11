@@ -13,6 +13,13 @@ public class FormationService {
 
 	@Autowired
 	IDAOFormation daoFormation;
+	
+	public Formation getByIdWithStagiaire(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find une formation sans id");
+		}
+		return daoFormation.findByIdFetchStagiaires(id).orElseThrow(RuntimeException::new);
+	}
 
 	public Formation getById(Integer id) {
 		if (id == null) {

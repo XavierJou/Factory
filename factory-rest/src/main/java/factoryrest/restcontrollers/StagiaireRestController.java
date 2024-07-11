@@ -20,13 +20,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import jakarta.validation.Valid;
 import factory.model.Stagiaire;
-import factory.service.FiliereService;
-import quest.service.StagiaireService;
+import factory.service.FormationService;
+import factory.service.StagiaireService;
 import factoryrest.dto.request.StagiaireRequest;
 import factoryrest.dto.response.CustomJsonViews;
 import factoryrest.dto.response.StagiaireResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/stagiaire")
@@ -35,40 +35,29 @@ public class StagiaireRestController {
 	@Autowired
 	private StagiaireService stagiaireSrv;
 	@Autowired
-	private FiliereService filiereSrv;
+	private FormationService formationSrv;
 
 	@GetMapping("")
-	@JsonView(CustomJsonViews.StagaireWithFiliere.class)
+	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	public List<StagiaireResponse> getAll() {
-//		List<Stagiaire> listStagiaireDeLaBase = stagiaireSrv.getAll();
-//
-//		List<StagiaireResponse> listARenvoyerAvecMesStagiaireResponse = new ArrayList<>();
-//
-//		for (Stagiaire stagiaireEntity : listStagiaireDeLaBase) {
-//			StagiaireResponse stagiaireResponse = new StagiaireResponse(stagiaireEntity);
-//			
-//			listARenvoyerAvecMesStagiaireResponse.add(stagiaireResponse);
-//		}
-//		return listARenvoyerAvecMesStagiaireResponse;
-
 		return stagiaireSrv.getAll().stream().map(entity -> new StagiaireResponse(entity)).collect(Collectors.toList());
 	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@JsonView(CustomJsonViews.StagaireWithFiliere.class)
+	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	public StagiaireResponse create(@Valid @RequestBody StagiaireRequest stagiaireRequest, BindingResult br) {
 		if (br.hasErrors()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 		}
 		Stagiaire entity = new Stagiaire();
 		BeanUtils.copyProperties(stagiaireRequest, entity);
-		entity.setFiliere(filiereSrv.getById(stagiaireRequest.getIdFiliere()));
+		entity.setFormation(formationSrv.getById(stagiaireRequest.getIdFormation()));
 		return new StagiaireResponse(stagiaireSrv.insert(entity));
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(CustomJsonViews.StagaireWithFiliere.class)
+	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	public StagiaireResponse update(@Valid @RequestBody StagiaireRequest stagiaireRequest, BindingResult br,
 			@PathVariable Integer id) {
 		if (br.hasErrors()) {
@@ -76,7 +65,7 @@ public class StagiaireRestController {
 		}
 		Stagiaire stagiaire = new Stagiaire();
 		BeanUtils.copyProperties(stagiaireRequest, stagiaire);
-		stagiaire.setFiliere(filiereSrv.getById(stagiaireRequest.getIdFiliere()));
+		stagiaire.setFormation(formationSrv.getById(stagiaireRequest.getIdFormation()));
 		stagiaire.setId(id);
 		return new StagiaireResponse(stagiaireSrv.update(stagiaire));
 	}

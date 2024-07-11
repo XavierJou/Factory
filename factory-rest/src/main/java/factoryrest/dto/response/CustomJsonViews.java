@@ -6,11 +6,11 @@ public class CustomJsonViews {
 
 	}
 
-	public static class StagaireWithFiliere extends Common {
+	public static class StagiaireWithFormation extends Common {
 
 	}
 
-	public static class FiliereWithStagiaire extends Common {
+	public static class FormationWithStagiaire extends Common {
 
 	}
 }
