@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ public class Competence {
 	@Column(name = "id_competence")
 	private Integer id;
 
+    @Column(name = "nom_competence", nullable = false, unique = true)
     private String nom;
     
     @OneToMany(mappedBy="competence")

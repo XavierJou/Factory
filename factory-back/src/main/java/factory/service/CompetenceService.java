@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOCompetence;
-import factory.model.Competence;
+import factory.entity.Competence;
 
 @Service
 public class CompetenceService {

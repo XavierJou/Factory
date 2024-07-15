@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Utilisateur;
+import factory.entity.Utilisateur;
 
 public interface IDAOUtilisateur extends JpaRepository<Utilisateur, Integer> {
 

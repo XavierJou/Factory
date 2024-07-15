@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,12 +22,21 @@ public class Cours {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cours")
 	private Integer id;
+	
+	@Column( nullable = false, unique = true)
 	private String titre;
+	
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
-	private boolean videoproj;
-	private boolean ordiFormateur;
-	private boolean ordiStagiaire;
+	
+	@Column(name = "besoin_videoprojecteur")
+	private Boolean besoinVideoprojecteur;
+	
+	@Column(name = "besoin_ordi_formateur")
+	private Boolean besoinOrdiFormateur;
+	
+	@Column(name = "besoin_ordi_stagiare")
+	private Boolean besoinOrdiStagiaire;
 	
 	@ManyToOne
 	@JoinColumn(name="id_matiere")
@@ -57,15 +66,15 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(LocalDateTime dateDebut,String titre, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire,
+	public Cours(LocalDateTime dateDebut,String titre, Boolean besoinVideoprojecteur, Boolean besoinOrdiFormateur, Boolean besoinOrdiStagiaire,
 			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
 			Videoprojecteur videoprojecteur, Salle salle) {
 		
 		this.dateDebut = dateDebut;
 		this.titre=titre;
-		this.videoproj = videoproj;
-		this.ordiFormateur = ordiFormateur;
-		this.ordiStagiaire = ordiStagiaire;
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
 		this.matiere = matiere;
 		this.formateur = formateur;
 		this.formation = formation;
@@ -74,16 +83,15 @@ public class Cours {
 		this.salle = salle;
 	}
 	
-	public Cours(LocalDateTime dateDebut,String titre, boolean videoproj, boolean ordiFormateur, boolean ordiStagiaire) {
+	public Cours(LocalDateTime dateDebut,String titre, Boolean besoinVideoprojecteur, Boolean besoinOrdiFormateur, Boolean besoinOrdiStagiaire) {
 		
 		this.dateDebut = dateDebut;
 		this.titre=titre;
-		this.videoproj = videoproj;
-		this.ordiFormateur = ordiFormateur;
-		this.ordiStagiaire = ordiStagiaire;
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
 		
 	}
-
 
 	public Integer getId() {
 		return id;
@@ -109,28 +117,28 @@ public class Cours {
 		this.dateDebut = dateDebut;
 	}
 
-	public boolean isVideoproj() {
-		return videoproj;
+	public Boolean getBesoinVideoprojecteur() {
+		return besoinVideoprojecteur;
 	}
 
-	public void setVideoproj(boolean videoproj) {
-		this.videoproj = videoproj;
+	public void setBesoinVideoprojecteur(Boolean besoinVideoprojecteur) {
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
 	}
 
-	public boolean isOrdiFormateur() {
-		return ordiFormateur;
+	public Boolean getBesoinOrdiFormateur() {
+		return besoinOrdiFormateur;
 	}
 
-	public void setOrdiFormateur(boolean ordiFormateur) {
-		this.ordiFormateur = ordiFormateur;
+	public void setBesoinOrdiFormateur(Boolean besoinOrdiFormateur) {
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
 	}
 
-	public boolean isOrdiStagiaire() {
-		return ordiStagiaire;
+	public Boolean getBesoinOrdiStagiaire() {
+		return besoinOrdiStagiaire;
 	}
 
-	public void setOrdiStagiaire(boolean ordiStagiaire) {
-		this.ordiStagiaire = ordiStagiaire;
+	public void setBesoinOrdiStagiaire(Boolean besoinOrdiStagiaire) {
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
 	}
 
 	public Matiere getMatiere() {
@@ -157,12 +165,20 @@ public class Cours {
 		this.formation = formation;
 	}
 
-	public List<CoursOrdinateurs> getCoursOrdinateurs() {
+	public List<CoursOrdinateurs> getOrdinateurs() {
 		return ordinateurs;
 	}
 
-	public void setCoursOrdinateurs(List<CoursOrdinateurs> ordinateurs) {
+	public void setOrdinateurs(List<CoursOrdinateurs> ordinateurs) {
 		this.ordinateurs = ordinateurs;
+	}
+
+	public Videoprojecteur getVideoprojecteur() {
+		return videoprojecteur;
+	}
+
+	public void setVideoprojecteur(Videoprojecteur videoprojecteur) {
+		this.videoprojecteur = videoprojecteur;
 	}
 
 	public Salle getSalle() {
@@ -172,6 +188,11 @@ public class Cours {
 	public void setSalle(Salle salle) {
 		this.salle = salle;
 	}
+
+
+	
+
+	
 
 	
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOOrdinateur;
-import factory.model.Ordinateur;
+import factory.entity.Ordinateur;
 
 @Service
 public class OrdinateurService {

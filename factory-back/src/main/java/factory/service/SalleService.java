@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOSalle;
-import factory.model.Salle;
+import factory.entity.Salle;
 
 
 

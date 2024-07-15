@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOUtilisateur;
-import factory.model.Utilisateur;
+import factory.entity.Utilisateur;
 
 @Service
 public class UtilisateurService {

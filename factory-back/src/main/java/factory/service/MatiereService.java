@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOMatiere;
-import factory.model.Matiere;
+import factory.entity.Matiere;
 
 @Service
 public class MatiereService {

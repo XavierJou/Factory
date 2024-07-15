@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Videoprojecteur;
+import factory.entity.Videoprojecteur;
 
 public interface IDAOVideoprojecteur extends JpaRepository<Videoprojecteur, Integer> {
 

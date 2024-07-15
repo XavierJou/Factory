@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Ordinateur;
+import factory.entity.Ordinateur;
 
 public interface IDAOOrdinateur extends JpaRepository<Ordinateur, Integer> {
 

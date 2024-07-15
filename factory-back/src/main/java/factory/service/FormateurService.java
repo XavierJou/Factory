@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOFormateur;
-import factory.model.Formateur;
+import factory.entity.Formateur;
 
 @Service
 public class FormateurService {

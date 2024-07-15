@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Cours;
+import factory.entity.Cours;
 
 public interface IDAOCours extends JpaRepository<Cours, Integer> {
 

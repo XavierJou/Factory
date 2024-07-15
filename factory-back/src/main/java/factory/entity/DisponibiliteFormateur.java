@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import java.time.LocalDate;
 
@@ -25,10 +25,10 @@ public class DisponibiliteFormateur {
     private Formateur formateur;
     
     
-    @Column(name = "date_debut")
+    @Column(name = "date_debut", nullable = false)
 	private LocalDate dateDebut;
 
-    @Column(name = "date_fin")
+    @Column(name = "date_fin", nullable = false)
 	private LocalDate dateFin;
     
     

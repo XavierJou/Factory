@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOStagiaire;
-import factory.model.Stagiaire;
+import factory.entity.Stagiaire;
 
 
 @Service

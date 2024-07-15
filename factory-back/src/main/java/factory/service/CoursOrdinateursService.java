@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOCoursOrdinateurs;
-import factory.model.Cours;
-import factory.model.CoursOrdinateurs;
+import factory.entity.CoursOrdinateurs;
 
 @Service
 public class CoursOrdinateursService {

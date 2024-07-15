@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOCompetenceFormateur;
-import factory.model.CompetenceFormateur;
+import factory.entity.CompetenceFormateur;
 
 @Service
 public class CompetenceFormateurService {

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Competence;
+import factory.entity.Competence;
 
 public interface IDAOCompetence extends JpaRepository<Competence, Integer> {
 

@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name="competenceFormateur")
+@Table(name="competence_formateur")
 @Entity
 public class CompetenceFormateur {
 	
@@ -19,11 +19,11 @@ public class CompetenceFormateur {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="id_competence")
+	@JoinColumn(name="id_competence", nullable = false)
 	private Competence competence;
 	
 	@ManyToOne
-	@JoinColumn(name="id_formateur")
+	@JoinColumn(name="id_formateur", nullable = false)
 	private Formateur formateur;
 
 	public CompetenceFormateur(Integer id, Competence competence, Formateur formateur) {

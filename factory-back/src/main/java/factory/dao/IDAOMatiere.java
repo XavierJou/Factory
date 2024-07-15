@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Matiere;
+import factory.entity.Matiere;
 
 public interface IDAOMatiere extends JpaRepository<Matiere, Integer> {
 

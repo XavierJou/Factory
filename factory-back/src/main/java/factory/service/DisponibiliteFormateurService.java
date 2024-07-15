@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAODisponibiliteFormateur;
-import factory.model.CoursOrdinateurs;
-import factory.model.DisponibiliteFormateur;
+import factory.entity.DisponibiliteFormateur;
 
 @Service
 public class DisponibiliteFormateurService {

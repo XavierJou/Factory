@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,21 +9,21 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name="coursOrdinateurs")
+@Table(name="cours_ordinateurs")
 @Entity
 public class CoursOrdinateurs {
 
 	@Id
-	@Column(name="id_coursOrdinateurs")
+	@Column(name="id_cours_ordinateurs")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name="id_cours")
+	@JoinColumn(name="id_cours", nullable = false)
 	private Cours cours;
 	
 	@ManyToOne
-	@JoinColumn(name="id_ordinateur")
+	@JoinColumn(name="id_ordinateur", nullable = false)
 	private Ordinateur ordinateur;
 
 	public CoursOrdinateurs() {

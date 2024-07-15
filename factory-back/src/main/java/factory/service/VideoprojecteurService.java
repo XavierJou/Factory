@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import factory.dao.IDAOVideoprojecteur;
-import factory.model.Videoprojecteur;
+import factory.entity.Videoprojecteur;
 
 
 @Service

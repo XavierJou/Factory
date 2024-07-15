@@ -1,4 +1,4 @@
-package factory.model;
+package factory.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="competenceMatiere")
+@Table(name="competence_matiere")
 public class CompetenceMatiere {
 
 	@Id
@@ -18,10 +18,10 @@ public class CompetenceMatiere {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@ManyToOne
-	@JoinColumn(name="id_competence")
+	@JoinColumn(name="id_competence", nullable = false)
 	private Competence competence;
 	@ManyToOne
-	@JoinColumn(name="id_matiere")
+	@JoinColumn(name="id_matiere", nullable = false)
 	private	Matiere matiere;
 	
 	

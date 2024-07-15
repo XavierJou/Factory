@@ -4,7 +4,7 @@ package factory.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.CompetenceFormateur;
+import factory.entity.CompetenceFormateur;
 
 
 public interface IDAOCompetenceFormateur extends JpaRepository<CompetenceFormateur, Integer> {

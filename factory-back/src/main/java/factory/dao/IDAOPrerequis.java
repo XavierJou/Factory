@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import factory.model.Prerequis;
+import factory.entity.Prerequis;
 
 public interface IDAOPrerequis extends JpaRepository<Prerequis, Integer> {
 
