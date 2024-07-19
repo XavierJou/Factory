@@ -1,3 +1,4 @@
+import { isLoggedGuard } from './guards/isLogged.guards';
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -25,7 +26,6 @@ import { CoursComponent } from './components/cours/cours/cours.component';
 import { EditCoursComponent } from './components/cours/edit-cours/edit-cours.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
-import { isLoggedGuard } from './guards/isLogged.guards';
 
 export const routes: Routes = [
   {
@@ -76,7 +76,7 @@ export const routes: Routes = [
         component: EditCoursComponent,
       },
       {
-        path: 'formateur',
+        path: 'formateurs',
         component: FormateurComponent,
       },
       {
@@ -88,7 +88,7 @@ export const routes: Routes = [
         component: EditFormateurComponent,
       },
       {
-        path: 'formation',
+        path: 'formations',
         component: FormationComponent,
       },
       {
@@ -148,7 +148,7 @@ export const routes: Routes = [
         component: EditSalleComponent,
       },
       {
-        path: 'stagiaire',
+        path: 'stagiaires',
         component: StagiaireComponent,
       },
       {
