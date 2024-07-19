@@ -12,17 +12,17 @@ import { Utilisateur } from '../../models/utilisateur';
 export class MenuComponent {
   constructor(private router: Router) {}
 
+  get login(): string {
+    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
+    return u.login!;
+  }
+
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/home');
   }
 
   get logged(): boolean {
-    return localStorage.getItem('token') !== null;
-  }
-
-  get isLogin(): string {
-    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
-    return u.login!;
+    return localStorage.getItem('token') != null;
   }
 }

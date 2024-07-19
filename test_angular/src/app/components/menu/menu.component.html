@@ -31,6 +31,9 @@
         </li>
       </ul>
       <div>
+        @if(logged){
+        <button (click)="logout()" class="btn btn-link">deconnexion</button>
+        }@else{
         <span
           ><a
             routerLink="/login"
@@ -47,6 +50,7 @@
             >inscription</a
           ></span
         >
+        }
       </div>
     </div>
   </div>

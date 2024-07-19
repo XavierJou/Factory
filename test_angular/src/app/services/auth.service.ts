@@ -7,11 +7,11 @@ import { Utilisateur } from '../models/utilisateur';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private HttpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   public connexion(login: string, password: string): Observable<Utilisateur> {
     let auth = 'Basic ' + window.btoa(login + ':' + password);
-    return this.HttpClient.get<Utilisateur>(
+    return this.httpClient.get<Utilisateur>(
       'http://localhost:8080/demo/api/auth',
       { headers: { Authorization: auth } }
     );
