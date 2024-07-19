@@ -20,6 +20,13 @@ public class CompetenceService {
 		}
 		return daoCompetence.findById(id).orElseThrow(RuntimeException::new);
 	}
+	
+	public Competence getByIdWithFormateurs(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Competence sans id");
+		}
+		return daoCompetence.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public List<Competence> getAll() {
 		return daoCompetence.findAll();
@@ -50,5 +57,7 @@ public class CompetenceService {
 	public void delete(Competence competence) {
 		deleteById(competence.getId());
 	}
+	
+	
 
 }

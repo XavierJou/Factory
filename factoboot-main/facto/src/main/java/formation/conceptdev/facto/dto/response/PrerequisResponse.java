@@ -1,57 +1,69 @@
 package formation.conceptdev.facto.dto.response;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.entities.Prerequis;
+
 
 public class PrerequisResponse {
 
     @JsonView(CustomJsonViews.Common.class)
     private Integer id;
 
+  
     @JsonView(CustomJsonViews.Common.class)
-    private String titre;
-
-    @JsonView(CustomJsonViews.Common.class)
-    private String description;
-
-    // Constructeur par défaut
-    public PrerequisResponse() {
-    }
-
-    // Constructeur pour initialiser à partir d'un objet Prerequis
+    private String nom;
+    
+ 
+    @JsonView(CustomJsonViews.PreRequisWithFormation.class)
+    private FormationResponse formation;
+    
+    
     public PrerequisResponse(Prerequis prerequis) {
-        this.id = prerequis.getId();
-        this.titre = prerequis.getTitre();
-        this.description = prerequis.getDescription();
-    }
+		this(prerequis, true);
+	}
 
-    // Getters
-    public Integer getId() {
-        return id;
-    }
+	public PrerequisResponse(Prerequis prerequisEntity, boolean bool) {
+//		this.setId(stagiaireEntity.getId());
+//		this.setPrenom(stagiaireEntity.getPrenom());
+//		this.setEmail(stagiaireEntity.getEmail());
+//		this.setNom(stagiaireEntity.getNom());
+		BeanUtils.copyProperties(prerequisEntity, this, "formation");
+		if (bool) {
+			if (prerequisEntity.getFormation() != null) {
+				this.setFormation(new FormationResponse(prerequisEntity.getFormation(),false));
+			}
+		}
+	}
 
-    public String getTitre() {
-        return titre;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getNom() {
+		return nom;
+	}
 
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public FormationResponse getFormation() {
+		return formation;
+	}
+
+	public void setFormation(FormationResponse formation) {
+		this.formation = formation;
+	}
+
+	
+
+    
+  
 }

@@ -4,6 +4,8 @@ import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import formation.conceptdev.facto.entities.Formateur;
+import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.entities.Utilisateur;
 
 public class UtilisateurResponse {
@@ -13,12 +15,32 @@ public class UtilisateurResponse {
 	private String login;
 	@JsonView(CustomJsonViews.Common.class)
 	private String password;
+	@JsonView(CustomJsonViews.UtilisateurResponseWithFormateur.class)
+	private FormateurResponse formateur;
+	@JsonView(CustomJsonViews.UtilisateurResponseWithStagiaire.class)
+	private StagiaireResponse stagiaire;
 
 	public UtilisateurResponse() {
 	}
 
-	public UtilisateurResponse(Utilisateur utilisateur) {
-		BeanUtils.copyProperties(utilisateur, this);
+	public UtilisateurResponse(Utilisateur utilisateurEntity, boolean besoinFormateur, boolean besoinStagiaire) {
+		BeanUtils.copyProperties(utilisateurEntity, this);
+		
+		if (besoinFormateur) {
+			if (utilisateurEntity.getFormateur() != null) {
+				this.setFormateur(new FormateurResponse(utilisateurEntity.getFormateur(),false,false,false,false));
+			}
+		}
+		
+		if (besoinStagiaire) {
+			if (utilisateurEntity.getStagiaire() != null) {
+				this.setStagiaire(new StagiaireResponse(utilisateurEntity.getStagiaire(),false));
+			}
+		}
+	}
+	
+	public UtilisateurResponse(Utilisateur utilisateurEntity) {
+		this(utilisateurEntity,true,true);
 	}
 
 	public Integer getId() {
@@ -43,6 +65,22 @@ public class UtilisateurResponse {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public FormateurResponse getFormateur() {
+		return formateur;
+	}
+
+	public void setFormateur(FormateurResponse formateur) {
+		this.formateur = formateur;
+	}
+
+	public StagiaireResponse getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(StagiaireResponse stagiaire) {
+		this.stagiaire = stagiaire;
 	}
 
 }

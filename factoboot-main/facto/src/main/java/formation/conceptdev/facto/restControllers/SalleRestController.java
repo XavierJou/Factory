@@ -62,6 +62,6 @@ public class SalleRestController {
 
     @GetMapping("/{id}/cours")
     public SalleResponse getByIdWithCours(@PathVariable Integer id) {
-        return new SalleResponse(salleService.getByIdWithCours(id));
+        return new SalleResponse(salleService.getByIdWithCours(id),false);
     }
 }

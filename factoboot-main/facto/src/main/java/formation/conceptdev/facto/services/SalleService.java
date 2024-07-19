@@ -22,6 +22,13 @@ public class SalleService {
 		}
 		return daoSalle.findById(id).orElseThrow(RuntimeException::new);
 	}
+	
+	public Salle getByIdWithCours(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Salle sans id");
+		}
+		return daoSalle.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public List<Salle> getAll() {
 		return daoSalle.findAll();

@@ -25,9 +25,10 @@ public class Cours {
 	private String titre;
 	@Column(name = "date_debut")
 	private LocalDateTime dateDebut;
-	private boolean videoprojecteur;
-	private boolean ordiFormateur;
-	private boolean ordiStagiaire;
+	private boolean besoinVideoprojecteur;
+	private boolean besoinOrdiFormateur;
+	private boolean besoinOrdiStagiaire;
+	private boolean besoinSalle;
 
 	@ManyToOne
 	@JoinColumn(name = "id_matiere")
@@ -42,11 +43,11 @@ public class Cours {
 	private Formation formation;
 
 	@OneToMany(mappedBy = "cours", fetch = FetchType.LAZY)
-	private List<CoursOrdinateurs> ordinateurs;
+	private List<CoursOrdinateurs> coursOrdinateurs;
 
 	@ManyToOne
-	@JoinColumn(name = "id_videoprojecteurecteur")
-	private Videoprojecteur videoprojecteurecteur;
+	@JoinColumn(name = "id_videoprojecteur")
+	private Videoprojecteur videoprojecteur;
 
 	@ManyToOne
 	@JoinColumn(name = "id_salle")
@@ -55,32 +56,35 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(LocalDateTime dateDebut, String titre, boolean videoprojecteur, boolean ordiFormateur, boolean ordiStagiaire,
+	public Cours(LocalDateTime dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
+			boolean besoinSalle,
 			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
 			Videoprojecteur videoprojecteurecteur, Salle salle) {
 
 		this.dateDebut = dateDebut;
 		this.titre = titre;
-		this.videoprojecteur = videoprojecteur;
-		this.ordiFormateur = ordiFormateur;
-		this.ordiStagiaire = ordiStagiaire;
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
+		this.besoinSalle = besoinSalle;
 		this.matiere = matiere;
 		this.formateur = formateur;
 		this.formation = formation;
-		this.ordinateurs = ordinateurs;
-		this.videoprojecteurecteur = videoprojecteurecteur;
+		this.coursOrdinateurs = ordinateurs;
+		this.videoprojecteur = videoprojecteurecteur;
 		this.salle = salle;
 	}
 
-	public Cours(LocalDateTime dateDebut, String titre, boolean videoprojecteur, boolean ordiFormateur,
-			boolean ordiStagiaire) {
+	public Cours(LocalDateTime dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
+			boolean besoinSalle) {
 
 		this.dateDebut = dateDebut;
 		this.titre = titre;
-		this.videoprojecteur = videoprojecteur;
-		this.ordiFormateur = ordiFormateur;
-		this.ordiStagiaire = ordiStagiaire;
-
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
+		this.besoinSalle = besoinSalle;
+		
 	}
 
 	public Integer getId() {
@@ -107,28 +111,36 @@ public class Cours {
 		this.dateDebut = dateDebut;
 	}
 
-	public boolean isVideoproj() {
-		return videoprojecteur;
+	public boolean isBesoinVideoprojecteur() {
+		return besoinVideoprojecteur;
 	}
 
-	public void setVideoproj(boolean videoprojecteur) {
-		this.videoprojecteur = videoprojecteur;
+	public void setBesoinVideoprojecteur(boolean besoinVideoprojecteur) {
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
 	}
 
-	public boolean isOrdiFormateur() {
-		return ordiFormateur;
+	public boolean isBesoinOrdiFormateur() {
+		return besoinOrdiFormateur;
 	}
 
-	public void setOrdiFormateur(boolean ordiFormateur) {
-		this.ordiFormateur = ordiFormateur;
+	public void setBesoinOrdiFormateur(boolean besoinOrdiFormateur) {
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
 	}
 
-	public boolean isOrdiStagiaire() {
-		return ordiStagiaire;
+	public boolean isBesoinOrdiStagiaire() {
+		return besoinOrdiStagiaire;
 	}
 
-	public void setOrdiStagiaire(boolean ordiStagiaire) {
-		this.ordiStagiaire = ordiStagiaire;
+	public void setBesoinOrdiStagiaire(boolean besoinOrdiStagiaire) {
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
+	}
+
+	public boolean isBesoinSalle() {
+		return besoinSalle;
+	}
+
+	public void setBesoinSalle(boolean besoinSalle) {
+		this.besoinSalle = besoinSalle;
 	}
 
 	public Matiere getMatiere() {
@@ -155,13 +167,9 @@ public class Cours {
 		this.formation = formation;
 	}
 
-	public List<CoursOrdinateurs> getCoursOrdinateurs() {
-		return ordinateurs;
-	}
+	
 
-	public void setCoursOrdinateurs(List<CoursOrdinateurs> ordinateurs) {
-		this.ordinateurs = ordinateurs;
-	}
+	
 
 	public Salle getSalle() {
 		return salle;
@@ -170,5 +178,25 @@ public class Cours {
 	public void setSalle(Salle salle) {
 		this.salle = salle;
 	}
+
+	public Videoprojecteur getVideoprojecteur() {
+		return videoprojecteur;
+	}
+
+	public void setVideoprojecteur(Videoprojecteur videoprojecteur) {
+		this.videoprojecteur = videoprojecteur;
+	}
+
+	public List<CoursOrdinateurs> getCoursOrdinateurs() {
+		return coursOrdinateurs;
+	}
+
+	public void setCoursOrdinateurs(List<CoursOrdinateurs> coursOrdinateurs) {
+		this.coursOrdinateurs = coursOrdinateurs;
+	}
+
+	
+	
+	
 
 }

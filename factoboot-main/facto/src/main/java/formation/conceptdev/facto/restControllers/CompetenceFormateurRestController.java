@@ -20,8 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CompetenceFormateurRequest;
-import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.CompetenceFormateurResponse;
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.CompetenceFormateur;
 import formation.conceptdev.facto.services.CompetenceFormateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -39,7 +39,7 @@ public class CompetenceFormateurRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<CompetenceFormateurResponse> getAll() {
-        return competenceFormateurService.getAll().stream().map(competenceFormateur -> new CompetenceFormateurResponse(competenceFormateur,false)).collect(Collectors.toList());
+        return competenceFormateurService.getAll().stream().map(competenceFormateur -> new CompetenceFormateurResponse(competenceFormateur,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,17 +51,18 @@ public class CompetenceFormateurRestController {
         }
         CompetenceFormateur competenceFormateur = new CompetenceFormateur();
         BeanUtils.copyProperties(competenceFormateurRequest, competenceFormateur);
-        return new CompetenceFormateurResponse(competenceFormateurService.insert(competenceFormateur),false);
+        return new CompetenceFormateurResponse(competenceFormateurService.insert(competenceFormateur),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public CompetenceFormateurResponse getById(@PathVariable Integer id) {
-        return new CompetenceFormateurResponse(competenceFormateurService.getById(id),false);
+        return new CompetenceFormateurResponse(competenceFormateurService.getById(id),false,false);
     }
 
     @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
     public CompetenceFormateurResponse getByIdWithDetails(@PathVariable Integer id) {
-        return new CompetenceFormateurResponse(competenceFormateurService.getByIdWithDetails(id));
+        return new CompetenceFormateurResponse(competenceFormateurService.getByIdWithDetails(id),false,false);
     }
 }

@@ -24,6 +24,14 @@ public class CompetenceFormateurService {
 	public List<CompetenceFormateur> getAll() {
 		return daoCompetenceFormateur.findAll();
 	}
+	
+
+	public CompetenceFormateur getByIdWithDetails(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find CompetenceFormateur sans id");
+		}
+		return daoCompetenceFormateur.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public CompetenceFormateur insert(CompetenceFormateur competenceMatiere) {
 

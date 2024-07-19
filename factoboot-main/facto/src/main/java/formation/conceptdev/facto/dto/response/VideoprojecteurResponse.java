@@ -1,6 +1,14 @@
 package formation.conceptdev.facto.dto.response;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.BeanUtils;
+
 import com.fasterxml.jackson.annotation.JsonView;
+
+
+import formation.conceptdev.facto.entities.Videoprojecteur;
 
 public class VideoprojecteurResponse {
 
@@ -11,42 +19,34 @@ public class VideoprojecteurResponse {
 	private String marque;
 
 	@JsonView(CustomJsonViews.Common.class)
-	private String modele;
+	private String nom;
+	
+	@JsonView(CustomJsonViews.VideoprojecteurResponse.class)
+	private List<CoursResponse> cours;
 
 	// Constructeur par défaut
 	public VideoprojecteurResponse() {
 	}
 
-	// Constructeur pour initialiser à partir d'un objet VideoProjecteur
-	public VideoprojecteurResponse(VideoProjecteur videoProjecteur) {
-		this.id = videoProjecteur.getId();
-		this.marque = videoProjecteur.getMarque();
-		this.modele = videoProjecteur.getModele();
+	public VideoprojecteurResponse(Videoprojecteur videoprojecteurEntity) {
+		this(videoprojecteurEntity,true);
 	}
 
-	// Getters
-	public Integer getId() {
-		return id;
+	// Constructeur pour initialiser à partir d'un objet Salle
+	public VideoprojecteurResponse(Videoprojecteur videoprojecteurEntity, boolean bool) {
+		
+		BeanUtils.copyProperties(videoprojecteurEntity, this, "cours");
+		
+		if (bool) {
+			if (videoprojecteurEntity.getCours() != null) {
+                this.cours = videoprojecteurEntity.getCours().stream()
+                		.map(cours -> new CoursResponse(cours, false,false, false,false, false,false))
+                        .collect(Collectors.toList());
+            }
+		}
+		
 	}
 
-	public String getMarque() {
-		return marque;
-	}
-
-	public String getModele() {
-		return modele;
-	}
-
-	// Setters
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public void setMarque(String marque) {
-		this.marque = marque;
-	}
-
-	public void setModele(String modele) {
-		this.modele = modele;
-	}
+	
+	
 }

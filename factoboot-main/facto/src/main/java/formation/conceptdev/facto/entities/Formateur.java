@@ -27,11 +27,11 @@ public class Formateur {
     
     
     @OneToMany(mappedBy = "formateur")
-    private List<CompetenceFormateur> competences;
+    private List<CompetenceFormateur> competenceFormateurs;
  
    
     @OneToMany(mappedBy = "formateur")
-    private List<DisponibiliteFormateur> dispos;
+    private List<DisponibiliteFormateur> disponibiliteFormateurs;
     
     @OneToOne
     @JoinColumn(name="id_utilisateur")
@@ -42,10 +42,24 @@ public class Formateur {
     }
 
     
+    
+
+	public Formateur(List<Cours> cours, List<CompetenceFormateur> competenceFormateurs,
+			List<DisponibiliteFormateur> disponibiliteFormateurs, Utilisateur utilisateur) {
+		
+		this.cours = cours;
+		this.competenceFormateurs = competenceFormateurs;
+		this.disponibiliteFormateurs = disponibiliteFormateurs;
+		this.utilisateur = utilisateur;
+	}
+
+
+
 
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -56,34 +70,43 @@ public class Formateur {
 		return cours;
 	}
 
+
 	public void setCours(List<Cours> cours) {
 		this.cours = cours;
 	}
 
-	public List<CompetenceFormateur> getCompetences() {
-		return competences;
+
+	public List<CompetenceFormateur> getCompetenceFormateurs() {
+		return competenceFormateurs;
 	}
 
-	public void setCompetences(List<CompetenceFormateur> competences) {
-		this.competences = competences;
+
+	public void setCompetenceFormateurs(List<CompetenceFormateur> competenceFormateurs) {
+		this.competenceFormateurs = competenceFormateurs;
 	}
 
-	public List<DisponibiliteFormateur> getDispos() {
-		return dispos;
+
+	public List<DisponibiliteFormateur> getDisponibiliteFormateurs() {
+		return disponibiliteFormateurs;
 	}
 
-	public void setDispos(List<DisponibiliteFormateur> dispos) {
-		this.dispos = dispos;
+
+	public void setDisponibiliteFormateurs(List<DisponibiliteFormateur> disponibiliteFormateurs) {
+		this.disponibiliteFormateurs = disponibiliteFormateurs;
 	}
+
 
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
 
+
 	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
+
     
+
     
 
 }

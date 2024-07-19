@@ -39,7 +39,7 @@ public class MatiereRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<MatiereResponse> getAll() {
-        return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,false)).collect(Collectors.toList());
+        return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,17 +51,17 @@ public class MatiereRestController {
         }
         Matiere matiere = new Matiere();
         BeanUtils.copyProperties(matiereRequest, matiere);
-        return new MatiereResponse(matiereService.insert(matiere),false);
+        return new MatiereResponse(matiereService.insert(matiere),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public MatiereResponse getById(@PathVariable Integer id) {
-        return new MatiereResponse(matiereService.getById(id),false);
+        return new MatiereResponse(matiereService.getById(id),false,false);
     }
 
     @GetMapping("/{id}/cours")
     public MatiereResponse getByIdWithCours(@PathVariable Integer id) {
-        return new MatiereResponse(matiereService.getByIdWithCours(id));
+        return new MatiereResponse(matiereService.getByIdWithCours(id),false,false);
     }
 }

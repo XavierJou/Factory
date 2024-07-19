@@ -25,7 +25,7 @@ public class Matiere {
 	private String contenu;
 	
 	@OneToMany(mappedBy="matiere")
-	private List<CompetenceMatiere> compMatiere;
+	private List<CompetenceMatiere> CompetenceMatieres;
 	
 	
 	@OneToMany(mappedBy="matiere")
@@ -42,7 +42,7 @@ public class Matiere {
 		this.duree = duree;
 		this.objectif = objectif;
 		this.contenu = contenu;
-		this.compMatiere = compMatiere;
+		this.CompetenceMatieres = compMatiere;
 		this.cours = cours;
 	}
 	
@@ -94,13 +94,17 @@ public class Matiere {
 		this.contenu = contenu;
 	}
 
-	public List<CompetenceMatiere> getCompMatiere() {
-		return compMatiere;
+	
+
+	public List<CompetenceMatiere> getCompetenceMatieres() {
+		return CompetenceMatieres;
 	}
 
-	public void setCompMatiere(List<CompetenceMatiere> compMatiere) {
-		this.compMatiere = compMatiere;
+
+	public void setCompetenceMatieres(List<CompetenceMatiere> competenceMatieres) {
+		CompetenceMatieres = competenceMatieres;
 	}
+
 
 	public List<Cours> getCours() {
 		return cours;

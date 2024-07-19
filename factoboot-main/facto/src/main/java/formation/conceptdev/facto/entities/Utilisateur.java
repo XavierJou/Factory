@@ -15,6 +15,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -37,6 +39,13 @@ public class Utilisateur implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role_utilisateur", nullable = false, length = 50)
 	private Role role;
+	@OneToOne
+    @JoinColumn(name="id_formateur")
+    private Formateur formateur;
+   
+    @OneToOne
+    @JoinColumn(name="id_stagiaire")
+    private Stagiaire stagiaire;
 
 	public Utilisateur() {
 	}
@@ -159,5 +168,27 @@ public class Utilisateur implements UserDetails {
 		Utilisateur other = (Utilisateur) obj;
 		return Objects.equals(id, other.id);
 	}
+
+
+	public Formateur getFormateur() {
+		return formateur;
+	}
+
+
+	public void setFormateur(Formateur formateur) {
+		this.formateur = formateur;
+	}
+
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
+	}
+	
+	
 
 }

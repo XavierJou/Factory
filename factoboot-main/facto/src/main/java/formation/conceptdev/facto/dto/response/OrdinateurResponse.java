@@ -1,27 +1,41 @@
-package ordinateur.conceptdev.facto.dto.response;
+package formation.conceptdev.facto.dto.response;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
+
+import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.entities.Ordinateur;
 
 
 public class OrdinateurResponse {
+	
+	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
+	@JsonView(CustomJsonViews.Common.class)
 	private String marque;
+	@JsonView(CustomJsonViews.Common.class)
 	private int ram;
+	@JsonView(CustomJsonViews.Common.class)
+	private String os;
+	
+	@JsonView(CustomJsonViews.OrdinateurWithCoursOrdinateurs.class)
+	private List<CoursOrdinateursResponse> coursOrdinateurs;
 
 	public OrdinateurResponse() {
 
 	}
+	
+	
 
 	public OrdinateurResponse(Ordinateur ordinateur, boolean bool) {
-		BeanUtils.copyProperties(ordinateur, this, "cours");
+		BeanUtils.copyProperties(ordinateur, this, "coursOrdinateurs");
 		if (bool) {
-			if (ordinateur.getCours() != null) {
-				this.setCours(ordinateur.getCours().stream()
-						.map(entity -> new CoursResponse(entity, false))
+			if (ordinateur.getCoursOrdinateurs() != null) {
+				this.setCoursOrdinateurs(ordinateur.getCoursOrdinateurs().stream()
+						.map(entity -> new CoursOrdinateursResponse(entity, false,false))
 						.collect(Collectors.toList()));
 			}
 		}
@@ -30,6 +44,32 @@ public class OrdinateurResponse {
 	public OrdinateurResponse(Ordinateur ordinateur) {
 		this(ordinateur, true);
 	}
+
+	
+	
+	public String getOs() {
+		return os;
+	}
+
+
+
+	public void setOs(String os) {
+		this.os = os;
+	}
+
+
+
+	public List<CoursOrdinateursResponse> getCoursOrdinateurs() {
+		return coursOrdinateurs;
+	}
+
+
+
+	public void setCoursOrdinateurs(List<CoursOrdinateursResponse> coursOrdinateurs) {
+		this.coursOrdinateurs = coursOrdinateurs;
+	}
+
+
 
 	public Integer getId() {
 		return id;

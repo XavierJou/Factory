@@ -15,14 +15,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-public class CoursResquest {
+public class CoursRequest {
 	private String titre;
 	private LocalDateTime dateDebut;
-	private boolean videoproj;
-	private boolean ordiFormateur;
-	private boolean ordiStagiaire;
+	private boolean besoinVideoprojecteur;
+	private boolean besoinOrdiFormateur;
+	private boolean besoinOrdiStagiaire;
+	private boolean besoinSalle;
 	
-	public CoursResquest() {
+	public CoursRequest() {
 	}
 
 	public String getTitre() {
@@ -41,28 +42,38 @@ public class CoursResquest {
 		this.dateDebut = dateDebut;
 	}
 
-	public boolean isVideoproj() {
-		return videoproj;
+	public boolean isBesoinVideoprojecteur() {
+		return besoinVideoprojecteur;
 	}
 
-	public void setVideoproj(boolean videoproj) {
-		this.videoproj = videoproj;
+	public void setBesoinVideoprojecteur(boolean besoinVideoprojecteur) {
+		this.besoinVideoprojecteur = besoinVideoprojecteur;
 	}
 
-	public boolean isOrdiFormateur() {
-		return ordiFormateur;
+	public boolean isBesoinOrdiFormateur() {
+		return besoinOrdiFormateur;
 	}
 
-	public void setOrdiFormateur(boolean ordiFormateur) {
-		this.ordiFormateur = ordiFormateur;
+	public void setBesoinOrdiFormateur(boolean besoinOrdiFormateur) {
+		this.besoinOrdiFormateur = besoinOrdiFormateur;
 	}
 
-	public boolean isOrdiStagiaire() {
-		return ordiStagiaire;
+	public boolean isBesoinOrdiStagiaire() {
+		return besoinOrdiStagiaire;
 	}
 
-	public void setOrdiStagiaire(boolean ordiStagiaire) {
-		this.ordiStagiaire = ordiStagiaire;
+	public void setBesoinOrdiStagiaire(boolean besoinOrdiStagiaire) {
+		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
 	}
+
+	public boolean isBesoinSalle() {
+		return besoinSalle;
+	}
+
+	public void setBesoinSalle(boolean besoinSalle) {
+		this.besoinSalle = besoinSalle;
+	}
+
+	
 	
 }

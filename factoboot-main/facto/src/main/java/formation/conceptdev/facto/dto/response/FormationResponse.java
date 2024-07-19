@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.entities.Formation;
 
+
 public class FormationResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
@@ -29,6 +30,9 @@ public class FormationResponse {
 	
 	@JsonView(CustomJsonViews.FormationWithCours.class)
 	private List<CoursResponse> cours;
+	
+	@JsonView(CustomJsonViews.FormationWithPrerequis.class)
+	private List<PrerequisResponse> prerequis;
 
 	public FormationResponse() {
 	}
@@ -43,15 +47,35 @@ public class FormationResponse {
 			}
 			if (formation.getCours() != null) {
 				this.setCours(formation.getCours().stream()
-						.map(entity -> new CoursResponse(entity, false))
+						.map(entity -> new CoursResponse(entity, false, false, false, false, false, false))
 						.collect(Collectors.toList()));
 			}
 		}
 	}
-
+	
 	public FormationResponse(Formation formation) {
 		this(formation, true);
 	}
+	
+	
+
+	public List<CoursResponse> getCours() {
+		return cours;
+	}
+
+	public void setCours(List<CoursResponse> cours) {
+		this.cours = cours;
+	}
+
+	public List<PrerequisResponse> getPrerequis() {
+		return prerequis;
+	}
+
+	public void setPrerequis(List<PrerequisResponse> prerequis) {
+		this.prerequis = prerequis;
+	}
+
+	
 
 	public Integer getId() {
 		return id;

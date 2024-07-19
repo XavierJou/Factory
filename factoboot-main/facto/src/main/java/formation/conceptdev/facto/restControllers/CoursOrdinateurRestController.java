@@ -19,11 +19,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation.conceptdev.facto.dto.request.CoursOrdinateurRequest;
+import formation.conceptdev.facto.dto.request.CoursOrdinateusRequest;
+import formation.conceptdev.facto.dto.response.CoursOrdinateursResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
-import formation.conceptdev.facto.dto.response.CoursOrdinateurResponse;
-import formation.conceptdev.facto.entities.CoursOrdinateur;
-import formation.conceptdev.facto.services.CoursOrdinateurService;
+import formation.conceptdev.facto.entities.CoursOrdinateurs;
+import formation.conceptdev.facto.services.CoursOrdinateursService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
@@ -34,34 +34,34 @@ import jakarta.validation.Valid;
 public class CoursOrdinateurRestController {
 
     @Autowired
-    private CoursOrdinateurService coursOrdinateurService;
+    private CoursOrdinateursService coursOrdinateursService;
 
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
-    public List<CoursOrdinateurResponse> getAll() {
-        return coursOrdinateurService.getAll().stream().map(coursOrdinateur -> new CoursOrdinateurResponse(coursOrdinateur,false)).collect(Collectors.toList());
+    public List<CoursOrdinateursResponse> getAll() {
+        return coursOrdinateursService.getAll().stream().map(coursOrdinateur -> new CoursOrdinateursResponse(coursOrdinateur,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     @JsonView(CustomJsonViews.Common.class)
-    public CoursOrdinateurResponse create(@Valid @RequestBody CoursOrdinateurRequest coursOrdinateurRequest, BindingResult br) {
+    public CoursOrdinateursResponse create(@Valid @RequestBody CoursOrdinateusRequest coursOrdinateurRequest, BindingResult br) {
         if (br.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        CoursOrdinateur coursOrdinateur = new CoursOrdinateur();
+        CoursOrdinateurs coursOrdinateur = new CoursOrdinateurs();
         BeanUtils.copyProperties(coursOrdinateurRequest, coursOrdinateur);
-        return new CoursOrdinateurResponse(coursOrdinateurService.insert(coursOrdinateur),false);
+        return new CoursOrdinateursResponse(coursOrdinateursService.insert(coursOrdinateur),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
-    public CoursOrdinateurResponse getById(@PathVariable Integer id) {
-        return new CoursOrdinateurResponse(coursOrdinateurService.getById(id),false);
+    public CoursOrdinateursResponse getById(@PathVariable Integer id) {
+        return new CoursOrdinateursResponse(coursOrdinateursService.getById(id),false,false);
     }
 
     @GetMapping("/{id}/details")
-    public CoursOrdinateurResponse getByIdWithDetails(@PathVariable Integer id) {
-        return new CoursOrdinateurResponse(coursOrdinateurService.getByIdWithDetails(id));
+    public CoursOrdinateursResponse getByIdWithDetails(@PathVariable Integer id) {
+        return new CoursOrdinateursResponse(coursOrdinateursService.getByIdWithDetails(id));
     }
 }

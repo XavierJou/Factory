@@ -14,6 +14,13 @@ public class VideoprojecteurService {
 	@Autowired
 	IDAOVideoprojecteur daoVideoprojecteur;
 
+	public Videoprojecteur getByIdWithCours(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Utilisateur sans id");
+		}
+		return daoVideoprojecteur.findById(id).orElseThrow(RuntimeException::new);
+	}
+	
 	public Videoprojecteur getById(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Utilisateur sans id");

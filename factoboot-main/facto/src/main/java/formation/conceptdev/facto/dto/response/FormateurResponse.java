@@ -3,71 +3,124 @@ package formation.conceptdev.facto.dto.response;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import formation.conceptdev.facto.entities.CompetenceFormateur;
-import formation.conceptdev.facto.entities.Cours;
-import formation.conceptdev.facto.entities.DisponibiliteFormateur;
+import org.springframework.beans.BeanUtils;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation.conceptdev.facto.entities.Formateur;
-import formation.conceptdev.facto.entities.Utilisateur;
+
 
 public class FormateurResponse {
+	
     @JsonView(CustomJsonViews.Common.class)
     private Integer id;
-    @JsonView(CustomJsonViews.Common.class)
+    
+    @JsonView(CustomJsonViews.FormateurResponseWithCours.class)
     private List<CoursResponse> cours;
-    @JsonView(CustomJsonViews.Common.class)
-    private List<CompetenceFormateurResponse>
-    @JsonView(CustomJsonViews.Common.class) competences;
-    private List<DisponibiliteFormateurResponse>
-    @JsonView(CustomJsonViews.Common.class) dispos;
+    
+    @JsonView(CustomJsonViews.FormateurResponseWithcompetenceFormateur.class)
+    private List<CompetenceFormateurResponse> competenceFormateurResponse;
+    
+    @JsonView(CustomJsonViews.FormateurResponseWithdisponibiliteFormateur.class) 
+    private List<DisponibiliteFormateurResponse> disponibiliteFormateurResponse;
+    
+    @JsonView(CustomJsonViews.FormateurResponseWithutilisateur.class) 
     private UtilisateurResponse utilisateur;
 
-    public FormateurResponse(Formateur formateur) {
-        this.id = formateur.getId();
-        this.cours = formateur.getCours().stream().map(c -> new CoursResponse(c)).collect(Collectors.toList());
-        this.competences = formateur.getCompetences().stream().map(cf -> new CompetenceFormateurResponse(cf)).collect(Collectors.toList());
-        this.dispos = formateur.getDispos().stream().map(df -> new DisponibiliteFormateurResponse(df)).collect(Collectors.toList());
-        this.utilisateur = new UtilisateurResponse(formateur.getUtilisateur());
+    public FormateurResponse() {
+        
     }
+    
+ public FormateurResponse(Formateur formateurEntity) {
+        this(formateurEntity,true,true,true,true);
+    }
+ 
+ public FormateurResponse(Formateur formateurEntity, 
+		 boolean besoincours, 
+		 boolean besoinCompetenceFormateurResponses,
+		 boolean besoinDisponibiliteFormateurResponse,
+		 boolean besoinUtlisateur) {
+	 
+	 BeanUtils.copyProperties(formateurEntity, this, "cours", "competenceFormateurResponse", "disponibiliteFormateurResponse", "utilisateur");
+		
+	 	if (besoincours) {
+			if (formateurEntity.getCours() != null) {
+				this.setCours(formateurEntity.getCours().stream()
+						.map(formateur -> new CoursResponse(formateur, false, false, false, false, false, false))
+						.collect(Collectors.toList()));
+			}
+		}
+	 	
+	 	if (besoinCompetenceFormateurResponses) {
+			if (formateurEntity.getCompetenceFormateurs() != null) {
+				this.setCompetenceFormateurResponse(formateurEntity.getCompetenceFormateurs().stream()
+						.map(formateur -> new CompetenceFormateurResponse(formateur, false,false))
+						.collect(Collectors.toList()));
+			}
+		}
+	 	
+	 	if (besoinDisponibiliteFormateurResponse) {
+			if (formateurEntity.getDisponibiliteFormateurs() != null) {
+				this.setDisponibiliteFormateurResponse(formateurEntity.getDisponibiliteFormateurs().stream()
+						.map(formateur -> new DisponibiliteFormateurResponse(formateur, false))
+						.collect(Collectors.toList()));
+			}
+		}
+	 	
+	 	if (besoinUtlisateur) {
+			if (formateurEntity.getUtilisateur() != null) {
+				this.setUtilisateur(new UtilisateurResponse(formateurEntity.getUtilisateur(),false,false));
+			}
+		}
+     
+ }
 
-    // Getters
-    public Integer getId() {
-        return id;
-    }
+public Integer getId() {
+	return id;
+}
 
-    public List<CoursResponse> getCours() {
-        return cours;
-    }
+public void setId(Integer id) {
+	this.id = id;
+}
 
-    public List<CompetenceFormateurResponse> getCompetences() {
-        return competences;
-    }
+public List<CoursResponse> getCours() {
+	return cours;
+}
 
-    public List<DisponibiliteFormateurResponse> getDispos() {
-        return dispos;
-    }
+public void setCours(List<CoursResponse> cours) {
+	this.cours = cours;
+}
 
-    public UtilisateurResponse getUtilisateur() {
-        return utilisateur;
-    }
+public List<CompetenceFormateurResponse> getCompetenceFormateurResponse() {
+	return competenceFormateurResponse;
+}
 
-    // Setters
-    public void setId(Integer id) {
-        this.id = id;
-    }
+public void setCompetenceFormateurResponse(List<CompetenceFormateurResponse> competenceFormateurResponse) {
+	this.competenceFormateurResponse = competenceFormateurResponse;
+}
 
-    public void setCours(List<CoursResponse> cours) {
-        this.cours = cours;
-    }
+public List<DisponibiliteFormateurResponse> getDisponibiliteFormateurResponse() {
+	return disponibiliteFormateurResponse;
+}
 
-    public void setCompetences(List<CompetenceFormateurResponse> competences) {
-        this.competences = competences;
-    }
+public void setDisponibiliteFormateurResponse(List<DisponibiliteFormateurResponse> disponibiliteFormateurResponse) {
+	this.disponibiliteFormateurResponse = disponibiliteFormateurResponse;
+}
 
-    public void setDispos(List<DisponibiliteFormateurResponse> dispos) {
-        this.dispos = dispos;
-    }
+public UtilisateurResponse getUtilisateur() {
+	return utilisateur;
+}
 
-    public void setUtilisateur(UtilisateurResponse utilisateur) {
-        this.utilisateur = utilisateur;
-    }
+public void setUtilisateur(UtilisateurResponse utilisateur) {
+	this.utilisateur = utilisateur;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+    
 }

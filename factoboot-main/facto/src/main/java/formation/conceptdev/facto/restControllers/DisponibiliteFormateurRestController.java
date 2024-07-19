@@ -62,6 +62,6 @@ public class DisponibiliteFormateurRestController {
 
     @GetMapping("/{id}/details")
     public DisponibiliteFormateurResponse getByIdWithDetails(@PathVariable Integer id) {
-        return new DisponibiliteFormateurResponse(disponibiliteFormateurService.getByIdWithDetails(id));
+        return new DisponibiliteFormateurResponse(disponibiliteFormateurService.getByIdWithDetails(id),false);
     }
 }

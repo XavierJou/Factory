@@ -20,8 +20,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CompetenceMatiereRequest;
-import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.CompetenceMatiereResponse;
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.CompetenceMatiere;
 import formation.conceptdev.facto.services.CompetenceMatiereService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -39,7 +39,7 @@ public class CompetenceMatiereRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<CompetenceMatiereResponse> getAll() {
-        return competenceMatiereService.getAll().stream().map(competenceMatiere -> new CompetenceMatiereResponse(competenceMatiere,false)).collect(Collectors.toList());
+        return competenceMatiereService.getAll().stream().map(competenceMatiere -> new CompetenceMatiereResponse(competenceMatiere,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,13 +51,13 @@ public class CompetenceMatiereRestController {
         }
         CompetenceMatiere competenceMatiere = new CompetenceMatiere();
         BeanUtils.copyProperties(competenceMatiereRequest, competenceMatiere);
-        return new CompetenceMatiereResponse(competenceMatiereService.insert(competenceMatiere),false);
+        return new CompetenceMatiereResponse(competenceMatiereService.insert(competenceMatiere),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public CompetenceMatiereResponse getById(@PathVariable Integer id) {
-        return new CompetenceMatiereResponse(competenceMatiereService.getById(id),false);
+        return new CompetenceMatiereResponse(competenceMatiereService.getById(id),false,false);
     }
 
     @GetMapping("/{id}/details")

@@ -20,6 +20,13 @@ public class DisponibiliteFormateurService {
 		}
 		return daoDisponibiliteFormateur.findById(id).orElseThrow(RuntimeException::new);
 	}
+	
+	public DisponibiliteFormateur getByIdWithDetails(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find CoursOrdinateurs sans id");
+		}
+		return daoDisponibiliteFormateur.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public List<DisponibiliteFormateur> getAll() {
 		return daoDisponibiliteFormateur.findAll();

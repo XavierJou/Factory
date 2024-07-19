@@ -39,7 +39,7 @@ public class CompetenceRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<CompetenceResponse> getAll() {
-        return competenceService.getAll().stream().map(competence -> new CompetenceResponse(competence,false)).collect(Collectors.toList());
+        return competenceService.getAll().stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,13 +51,13 @@ public class CompetenceRestController {
         }
         Competence competence = new Competence();
         BeanUtils.copyProperties(competenceRequest, competence);
-        return new CompetenceResponse(competenceService.insert(competence),false);
+        return new CompetenceResponse(competenceService.insert(competence),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public CompetenceResponse getById(@PathVariable Integer id) {
-        return new CompetenceResponse(competenceService.getById(id),false);
+        return new CompetenceResponse(competenceService.getById(id),false,false);
     }
 
     @GetMapping("/{id}/formateurs")

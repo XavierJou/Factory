@@ -28,18 +28,18 @@ public class Ordinateur {
 	private LocalDate dateAchat;
 
 	@OneToMany(mappedBy = "ordinateur", fetch = FetchType.LAZY)
-	private List<CoursOrdinateurs> cours;
+	private List<CoursOrdinateurs> coursOrdinateurs;
 
 	public Ordinateur() {
 	}
 
-	public Ordinateur(String nom, String marque, String os, LocalDate dateAchat, List<CoursOrdinateurs> cours) {
+	public Ordinateur(String nom, String marque, String os, LocalDate dateAchat, List<CoursOrdinateurs> coursOrdinateurs) {
 		super();
 		this.nom = nom;
 		this.marque = marque;
 		this.os = os;
 		this.dateAchat = dateAchat;
-		this.cours = cours;
+		this.coursOrdinateurs = coursOrdinateurs;
 	}
 
 	public Ordinateur(String nom, String marque, String os, LocalDate dateAchat) {
@@ -90,12 +90,14 @@ public class Ordinateur {
 		this.dateAchat = dateAchat;
 	}
 
-	public List<CoursOrdinateurs> getCours() {
-		return cours;
+	public List<CoursOrdinateurs> getCoursOrdinateurs() {
+		return coursOrdinateurs;
 	}
 
-	public void setCours(List<CoursOrdinateurs> cours) {
-		this.cours = cours;
+	public void setCoursOrdinateurs(List<CoursOrdinateurs> coursOrdinateurs) {
+		this.coursOrdinateurs = coursOrdinateurs;
 	}
+
+	
 
 }

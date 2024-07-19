@@ -39,7 +39,7 @@ public class FormateurRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<FormateurResponse> getAll() {
-        return formateurService.getAll().stream().map(formateur -> new FormateurResponse(formateur,false)).collect(Collectors.toList());
+        return formateurService.getAll().stream().map(formateur -> new FormateurResponse(formateur,false,false,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,17 +51,17 @@ public class FormateurRestController {
         }
         Formateur formateur = new Formateur();
         BeanUtils.copyProperties(formateurRequest, formateur);
-        return new FormateurResponse(formateurService.insert(formateur),false);
+        return new FormateurResponse(formateurService.insert(formateur),false,false,false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public FormateurResponse getById(@PathVariable Integer id) {
-        return new FormateurResponse(formateurService.getById(id),false);
+        return new FormateurResponse(formateurService.getById(id),false,false,false,false);
     }
 
     @GetMapping("/{id}/cours")
     public FormateurResponse getByIdWithCours(@PathVariable Integer id) {
-        return new FormateurResponse(formateurService.getByIdWithCours(id));
+        return new FormateurResponse(formateurService.getByIdWithCours(id),false,false,false,false);
     }
 }

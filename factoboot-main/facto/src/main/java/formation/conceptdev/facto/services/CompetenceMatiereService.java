@@ -9,13 +9,20 @@ import formation.conceptdev.facto.entities.CompetenceMatiere;
 import formation.conceptdev.facto.repositories.IDAOCompetenceMatiere;
 
 @Service
-public class CompetenceMatiererService {
+public class CompetenceMatiereService {
 
 	@Autowired
 	IDAOCompetenceMatiere daoCompetenceMatiere;
 	
 
 	public CompetenceMatiere getById(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find CompetenceMatiere sans id");
+		}
+		return daoCompetenceMatiere.findById(id).orElseThrow(RuntimeException::new);
+	}
+	
+	public CompetenceMatiere getByIdWithDetails(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find CompetenceMatiere sans id");
 		}

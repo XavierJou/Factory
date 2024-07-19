@@ -20,6 +20,13 @@ public class CoursService {
 		}
 		return daoCours.findById(id).orElseThrow(RuntimeException::new);
 	}
+	
+	public Cours getByIdWithStagiaire(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Cours sans id");
+		}
+		return daoCours.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public List<Cours> getAll() {
 		return daoCours.findAll();

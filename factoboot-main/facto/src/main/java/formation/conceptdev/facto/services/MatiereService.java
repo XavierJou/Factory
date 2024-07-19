@@ -20,6 +20,13 @@ public class MatiereService {
 		}
 		return daoMatiere.findById(id).orElseThrow(RuntimeException::new);
 	}
+	
+	public Matiere getByIdWithCours(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Matiere sans id");
+		}
+		return daoMatiere.findById(id).orElseThrow(RuntimeException::new);
+	}
 
 	public List<Matiere> getAll() {
 		return daoMatiere.findAll();
