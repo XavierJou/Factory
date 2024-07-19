@@ -14,6 +14,32 @@ public class CustomJsonViews {
 
 	}
 	
+	public static class CompetenceWithMatiere extends Common {
+	
+	}
+	
+
+	public static class CompetenceWithFormation extends Common {
+	
+	}
+	
+
+	public static class CompetenceWithCoursOrdinateurs extends Common {
+	
+	}
+	
+	public static class CompetenceWithVideoprojecteur extends Common {
+		
+	}
+	
+	public static class CompetenceWithSalle extends Common {
+		
+	}
+	
+	public static class CompetenceWithFormateur extends Common {
+		
+	}
+	
 	public static class CoursWithFormation extends Common {
 
 	}

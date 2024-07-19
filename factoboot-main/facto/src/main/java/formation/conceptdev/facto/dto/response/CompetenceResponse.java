@@ -15,33 +15,16 @@ public class CompetenceResponse {
     @JsonView(CustomJsonViews.Common.class)
     private Integer id;
     @JsonView(CustomJsonViews.Common.class)
-    private String titre;
-    @JsonView(CustomJsonViews.Common.class)
-    private LocalDateTime dateDebut;
-    @JsonView(CustomJsonViews.Common.class)
-    private boolean videoproj;
-    @JsonView(CustomJsonViews.Common.class)
-    private boolean ordiFormateur;
-    @JsonView(CustomJsonViews.Common.class)
-    private boolean ordiStagiaire;
+    private String nom;
+    
 
     @JsonView(CustomJsonViews.CompetenceWithMatiere.class)
-    private MatiereResponse matiere;
+    private List<MatiereResponse> matieres;
 
     @JsonView(CustomJsonViews.CompetenceWithFormateur.class)
-    private FormateurResponse formateur;
+    private List<FormateurResponse> formateurs;
 
-    @JsonView(CustomJsonViews.CompetenceWithFormation.class)
-    private FormationResponse formation;
-
-    @JsonView(CustomJsonViews.CompetenceWithCoursOrdinateurs.class)
-    private List<CoursOrdinateursResponse> ordinateurs;
-
-    @JsonView(CustomJsonViews.CompetenceWithVideoprojecteur.class)
-    private VideoprojecteurResponse videoprojecteur;
-
-    @JsonView(CustomJsonViews.CompetenceWithSalle.class)
-    private SalleResponse salle;
+    
 
     public CompetenceResponse() {
     }
@@ -67,19 +50,5 @@ public class CompetenceResponse {
             this.salle = new SalleResponse(entity.getSalle());
         }
     }
-    public boolean isOrdiCours() {
-        return ordiCours;
-    }
-    
-    public void setOrdiCours(boolean ordiCours) {
-        this.ordiCours = ordiCours;
-    }
-    
-    public FormationResponse getFormation() {
-        return formation;
-    }
-    
-    public void setFormation(FormationResponse formation) {
-        this.formation = formation;
-    }
+   
 }
