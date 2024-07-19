@@ -20,6 +20,21 @@
       [(ngModel)]="cours.dateDebut"
     />
   </div>
+
+  <div class="form-group">
+    <label for="formation">formation:</label>
+    <select
+      id="formation"
+      [(ngModel)]="cours.formation"
+      class="form-control"
+      [compareWith]="compareFn"
+    >
+      @for(f of formationsObservable|async ;track f.id ){
+      <option [ngValue]="f">{{ f.titre }}</option>
+      }
+    </select>
+  </div>
+
   <button (click)="save()">Enregistrer</button>
   <a routerLink="/cours" routerLinkActive="active" class="btn btn-link"
     >Retour</a
