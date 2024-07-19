@@ -8,6 +8,8 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { UtilisateurService } from '../../services/utilisateur.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inscription',
@@ -18,7 +20,11 @@ import {
 })
 export class InscriptionComponent {
   form!: FormGroup;
-  constructor() {
+
+  constructor(
+    private utilisateurSrv: UtilisateurService,
+    private router: Router
+  ) {
     this.form = new FormGroup({
       login: new FormControl('', Validators.required),
       nom: new FormControl(''),
@@ -34,16 +40,19 @@ export class InscriptionComponent {
     });
   }
 
-  submit() {
+  inscription() {
     let obj = {
       login: this.form.get('login')?.value,
       nom: this.form.get('nom')?.value,
       prenom: this.form.get('prenom')?.value,
       email: this.form.get('email')?.value,
       password: this.form.get('passwordGroup.password')?.value,
-      role: 'ROLE_USER', // A VERIFIER <----------------------------------------------------------------------------------------------------------------
+      //role: 'ROLE_USER', // A VERIFIER
     };
     console.log(obj);
+    this.utilisateurSrv.inscription(obj).subscribe((data) => {
+      this.router.navigateByUrl('/login');
+    });
   }
 
   passwordEtConfirmationEgaux(

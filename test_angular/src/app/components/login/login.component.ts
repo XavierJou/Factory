@@ -26,7 +26,7 @@ export class LoginComponent {
         );
         localStorage.setItem('utilisateur', JSON.stringify(utilisateur));
         this.error = false;
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/dashboard');
       },
       error: (err) => {
         this.error = true;

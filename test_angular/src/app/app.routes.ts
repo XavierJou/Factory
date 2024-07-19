@@ -25,6 +25,7 @@ import { CoursComponent } from './components/cours/cours/cours.component';
 import { EditCoursComponent } from './components/cours/edit-cours/edit-cours.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
+import { isLoggedGuard } from './guards/isLogged.guards';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [isLoggedGuard],
   },
   { path: 'inscription', component: InscriptionComponent },
   {
