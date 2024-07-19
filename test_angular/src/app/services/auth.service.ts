@@ -12,7 +12,7 @@ export class AuthService {
   public connexion(login: string, password: string): Observable<Utilisateur> {
     let auth = 'Basic ' + window.btoa(login + ':' + password);
     return this.httpClient.get<Utilisateur>(
-      'http://localhost:8080/demo/api/auth',
+      'http://localhost:8080/factory/api/auth',
       { headers: { Authorization: auth } }
     );
   }

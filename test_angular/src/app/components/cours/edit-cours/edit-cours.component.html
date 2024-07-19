@@ -22,7 +22,7 @@
   </div>
 
   <div class="form-group">
-    <label for="formation">formation:</label>
+    <label for="formation">Formation:</label>
     <select
       id="formation"
       [(ngModel)]="cours.formation"
@@ -30,6 +30,20 @@
       [compareWith]="compareFn"
     >
       @for(f of formationsObservable|async ;track f.id ){
+      <option [ngValue]="f">{{ f.titre }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="matiere">matière:</label>
+    <select
+      id="matiere"
+      [(ngModel)]="cours.matiere"
+      class="form-control"
+      [compareWith]="compareFn"
+    >
+      @for(f of matieresObservable|async ;track f.id ){
       <option [ngValue]="f">{{ f.titre }}</option>
       }
     </select>
