@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -59,6 +60,30 @@ public class Utilisateur implements UserDetails {
 		this.email = email;
 		this.role = role;
 	}
+	
+	 public Utilisateur(String login, String password, String nom, String prenom, String email, Formateur formateur, Role role) {
+		 this.login = login;
+			this.password = password;
+			this.nom = nom;
+			this.prenom = prenom;
+			this.email = email;
+			this.role = role;
+	        this.formateur = formateur;
+	        
+	    }
+	    
+	    public Utilisateur(String login, String password, String nom, String prenom, String email, Stagiaire stagiaire, Role role) {
+	    	this.login = login;
+			this.password = password;
+			this.nom = nom;
+			this.prenom = prenom;
+			this.email = email;
+			this.role = role;
+	        this.stagiaire = stagiaire;
+	       
+	    }
+	    
+
 
 
 	public Integer getId() {

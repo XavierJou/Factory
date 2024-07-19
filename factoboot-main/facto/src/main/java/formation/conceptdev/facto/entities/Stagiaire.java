@@ -1,5 +1,6 @@
 package formation.conceptdev.facto.entities;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,11 @@ public class Stagiaire {
 
     public Stagiaire() {
     }
+    
+    public Stagiaire(Formation formation) {
+    	this.formation=formation;
+    }
+
 
 
 	public Integer getId() {
