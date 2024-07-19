@@ -1,0 +1,47 @@
+<p>edit-ordinateur works!</p>
+<div>
+  <div class="form-group">
+    <label for="nom">Nom</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nom"
+      name="nom"
+      [(ngModel)]="ordinateur.nom"
+    />
+  </div>
+  <div class="form-group">
+    <label for="marque">Marque</label>
+    <input
+      type="text"
+      class="form-control"
+      id="marque"
+      name="marque"
+      [(ngModel)]="ordinateur.marque"
+    />
+  </div>
+  <div class="form-group">
+    <label for="os">Os</label>
+    <input
+      type="text"
+      class="form-control"
+      id="os"
+      name="os"
+      [(ngModel)]="ordinateur.os"
+    />
+  </div>
+  <div class="form-group">
+    <label for="dateAchat">Date d'achat</label>
+    <input
+      type="date"
+      class="form-control"
+      id="dateAchat"
+      name="dateAchat"
+      [(ngModel)]="ordinateur.dateAchat"
+    />
+  </div>
+  <button (click)="save()">Enregistrer</button>
+  <a routerLink="/ordinateur" routerLinkActive="active" class="btn btn-link"
+    >Retour</a
+  >
+</div>

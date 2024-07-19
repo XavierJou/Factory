@@ -1,0 +1,8 @@
+<a routerLink="/ordinateur/edit" routerLinkActive="active" class="btn btn-link"
+  >Nouveau ordinateur</a
+>
+
+@for(o of ordinateurs;track o.id){
+<p>{{ o.id }} : {{ o.nom }}</p>
+<p><button (click)="delete(o.id!)">Supprimer</button></p>
+}

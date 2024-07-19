@@ -1,0 +1,8 @@
+<a routerLink="/salle/edit" routerLinkActive="active" class="btn btn-link"
+  >Nouveau salle</a
+>
+
+@for(s of salles;track s.id){
+<p>{{ s.id }} : {{ s.nom }}</p>
+<p><button (click)="delete(s.id!)">Supprimer</button></p>
+}

@@ -1,0 +1,35 @@
+<h1>Édition stagiaire</h1>
+<div>
+  @if(stagiaire.id){
+  <div class="form-group">
+    <label for="id">Id</label>
+    <input
+      type="text"
+      class="form-control"
+      id="id"
+      name="id"
+      [(ngModel)]="stagiaire.id"
+      readonly
+    />
+  </div>
+  }
+  <div class="form-group">
+    <label for="formation">Formation</label>
+    <select
+      class="form-control"
+      id="formation"
+      name="formation"
+      [(ngModel)]="stagiaire.formation"
+      [compareWith]="compareFn"
+    >
+      @for(f of formationsObservable|async; track f.id){
+      <option [ngValue]="f">{{ f.titre }}</option>
+      }
+    </select>
+
+    <button (click)="save()">Enregistrer</button>
+    <a routerLink="/stagiaire" routerLinkActive="active" class="btn btn-link"
+      >Retour</a
+    >
+  </div>
+</div>

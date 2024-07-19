@@ -1,0 +1,8 @@
+<a routerLink="/prerequis/edit" routerLinkActive="active" class="btn btn-link"
+  >Nouveau prerequis</a
+>
+
+@for(p of prerequiss;track p.id){
+<p>{{ p.id }} : {{ p.nom }}</p>
+<p><button (click)="delete(p.id!)">Supprimer</button></p>
+}
