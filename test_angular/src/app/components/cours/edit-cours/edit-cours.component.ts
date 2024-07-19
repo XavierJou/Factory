@@ -13,6 +13,8 @@ import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Formation } from '../../../models/formation';
 import { FormationService } from '../../../services/formation.service';
+import { MatiereService } from '../../../services/matiere.service';
+import { Matiere } from '../../../models/matiere';
 
 @Component({
   selector: 'app-edit-cours',
@@ -25,16 +27,20 @@ export class EditCoursComponent implements OnInit {
   cours: Cours = new Cours();
 
   formationsObservable!: Observable<Formation[]>;
+  matieresObservable!: Observable<Matiere[]>;
 
   constructor(
     private coursSrv: CoursService,
     private formationSrv: FormationService,
+    private matiereSrv: MatiereService,
     private router: Router,
     private ActivatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.formationsObservable = this.formationSrv.getAll();
+    this.matieresObservable = this.matiereSrv.getAll();
+
     this.ActivatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.coursSrv.getById(params['id']).subscribe((cours) => {
