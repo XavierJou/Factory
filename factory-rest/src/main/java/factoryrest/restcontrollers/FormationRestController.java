@@ -18,12 +18,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import jakarta.validation.Valid;
-import factory.model.Formation;
+import factory.entity.Formation;
 import factory.service.FormationService;
 import factoryrest.dto.request.FormationRequest;
 import factoryrest.dto.response.CustomJsonViews;
 import factoryrest.dto.response.FormationResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/formation")

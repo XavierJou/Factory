@@ -2,7 +2,7 @@ package factoryrest.dto.response;
 
 import org.springframework.beans.BeanUtils;
 
-import factory.model.Ordinateur;
+import factory.entity.Ordinateur;
 
 public class OrdinateurResponse {
 	private Integer id;

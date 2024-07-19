@@ -4,7 +4,7 @@ import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factory.model.Stagiaire;
+import factory.entity.Stagiaire;
 
 public class StagiaireResponse {
 	@JsonView(CustomJsonViews.Common.class)

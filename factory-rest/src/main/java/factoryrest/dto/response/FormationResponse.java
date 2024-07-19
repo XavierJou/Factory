@@ -8,7 +8,9 @@ import org.springframework.beans.BeanUtils;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factory.model.Formation;
+import factory.entity.Formation;
+
+
 
 public class FormationResponse {
 	@JsonView(CustomJsonViews.Common.class)

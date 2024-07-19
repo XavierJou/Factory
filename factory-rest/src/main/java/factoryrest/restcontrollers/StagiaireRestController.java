@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import factory.model.Stagiaire;
+import factory.entity.Stagiaire;
 import factory.service.FormationService;
 import factory.service.StagiaireService;
 import factoryrest.dto.request.StagiaireRequest;

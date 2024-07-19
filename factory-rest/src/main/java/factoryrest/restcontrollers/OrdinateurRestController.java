@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import factory.model.Ordinateur;
+import factory.entity.Ordinateur;
 import factory.service.OrdinateurService;
 import factoryrest.dto.request.OrdinateurRequest;
 import factoryrest.dto.response.OrdinateurResponse;
