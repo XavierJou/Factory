@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/videoprojecteurs")
+@RequestMapping("/api/videoprojecteur")
 @SecurityRequirement(name="basicAuth")
 @CrossOrigin(origins = "*")
 public class VideoprojecteurRestController {
