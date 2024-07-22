@@ -1,8 +1,23 @@
-<a routerLink="/formateur/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouveau formateur</a
->
-
-@for(f of formateurs;track f.id){
-<p>{{ f.id }}</p>
-<p><button (click)="delete(f.id!)">Supprimer</button></p>
-}
+<div class="container">
+  <div class="container-fluid">
+    <a
+      routerLink="/formateur/edit"
+      routerLinkActive="active"
+      class="btn btn-link-primary btn-outline-primary btn-sm"
+      >Nouveau formateur</a
+    >
+  </div>
+  <p></p>
+  <div class="container">
+    @for(f of formateurs;track f.id){
+    <div class="alert alert-dismissible alert-secondary">
+      <p>{{ f.id }}</p>
+      <p>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(f.id!)">
+          Supprimer
+        </button>
+      </p>
+    </div>
+    }
+  </div>
+</div>

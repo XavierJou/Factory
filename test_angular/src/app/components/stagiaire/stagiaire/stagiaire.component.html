@@ -1,12 +1,29 @@
-<a routerLink="/stagiaire/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouveau stagiaire</a
->
-
-@for(s of stagiaires;track s.id){
-<p>{{ s.id }}</p>
-<p>{{ s.formation?.titre }}</p>
-<p>
-  <button (click)="delete(s.id!)">Supprimer</button> &nbsp;
-  <a routerLink="/stagiaire/edit/{{ s.id }}">editer</a>
-</p>
-}
+<div class="container">
+  <div class="container-fluid">
+    <a
+      routerLink="/stagiaire/edit"
+      routerLinkActive="active"
+      class="btn btn-link-primary btn-outline-primary btn-sm"
+      >Nouveau stagiaire</a
+    >
+  </div>
+  <p></p>
+  <div class="container">
+    @for(s of stagiaires;track s.id){
+    <div class="alert alert-dismissible alert-secondary">
+      <p>{{ s.id }} : {{ s.formation?.titre }}</p>
+      <p>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(s.id!)">
+          Supprimer
+        </button>
+        &nbsp;
+        <a
+          class="btn btn-outline-warning btn-sm"
+          routerLink="/stagiaire/edit/{{ s.id }}"
+          >editer</a
+        >
+      </p>
+    </div>
+    }
+  </div>
+</div>
