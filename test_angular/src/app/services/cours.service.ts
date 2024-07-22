@@ -7,7 +7,7 @@ import { Cours } from '../models/cours';
   providedIn: 'root',
 })
 export class CoursService {
-  url = 'http://localhost:8080/demo/api/cours';
+  url = 'http://localhost:8080/factory/api/cours';
 
   constructor(private httpClient: HttpClient) {}
 

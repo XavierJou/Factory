@@ -7,7 +7,7 @@ import { Competence } from '../models/competence';
   providedIn: 'root',
 })
 export class CompetenceService {
-  url = 'http://localhost:8080/demo/api/competence';
+  url = 'http://localhost:8080/factory/api/competence';
 
   constructor(private httpClient: HttpClient) {}
 

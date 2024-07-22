@@ -11,7 +11,7 @@ export class UtilisateurService {
 
   public inscription(obj: any): Observable<Utilisateur> {
     return this.http.post(
-      'http://localhost:8080/demo/api/utilisateur/inscription',
+      'http://localhost:8080/factory/api/utilisateur/inscription',
       obj
     );
   }

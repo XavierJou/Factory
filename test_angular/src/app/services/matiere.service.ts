@@ -7,7 +7,7 @@ import { Matiere } from '../models/matiere';
   providedIn: 'root',
 })
 export class MatiereService {
-  url = 'http://localhost:8080/demo/api/matiere';
+  url = 'http://localhost:8080/factory/api/matiere';
 
   constructor(private httpClient: HttpClient) {}
 

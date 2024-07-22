@@ -7,7 +7,7 @@ import { Formation } from '../models/formation';
   providedIn: 'root',
 })
 export class FormationService {
-  url = 'http://localhost:8080/demo/api/formation';
+  url = 'http://localhost:8080/factory/api/formation';
 
   constructor(private httpClient: HttpClient) {}
 

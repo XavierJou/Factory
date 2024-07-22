@@ -7,7 +7,7 @@ import { Stagiaire } from '../models/stagiaire';
   providedIn: 'root',
 })
 export class StagiaireService {
-  url = 'http://localhost:8080/demo/api/stagiaire';
+  url = 'http://localhost:8080/factory/api/stagiaire';
 
   constructor(private httpClient: HttpClient) {}
 

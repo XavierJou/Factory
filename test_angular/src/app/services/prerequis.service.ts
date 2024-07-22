@@ -5,7 +5,7 @@ import { Prerequis } from '../models/prerequis';
 
 @Injectable()
 export class PrerequisService {
-  url = 'http://localhost:8080/demo/api/prerequis';
+  url = 'http://localhost:8080/factory/api/prerequis';
 
   constructor(private httpClient: HttpClient) {}
 
