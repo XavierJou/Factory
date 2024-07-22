@@ -56,6 +56,7 @@ export class InscriptionComponent {
 
     this.utilisateurSrv.inscription(obj).subscribe({
       next: (data) => {
+        console.log('controle ok');
         this.router.navigateByUrl('/login');
       },
       error: (error) => {

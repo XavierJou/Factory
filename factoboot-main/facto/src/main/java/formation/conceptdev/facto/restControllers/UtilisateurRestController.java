@@ -43,9 +43,11 @@ public class UtilisateurRestController {
 	@PostMapping("/inscription")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public UtilisateurResponse inscription(@Valid @RequestBody UtilisateurRequest utilisateurRequest, BindingResult br) {
+		
 		if (br.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cette erreeur");
         }
+		
 		System.out.println(utilisateurRequest.getLogin());
 		
 		   // Vérification si le login existe déjà
@@ -57,6 +59,6 @@ public class UtilisateurRestController {
 		Utilisateur utilisateur = new Utilisateur();
 		BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role","formateur","stagiaire");
 		utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
-		return new UtilisateurResponse(utilisateurSrv.create(utilisateur));
+		return new UtilisateurResponse(utilisateurSrv.create(utilisateur),false,false);
 	}
 }

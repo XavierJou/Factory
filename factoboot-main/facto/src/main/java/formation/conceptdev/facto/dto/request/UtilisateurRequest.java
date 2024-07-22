@@ -1,12 +1,21 @@
 package formation.conceptdev.facto.dto.request;
 
+import jakarta.validation.constraints.NotNull;
+
 public class UtilisateurRequest {
+	
 	private Integer id;
+	@NotNull
 	private String login;
+	@NotNull
 	private String nom;
-	private String prenom;	
+	@NotNull
+	private String prenom;
+	@NotNull
 	private String email;
+	@NotNull
 	private String password;
+	@NotNull
 	private String role;
 
 
