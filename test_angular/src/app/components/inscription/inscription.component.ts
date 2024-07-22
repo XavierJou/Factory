@@ -40,6 +40,8 @@ export class InscriptionComponent {
     });
   }
 
+  messageErreur!: string;
+
   inscription() {
     let obj = {
       login: this.form.get('login')?.value,
@@ -47,11 +49,18 @@ export class InscriptionComponent {
       prenom: this.form.get('prenom')?.value,
       email: this.form.get('email')?.value,
       password: this.form.get('passwordGroup.password')?.value,
-      //role: 'ROLE_USER', // A VERIFIER
+      id_satgiaire: null,
+      id_formateur: null,
+      role: 'ROLE_USER',
     };
-    console.log(obj);
-    this.utilisateurSrv.inscription(obj).subscribe((data) => {
-      this.router.navigateByUrl('/login');
+
+    this.utilisateurSrv.inscription(obj).subscribe({
+      next: (data) => {
+        this.router.navigateByUrl('/login');
+      },
+      error: (error) => {
+        this.messageErreur = error.message;
+      },
     });
   }
 
