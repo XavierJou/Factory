@@ -16,8 +16,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
-@SecurityRequirement(name="basicAuth")
 public class AuthRestController {
 
 	@JsonView(CustomJsonViews.Common.class)

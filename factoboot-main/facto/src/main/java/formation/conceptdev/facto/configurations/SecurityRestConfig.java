@@ -39,8 +39,8 @@ public class SecurityRestConfig {
             CorsConfigurationSource source=request ->{
                 CorsConfiguration config=new CorsConfiguration();
 
-                config.setAllowedOrigins(List.of(""));
-                config.setAllowedMethods(List.of(""));
+                config.setAllowedOrigins(List.of("*"));
+                config.setAllowedMethods(List.of("*"));
                 config.setAllowedHeaders(List.of("*"));
                 return config;
             };
