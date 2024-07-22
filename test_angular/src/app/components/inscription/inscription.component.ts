@@ -10,6 +10,8 @@ import {
 } from '@angular/forms';
 import { UtilisateurService } from '../../services/utilisateur.service';
 import { Router } from '@angular/router';
+import { UtilisateurInscription } from '../../models/utilisateur-inscription';
+import { utcFridays } from 'd3';
 
 @Component({
   selector: 'app-inscription',
@@ -53,8 +55,9 @@ export class InscriptionComponent {
       id_formateur: null,
       role: 'ROLE_USER',
     };
+    let utilisateurInscription: UtilisateurInscription = obj;
 
-    this.utilisateurSrv.inscription(obj).subscribe({
+    this.utilisateurSrv.inscription(utilisateurInscription).subscribe({
       next: (data) => {
         console.log('controle ok');
         this.router.navigateByUrl('/login');

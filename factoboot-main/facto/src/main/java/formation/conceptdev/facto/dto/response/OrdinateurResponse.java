@@ -15,6 +15,8 @@ public class OrdinateurResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
 	@JsonView(CustomJsonViews.Common.class)
+	private String nom;
+	@JsonView(CustomJsonViews.Common.class)
 	private String marque;
 	@JsonView(CustomJsonViews.Common.class)
 	private int ram;
@@ -95,4 +97,11 @@ public class OrdinateurResponse {
 		this.ram = ram;
 	}
 
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 }

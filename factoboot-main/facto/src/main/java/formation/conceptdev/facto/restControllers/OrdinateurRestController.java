@@ -41,8 +41,7 @@ public class OrdinateurRestController {
 	public List<OrdinateurResponse> getAll() {
 		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o)).collect(Collectors.toList());
 	}
-
-	/*
+	
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public OrdinateurResponse create(@RequestBody OrdinateurRequest ordinateurRequest) {
@@ -50,23 +49,10 @@ public class OrdinateurRestController {
 		BeanUtils.copyProperties(ordinateurRequest, o);
 		return new OrdinateurResponse(ordinateurSrv.insert(o));
 	}
-	*/
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable("id") Integer id) {
 		ordinateurSrv.deleteById(id);
-	}
-	
-	@PostMapping("")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	@JsonView(CustomJsonViews.Common.class)
-	public OrdinateurResponse create(@Valid @RequestBody OrdinateurRequest ordinateurRequest, BindingResult br) {
-		if (br.hasErrors()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-		}
-		Ordinateur ordinateur = new Ordinateur();
-		BeanUtils.copyProperties(ordinateurRequest, ordinateur);
-		return new OrdinateurResponse(ordinateurSrv.insert(ordinateur), false);
 	}
 }

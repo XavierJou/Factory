@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Prerequis } from '../models/prerequis';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class PrerequisService {
   url = 'http://localhost:8080/factory/api/prerequis';
 
