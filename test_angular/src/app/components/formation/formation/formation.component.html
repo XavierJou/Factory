@@ -1,9 +1,24 @@
-<a routerLink="/formation/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouvelle formation</a
->
-
-@for(f of formations;track f.id){
-<p>{{ f.id }} : {{ f.titre }}</p>
-<p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
-<p><button (click)="delete(f.id!)">Supprimer</button></p>
-}
+<div class="container">
+  <div class="container-fluid">
+    <a
+      routerLink="/formation/edit"
+      routerLinkActive="active"
+      class="btn btn-link-primary btn-outline-primary btn-sm"
+      >Nouvelle formation</a
+    >
+  </div>
+  <p></p>
+  <div class="container">
+    @for(f of formations;track f.id){
+    <div class="alert alert-dismissible alert-secondary">
+      <p>{{ f.id }} : {{ f.titre }}</p>
+      <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
+      <p>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(f.id!)">
+          Supprimer
+        </button>
+      </p>
+    </div>
+    }
+  </div>
+</div>
