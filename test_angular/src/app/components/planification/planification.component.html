@@ -1,0 +1,17 @@
+debut
+<input
+  type="date"
+  id="dateDebut"
+  [(ngModel)]="dateDebut"
+  (ngModelChange)="ChangementBorneDebut()"
+/>
+fin
+<input
+  type="date"
+  id="dateFin"
+  [(ngModel)]="dateFin"
+  (ngModelChange)="ChangementBorneFin()"
+/>
+<button (click)="semainePrecedente()">precedent</button>
+<button (click)="semaineSuivante()">suivant</button>
+<div #chart class="chart-container"></div>

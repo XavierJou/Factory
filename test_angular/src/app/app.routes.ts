@@ -26,6 +26,7 @@ import { CoursComponent } from './components/cours/cours/cours.component';
 import { EditCoursComponent } from './components/cours/edit-cours/edit-cours.component';
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
+import { PlanificationComponent } from './components/planification/planification.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,11 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+
+  {
+    path: 'planification',
+    component: PlanificationComponent,
   },
   {
     path: 'login',
