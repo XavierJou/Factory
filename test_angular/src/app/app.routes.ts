@@ -40,10 +40,6 @@ export const routes: Routes = [
   },
 
   {
-    path: 'planning',
-    component: PlanificationComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent,
     canActivate: [isLoggedGuard],
@@ -53,6 +49,10 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
+      {
+        path: 'planning',
+        component: PlanificationComponent,
+      },
       {
         path: 'dashboard',
         component: DashboardComponent,

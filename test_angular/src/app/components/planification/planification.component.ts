@@ -2,11 +2,12 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { PlanifSalle } from '../../models/planif-salle';
 import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-planification',
   standalone: true,
-  imports: [FormsModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule],
   templateUrl: './planification.component.html',
   styleUrl: './planification.component.css',
 })
