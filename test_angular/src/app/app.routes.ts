@@ -1,4 +1,4 @@
-import { isLoggedGuard } from './guards/isLogged.guards';
+import { isLoggedGuard } from './guards/isLogged.guard';
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './pages/layout/layout.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -40,7 +40,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'planification',
+    path: 'planning',
     component: PlanificationComponent,
   },
   {

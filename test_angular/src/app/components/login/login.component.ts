@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   login: string = '';
   password: string = '';
-  error: boolean = false;
+  error = false;
 
   constructor(private authSrv: AuthService, private router: Router) {}
 
