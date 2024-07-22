@@ -48,11 +48,11 @@ public class UtilisateurRestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cette erreeur");
         }
 		
-		System.out.println(utilisateurRequest.getLogin());
+		
 		
 		   // Vérification si le login existe déjà
 	    if (utilisateurSrv.loginExists(utilisateurRequest.getLogin())) {
-	    	System.out.println("erreur login");
+	    	
 	        throw new ResponseStatusException(HttpStatus.CONFLICT, "Login existe déjà");
 	    }
 	    
