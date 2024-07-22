@@ -59,6 +59,13 @@ public class CoursRestController {
     public CoursResponse getById(@PathVariable Integer id) {
         return new CoursResponse(coursSrv.getById(id),false, false, false, false, false, false);
     }
+    
+    
+    @GetMapping("/formateurComptence")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<CoursResponse> getFormateurComptence() {
+        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false)).collect(Collectors.toList());
+    }
 
     @GetMapping("/{id}/stagiaire")
     public CoursResponse getByIdWithStagiaire(@PathVariable Integer id) {

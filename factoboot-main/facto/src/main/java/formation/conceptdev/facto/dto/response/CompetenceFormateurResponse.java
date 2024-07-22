@@ -11,9 +11,9 @@ public class CompetenceFormateurResponse {
 	
 	 @JsonView(CustomJsonViews.Common.class)
 	    private Integer id;
-	    @JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.CompetenceFormateurResponseWithCompetence.class)
+	 	@JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
 	    private CompetenceResponse competence;
-	    @JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.CompetenceFormateurResponseWithFormateur.class)
+	 	@JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
 	    private FormateurResponse formateur;
 
 	    public CompetenceFormateurResponse() {
