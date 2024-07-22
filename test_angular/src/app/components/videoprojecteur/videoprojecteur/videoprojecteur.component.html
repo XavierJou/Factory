@@ -1,11 +1,23 @@
-<a
-  routerLink="/videoprojecteur/edit"
-  routerLinkActive="active"
-  class="btn btn-link"
-  >Nouveau videoprojecteur</a
->
-
-@for(v of videoprojecteurs;track v.id){
-<p>{{ v.id }} : {{ v.nom }}</p>
-<p><button (click)="delete(v.id!)">Supprimer</button></p>
-}
+<div class="container">
+  <div class="container-fluid">
+    <a
+      routerLink="/videoprojecteur/edit"
+      routerLinkActive="active"
+      class="btn btn-link-primary btn-outline-primary btn-sm"
+      >Nouveau videoprojecteur</a
+    >
+  </div>
+  <p></p>
+  <div class="container">
+    @for(v of videoprojecteurs;track v.id){
+    <div class="alert alert-dismissible alert-secondary">
+      <p>{{ v.id }} : {{ v.nom }}</p>
+      <p>
+        <button class="btn btn-outline-danger btn-sm" (click)="delete(v.id!)">
+          Supprimer
+        </button>
+      </p>
+    </div>
+    }
+  </div>
+</div>
