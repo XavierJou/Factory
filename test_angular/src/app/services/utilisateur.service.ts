@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
 
 @Injectable({
@@ -10,9 +10,17 @@ export class UtilisateurService {
   constructor(private http: HttpClient) {}
 
   public inscription(obj: any): Observable<Utilisateur> {
-    return this.http.post(
-      'http://localhost:8080/factory/api/utilisateur/inscription',
-      obj
-    );
+    return this.http
+      .post('http://localhost:8080/factory/api/utilisateur/inscription', obj)
+      .pipe(catchError(this.gestionErreur));
+  }
+
+  private gestionErreur(error: HttpErrorResponse) {
+    if (error.status === 409) {
+      // Conflict error, login already exists
+      return throwError(() => new Error('Ce login existe dèjà'));
+    } else {
+      return throwError(() => new Error('Une erreur est survenue'));
+    }
   }
 }
