@@ -238,7 +238,7 @@ class FactoinitAdmin {
 		        	Collections.shuffle(formations);
 		            Stagiaire stagiaire = new Stagiaire(formations.get(0));            
 		            stagiaireService.insert(stagiaire);
-		            Utilisateur utilisateur = new Utilisateur("user", "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",stagiaire,Role.ROLE_STAGIAIRE);
+		            Utilisateur utilisateur = new Utilisateur("user"+i, "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",stagiaire,Role.ROLE_STAGIAIRE);
 		            utilisateurService.create(utilisateur);
 		        }
 		        
@@ -246,19 +246,19 @@ class FactoinitAdmin {
 
 		        // ajout données Utilisateurs
 		        for (int i = 101; i <= 105; i++) {
-		            Utilisateur utilisateur = new Utilisateur("admin" , "admin", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_ADMINISTRATEUR);
+		            Utilisateur utilisateur = new Utilisateur("admin"+(i-100) , "admin", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_ADMINISTRATEUR);
 		            utilisateurService.create(utilisateur);
 		        }
 		        
 		        // ajout données Utilisateurs
 		        for (int i = 106; i <= 110; i++) {
-		            Utilisateur utilisateur = new Utilisateur("user" , "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_GESTIONNAIRE);
+		            Utilisateur utilisateur = new Utilisateur("user"+i , "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_GESTIONNAIRE);
 		            utilisateurService.create(utilisateur);
 		        }
 		        
 		     // ajout données Utilisateurs
 		        for (int i = 111; i <= 115; i++) {
-		            Utilisateur utilisateur = new Utilisateur("user", "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_TECHNICIEN);
+		            Utilisateur utilisateur = new Utilisateur("user"+i, "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",Role.ROLE_TECHNICIEN);
 		            utilisateurService.create(utilisateur);
 		        }
 
@@ -272,7 +272,7 @@ class FactoinitAdmin {
 		        // ajout données Utilisateurs
 		        for (int i = 116; i <= 126; i++) {
 		        	Formateur formateur = formateurService.getById(i-115);    
-		            Utilisateur utilisateur = new Utilisateur("user", "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",formateur,Role.ROLE_FORMATEUR);
+		            Utilisateur utilisateur = new Utilisateur("user"+i, "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",formateur,Role.ROLE_FORMATEUR);
 		            utilisateurService.create(utilisateur);
 		            
 		            Collections.shuffle(competences);
