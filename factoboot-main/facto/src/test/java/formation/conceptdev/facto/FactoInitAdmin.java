@@ -235,6 +235,7 @@ class FactoinitAdmin {
 		     // ajout données Stagiaires
 		        for (int i = 1; i <= 100; i++) 
 		        {
+		        	
 		        	Collections.shuffle(formations);
 		            Stagiaire stagiaire = new Stagiaire(formations.get(0));            
 		            stagiaireService.insert(stagiaire);
