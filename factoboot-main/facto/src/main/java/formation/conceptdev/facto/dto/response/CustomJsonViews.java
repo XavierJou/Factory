@@ -2,167 +2,176 @@ package formation.conceptdev.facto.dto.response;
 
 public class CustomJsonViews {
 
-	public static class Common {
+	public interface Common {
 
 	}
 
-	public static class StagiaireWithFormation extends Common {
+	public interface StagiaireWithFormation extends Common {
 
 	}
 
-	public static class FormationWithStagiaire extends Common {
-
-	}
-	
-	
-	public static class VideoprojecteurResponse extends Common {
+	public interface FormationWithStagiaire extends Common {
 
 	}
 	
-	public static class SalleResponse extends Common {
+	public interface FormateurPossiblePourCoursWithDisponibiliteFormateur extends Common {
 
 	}
 	
 	
-	public static class CompetenceWithMatiere extends Common {
+	
+	
+	public interface VideoprojecteurResponse extends Common {
+
+	}
+	
+	public interface SalleResponse extends Common {
+
+	}
+	
+	
+	public interface CompetenceWithMatiere extends Common {
 	
 	}
 	
-	public static class CoursWithSalle extends Common {
+	public interface CoursWithSalle extends Common {
 		
 	}
 	
 
-	public static class CompetenceWithFormation extends Common {
+	public interface CompetenceWithFormation extends Common {
 	
 	}
 	
 
-	public static class CompetenceWithCoursOrdinateurs extends Common {
+	public interface CompetenceWithCoursOrdinateurs extends Common {
 	
 	}
 	
-	public static class CoursOrdinateursWithCours extends Common {
+	public interface CoursOrdinateursWithCours extends Common {
 		
 	}
 	
-	public static class CoursOrdinateursWithOrdinateur extends Common {
+	public interface CoursOrdinateursWithOrdinateur extends Common {
 		
 	}
 	
 	
-	public static class CompetenceWithFormateurs extends Common {
+	public interface CompetenceWithFormateurs extends Common {
 		
 	}
 	
-	public static class CompetenceWithMatieres extends Common {
+	public interface CompetenceWithMatieres extends Common {
 		
 	}
 	
-public static class CoursResponseWithMatiere extends Common {
+public interface CoursResponseWithMatiere extends Common {
 		
 	}
-public static class CoursResponseWithFormateur extends Common {
+public interface CoursResponseWithFormateur extends Common {
 	
 }
-public static class CoursResponseWithFormation extends Common {
+public interface CoursResponseWithFormation extends Common {
 	
 }
-public static class CoursResponseWithCoursOrdinateurs extends Common {
+public interface CoursResponseWithCoursOrdinateurs extends Common {
 	
 }
-public static class CoursResponseWithVideoprojecteur extends Common {
+public interface CoursResponseWithVideoprojecteur extends Common {
 	
 }
-public static class CoursResponseWithSalle extends Common {
+public interface CoursResponseWithSalle extends Common {
 	
 }
 	
-public static class CompetenceFormateurResponseWithDetail extends Common {
+public interface CompetenceFormateurResponseWithDetail extends CompetenceFormateurResponseWithCompetence, CompetenceFormateurResponseWithFormateur{
 	
-public static class CompetenceFormateurResponseWithCompetence extends Common {
-		
-	}
-
-public static class CompetenceFormateurResponseWithFormateur extends Common {
-	
-}
-	}
-
-
-
-public static class CompetenceMatiereResponseWithCompetence extends Common {
 	
 }
 
-public static class CompetenceMatiereResponseWithMatiere extends Common {
+public interface CompetenceFormateurResponseWithCompetence extends Common {
 	
 }
 
-public static class UtilisateurResponseWithFormateur extends Common {
+public interface CompetenceFormateurResponseWithFormateur extends Common {
+
+}
+
+public interface CompetenceMatiereResponseWithMatiere extends Common {}
+
+public interface CompetenceMatiereResponseWithCompetence extends Common {}
+
+public interface CompetenceMatiereResponseWithDetails extends CompetenceMatiereResponseWithMatiere, CompetenceMatiereResponseWithCompetence {}
+
+
+
+
+
+
+public interface UtilisateurResponseWithFormateur extends Common {
 	
 }
 
-public static class DisponibiliteFormateurResponseWithformateur extends Common {
+public interface DisponibiliteFormateurResponseWithformateur extends Common {
 	
 }
 
-public static class UtilisateurResponseWithStagiaire extends Common {
+public interface UtilisateurResponseWithStagiaire extends Common {
 	
 }
 
-public static class FormateurResponseWithCours extends Common {
+public interface FormateurResponseWithCours extends Common {
 	
 }
 
-public static class FormateurResponseWithcompetenceFormateur extends Common {
+public interface FormateurResponseWithcompetenceFormateur extends Common {
 	
 }
 
-public static class FormateurResponseWithdisponibiliteFormateur extends Common {
+public interface FormateurResponseWithdisponibiliteFormateur extends Common {
 	
 }
 
-public static class FormateurResponseWithutilisateur extends Common {
+public interface FormateurResponseWithutilisateur extends Common {
 	
 }
-	public static class FormationWithPrerequis extends Common {
-		
-	}
-	
-	public static class PreRequisWithFormation extends Common {
-		
-	}
-	
-	public static class OrdinateurWithCoursOrdinateurs extends Common {
+	public interface FormationWithPrerequis extends Common {
 		
 	}
 	
-	public static class CompetenceWithVideoprojecteur extends Common {
+	public interface PreRequisWithFormation extends Common {
 		
 	}
 	
-	public static class CompetenceWithSalle extends Common {
+	public interface OrdinateurWithCoursOrdinateurs extends Common {
 		
 	}
 	
-	public static class CompetenceWithFormateur extends Common {
+	public interface CompetenceWithVideoprojecteur extends Common {
 		
 	}
 	
-	public static class CoursWithFormation extends Common {
+	public interface CompetenceWithSalle extends Common {
+		
+	}
+	
+	public interface CompetenceWithFormateur extends Common {
+		
+	}
+	
+	public interface CoursWithFormation extends Common {
 
 	}
 
-	public static class FormationWithCours extends Common {
+	public interface FormationWithCours extends Common {
 
 	}
 	
-	public static class OrdinateurWithCours extends Common {
+	public interface OrdinateurWithCours extends Common {
 
 	}
 
-	public static class CoursWithOrdinateur extends Common {
+	public interface CoursWithOrdinateur extends Common {
 
 	}
 }

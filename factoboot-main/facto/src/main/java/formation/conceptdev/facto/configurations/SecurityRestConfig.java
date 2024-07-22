@@ -29,7 +29,7 @@ public class SecurityRestConfig {
             auth.requestMatchers("/swagger-ui/","/swagger-ui.html","/v3/").permitAll()
                 .requestMatchers(HttpMethod.POST,"/api/utilisateur/inscription").permitAll() 
                 .requestMatchers(HttpMethod.GET).authenticated()
-                .anyRequest().hasAnyAuthority("ROLE_ADMIN");
+                .anyRequest().hasAnyAuthority("ROLE_ADMINISTRATEUR");
         });
 
         //desactivation de la session utilisateur

@@ -41,6 +41,12 @@ public class CompetenceMatiereRestController {
     public List<CompetenceMatiereResponse> getAll() {
         return competenceMatiereService.getAll().stream().map(competenceMatiere -> new CompetenceMatiereResponse(competenceMatiere,false,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.CompetenceMatiereResponseWithDetails.class)
+    public List<CompetenceMatiereResponse> getAllWithDetail() {
+        return competenceMatiereService.getAll().stream().map(competenceMatiere -> new CompetenceMatiereResponse(competenceMatiere,true,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -61,6 +67,7 @@ public class CompetenceMatiereRestController {
     }
 
     @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.CompetenceMatiereResponseWithDetails.class)
     public CompetenceMatiereResponse getByIdWithDetails(@PathVariable Integer id) {
         return new CompetenceMatiereResponse(competenceMatiereService.getByIdWithDetails(id));
     }

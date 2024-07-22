@@ -41,6 +41,12 @@ public class CompetenceFormateurRestController {
     public List<CompetenceFormateurResponse> getAll() {
         return competenceFormateurService.getAll().stream().map(competenceFormateur -> new CompetenceFormateurResponse(competenceFormateur,false,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
+    public List<CompetenceFormateurResponse> getAllWithDetail() {
+        return competenceFormateurService.getAll().stream().map(competenceFormateur -> new CompetenceFormateurResponse(competenceFormateur,true,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -63,6 +69,6 @@ public class CompetenceFormateurRestController {
     @GetMapping("/{id}/details")
     @JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
     public CompetenceFormateurResponse getByIdWithDetails(@PathVariable Integer id) {
-        return new CompetenceFormateurResponse(competenceFormateurService.getByIdWithDetails(id),false,false);
+        return new CompetenceFormateurResponse(competenceFormateurService.getByIdWithDetails(id),true,true);
     }
 }
