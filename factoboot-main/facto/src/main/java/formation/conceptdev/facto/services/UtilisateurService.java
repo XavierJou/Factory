@@ -30,6 +30,10 @@ public class UtilisateurService implements UserDetailsService {
 			throw new UsernameNotFoundException("Utilisateur inconnu");
 		});
 	}
+	
+	public boolean loginExists(String login) {
+	    return daoUtilisateur.findByLogin(login).isPresent();
+	}
 
 	public void updatePassword(String login, String password) {
 		Utilisateur utilisateur = daoUtilisateur.findByLogin(login).orElseThrow(() -> {
@@ -72,11 +76,12 @@ public class UtilisateurService implements UserDetailsService {
 	{
 		return daoUtilisateur.findAll();
 	}
+	/*
 	
 	public Utilisateur insert(Utilisateur utilisateur) 
 	{
 		return daoUtilisateur.save(utilisateur);
-	}
+	}*/
 	
 	public Utilisateur update(Utilisateur utilisateur) 
 	{
