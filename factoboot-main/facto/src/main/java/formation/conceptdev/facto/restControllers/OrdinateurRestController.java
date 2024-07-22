@@ -41,8 +41,7 @@ public class OrdinateurRestController {
 	public List<OrdinateurResponse> getAll() {
 		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o)).collect(Collectors.toList());
 	}
-
-	/*
+	
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public OrdinateurResponse create(@RequestBody OrdinateurRequest ordinateurRequest) {
@@ -50,7 +49,6 @@ public class OrdinateurRestController {
 		BeanUtils.copyProperties(ordinateurRequest, o);
 		return new OrdinateurResponse(ordinateurSrv.insert(o));
 	}
-	*/
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
