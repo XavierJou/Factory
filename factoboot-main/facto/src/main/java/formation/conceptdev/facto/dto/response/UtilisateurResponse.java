@@ -8,13 +8,20 @@ import formation.conceptdev.facto.entities.Formateur;
 import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.entities.Utilisateur;
 
+
 public class UtilisateurResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer id;
 	@JsonView(CustomJsonViews.Common.class)
 	private String login;
 	@JsonView(CustomJsonViews.Common.class)
-	private String password;
+	private String nom;
+	@JsonView(CustomJsonViews.Common.class)
+	private String prenom;
+	@JsonView(CustomJsonViews.Common.class)
+	private String email;
+	@JsonView(CustomJsonViews.Common.class)
+	private String role;
 	@JsonView(CustomJsonViews.UtilisateurResponseWithFormateur.class)
 	private FormateurResponse formateur;
 	@JsonView(CustomJsonViews.UtilisateurResponseWithStagiaire.class)
@@ -24,7 +31,8 @@ public class UtilisateurResponse {
 	}
 
 	public UtilisateurResponse(Utilisateur utilisateurEntity, boolean besoinFormateur, boolean besoinStagiaire) {
-		BeanUtils.copyProperties(utilisateurEntity, this);
+		BeanUtils.copyProperties(utilisateurEntity, this, "role","formateur","stagiaire");
+		this.role= utilisateurEntity.getRole().toString();
 		
 		if (besoinFormateur) {
 			if (utilisateurEntity.getFormateur() != null) {
@@ -59,12 +67,20 @@ public class UtilisateurResponse {
 		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPrenom() {
+		return prenom;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public FormateurResponse getFormateur() {
@@ -82,5 +98,7 @@ public class UtilisateurResponse {
 	public void setStagiaire(StagiaireResponse stagiaire) {
 		this.stagiaire = stagiaire;
 	}
+
+
 
 }
