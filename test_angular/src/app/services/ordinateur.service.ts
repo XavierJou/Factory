@@ -7,7 +7,7 @@ import { Ordinateur } from '../models/ordinateur';
   providedIn: 'root',
 })
 export class OrdinateurService {
-  url = 'http://localhost:8080/demo/api/ordinateur';
+  url = 'http://localhost:8080/factory/api/ordinateur';
 
   constructor(private httpClient: HttpClient) {}
 

@@ -7,7 +7,7 @@ import { Videoprojecteur } from '../models/videoprojecteur';
   providedIn: 'root',
 })
 export default class VideoprojecteurService {
-  url = 'http://localhost:8080/demo/api/videoprojecteur';
+  url = 'http://localhost:8080/factory/api/videoprojecteur';
 
   constructor(private httpClient: HttpClient) {}
 

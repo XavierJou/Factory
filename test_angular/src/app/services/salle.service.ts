@@ -5,7 +5,7 @@ import { Salle } from '../models/salle';
 
 @Injectable()
 export class SalleService {
-  url = 'http://localhost:8080/demo/api/salle';
+  url = 'http://localhost:8080/factory/api/salle';
 
   constructor(private httpClient: HttpClient) {}
 
