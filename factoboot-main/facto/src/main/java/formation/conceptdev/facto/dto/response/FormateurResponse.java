@@ -18,13 +18,13 @@ public class FormateurResponse {
     @JsonView(CustomJsonViews.FormateurResponseWithCours.class)
     private List<CoursResponse> cours;
     
-    @JsonView(CustomJsonViews.FormateurResponseWithcompetenceFormateur.class)
+    @JsonView(CustomJsonViews.FormateurResponseWithCompetenceFormateur.class)
     private List<CompetenceFormateurResponse> competenceFormateurResponse;
     
-    @JsonView(CustomJsonViews.FormateurResponseWithdisponibiliteFormateur.class) 
+    @JsonView(CustomJsonViews.FormateurResponseWithDisponibiliteFormateur.class) 
     private List<DisponibiliteFormateurResponse> disponibiliteFormateurResponse;
     
-    @JsonView(CustomJsonViews.FormateurResponseWithutilisateur.class) 
+    @JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class) 
     private UtilisateurResponse utilisateur;
 
     public FormateurResponse() {

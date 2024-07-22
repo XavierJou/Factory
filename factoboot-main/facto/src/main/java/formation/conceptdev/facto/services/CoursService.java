@@ -1,7 +1,7 @@
 package formation.conceptdev.facto.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import formation.conceptdev.facto.entities.Cours;
 import formation.conceptdev.facto.entities.Formateur;
 import formation.conceptdev.facto.repositories.IDAOCompetenceFormateur;
 import formation.conceptdev.facto.repositories.IDAOCours;
+import formation.conceptdev.facto.repositories.IDAOFormateur;
 
 @Service
 public class CoursService {
@@ -20,6 +21,9 @@ public class CoursService {
 	
 	 @Autowired
 	 IDAOCompetenceFormateur daoCompetenceFormateur;
+	 
+	 @Autowired
+	 IDAOFormateur daoFormateur;
 
 	public Cours getById(Integer id) {
 		if (id == null) {
@@ -30,11 +34,72 @@ public class CoursService {
 	
 	
 	
+	
 	public Cours getByIdWithStagiaire(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Cours sans id");
 		}
 		return daoCours.findById(id).orElseThrow(RuntimeException::new);
+	}
+	
+	public List<Formateur> getFormateurComptenceCours(Integer id_cours)
+	{
+		if (id_cours == null) {
+			throw new RuntimeException("Impossible de find Cours sans id");
+		}
+		
+
+		
+		List<Integer> competences =daoCours.findCompetencesByCoursId(id_cours);
+		
+		
+		
+		List<CompetenceFormateur>  competenceFormateurs= 	daoCompetenceFormateur.findAllOrderByFormateurIdAsc();
+		
+		Integer idFormateurEnCours=-1;
+		int nbComptenceTrouve=0;
+		
+		List<Formateur> formateurs= new ArrayList<Formateur>();
+		
+		boolean premier=false;
+		
+		
+		for(CompetenceFormateur competenceFormateur  :competenceFormateurs)
+		{	
+			
+			
+			System.out.println(competenceFormateur.getFormateur().getId()+" "+competenceFormateur.getCompetence().getId());
+			if (competenceFormateur.getFormateur().getId()!=idFormateurEnCours)
+			{
+				
+				
+				if (nbComptenceTrouve==competences.size())
+				{
+					formateurs.add(daoFormateur.getById(idFormateurEnCours));
+				}
+				
+				nbComptenceTrouve=0;
+						
+				idFormateurEnCours=competenceFormateur.getFormateur().getId();	
+				
+			}
+			
+			
+			
+			if (competences.contains(competenceFormateur.getCompetence().getId())) 
+			{
+				nbComptenceTrouve++;
+				
+							
+			}
+			
+		}
+		
+		
+		return formateurs;
+		
+		
+		
 	}
 
 	public List<Cours> getAll() {

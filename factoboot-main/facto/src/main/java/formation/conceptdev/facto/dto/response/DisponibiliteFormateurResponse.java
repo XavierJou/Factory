@@ -26,7 +26,7 @@ public class DisponibiliteFormateurResponse {
     @JsonView(CustomJsonViews.Common.class)
 	private LocalDate dateFin;
     
-    @JsonView(CustomJsonViews.DisponibiliteFormateurResponseWithformateur.class)
+    @JsonView(CustomJsonViews.DisponibiliteFormateurResponseWithDetails.class)
     private FormateurResponse formateur;
     
     public DisponibiliteFormateurResponse(DisponibiliteFormateur disponibiliteFormateurEntity)

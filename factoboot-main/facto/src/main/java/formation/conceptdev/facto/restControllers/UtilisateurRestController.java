@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import formation.conceptdev.facto.dto.request.UtilisateurRequest;
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.UtilisateurResponse;
 import formation.conceptdev.facto.entities.Role;
 import formation.conceptdev.facto.entities.Utilisateur;
@@ -34,6 +37,7 @@ public class UtilisateurRestController {
 	private UtilisateurService utilisateurSrv;
 
 	@GetMapping("")
+	@JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
 	public List<UtilisateurResponse> getAll() {
 		return utilisateurSrv.getAll().stream().map(u -> new UtilisateurResponse(u)).collect(Collectors.toList());
 	}

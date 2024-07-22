@@ -18,7 +18,7 @@ public class SalleResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private Integer capacite;
 	
-	@JsonView(CustomJsonViews.SalleResponse.class)
+	@JsonView(CustomJsonViews.SalleResponseWithCours.class)
 	private List<CoursResponse> cours;
 
 	// Constructeur par défaut

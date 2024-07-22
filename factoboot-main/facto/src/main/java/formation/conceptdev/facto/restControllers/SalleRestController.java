@@ -42,6 +42,18 @@ public class SalleRestController {
     public List<SalleResponse> getAll() {
         return salleService.getAll().stream().map(salle -> new SalleResponse(salle,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/cours")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<SalleResponse> getWithCours() {
+        return salleService.getAll().stream().map(salle -> new SalleResponse(salle,true)).collect(Collectors.toList());
+    }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<SalleResponse> getWithDetails() {
+        return salleService.getAll().stream().map(salle -> new SalleResponse(salle,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -62,8 +74,15 @@ public class SalleRestController {
     }
 
     @GetMapping("/{id}/cours")
+    @JsonView(CustomJsonViews.SalleResponseWithCours.class)
     public SalleResponse getByIdWithCours(@PathVariable Integer id) {
-        return new SalleResponse(salleService.getByIdWithCours(id),false);
+        return new SalleResponse(salleService.getByIdWithCours(id),true);
+    }
+    
+    @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.SalleResponseWithCours.class)
+    public SalleResponse getByIdWithDetails(@PathVariable Integer id) {
+        return new SalleResponse(salleService.getByIdWithCours(id),true);
     }
     
     @DeleteMapping("/{id}")

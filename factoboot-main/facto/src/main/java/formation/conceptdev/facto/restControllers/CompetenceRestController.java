@@ -61,7 +61,8 @@ public class CompetenceRestController {
     }
 
     @GetMapping("/{id}/formateurs")
+    @JsonView(CustomJsonViews.CompetenceWithFormateurs.class)
     public CompetenceResponse getByIdWithFormateurs(@PathVariable Integer id) {
-        return new CompetenceResponse(competenceService.getByIdWithFormateurs(id));
+        return new CompetenceResponse(competenceService.getByIdWithFormateurs(id),true,false);
     }
 }

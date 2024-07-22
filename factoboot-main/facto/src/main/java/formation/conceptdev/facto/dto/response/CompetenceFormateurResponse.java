@@ -13,7 +13,7 @@ public class CompetenceFormateurResponse {
 	    private Integer id;
 	 	@JsonView(CustomJsonViews.CompetenceFormateurResponseWithCompetence.class)
 	    private CompetenceResponse competence;
-	 	@JsonView(CustomJsonViews.CompetenceFormateurResponseWithDetail.class)
+	 	@JsonView(CustomJsonViews.CompetenceFormateurResponseWithFormateur.class)
 	    private FormateurResponse formateur;
 
 	    public CompetenceFormateurResponse() {
