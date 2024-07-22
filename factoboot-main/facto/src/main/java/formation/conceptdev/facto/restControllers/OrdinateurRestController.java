@@ -55,16 +55,4 @@ public class OrdinateurRestController {
 	public void deleteById(@PathVariable("id") Integer id) {
 		ordinateurSrv.deleteById(id);
 	}
-	
-	@PostMapping("")
-	@ResponseStatus(code = HttpStatus.CREATED)
-	@JsonView(CustomJsonViews.Common.class)
-	public OrdinateurResponse create(@Valid @RequestBody OrdinateurRequest ordinateurRequest, BindingResult br) {
-		if (br.hasErrors()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-		}
-		Ordinateur ordinateur = new Ordinateur();
-		BeanUtils.copyProperties(ordinateurRequest, ordinateur);
-		return new OrdinateurResponse(ordinateurSrv.insert(ordinateur), false);
-	}
 }
