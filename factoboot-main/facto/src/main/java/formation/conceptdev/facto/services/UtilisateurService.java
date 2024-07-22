@@ -64,7 +64,7 @@ public class UtilisateurService implements UserDetailsService {
 		}
 
 		utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-		utilisateur.setRole(Role.ROLE_USER);
+		utilisateur.setRole(utilisateur.getRole());
 		return daoUtilisateur.save(utilisateur);
 	}
 	
