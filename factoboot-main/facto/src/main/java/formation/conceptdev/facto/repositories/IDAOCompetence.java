@@ -10,6 +10,6 @@ public interface IDAOCompetence extends JpaRepository<Competence, Integer> {
 
 	public List<Competence> findAllByNom(String nom);
 
-	public List<Competence> findByNomContaining(String recherche);
+	public List<Competence> findByNomContaining(String nom);
 
 }
