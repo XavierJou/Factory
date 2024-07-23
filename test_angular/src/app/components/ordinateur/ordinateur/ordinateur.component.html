@@ -21,3 +21,13 @@
     }
   </div>
 </div>
+
+@for(o of ordinateurs;track o.id){
+<p>
+  {{ o.id }} : {{ o.nom }}
+  <button routerLink="/ordinateur/edit/{{ o.id }}" routerLinkActive="active">
+    éditer
+  </button>
+</p>
+<p><button (click)="delete(o.id!)">Supprimer</button></p>
+}

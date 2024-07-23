@@ -3,6 +3,11 @@
 >
 
 @for(s of salles;track s.id){
-<p>{{ s.id }} : {{ s.nom }}</p>
+<p>
+  {{ s.id }} : {{ s.nom }}
+  <button routerLink="/salle/edit/{{ s.id }}" routerLinkActive="active">
+    éditer
+  </button>
+</p>
 <p><button (click)="delete(s.id!)">Supprimer</button></p>
 }

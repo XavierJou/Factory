@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -20,8 +22,8 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CompetenceRequest;
-import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.CompetenceResponse;
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.services.CompetenceService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -34,12 +36,12 @@ import jakarta.validation.Valid;
 public class CompetenceRestController {
 
     @Autowired
-    private CompetenceService competenceService;
+    private CompetenceService competenceSrv;
 
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<CompetenceResponse> getAll() {
-        return competenceService.getAll().stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
+        return competenceSrv.getAll().stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -51,18 +53,40 @@ public class CompetenceRestController {
         }
         Competence competence = new Competence();
         BeanUtils.copyProperties(competenceRequest, competence);
-        return new CompetenceResponse(competenceService.insert(competence),false,false);
+        return new CompetenceResponse(competenceSrv.insert(competence),false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public CompetenceResponse getById(@PathVariable Integer id) {
-        return new CompetenceResponse(competenceService.getById(id),false,false);
+        return new CompetenceResponse(competenceSrv.getById(id),false,false);
     }
 
     @GetMapping("/{id}/formateurs")
     @JsonView(CustomJsonViews.CompetenceWithFormateurs.class)
     public CompetenceResponse getByIdWithFormateurs(@PathVariable Integer id) {
-        return new CompetenceResponse(competenceService.getByIdWithFormateurs(id),true,false);
+        return new CompetenceResponse(competenceSrv.getByIdWithFormateurs(id),true,false);
     }
+    
+    @PutMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    @JsonView(CustomJsonViews.Common.class)
+    public CompetenceResponse update(@PathVariable Integer id, @Valid @RequestBody CompetenceRequest competenceRequest, BindingResult br) {
+        if (br.hasErrors()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        Competence existingCompetence = competenceSrv.getById(id);
+        BeanUtils.copyProperties(competenceRequest, existingCompetence, "id", "competenceFormateurs", "competenceMatieres");
+        return new CompetenceResponse(competenceSrv.update(existingCompetence), false, false);
+    }
+    
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Integer id) {
+		 Competence competence = competenceSrv.getById(id);
+		 if (!competence.getCompetenceFormateurs().isEmpty() || !competence.getCompetenceMatieres().isEmpty()) {
+		        throw new ResponseStatusException(HttpStatus.CONFLICT, "La compétence est utilisée et ne peut pas être supprimée.");
+		    }
+		competenceSrv.deleteById(id);
+	}
 }
