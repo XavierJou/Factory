@@ -40,8 +40,16 @@ public class CoursRestController {
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<CoursResponse> getAll() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false)).collect(Collectors.toList());
+        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false,false)).collect(Collectors.toList());
     }
+    
+    
+    @GetMapping("/formateur")
+    @JsonView(CustomJsonViews.CoursResponseWithFormateur.class)
+    public List<CoursResponse> getAllCoursWithFormateurAndUtilisateur() {
+        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, true, false, false, false, false,true)).collect(Collectors.toList());
+    }
+    
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -52,13 +60,13 @@ public class CoursRestController {
         }
         Cours cours = new Cours();
         BeanUtils.copyProperties(coursRequest, cours);
-        return new CoursResponse(coursSrv.insert(cours),false, false, false, false, false, false);
+        return new CoursResponse(coursSrv.insert(cours),false, false, false, false, false, false,false);
     }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public CoursResponse getById(@PathVariable Integer id) {
-        return new CoursResponse(coursSrv.getById(id),false, false, false, false, false, false);
+        return new CoursResponse(coursSrv.getById(id),false, false, false, false, false, false,false);
     }
     
     
@@ -71,6 +79,6 @@ public class CoursRestController {
 
     @GetMapping("/{id}/stagiaire")
     public CoursResponse getByIdWithStagiaire(@PathVariable Integer id) {
-        return new CoursResponse(coursSrv.getByIdWithStagiaire(id),false, false, false, false, false, false);
+        return new CoursResponse(coursSrv.getByIdWithStagiaire(id),false, false, false, false, false, false,false);
     }
 }
