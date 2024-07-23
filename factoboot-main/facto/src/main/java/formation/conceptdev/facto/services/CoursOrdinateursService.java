@@ -32,8 +32,6 @@ public class CoursOrdinateursService {
 		return daoCoursOrdinateurs.findAll();
 	}
 
-	
-
 	public CoursOrdinateurs insert(CoursOrdinateurs coursOrdinateurs) {
 		
 		return daoCoursOrdinateurs.save(coursOrdinateurs);

@@ -28,23 +28,22 @@ public class CoursResponse {
 	private boolean besoinSalle;
 
 	
-	@JsonView(CustomJsonViews.CoursResponseWithMatiere.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private MatiereResponse matiere;
 	
-	@JsonView(CustomJsonViews.CoursResponseWithFormateur.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private FormateurResponse formateur;
 	
-	@JsonView(CustomJsonViews.CoursResponseWithFormation.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private FormationResponse formation;
 
-
-	@JsonView(CustomJsonViews.CoursResponseWithCoursOrdinateurs.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private List<CoursOrdinateursResponse> coursOrdinateurs;
 	
-	@JsonView(CustomJsonViews.CoursResponseWithVideoprojecteur.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private VideoprojecteurResponse videoprojecteur;
 	
-	@JsonView(CustomJsonViews.CoursResponseWithSalle.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	private SalleResponse salle;
 	
 

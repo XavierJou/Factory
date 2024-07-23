@@ -19,7 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation.conceptdev.facto.dto.request.CoursOrdinateusRequest;
+import formation.conceptdev.facto.dto.request.CoursOrdinateursRequest;
 import formation.conceptdev.facto.dto.response.CoursOrdinateursResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.CoursOrdinateurs;
@@ -51,7 +51,7 @@ public class CoursOrdinateurRestController {
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
     @JsonView(CustomJsonViews.Common.class)
-    public CoursOrdinateursResponse create(@Valid @RequestBody CoursOrdinateusRequest coursOrdinateurRequest, BindingResult br) {
+    public CoursOrdinateursResponse create(@Valid @RequestBody CoursOrdinateursRequest coursOrdinateurRequest, BindingResult br) {
         if (br.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

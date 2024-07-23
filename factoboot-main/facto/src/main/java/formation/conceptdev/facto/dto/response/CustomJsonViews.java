@@ -52,6 +52,8 @@ public class CustomJsonViews {
 	public interface CoursResponseWithVideoprojecteur extends Common {}
 
 	public interface CoursResponseWithSalle extends Common {}
+	
+	public interface CoursResponseWithDetails extends Common {}
 
 	public interface CoursWithDetails extends CoursResponseWithMatiere, CoursResponseWithFormateur, CoursResponseWithFormation,CoursResponseWithCoursOrdinateurs,CoursResponseWithVideoprojecteur,CoursResponseWithSalle{}
 	

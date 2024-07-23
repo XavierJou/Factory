@@ -1,56 +1,181 @@
-<p>edit-cours works!</p>
-<div>
-  <div class="form-group">
-    <label for="titre">Titre</label>
-    <input
-      type="text"
-      class="form-control"
-      id="titre"
-      name="titre"
-      [(ngModel)]="cours.titre"
-    />
-  </div>
-  <div class="form-group">
-    <label for="dateDebut">Date début</label>
-    <input
-      type="date"
-      class="form-control"
-      id="dateDebut"
-      name="dateDebut"
-      [(ngModel)]="cours.dateDebut"
-    />
-  </div>
+<div class="my-5 d-flex flex-column">
+  <div class="container mt-5" style="max-width: 648px">
+    <h1>Éditer un cours</h1>
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titre"
+        name="titre"
+        [(ngModel)]="cours.titre"
+      />
+    </div>
+    <div class="form-group">
+      <label for="dateDebut">Date début</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dateDebut"
+        name="dateDebut"
+        [(ngModel)]="cours.dateDebut"
+      />
+    </div>
 
-  <div class="form-group">
-    <label for="formation">Formation:</label>
-    <select
-      id="formation"
-      [(ngModel)]="cours.formation"
-      class="form-control"
-      [compareWith]="compareFn"
-    >
-      @for(f of formationsObservable|async ;track f.id ){
-      <option [ngValue]="f">{{ f.titre }}</option>
+    <fieldset>
+      <legend class="mt-4">Ressources</legend>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="check-formateur"
+          [(ngModel)]="cours.besoinOrdiFormateur"
+        />
+        <label class="form-check-label" for="check-formateur">
+          Ordinateur formateur ?
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="check-formateur"
+          [(ngModel)]="cours.besoinOrdiStagiaire"
+        />
+        <label class="form-check-label" for="check-formateur">
+          Ordinateur stagiaires ?
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="check-formateur"
+          [(ngModel)]="cours.besoinVideoprojecteur"
+        />
+        <label class="form-check-label" for="check-formateur">
+          Vidéoprojecteur ?
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          name="check-formateur"
+          [(ngModel)]="cours.besoinSalle"
+        />
+        <label class="form-check-label" for="check-formateur"> Salle ? </label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend class="mt-4">Saisissez les informations</legend>
+
+      <div class="form-group">
+        <label for="formation">Formation:</label>
+        <select
+          id="formation"
+          [(ngModel)]="cours.formation"
+          class="form-control"
+          [compareWith]="compareFnFormation"
+        >
+          @for(f of formationsObservable|async ;track f.id ){
+          <option [ngValue]="f">{{ f.titre }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="formateur">Formateur:</label>
+        <select
+          id="formateur"
+          [(ngModel)]="cours.formateur"
+          class="form-control"
+          [compareWith]="compareFnFormateur"
+        >
+          @for(f of formateursObservable|async ;track f.id ){
+          <option [ngValue]="f">
+            {{ f.utilisateur?.prenom }}
+            {{ f.utilisateur?.nom }}
+          </option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="matiere">Matière:</label>
+        <select
+          id="matiere"
+          [(ngModel)]="cours.matiere"
+          class="form-control"
+          [compareWith]="compareFnMatiere"
+        >
+          @for(f of matieresObservable|async ;track f.id ){
+          <option [ngValue]="f">{{ f.titre }}</option>
+          }
+        </select>
+      </div>
+      @if(cours.besoinSalle){
+      <div class="form-group">
+        <label for="salle">Salle:</label>
+        <select
+          id="salle"
+          [(ngModel)]="cours.salle"
+          class="form-control"
+          [compareWith]="compareFnSalle"
+        >
+          @for(f of sallesObservable|async ;track f.id ){
+          <option [ngValue]="f">{{ f.nom }}</option>
+          }
+        </select>
+      </div>
+      } @if(cours.besoinOrdiFormateur || cours.besoinOrdiStagiaire){
+      <div class="form-group">
+        <label for="ordinateur">Ordinateurs:</label>
+        <select
+          id="ordinateur"
+          [(ngModel)]="cours.ordinateurs"
+          class="form-control"
+          [compareWith]="compareFnOrdinateur"
+          multiple
+        >
+          @for(f of ordinateursObservable|async ;track f.id ){
+          <option [ngValue]="f">{{ f.nom }}</option>
+          }
+        </select>
+      </div>
+      } @if(cours.besoinVideoprojecteur){
+      <div class="form-group">
+        <label for="videoprojecteur">Videoprojecteur:</label>
+        <select
+          id="videoprojecteur"
+          [(ngModel)]="cours.videoprojecteur"
+          class="form-control"
+          [compareWith]="compareFnVideoprojecteur"
+        >
+          @for(f of videoprojecteursObservable|async ;track f.id ){
+          <option [ngValue]="f">{{ f.nom }}</option>
+          }
+        </select>
+      </div>
       }
-    </select>
-  </div>
+    </fieldset>
 
-  <div class="form-group">
-    <label for="matiere">matière:</label>
-    <select
-      id="matiere"
-      [(ngModel)]="cours.matiere"
-      class="form-control"
-      [compareWith]="compareFn"
-    >
-      @for(f of matieresObservable|async ;track f.id ){
-      <option [ngValue]="f">{{ f.titre }}</option>
-      }
-    </select>
+    <div class="gap-3 mt-3 d-flex float-end">
+      <a
+        routerLink="/cours"
+        routerLinkActive="active"
+        type="button"
+        class="btn btn-outline-light btn-sm"
+        >Retour</a
+      >
+      <button
+        (click)="save()"
+        type="button"
+        class="btn btn-outline-primary btn-sm"
+      >
+        Enregistrer
+      </button>
+    </div>
   </div>
-
-  <button (click)="save()">Enregistrer</button>
-  <a routerLink="/cours" routerLinkActive="active" class="btn btn-link"
-    >Retour</a
-  >
 </div>

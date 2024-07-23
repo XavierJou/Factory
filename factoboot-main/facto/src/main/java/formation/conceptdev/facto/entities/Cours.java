@@ -1,7 +1,6 @@
 package formation.conceptdev.facto.entities;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -57,10 +56,9 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
-			boolean besoinSalle,
-			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
-			Videoprojecteur videoprojecteur, Salle salle) {
+	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur,
+			boolean besoinOrdiStagiaire, boolean besoinSalle, Matiere matiere, Formateur formateur, Formation formation,
+			List<CoursOrdinateurs> ordinateurs, Videoprojecteur videoprojecteur, Salle salle) {
 
 		this.dateDebut = dateDebut;
 		this.titre = titre;
@@ -76,8 +74,8 @@ public class Cours {
 		this.salle = salle;
 	}
 
-	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
-			boolean besoinSalle) {
+	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur,
+			boolean besoinOrdiStagiaire, boolean besoinSalle) {
 
 		this.dateDebut = dateDebut;
 		this.titre = titre;
@@ -85,7 +83,7 @@ public class Cours {
 		this.besoinOrdiFormateur = besoinOrdiFormateur;
 		this.besoinOrdiStagiaire = besoinOrdiStagiaire;
 		this.besoinSalle = besoinSalle;
-		
+
 	}
 
 	public Integer getId() {
@@ -168,10 +166,6 @@ public class Cours {
 		this.formation = formation;
 	}
 
-	
-
-	
-
 	public Salle getSalle() {
 		return salle;
 	}
@@ -195,9 +189,5 @@ public class Cours {
 	public void setCoursOrdinateurs(List<CoursOrdinateurs> coursOrdinateurs) {
 		this.coursOrdinateurs = coursOrdinateurs;
 	}
-
-	
-	
-	
 
 }
