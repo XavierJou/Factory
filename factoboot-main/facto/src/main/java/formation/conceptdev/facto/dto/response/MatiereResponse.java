@@ -54,7 +54,7 @@ public class MatiereResponse {
         if (besoinCoursResponse) {
             if (matiereEntity.getCompetenceMatieres() != null) {
                 this.cours = matiereEntity.getCours().stream()
-                		.map(matiere -> new CoursResponse(matiere, false, false, false, false, false, false))
+                		.map(matiere -> new CoursResponse(matiere, false, false, false, false, false, false,false))
                         .collect(Collectors.toList());
             }
             

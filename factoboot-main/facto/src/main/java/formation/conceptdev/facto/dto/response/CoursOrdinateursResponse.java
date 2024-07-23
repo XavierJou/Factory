@@ -30,7 +30,7 @@ public class CoursOrdinateursResponse {
 			BeanUtils.copyProperties(coursOrdinateursEntity, this, "cours","ordinateur");
 			if (besoinCours) {
 				if (coursOrdinateursEntity.getCours() != null) {
-					this.setCours(new CoursResponse(coursOrdinateursEntity.getCours(),false,false,false,false,false,false));
+					this.setCours(new CoursResponse(coursOrdinateursEntity.getCours(),false,false,false,false,false,false,false));
 				}
 			}
 			

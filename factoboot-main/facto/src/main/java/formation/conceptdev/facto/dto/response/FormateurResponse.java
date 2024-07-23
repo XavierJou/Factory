@@ -46,7 +46,7 @@ public class FormateurResponse {
 	 	if (besoincours) {
 			if (formateurEntity.getCours() != null) {
 				this.setCours(formateurEntity.getCours().stream()
-						.map(formateur -> new CoursResponse(formateur, false, false, false, false, false, false))
+						.map(formateur -> new CoursResponse(formateur, false, false, false, false, false, false,false))
 						.collect(Collectors.toList()));
 			}
 		}

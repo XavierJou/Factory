@@ -53,12 +53,14 @@ public class CoursResponse {
 	
 	public CoursResponse(Cours entity) {
 		
-		this(entity,true,true,true,true,true,true);
+		this(entity,true,true,true,true,true,true,true);
 	}
+	
+
 
 	public CoursResponse(Cours coursEntity, boolean besoinMatiere, boolean besoinFormateur
 			, boolean besoinFormation, boolean besoinOrdinateurs
-			, boolean besoinVideoprojecteur, boolean besoinSalle) {
+			, boolean besoinVideoprojecteur, boolean besoinSalle,boolean besoinUtlisateurFormateur) {
 		
 		BeanUtils.copyProperties(coursEntity, this, "formation", "formateur", "matiere","salle","coursOrdinateurs","videoprojecteur");
 		
@@ -69,8 +71,9 @@ public class CoursResponse {
 		}
 		
 		if (besoinFormateur) {
+			
 			if (coursEntity.getFormateur() != null) {
-				this.setFormateur(new FormateurResponse(coursEntity.getFormateur(), false, false, false, false));
+				this.setFormateur(new FormateurResponse(coursEntity.getFormateur(), false, false, false, besoinUtlisateurFormateur));
 			}
 		}
 		

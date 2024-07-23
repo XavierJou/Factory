@@ -19,6 +19,9 @@ public interface IDAOCours extends JpaRepository<Cours, Integer> {
 	           "WHERE c.id = :coursId")
 	    List<Integer> findCompetencesByCoursId(@Param("coursId") Integer coursId);
 	
+	@Query("SELECT c FROM Cours c LEFT JOIN FETCH c.formateur f LEFT JOIN FETCH f.utilisateur")
+    List<Cours> findAllWithFormateurAndUtilisateur();
+	
 	
 
 }
