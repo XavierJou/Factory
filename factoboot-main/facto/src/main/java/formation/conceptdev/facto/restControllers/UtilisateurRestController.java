@@ -37,11 +37,17 @@ public class UtilisateurRestController {
 	private UtilisateurService utilisateurSrv;
 
 	@GetMapping("")
-	@JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
+	@JsonView(CustomJsonViews.Common.class)
 	public List<UtilisateurResponse> getAll() {
 		return utilisateurSrv.getAll().stream().map(u -> new UtilisateurResponse(u)).collect(Collectors.toList());
 	}
 
+	
+	@GetMapping("/details")
+	@JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
+	public List<UtilisateurResponse> getWithDetails() {
+		return utilisateurSrv.getAll().stream().map(u -> new UtilisateurResponse(u)).collect(Collectors.toList());
+	}
 	
 	
 	@PostMapping("/inscription")
