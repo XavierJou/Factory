@@ -47,7 +47,7 @@ public class FormationResponse {
 			}
 			if (formation.getCours() != null) {
 				this.setCours(formation.getCours().stream()
-						.map(entity -> new CoursResponse(entity, false, false, false, false, false, false))
+						.map(entity -> new CoursResponse(entity, false, false, false, false, false, false,false))
 						.collect(Collectors.toList()));
 			}
 		}

@@ -40,7 +40,7 @@ public class VideoprojecteurResponse {
 		if (bool) {
 			if (videoprojecteurEntity.getCours() != null) {
                 this.cours = videoprojecteurEntity.getCours().stream()
-                		.map(cours -> new CoursResponse(cours, false,false, false,false, false,false))
+                		.map(cours -> new CoursResponse(cours, false,false, false,false, false,false,false))
                         .collect(Collectors.toList());
             }
 		}

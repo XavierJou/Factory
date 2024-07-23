@@ -31,6 +31,8 @@ public class UtilisateurResponse {
 	}
 
 	public UtilisateurResponse(Utilisateur utilisateurEntity, boolean besoinFormateur, boolean besoinStagiaire) {
+		
+		
 		BeanUtils.copyProperties(utilisateurEntity, this, "role","formateur","stagiaire");
 		this.role= utilisateurEntity.getRole().toString();
 		
@@ -97,6 +99,22 @@ public class UtilisateurResponse {
 
 	public void setStagiaire(StagiaireResponse stagiaire) {
 		this.stagiaire = stagiaire;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
