@@ -33,4 +33,8 @@ export class CompetenceService {
       competence
     );
   }
+
+  public delete(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
 }
