@@ -1,6 +1,6 @@
 package formation.conceptdev.facto.dto.response;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,13 +9,6 @@ import org.springframework.beans.BeanUtils;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.entities.Cours;
-import formation.conceptdev.facto.entities.CoursOrdinateurs;
-import formation.conceptdev.facto.entities.Salle;
-import formation.conceptdev.facto.entities.Videoprojecteur;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 public class CoursResponse {
 	
@@ -24,7 +17,7 @@ public class CoursResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private String titre;
 	@JsonView(CustomJsonViews.Common.class)
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
 	@JsonView(CustomJsonViews.Common.class)
 	private boolean besoinVideoprojecteur;
 	@JsonView(CustomJsonViews.Common.class)
@@ -126,11 +119,11 @@ public class CoursResponse {
 		this.titre = titre;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 

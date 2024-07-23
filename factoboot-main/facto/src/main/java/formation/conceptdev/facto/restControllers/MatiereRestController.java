@@ -41,6 +41,12 @@ public class MatiereRestController {
     public List<MatiereResponse> getAll() {
         return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,false,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<MatiereResponse> getWithDetails() {
+        return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,true,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -61,7 +67,14 @@ public class MatiereRestController {
     }
 
     @GetMapping("/{id}/cours")
+    @JsonView(CustomJsonViews.MatiereWithCours.class)
     public MatiereResponse getByIdWithCours(@PathVariable Integer id) {
-        return new MatiereResponse(matiereService.getByIdWithCours(id),false,false);
+        return new MatiereResponse(matiereService.getByIdWithCours(id),false,true);
+    }
+    
+    @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.MatiereWithDetails.class)
+    public MatiereResponse getByIdWithDetails(@PathVariable Integer id) {
+        return new MatiereResponse(matiereService.getByIdWithCours(id),true,true);
     }
 }

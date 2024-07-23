@@ -20,8 +20,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CoursRequest;
-import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.CoursResponse;
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
+import formation.conceptdev.facto.dto.response.FormateurResponse;
 import formation.conceptdev.facto.entities.Cours;
 import formation.conceptdev.facto.services.CoursService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -61,10 +62,11 @@ public class CoursRestController {
     }
     
     
-    @GetMapping("/formateurComptence")
-    @JsonView(CustomJsonViews.Common.class)
-    public List<CoursResponse> getFormateurComptence() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false)).collect(Collectors.toList());
+    @GetMapping("/{id}/formateurComptence")
+    //@JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class)
+    @JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class)
+    public List<FormateurResponse> getFormateurComptence(@PathVariable Integer id) {
+        return coursSrv.getFormateurComptenceCours(id).stream().map(formateur -> new FormateurResponse(formateur,false, false, false, true)).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}/stagiaire")

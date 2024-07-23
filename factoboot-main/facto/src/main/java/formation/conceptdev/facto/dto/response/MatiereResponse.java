@@ -27,10 +27,10 @@ public class MatiereResponse {
     @JsonView(CustomJsonViews.Common.class)
     private String contenu;
 
-    @JsonView(CustomJsonViews.Common.class)
+    @JsonView(CustomJsonViews.MatiereWithCompetenceMatiere.class)
     private List<CompetenceMatiereResponse> competenceMatiereResponses;
 
-    @JsonView(CustomJsonViews.Common.class)
+    @JsonView(CustomJsonViews.MatiereWithCours.class)
     private List<CoursResponse> cours;
     
     

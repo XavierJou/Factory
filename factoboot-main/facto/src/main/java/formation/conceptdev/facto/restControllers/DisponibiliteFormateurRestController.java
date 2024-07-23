@@ -41,6 +41,12 @@ public class DisponibiliteFormateurRestController {
     public List<DisponibiliteFormateurResponse> getAll() {
         return disponibiliteFormateurService.getAll().stream().map(disponibiliteFormateur -> new DisponibiliteFormateurResponse(disponibiliteFormateur,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.DisponibiliteFormateurResponseWithDetails.class)
+    public List<DisponibiliteFormateurResponse> getWithDetails() {
+        return disponibiliteFormateurService.getAll().stream().map(disponibiliteFormateur -> new DisponibiliteFormateurResponse(disponibiliteFormateur,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -61,7 +67,8 @@ public class DisponibiliteFormateurRestController {
     }
 
     @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.DisponibiliteFormateurResponseWithDetails.class)
     public DisponibiliteFormateurResponse getByIdWithDetails(@PathVariable Integer id) {
-        return new DisponibiliteFormateurResponse(disponibiliteFormateurService.getByIdWithDetails(id),false);
+        return new DisponibiliteFormateurResponse(disponibiliteFormateurService.getByIdWithDetails(id),true);
     }
 }

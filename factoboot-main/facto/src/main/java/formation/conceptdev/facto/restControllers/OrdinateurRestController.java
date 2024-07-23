@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.OrdinateurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
+import formation.conceptdev.facto.dto.response.MatiereResponse;
 import formation.conceptdev.facto.dto.response.OrdinateurResponse;
 import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.services.OrdinateurService;
@@ -38,17 +39,37 @@ public class OrdinateurRestController {
 	private OrdinateurService ordinateurSrv;
 
 	@GetMapping("")
+	@JsonView(CustomJsonViews.Common.class)
 	public List<OrdinateurResponse> getAll() {
-		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o)).collect(Collectors.toList());
+		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o,false)).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/details")
+	@JsonView(CustomJsonViews.OrdinateurWithDetails.class)
+	public List<OrdinateurResponse> getWithDetails() {
+		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o,true)).collect(Collectors.toList());
+	}
+	
+	@GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.OrdinateurWithDetails.class)
+    public OrdinateurResponse getByIdWithDetails(@PathVariable Integer id) {
+        return new OrdinateurResponse(ordinateurSrv.getById(id),false);
+    }
+	
+	@GetMapping("/{id}")
+    @JsonView(CustomJsonViews.Common.class)
+    public OrdinateurResponse getById(@PathVariable Integer id) {
+        return new OrdinateurResponse(ordinateurSrv.getById(id),false);
+    }
 	
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public OrdinateurResponse create(@RequestBody OrdinateurRequest ordinateurRequest) {
 		Ordinateur o = new Ordinateur();
 		BeanUtils.copyProperties(ordinateurRequest, o);
-		return new OrdinateurResponse(ordinateurSrv.insert(o));
+		return new OrdinateurResponse(ordinateurSrv.insert(o),false);
 	}
+		
 	
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)

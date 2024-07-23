@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.CompetenceFormateur;
 import formation.conceptdev.facto.repositories.IDAOCompetenceFormateur;
 
@@ -14,6 +17,8 @@ public class CompetenceFormateurService {
 	@Autowired
 	IDAOCompetenceFormateur daoCompetenceFormateur;
 
+
+	
 	public CompetenceFormateur getById(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find CompetenceFormateur sans id");
@@ -21,11 +26,12 @@ public class CompetenceFormateurService {
 		return daoCompetenceFormateur.findById(id).orElseThrow(RuntimeException::new);
 	}
 
+	
 	public List<CompetenceFormateur> getAll() {
 		return daoCompetenceFormateur.findAll();
 	}
 	
-
+    
 	public CompetenceFormateur getByIdWithDetails(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find CompetenceFormateur sans id");

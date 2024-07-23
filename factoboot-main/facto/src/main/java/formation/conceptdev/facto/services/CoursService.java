@@ -1,7 +1,7 @@
 package formation.conceptdev.facto.services;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import formation.conceptdev.facto.entities.CompetenceFormateur;
 import formation.conceptdev.facto.entities.Cours;
 import formation.conceptdev.facto.entities.Formateur;
+import formation.conceptdev.facto.entities.Utilisateur;
 import formation.conceptdev.facto.repositories.IDAOCompetenceFormateur;
 import formation.conceptdev.facto.repositories.IDAOCours;
+import formation.conceptdev.facto.repositories.IDAOFormateur;
+import formation.conceptdev.facto.repositories.IDAOUtilisateur;
 
 @Service
 public class CoursService {
@@ -20,6 +23,12 @@ public class CoursService {
 	
 	 @Autowired
 	 IDAOCompetenceFormateur daoCompetenceFormateur;
+	 
+	 @Autowired
+	 IDAOFormateur daoFormateur;
+	 
+	 @Autowired
+	 IDAOUtilisateur daoUtilisateur;
 
 	public Cours getById(Integer id) {
 		if (id == null) {
@@ -30,11 +39,87 @@ public class CoursService {
 	
 	
 	
+	
 	public Cours getByIdWithStagiaire(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Cours sans id");
 		}
 		return daoCours.findById(id).orElseThrow(RuntimeException::new);
+	}
+	
+
+	public List<Formateur> getFormateurComptenceCours(Integer id_cours)
+	{
+		if (id_cours == null) {
+			throw new RuntimeException("Impossible de find Cours sans id");
+		}
+		
+		
+		
+
+		
+		
+		List<Integer> competences =daoCours.findCompetencesByCoursId(id_cours);
+		
+		
+		
+		List<CompetenceFormateur>  competenceFormateurs=daoCompetenceFormateur.findAllOrderByFormateurIdAsc();
+		
+		Integer idFormateurEnCours=-1;
+		Formateur formateurEnCours=null;
+		int nbComptenceTrouve=0;
+		
+		List<Formateur> formateurs= new ArrayList<Formateur>();
+		
+		boolean premier=false;
+		
+		
+		for(CompetenceFormateur competenceFormateur  :competenceFormateurs)
+		{	
+			
+			
+			
+			if (competenceFormateur.getFormateur().getId()!=idFormateurEnCours)
+			{
+				
+				
+				if (nbComptenceTrouve==competences.size())
+				{
+					
+					
+					formateurs.add(formateurEnCours);
+					Utilisateur utilisateur= daoUtilisateur.findByFormateurId(idFormateurEnCours).orElse(null);
+					if (utilisateur!=null)
+					{
+						formateurEnCours.setUtilisateur(utilisateur);
+						daoFormateur.save(formateurEnCours);
+					}
+					
+				}
+				
+				nbComptenceTrouve=0;
+						
+				idFormateurEnCours=competenceFormateur.getFormateur().getId();	
+				formateurEnCours=competenceFormateur.getFormateur(); 
+				
+			}
+			
+			
+			
+			if (competences.contains(competenceFormateur.getCompetence().getId())) 
+			{
+				nbComptenceTrouve++;
+				
+							
+			}
+			
+		}
+		
+		
+		return formateurs;
+		
+		
+		
 	}
 
 	public List<Cours> getAll() {

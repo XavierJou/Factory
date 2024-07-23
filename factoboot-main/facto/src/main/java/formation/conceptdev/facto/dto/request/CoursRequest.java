@@ -1,23 +1,10 @@
 package formation.conceptdev.facto.dto.request;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-import formation.conceptdev.facto.entities.CoursOrdinateurs;
-import formation.conceptdev.facto.entities.Formateur;
-import formation.conceptdev.facto.entities.Formation;
-import formation.conceptdev.facto.entities.Matiere;
-import formation.conceptdev.facto.entities.Salle;
-import formation.conceptdev.facto.entities.Videoprojecteur;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import java.time.LocalDate;
 
 public class CoursRequest {
 	private String titre;
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
 	private boolean besoinVideoprojecteur;
 	private boolean besoinOrdiFormateur;
 	private boolean besoinOrdiStagiaire;
@@ -34,11 +21,11 @@ public class CoursRequest {
 		this.titre = titre;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 

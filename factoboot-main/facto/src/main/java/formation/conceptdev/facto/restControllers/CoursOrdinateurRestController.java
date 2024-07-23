@@ -41,6 +41,12 @@ public class CoursOrdinateurRestController {
     public List<CoursOrdinateursResponse> getAll() {
         return coursOrdinateursService.getAll().stream().map(coursOrdinateur -> new CoursOrdinateursResponse(coursOrdinateur,false,false)).collect(Collectors.toList());
     }
+    
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.CoursOrdinateursWithDetails.class)
+    public List<CoursOrdinateursResponse> getWithDetails() {
+        return coursOrdinateursService.getAll().stream().map(coursOrdinateur -> new CoursOrdinateursResponse(coursOrdinateur,true,true)).collect(Collectors.toList());
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
@@ -61,6 +67,7 @@ public class CoursOrdinateurRestController {
     }
 
     @GetMapping("/{id}/details")
+    @JsonView(CustomJsonViews.CoursOrdinateursWithDetails.class)
     public CoursOrdinateursResponse getByIdWithDetails(@PathVariable Integer id) {
         return new CoursOrdinateursResponse(coursOrdinateursService.getByIdWithDetails(id));
     }

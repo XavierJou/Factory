@@ -5,21 +5,118 @@ public class CustomJsonViews {
 	public interface Common {
 
 	}
-
-	public interface StagiaireWithFormation extends Common {
-
-	}
-
-	public interface FormationWithStagiaire extends Common {
+	
+	
+	public interface CompetenceFormateurResponseWithCompetence extends Common {
 
 	}
+	
+	public interface CompetenceFormateurResponseWithFormateur extends Common {
+
+	}
+	
+	public interface CompetenceFormateurResponseWithDetail extends CompetenceFormateurResponseWithCompetence,CompetenceFormateurResponseWithFormateur {
+
+	}
+	
+	public interface CompetenceMatiereResponseWithMatiere extends Common {}
+
+	public interface CompetenceMatiereResponseWithCompetence extends Common {}
+
+	public interface CompetenceMatiereResponseWithDetails extends CompetenceMatiereResponseWithMatiere, CompetenceMatiereResponseWithCompetence {}
+
+
+	public interface CompetenceWithFormateurs extends Common {}
+
+	public interface CompetenceWithMatieres extends Common {}
+
+	public interface CompetenceWithDetails extends CompetenceWithFormateurs, CompetenceWithMatieres {}
+	
+	
+	public interface CoursOrdinateursWithCours extends Common {}
+
+	public interface CoursOrdinateursWithOrdinateur extends Common {}
+
+	public interface CoursOrdinateursWithDetails extends CoursOrdinateursWithCours, CoursOrdinateursWithOrdinateur {}
+
+	
+	
+	public interface CoursResponseWithMatiere extends Common {}
+
+	public interface CoursResponseWithFormateur extends Common {}
+	
+	public interface CoursResponseWithFormation extends Common {}
+
+	public interface CoursResponseWithCoursOrdinateurs extends Common {}
+	
+	public interface CoursResponseWithVideoprojecteur extends Common {}
+
+	public interface CoursResponseWithSalle extends Common {}
+
+	public interface CoursWithDetails extends CoursResponseWithMatiere, CoursResponseWithFormateur, CoursResponseWithFormation,CoursResponseWithCoursOrdinateurs,CoursResponseWithVideoprojecteur,CoursResponseWithSalle{}
+	
+	
+	public interface DisponibiliteFormateurResponseWithDetails extends Common {}
+
+	
+	public interface FormateurResponseWithCours extends Common {}
+
+	public interface FormateurResponseWithCompetenceFormateur extends Common {}
+	
+	public interface FormateurResponseWithDisponibiliteFormateur extends Common {}
+
+	public interface FormateurResponseWithUtilisateur extends Common {}
+
+	public interface FormateurWithDetails extends FormateurResponseWithCours ,FormateurResponseWithCompetenceFormateur ,FormateurResponseWithDisponibiliteFormateur ,FormateurResponseWithUtilisateur {}
+
+	
+	public interface FormationWithStagiaire extends Common {}
+
+	public interface FormationWithCours extends Common {}
+	
+	public interface FormationWithPrerequis extends Common {}
+
+
+	public interface FormationsWithDetails extends FormationWithStagiaire , FormationWithCours , FormationWithPrerequis{}
+
+	
+	public interface MatiereWithCompetenceMatiere extends Common {}
+
+	public interface MatiereWithCours extends Common {}
+
+	public interface MatiereWithDetails extends MatiereWithCompetenceMatiere, MatiereWithCours {}
+
+	
+	public interface OrdinateurWithCoursOrdinateurs extends Common {}
+	
+	public interface OrdinateurWithDetails extends OrdinateurWithCoursOrdinateurs {}
+	
+	
+	
+	public interface PreRequisWithFormation extends Common {}
+	
+	public interface PreRequisWithDetails extends PreRequisWithFormation {}
+	
+	public interface SalleResponseWithCours extends Common {}
+	
+	public interface SalleWithDetails extends SalleResponseWithCours {}
+	
+	
+	public interface StagiaireWithFormation extends Common {}
+	
+	public interface StagiaireWithDetails extends StagiaireWithFormation {}
+
+	
+	public interface UtilisateurResponseWithFormateur extends Common {}
+	public interface UtilisateurResponseWithStagiaire extends Common {}
+	
+	public interface UtilisateurResponseWithDetails extends UtilisateurResponseWithFormateur,UtilisateurResponseWithStagiaire {}
+
+	
 	
 	public interface FormateurPossiblePourCoursWithDisponibiliteFormateur extends Common {
 
 	}
-	
-	
-	
 	
 	public interface VideoprojecteurResponse extends Common {
 
@@ -48,124 +145,18 @@ public class CustomJsonViews {
 	
 	}
 	
-	public interface CoursOrdinateursWithCours extends Common {
-		
-	}
-	
-	public interface CoursOrdinateursWithOrdinateur extends Common {
-		
-	}
-	
-	
-	public interface CompetenceWithFormateurs extends Common {
-		
-	}
-	
-	public interface CompetenceWithMatieres extends Common {
-		
-	}
-	
-public interface CoursResponseWithMatiere extends Common {
-		
-	}
-public interface CoursResponseWithFormateur extends Common {
-	
-}
-public interface CoursResponseWithFormation extends Common {
-	
-}
-public interface CoursResponseWithCoursOrdinateurs extends Common {
-	
-}
-public interface CoursResponseWithVideoprojecteur extends Common {
-	
-}
-public interface CoursResponseWithSalle extends Common {
-	
-}
-	
-public interface CompetenceFormateurResponseWithDetail extends CompetenceFormateurResponseWithCompetence, CompetenceFormateurResponseWithFormateur{
-	
-	
-}
 
-public interface CompetenceFormateurResponseWithCompetence extends Common {
 	
-}
-
-public interface CompetenceFormateurResponseWithFormateur extends Common {
-
-}
-
-public interface CompetenceMatiereResponseWithMatiere extends Common {}
-
-public interface CompetenceMatiereResponseWithCompetence extends Common {}
-
-public interface CompetenceMatiereResponseWithDetails extends CompetenceMatiereResponseWithMatiere, CompetenceMatiereResponseWithCompetence {}
 
 
 
-
-
-
-public interface UtilisateurResponseWithFormateur extends Common {
 	
-}
-
-public interface DisponibiliteFormateurResponseWithformateur extends Common {
-	
-}
-
-public interface UtilisateurResponseWithStagiaire extends Common {
-	
-}
-
-public interface FormateurResponseWithCours extends Common {
-	
-}
-
-public interface FormateurResponseWithcompetenceFormateur extends Common {
-	
-}
-
-public interface FormateurResponseWithdisponibiliteFormateur extends Common {
-	
-}
-
-public interface FormateurResponseWithutilisateur extends Common {
-	
-}
-	public interface FormationWithPrerequis extends Common {
-		
-	}
-	
-	public interface PreRequisWithFormation extends Common {
-		
-	}
-	
-	public interface OrdinateurWithCoursOrdinateurs extends Common {
-		
-	}
-	
-	public interface CompetenceWithVideoprojecteur extends Common {
-		
-	}
-	
-	public interface CompetenceWithSalle extends Common {
-		
-	}
-	
-	public interface CompetenceWithFormateur extends Common {
-		
-	}
 	
 	public interface CoursWithFormation extends Common {
 
 	}
 
-	public interface FormationWithCours extends Common {
 
-	}
 	
 	public interface OrdinateurWithCours extends Common {
 
