@@ -47,6 +47,36 @@ public class VideoprojecteurResponse {
 		
 	}
 
-	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getMarque() {
+		return marque;
+	}
+
+	public void setMarque(String marque) {
+		this.marque = marque;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public List<CoursResponse> getCours() {
+		return cours;
+	}
+
+	public void setCours(List<CoursResponse> cours) {
+		this.cours = cours;
+	}
 	
 }
