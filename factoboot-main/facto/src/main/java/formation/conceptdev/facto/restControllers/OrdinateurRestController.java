@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,10 +22,13 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.OrdinateurRequest;
+import formation.conceptdev.facto.dto.request.StagiaireRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.MatiereResponse;
 import formation.conceptdev.facto.dto.response.OrdinateurResponse;
+import formation.conceptdev.facto.dto.response.StagiaireResponse;
 import formation.conceptdev.facto.entities.Ordinateur;
+import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.services.OrdinateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -68,6 +72,19 @@ public class OrdinateurRestController {
 		Ordinateur o = new Ordinateur();
 		BeanUtils.copyProperties(ordinateurRequest, o);
 		return new OrdinateurResponse(ordinateurSrv.insert(o),false);
+	}
+	
+	@PutMapping("/{id}")
+	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
+	public OrdinateurResponse update(@Valid @RequestBody OrdinateurRequest ordinateurRequest, BindingResult br,
+			@PathVariable Integer id) {
+		if (br.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		Ordinateur ordinateur = new Ordinateur();
+		BeanUtils.copyProperties(ordinateurRequest, ordinateur);
+		ordinateur.setId(id);
+		return new OrdinateurResponse(ordinateurSrv.update(ordinateur));
 	}
 		
 	
