@@ -1,0 +1,60 @@
+<h1>edition stagiaire</h1>
+<div>
+  <div class="form-group">
+    <label for="id">Id:</label>
+    {{ utilisateur.id }}
+  </div>
+  <div class="form-group">
+    <label for="login">Login:</label>
+    <input id="login" [(ngModel)]="utilisateur.login" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="nom">Nom:</label>
+    <input id="nom" [(ngModel)]="utilisateur.nom" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="prenom">Prenom:</label>
+    <input id="prenom" [(ngModel)]="utilisateur.prenom" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label for="email">email:</label>
+    <input
+      id="email"
+      type="email"
+      [(ngModel)]="utilisateur.email"
+      class="form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="role">filiere:</label>
+    <select
+      id="role"
+      [(ngModel)]="utilisateur.role"
+      class="form-control"
+      [compareWith]="compareFn"
+    >
+      @for(f of valeurSelect ;track $index){
+      <option [ngValue]="f">{{ f }}</option>
+      }
+    </select>
+  </div>
+
+  @if(utilisateur.formateur){
+  <div lass="form-group">
+    <label for="formateur">filiere:</label> {{ utilisateur.formateur.id }}
+  </div>
+  } @if(utilisateur.stagiaire){
+  <div lass="form-group">
+    <label for="stagiaire">filiere:</label> {{ utilisateur.stagiaire.id }}
+  </div>
+  }
+
+  <button class="btn btn-outline-info" (click)="save()">enregistrer</button>
+  <a
+    routerLink="/utilisateurs"
+    routerLinkActive="active"
+    class="btn btn-outline-warning"
+    >annuler</a
+  >
+</div>

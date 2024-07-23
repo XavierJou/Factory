@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public class UtilisateurRequest {
 	
-	private Integer id;
+	 Integer id;
 	@NotNull
 	private String login;
 	@NotNull
@@ -13,8 +13,6 @@ public class UtilisateurRequest {
 	private String prenom;
 	@NotNull
 	private String email;
-	@NotNull
-	private String password;
 	@NotNull
 	private String role;
 
@@ -73,15 +71,9 @@ public class UtilisateurRequest {
 	}
 
 
-	public String getPassword() {
-		return password;
-	}
 
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	
 
 	public String getRole() {
 		return role;

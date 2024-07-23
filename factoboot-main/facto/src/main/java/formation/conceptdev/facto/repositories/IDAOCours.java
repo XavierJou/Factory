@@ -23,5 +23,8 @@ public interface IDAOCours extends JpaRepository<Cours, Integer> {
     List<Cours> findAllWithFormateurAndUtilisateur();
 	
 	
+	 @Query("SELECT COUNT(c) FROM Cours c WHERE c.formateur.id = :idFormateur")
+	  Integer countCoursByFormateurId(@Param("idFormateur") Integer idFormateur);
+	
 
 }

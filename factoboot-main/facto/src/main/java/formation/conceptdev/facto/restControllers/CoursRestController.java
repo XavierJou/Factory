@@ -50,6 +50,11 @@ public class CoursRestController {
         return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, true, false, false, false, false,true)).collect(Collectors.toList());
     }
     
+    
+    @GetMapping("/countFormateur/{idFormateur}")
+    public Integer getCountCoursByFormateurId(@PathVariable Integer idFormateur) {
+        return coursSrv.NombreCoursFormateurId(idFormateur);
+    }
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
