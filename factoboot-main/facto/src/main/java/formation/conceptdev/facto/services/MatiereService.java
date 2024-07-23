@@ -37,8 +37,12 @@ public class MatiereService {
 	}
 
 	public Matiere insert(Matiere matiere) {
+		String titre = matiere.getTitre();
 		if (matiere.getTitre() == null) {
 			throw new RuntimeException("Impossible d'insert Matiere sans titre");
+		}
+		if(daoMatiere.findAllByTitre(titre) != null) {
+			throw new RuntimeException("La matiere existe déjà");
 		}
 		return daoMatiere.save(matiere);
 	}
