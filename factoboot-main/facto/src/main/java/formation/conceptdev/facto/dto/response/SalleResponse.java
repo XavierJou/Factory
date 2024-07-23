@@ -38,7 +38,7 @@ public class SalleResponse {
 		if (bool) {
 			if (salleEntity.getCours() != null) {
                 this.cours = salleEntity.getCours().stream()
-                		.map(cours -> new CoursResponse(cours, false,false, false,false, false,false))
+                		.map(cours -> new CoursResponse(cours, false,false, false,false, false,false,false))
                         .collect(Collectors.toList());
             }
 		}

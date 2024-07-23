@@ -38,6 +38,9 @@ public class CoursService {
 	}
 	
 	
+	public List<Cours> getAllCoursWithFormateurAndUtilisateur() {
+        return daoCours.findAllWithFormateurAndUtilisateur();
+    }
 	
 	
 	public Cours getByIdWithStagiaire(Integer id) {

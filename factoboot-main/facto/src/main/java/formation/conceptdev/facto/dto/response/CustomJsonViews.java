@@ -43,7 +43,7 @@ public class CustomJsonViews {
 	
 	public interface CoursResponseWithMatiere extends Common {}
 
-	public interface CoursResponseWithFormateur extends Common {}
+	public interface CoursResponseWithFormateur extends Common,FormateurResponseWithUtilisateur {}
 	
 	public interface CoursResponseWithFormation extends Common {}
 
