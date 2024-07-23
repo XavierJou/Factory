@@ -1,1 +1,124 @@
-<p>dashboard works!</p>
+<section>
+  <div class="container">
+    <div class="gap-3 d-flex">
+      <div class="col-md-3" style="min-height: 120px">
+        <label for="exampleSelect1" class="mt-4 form-label"
+          ><h2>Formations</h2></label
+        >
+        <p>{{ formation.titre }}</p>
+      </div>
+      <div class="col-md-9">
+        <div class="form-group">
+          <select
+            id="formation"
+            [(ngModel)]="formation"
+            class="form-select"
+            [compareWith]="compareFn"
+            data-form-type="other"
+            (ngModelChange)="onChangeSelect($event)"
+          >
+            <option value="" disabled>Choisir une formation</option>
+            @for(f of formationsObservable|async ;track f.id ){
+            <option [ngValue]="f">{{ f.titre }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container mt-5">
+  <div class="m-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Compétences</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">6</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Matières</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">9</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Objectifs</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">4</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Formateurs</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">3</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Stagiaires</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">18</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> your_trips </span>
+            </div>
+            <h4 class="card-title">Demandes</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">1</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
