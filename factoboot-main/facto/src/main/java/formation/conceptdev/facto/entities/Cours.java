@@ -60,7 +60,7 @@ public class Cours {
 	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
 			boolean besoinSalle,
 			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
-			Videoprojecteur videoprojecteurecteur, Salle salle) {
+			Videoprojecteur videoprojecteur, Salle salle) {
 
 		this.dateDebut = dateDebut;
 		this.titre = titre;
@@ -72,7 +72,7 @@ public class Cours {
 		this.formateur = formateur;
 		this.formation = formation;
 		this.coursOrdinateurs = ordinateurs;
-		this.videoprojecteur = videoprojecteurecteur;
+		this.videoprojecteur = videoprojecteur;
 		this.salle = salle;
 	}
 
