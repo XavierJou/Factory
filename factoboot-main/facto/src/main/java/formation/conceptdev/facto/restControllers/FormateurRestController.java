@@ -47,6 +47,8 @@ public class FormateurRestController {
     public List<FormateurResponse> getWithUtilisateur() {
         return formateurService.getAll().stream().map(formateur -> new FormateurResponse(formateur,false,false,false,true)).collect(Collectors.toList());
     }
+    
+    
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)
