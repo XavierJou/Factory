@@ -22,13 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.OrdinateurRequest;
-import formation.conceptdev.facto.dto.request.StagiaireRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
-import formation.conceptdev.facto.dto.response.MatiereResponse;
 import formation.conceptdev.facto.dto.response.OrdinateurResponse;
-import formation.conceptdev.facto.dto.response.StagiaireResponse;
 import formation.conceptdev.facto.entities.Ordinateur;
-import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.services.OrdinateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
