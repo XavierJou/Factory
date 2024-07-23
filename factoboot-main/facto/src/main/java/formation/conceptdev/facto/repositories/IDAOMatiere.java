@@ -15,10 +15,10 @@ public interface IDAOMatiere extends JpaRepository<Matiere, Integer> {
 
 	public List<Matiere> findByTitreContaining(String recherche);
 
-	@Query("SELECT m FROM Matiere m WHERE m.matiere.id = :matiereId")
-    Optional<Matiere> findByMatiereId(@Param("matiereId") Integer matiereId);
+	@Query("SELECT m FROM Matiere m WHERE m.id = :matiereId")
+    Optional<Matiere> findByMatiereId(@Param("matiereId") Integer Id);
 	
-	@Query("SELECT m FROM Matiere m WHERE m.matiere.titre = :matiereTitre")
-    Optional<Matiere> findByTitre(@Param("matiereTitre") String matiereTitre);
+	@Query("SELECT m FROM Matiere m WHERE m.titre = :matiereTitre")
+    Optional<Matiere> findByTitre(@Param("matiereTitre") String Titre);
 	
 }
