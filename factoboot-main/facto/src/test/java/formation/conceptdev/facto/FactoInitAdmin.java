@@ -194,7 +194,7 @@ class FactoinitAdmin {
 		            Salle salle = salles.get(0);
 		            
 		            
-		            Cours cours = new Cours(LocalDateTime.now(), "titre" +i,true, true, true,true, matiere, formateur,formation,null,videoprojecteur,salle);
+		            Cours cours = new Cours(LocalDate.now(), "titre" +i,true, true, true,true, matiere, formateur,formation,null,videoprojecteur,salle);
 		            coursService.insert(cours);
 		        }
 

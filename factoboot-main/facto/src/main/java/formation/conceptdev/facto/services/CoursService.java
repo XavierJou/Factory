@@ -89,8 +89,12 @@ public class CoursService {
 					
 					formateurs.add(formateurEnCours);
 					Utilisateur utilisateur= daoUtilisateur.findByFormateurId(idFormateurEnCours).orElse(null);
-					formateurEnCours.setUtilisateur(utilisateur);
-					daoFormateur.save(formateurEnCours);
+					if (utilisateur!=null)
+					{
+						formateurEnCours.setUtilisateur(utilisateur);
+						daoFormateur.save(formateurEnCours);
+					}
+					
 				}
 				
 				nbComptenceTrouve=0;
