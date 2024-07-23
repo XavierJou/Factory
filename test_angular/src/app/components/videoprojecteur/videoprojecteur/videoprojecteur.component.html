@@ -6,6 +6,14 @@
 >
 
 @for(v of videoprojecteurs;track v.id){
-<p>{{ v.id }} : {{ v.nom }}</p>
+<p>
+  {{ v.id }} : {{ v.nom }}
+  <button
+    routerLink="/videoprojecteur/edit/{{ v.id }}"
+    routerLinkActive="active"
+  >
+    éditer
+  </button>
+</p>
 <p><button (click)="delete(v.id!)">Supprimer</button></p>
 }

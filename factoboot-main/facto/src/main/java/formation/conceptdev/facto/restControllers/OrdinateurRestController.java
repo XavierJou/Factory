@@ -71,7 +71,7 @@ public class OrdinateurRestController {
 	}
 	
 	@PutMapping("/{id}")
-	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
+	@JsonView(CustomJsonViews.Common.class)
 	public OrdinateurResponse update(@Valid @RequestBody OrdinateurRequest ordinateurRequest, BindingResult br,
 			@PathVariable Integer id) {
 		if (br.hasErrors()) {
