@@ -37,6 +37,7 @@ public class MatiereRestController {
 
     @Autowired
     private MatiereService matiereService;
+    
 
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
