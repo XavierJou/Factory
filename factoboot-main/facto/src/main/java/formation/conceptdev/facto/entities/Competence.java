@@ -14,41 +14,33 @@ import jakarta.persistence.Table;
 @Table(name = "competence")
 public class Competence {
 
-    @Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_competence")
 	private Integer id;
 
-    private String nom;
-    
-    @OneToMany(mappedBy="competence")
-    private List<CompetenceFormateur> competenceFormateurs;
-   
-    @OneToMany(mappedBy="competence")
-    private List<CompetenceMatiere> competenceMatieres;
+	private String nom;
 
-    public Competence() {
-    }
+	@OneToMany(mappedBy = "competence")
+	private List<CompetenceFormateur> competenceFormateurs;
 
-   
+	@OneToMany(mappedBy = "competence")
+	private List<CompetenceMatiere> competenceMatieres;
 
-
+	public Competence() {
+	}
 
 	public Competence(String nom, List<CompetenceFormateur> competenceFormateurs,
 			List<CompetenceMatiere> competenceMatieres) {
-				this.nom = nom;
+		this.nom = nom;
 		this.competenceFormateurs = competenceFormateurs;
 		this.competenceMatieres = competenceMatieres;
 	}
-	
+
 	public Competence(String nom) {
-				this.nom = nom;
-		
+		this.nom = nom;
+
 	}
-
-
-
-
 
 	public Integer getId() {
 		return id;
@@ -66,7 +58,6 @@ public class Competence {
 		this.nom = nom;
 	}
 
-
 	public List<CompetenceFormateur> getCompetenceFormateurs() {
 		return competenceFormateurs;
 	}
@@ -75,22 +66,11 @@ public class Competence {
 		this.competenceFormateurs = competenceFormateurs;
 	}
 
-
-
-
-
 	public List<CompetenceMatiere> getCompetenceMatieres() {
 		return competenceMatieres;
 	}
 
-
-
-
-
 	public void setCompetenceMatieres(List<CompetenceMatiere> competenceMatieres) {
 		this.competenceMatieres = competenceMatieres;
 	}
-
-	
-
 }
