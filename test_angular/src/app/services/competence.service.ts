@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Competence } from '../models/competence';
@@ -32,5 +32,10 @@ export class CompetenceService {
       `${this.url}/${competence.id}`,
       competence
     );
+  }
+
+  public searchByNom(search: string): Observable<Competence[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Competence[]>(this.url, { params });
   }
 }

@@ -40,6 +40,10 @@ public class CompetenceService {
 	public List<Competence> getAll() {
 		return daoCompetence.findAll();
 	}
+	
+	public List<Competence> searchByNom(String nom) {
+	    return daoCompetence.findByNomContaining(nom);
+	}
 
 	public Competence insert(Competence competence) {
 		if (competence.getNom() == null) {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,10 +39,24 @@ public class CompetenceRestController {
     @Autowired
     private CompetenceService competenceSrv;
 
+//    @GetMapping("")
+//    @JsonView(CustomJsonViews.Common.class)
+//    public List<CompetenceResponse> getAll() {
+//        return competenceSrv.getAll().stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
+//    }
+    
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
-    public List<CompetenceResponse> getAll() {
-        return competenceSrv.getAll().stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
+    public List<CompetenceResponse> getAll(@RequestParam(value = "search", required = false) String search) {
+        List<Competence> competences;
+        if (search != null && !search.trim().isEmpty()) {
+            competences = competenceSrv.searchByNom(search);
+        } else {
+            competences = competenceSrv.getAll();
+        }
+        return competences.stream()
+                          .map(competence -> new CompetenceResponse(competence, false, false))
+                          .collect(Collectors.toList());
     }
 
     @PostMapping("")
@@ -89,4 +104,6 @@ public class CompetenceRestController {
 		    }
 		competenceSrv.deleteById(id);
 	}
+	
+
 }

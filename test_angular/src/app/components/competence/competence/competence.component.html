@@ -1,8 +1,25 @@
-<a routerLink="/competence/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouveau competence</a
->
+<div class="d-flex justify-content-between align-items-center mb-3">
 
-@for(c of competences;track c.id){
-<p>{{ c.id }} : {{ c.nom }}</p>
-<p><button (click)="delete(c.id!)">Supprimer</button></p>
-}
+  <a routerLink="/competence/edit" routerLinkActive="active" class="btn btn-link">Nouvelle compétence</a>
+
+  <div class="search-bar">
+    <div class="input-group">
+      <input class="form-control" type="text" placeholder="Rechercher une compétence" [(ngModel)]="searchTerm"
+        (input)="searchCompetences()" />
+      <!-- Boutton pour effacer la recherche -->
+
+    </div>
+  </div>
+</div>
+
+<table class="table">
+  @for(c of competences;track c.id){
+  <tr>
+    <td>{{ c.id}}</td>
+    <td>{{ c.nom}}</td>
+    <a routerLink="/competence/edit/{{ c.id }}" routerLinkActive="active" class="btn btn-outline-primary">Mettre à
+      jour</a>
+    <td><button (click)="delete(c.id!)" class="btn btn-outline-danger">Supprimer</button></td>
+  </tr>
+  }
+</table>
