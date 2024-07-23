@@ -1,3 +1,5 @@
+import { Formateur } from './formateur';
+import { Stagiaire } from './stagiaire';
 export class Utilisateur {
   constructor(
     public id?: number,
@@ -5,6 +7,8 @@ export class Utilisateur {
     public nom?: string,
     public prenom?: string,
     public email?: string,
-    public role?: string
+    public role?: string,
+    public formateur?: Formateur,
+    public stagiaire?: Stagiaire
   ) {}
 }
