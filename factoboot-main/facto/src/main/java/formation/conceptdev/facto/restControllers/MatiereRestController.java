@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,17 +50,6 @@ public class MatiereRestController {
         return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,true,true)).collect(Collectors.toList());
     }
 
-    @PostMapping("")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @JsonView(CustomJsonViews.Common.class)
-    public MatiereResponse create(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br) {
-        if (br.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        Matiere matiere = new Matiere();
-        BeanUtils.copyProperties(matiereRequest, matiere);
-        return new MatiereResponse(matiereService.insert(matiere),false,false);
-    }
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
@@ -84,4 +74,29 @@ public class MatiereRestController {
 	public void deleteById(@PathVariable("id") Integer id) {
     	matiereService.deleteById(id);
 	}
+    
+    @PostMapping("")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @JsonView(CustomJsonViews.Common.class)
+    public MatiereResponse create(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br) {
+        if (br.hasErrors()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        Matiere matiere = new Matiere();
+        BeanUtils.copyProperties(matiereRequest, matiere);
+        return new MatiereResponse(matiereService.insert(matiere),false,false);
+    }
+    
+    @PutMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    @JsonView(CustomJsonViews.Common.class)
+    public MatiereResponse update(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br, @PathVariable Integer id) {
+        if (br.hasErrors()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        Matiere matiere = new Matiere();
+        BeanUtils.copyProperties(matiereRequest, matiere);
+        matiere.setId(id);
+        return new MatiereResponse(matiereService.update(matiere),false,false);
+    }
 }
