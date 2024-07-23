@@ -24,6 +24,8 @@ export class OrdinateurComponent {
     });
   }
 
+  edit(id: number) {}
+
   initOrdinateur() {
     this.ordinateurSrv.getAll().subscribe((ordinateurs) => {
       this.ordinateurs = ordinateurs;
