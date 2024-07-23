@@ -69,7 +69,7 @@ public class SalleRestController {
     }
     
     @PutMapping("/{id}")
-	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
+	@JsonView(CustomJsonViews.Common.class)
 	public SalleResponse update(@Valid @RequestBody SalleRequest salleRequest, BindingResult br,
 			@PathVariable Integer id) {
 		if (br.hasErrors()) {

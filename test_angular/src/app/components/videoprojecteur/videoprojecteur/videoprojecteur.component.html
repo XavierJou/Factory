@@ -21,3 +21,8 @@
     }
   </div>
 </div>
+
+@for(v of videoprojecteurs;track v.id){
+<p>{{ v.id }} : {{ v.nom }}</p>
+<p><button (click)="delete(v.id!)">Supprimer</button></p>
+}
