@@ -1,5 +1,6 @@
 package formation.conceptdev.facto.entities;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Cours {
 	private Integer id;
 	private String titre;
 	@Column(name = "date_debut")
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
 	private boolean besoinVideoprojecteur;
 	private boolean besoinOrdiFormateur;
 	private boolean besoinOrdiStagiaire;
@@ -56,7 +57,7 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(LocalDateTime dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
+	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
 			boolean besoinSalle,
 			Matiere matiere, Formateur formateur, Formation formation, List<CoursOrdinateurs> ordinateurs,
 			Videoprojecteur videoprojecteurecteur, Salle salle) {
@@ -75,7 +76,7 @@ public class Cours {
 		this.salle = salle;
 	}
 
-	public Cours(LocalDateTime dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
+	public Cours(LocalDate dateDebut, String titre, boolean besoinVideoprojecteur, boolean besoinOrdiFormateur, boolean besoinOrdiStagiaire,
 			boolean besoinSalle) {
 
 		this.dateDebut = dateDebut;
@@ -103,11 +104,11 @@ public class Cours {
 		this.titre = titre;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
