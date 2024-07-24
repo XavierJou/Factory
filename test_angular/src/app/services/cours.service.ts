@@ -15,16 +15,19 @@ export class CoursService {
     return this.httpClient.get<Cours[]>(this.url);
   }
 
+  public create(cours: Cours): Observable<Cours> {
+    return this.httpClient.post<Cours>(
+      this.url,
+      this.coursToCoursRequest(cours)
+    );
+  }
+
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
-  public create(cours: Cours): Observable<Cours> {
-    return this.httpClient.post<Cours>(this.url, cours);
-  }
-
   public getById(id: number): Observable<Cours> {
-    return this.httpClient.get<Cours>(`${this.url}/${id}`);
+    return this.httpClient.get<Cours>(`${this.url}/${id}/details`);
   }
 
   public getCountFormateurById(id: number): Observable<number> {
@@ -32,6 +35,27 @@ export class CoursService {
   }
 
   public update(cours: Cours): Observable<Cours> {
-    return this.httpClient.put<Cours>(`${this.url}/${cours.id}`, cours);
+    return this.httpClient.put<Cours>(
+      `${this.url}/${cours.id}`,
+      this.coursToCoursRequest(cours)
+    );
+  }
+
+  private coursToCoursRequest(cours: Cours): any {
+    let obj = {
+      titre: cours.titre,
+      dateDebut: cours.dateDebut,
+      besoinOrdiFormateur: cours.besoinOrdiFormateur,
+      besoinOrdiStagiaire: cours.besoinOrdiStagiaire,
+      besoinSalle: cours.besoinSalle,
+      besoinVideoprojecteur: cours.besoinVideoprojecteur,
+      idFormation: cours.formation?.id,
+      idFormateur: cours.formateur?.id,
+      idMatiere: cours.matiere?.id,
+      idSalle: cours.salle?.id,
+      idsOrdinateurs: cours.ordinateurs?.map((o) => o.id),
+      idVideoprojecteur: cours.videoprojecteur?.id,
+    };
+    return obj;
   }
 }

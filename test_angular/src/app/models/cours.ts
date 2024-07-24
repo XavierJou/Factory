@@ -3,6 +3,8 @@ import { Formateur } from './formateur';
 import { Formation } from './formation';
 import { Matiere } from './matiere';
 import { Salle } from './salle';
+import { Ordinateur } from './ordinateur';
+import { Stagiaire } from './stagiaire';
 
 export class Cours {
   constructor(
@@ -13,6 +15,11 @@ export class Cours {
     public formation?: Formation,
     public salle?: Salle,
     public formateur?: Formateur,
-    public videoprojecteur?: Videoprojecteur
+    public videoprojecteur?: Videoprojecteur,
+    public ordinateurs?: Ordinateur[],
+    public besoinVideoprojecteur: boolean = false,
+    public besoinOrdiFormateur: boolean = false,
+    public besoinOrdiStagiaire: boolean = false,
+    public besoinSalle: boolean = false
   ) {}
 }

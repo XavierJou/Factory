@@ -7,7 +7,7 @@ import { Formateur } from '../models/formateur';
   providedIn: 'root',
 })
 export class FormateurService {
-  url = 'http://localhost:8080/factory/api/formateur';
+  url = 'http://localhost:8080/factory/api/formateur/utilisateur';
 
   constructor(private httpClient: HttpClient) {}
 

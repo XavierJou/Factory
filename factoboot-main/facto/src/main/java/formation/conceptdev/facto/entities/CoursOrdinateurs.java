@@ -9,25 +9,33 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name="coursOrdinateurs")
+@Table(name = "coursOrdinateurs")
 @Entity
 public class CoursOrdinateurs {
 
 	@Id
-	@Column(name="id_coursOrdinateurs")
+	@Column(name = "id_coursOrdinateurs")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@ManyToOne
-	@JoinColumn(name="id_cours")
+	@JoinColumn(name = "id_cours")
 	private Cours cours;
-	
+
 	@ManyToOne
-	@JoinColumn(name="id_ordinateur")
+	@JoinColumn(name = "id_ordinateur")
 	private Ordinateur ordinateur;
 
 	public CoursOrdinateurs() {
 	}
+
+
+
+	public CoursOrdinateurs(Cours cours, Ordinateur ordinateur) {
+		this.cours = cours;
+		this.ordinateur = ordinateur;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -52,8 +60,5 @@ public class CoursOrdinateurs {
 	public void setOrdinateur(Ordinateur ordinateur) {
 		this.ordinateur = ordinateur;
 	}
-	
-	
-	
-}
 
+}
