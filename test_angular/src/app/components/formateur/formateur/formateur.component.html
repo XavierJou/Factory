@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Formations</h1>
+  <h1>Formateurs</h1>
   <div class="gap-5 m-auto d-flex flex-column">
     <div class="text-end">
       <a
@@ -12,7 +12,7 @@
     <div class="gap-3 d-flex flex-column">
       @for(f of formateurs;track f.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ f.utilisateur?.nom }}</p>
+        <p>[{{ f.id }}] {{ f.utilisateur?.nom }} {{ f.utilisateur?.prenom }}</p>
         <div>
           <div class="d-inline">
             <button
@@ -25,7 +25,7 @@
           <div class="p-2 d-inline">
             <button
               class="p-2 btn btn-outline-warning btn-sm d-inline"
-              routerLink="/formations/edit/{{ f.id }}"
+              routerLink="/formateur/edit/{{ f.id }}"
               routerLinkActive="active"
             >
               éditer
