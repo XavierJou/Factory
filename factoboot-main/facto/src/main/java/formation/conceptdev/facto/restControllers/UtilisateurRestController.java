@@ -21,15 +21,15 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import formation.conceptdev.facto.dto.request.CompetenceRequest;
 import formation.conceptdev.facto.dto.request.UtilisateurRequest;
-import formation.conceptdev.facto.dto.response.CompetenceResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
-import formation.conceptdev.facto.dto.response.MatiereResponse;
 import formation.conceptdev.facto.dto.response.UtilisateurResponse;
-import formation.conceptdev.facto.entities.Competence;
+import formation.conceptdev.facto.entities.Formateur;
 import formation.conceptdev.facto.entities.Role;
+import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.entities.Utilisateur;
+import formation.conceptdev.facto.services.FormateurService;
+import formation.conceptdev.facto.services.StagiaireService;
 import formation.conceptdev.facto.services.UtilisateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -42,6 +42,12 @@ public class UtilisateurRestController {
 
 	@Autowired
 	private UtilisateurService utilisateurSrv;
+	
+    @Autowired
+    private FormateurService formateurService;
+    
+	@Autowired
+	private StagiaireService stagiaireSrv;
 
 	@GetMapping("")
 	@JsonView(CustomJsonViews.Common.class)
@@ -92,6 +98,24 @@ public class UtilisateurRestController {
 	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 	        }
 	        Utilisateur utilisateur = utilisateurSrv.getById(id);
+	        
+	        if (utilisateurRequest.isAjoutFormateur())
+	        {
+	        	// ajout formateur
+	        	Formateur formateur = new Formateur();
+	        	formateur.setUtilisateur(utilisateur);	        	
+	        	formateur = formateurService.insert(formateur);
+	        	utilisateur.setFormateur(formateur);
+	        }
+	        if (utilisateurRequest.isAjoutStagiaire())
+	        {
+	        	// ajout formateur
+	        	Stagiaire stagiaire = new Stagiaire();
+	        	stagiaire.setUtilisateur(utilisateur);	        	
+	        	stagiaire = stagiaireSrv.insert(stagiaire);
+	        	utilisateur.setStagiaire(stagiaire);
+	        	
+	        }
 	        BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role");
 	        utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
 	        return new UtilisateurResponse(utilisateurSrv.update(utilisateur), false, false);
@@ -100,7 +124,7 @@ public class UtilisateurRestController {
 	 @DeleteMapping("/{id}")
 		@ResponseStatus(code = HttpStatus.OK)
 		public void deleteById(@PathVariable("id") Integer id) {
-		
+
 		 utilisateurSrv.deleteById(id);
 		}
 	 

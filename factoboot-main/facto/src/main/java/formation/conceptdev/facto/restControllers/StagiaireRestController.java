@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.StagiaireRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
+import formation.conceptdev.facto.dto.response.FormateurResponse;
 import formation.conceptdev.facto.dto.response.StagiaireResponse;
 import formation.conceptdev.facto.entities.Stagiaire;
 import formation.conceptdev.facto.services.FormationService;
@@ -46,8 +47,14 @@ public class StagiaireRestController {
 	public List<StagiaireResponse> getAll() {
 		return stagiaireSrv.getAll().stream().map(entity -> new StagiaireResponse(entity)).collect(Collectors.toList());
 	}
+	
+	 @GetMapping("/{id}")
+	    @JsonView(CustomJsonViews.StagiaireWithFormation.class)
+	    public StagiaireResponse getById(@PathVariable Integer id) {
+	        return new StagiaireResponse(stagiaireSrv.getById(id));
+	    }
 
-	@PostMapping("")
+	@PostMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	public StagiaireResponse create(@Valid @RequestBody StagiaireRequest stagiaireRequest, BindingResult br) {

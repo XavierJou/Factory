@@ -72,25 +72,33 @@ export class EditUtilisateurComponent {
         this.roleAvant == 'ROLE_STAGIARE' &&
         this.roleAvant != this.utilisateur.role
       ) {
-        // annulation id stagiaire dans utilisateur
-        this.utilisateurSrv
-          .nullIdStagiaire(this.utilisateur.id)
-          .subscribe(() => {
-            let stagiaire = this.utilisateur.stagiaire ?? new Stagiaire();
-            let id_stagiaire = stagiaire.id ?? 0;
-            if (id_stagiaire > 0) {
-              // annulation id utilisateur dans stagiare
-              this.stagiaireSrv
-                .nullIdUtilisateur(id_stagiaire)
-                .subscribe(() => {
-                  // suppression stagiaire
-                  this.stagiaireSrv.delete(id_stagiaire).subscribe(() => {
-                    this.miseAJour();
-                    return;
-                  });
-                });
-            }
-          });
+        let stagiaire = this.utilisateur.stagiaire ?? new Stagiaire();
+        let id_stagiaire = stagiaire.id ?? 0;
+
+        this.stagiaireSrv.getById(id_stagiaire).subscribe((stagiaireRecup) => {
+          if (stagiaireRecup.formation) {
+            this.messageInfo = 'ce stagiaire est associé à une formation';
+            return;
+          } else {
+            // annulation id stagiaire dans utilisateur
+            this.utilisateurSrv
+              .nullIdStagiaire(this.utilisateur.id ?? 0)
+              .subscribe(() => {
+                if (id_stagiaire > 0) {
+                  // annulation id utilisateur dans stagiare
+                  this.stagiaireSrv
+                    .nullIdUtilisateur(id_stagiaire)
+                    .subscribe(() => {
+                      // suppression stagiaire
+                      this.stagiaireSrv.delete(id_stagiaire).subscribe(() => {
+                        this.miseAJour();
+                        return;
+                      });
+                    });
+                }
+              });
+          }
+        });
       } else {
         if (
           this.roleAvant == 'ROLE_FORMATEUR' &&
@@ -102,19 +110,28 @@ export class EditUtilisateurComponent {
             this.coursService
               .getCountFormateurById(id_formateur)
               .subscribe((nbcours) => {
-                // on peut l'effacer le formateur
+                // on peut l'effacer le formateur ?
                 if (nbcours > 0) {
                   this.messageInfo = 'ce formateur est associé à un cours';
                 } else {
-                  // effaceement formateur
+                  // effacement id formateur
                   this.utilisateurSrv
                     .nullIdFormateur(this.utilisateur.id ?? 0)
                     .subscribe(() => {
-                      // effaceement formateur
-                      this.formateurSrv.delete(id_formateur).subscribe(() => {
-                        this.miseAJour();
-                        return;
-                      });
+                      console.log('effacement id formateur');
+                      // effacement id utilisateur
+                      this.formateurSrv
+                        .nullIdUtilisateur(id_formateur)
+                        .subscribe(() => {
+                          // effacement formateur
+                          this.formateurSrv
+                            .delete(id_formateur)
+                            .subscribe(() => {
+                              console.log('effacement formateur');
+                              this.miseAJour();
+                              return;
+                            });
+                        });
                     });
                 }
               });
@@ -131,9 +148,35 @@ export class EditUtilisateurComponent {
       this.utilisateur.role == 'ROLE_FORMATEUR' &&
       this.roleAvant != this.utilisateur.role
     ) {
-    } else {
-    }
+      // ajout formateur
+      this.utilisateur.stagiaire = undefined;
+      this.utilisateur.formateur = new Formateur();
 
+      // affectation formateur utilisateur
+
+      this.sauveUtilisateur();
+    } else {
+      if (
+        this.utilisateur.role == 'ROLE_STAGIAIRE' &&
+        this.roleAvant != this.utilisateur.role
+      ) {
+        // ajout stagiaire
+
+        // affectation stagiaire utilisateur
+
+        this.utilisateur.stagiaire = new Stagiaire();
+        this.utilisateur.formateur = undefined;
+
+        this.sauveUtilisateur();
+      } else {
+        this.utilisateur.stagiaire = undefined;
+        this.utilisateur.formateur = undefined;
+        this.sauveUtilisateur();
+      }
+    }
+  }
+
+  sauveUtilisateur() {
     this.utilisateurSrv.update(this.utilisateur).subscribe((utilisateur) => {
       this.router.navigateByUrl('/utilisateur?q=update&id=' + utilisateur.id);
     });

@@ -51,7 +51,7 @@ export class UtilisateurComponent {
     });
   }
 
-  delete(idUtilisateur: number, formateur: any, Stagiaire: any) {
+  delete(idUtilisateur: number, formateur: any, stagiaire: any) {
     this.messageID = idUtilisateur;
     this.messageInfo = '';
     // controle formateur /et stagiaire
@@ -64,26 +64,53 @@ export class UtilisateurComponent {
             this.messageID = idUtilisateur;
             this.messageInfo = 'ce formateur est associé à un cours';
           } else {
-            this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
-              this.formateurSrv.delete(formateur.id).subscribe(() => {
-                this.initUtilisateurs();
+            this.utilisateurServ
+              .nullIdFormateur(idUtilisateur)
+              .subscribe(() => {
+                this.formateurSrv
+                  .nullIdUtilisateur(formateur.id)
+                  .subscribe(() => {
+                    this.formateurSrv.delete(formateur.id).subscribe(() => {
+                      this.effacementUtilisateur(idUtilisateur);
+                    });
+                  });
               });
-            });
           }
         });
     } else {
-      if (Stagiaire) {
-        this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
-          this.stagiaireSrv.delete(Stagiaire.id).subscribe(() => {
-            this.initUtilisateurs();
-          });
+      if (stagiaire) {
+        // controle pas relié à une formation
+        this.stagiaireSrv.getById(stagiaire.id).subscribe((stagiaireRecup) => {
+          if (stagiaireRecup.formation) {
+            this.messageID = idUtilisateur;
+            this.messageInfo = 'ce stagiaire est associé à une formation';
+          } else {
+            console.log('debut traitement');
+            this.utilisateurServ
+              .nullIdStagiaire(idUtilisateur)
+              .subscribe(() => {
+                console.log('nullIdStagiaire');
+                this.stagiaireSrv
+                  .nullIdUtilisateur(stagiaire.id)
+                  .subscribe(() => {
+                    console.log('nullIdUtilisateur');
+                    this.stagiaireSrv.delete(stagiaire.id).subscribe(() => {
+                      this.effacementUtilisateur(idUtilisateur);
+                    });
+                  });
+              });
+          }
         });
       } else {
-        this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
-          this.initUtilisateurs();
-        });
+        this.effacementUtilisateur(idUtilisateur);
       }
     }
+  }
+
+  effacementUtilisateur(idUtilisateur: number) {
+    this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
+      this.initUtilisateurs();
+    });
   }
 
   compareFn(f1: string, f2: string): boolean {
