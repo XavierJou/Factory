@@ -82,11 +82,68 @@
 
     <!-- Disponibilité Infos -->
     <div>
-      <h6>
-        <button class="btn btn-link p-0" (click)="inverse($index, 1)">
-          Disponibilité Infos
-        </button>
-      </h6>
+      <table class="table">
+        <tr>
+          <td>
+            <button class="btn btn-link p-0" (click)="inverse($index, 1)">
+              Disponibilité Infos
+            </button>
+          </td>
+          <td>
+            <button
+              class="btn btn-link p-0"
+              (click)="affichageAjoutEdition($index)"
+            >
+              Ajout Disponibilité
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          @if(indexAjoutDisponibilite==$index) {
+          <td>
+            Date de début
+            <input
+              type="date"
+              class="form-control"
+              id="dateDebut"
+              [(ngModel)]="disponibiliteFormateur.dateDebut"
+            />
+          </td>
+          <td>
+            Date de fin
+            <input
+              type="date"
+              class="form-control"
+              id="id"
+              name="id"
+              [(ngModel)]="disponibiliteFormateur.dateFin"
+            />
+          </td>
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                (click)="AjoutDisponibilite(formateur.id!)"
+              >
+                Valider
+              </button>
+            </h6>
+          </td>
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-warning btn-sm"
+                (click)="inverse($index, 1)"
+              >
+                Annuler
+              </button>
+            </h6>
+          </td>
+          }
+        </tr>
+      </table>
       @if(showInfo[$index ][1]) {
       <table class="table table-sm">
         <th>Date de début</th>

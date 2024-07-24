@@ -3,16 +3,22 @@ import { Formateur } from '../../../models/formateur';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { FormateurService } from '../../../services/formateur.service';
+import { FormsModule } from '@angular/forms';
+import { DisponibiliteFormateur } from '../../../models/disponibilite-formateur';
 
 @Component({
   selector: 'app-formateur',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, DatePipe],
+  imports: [FormsModule, RouterLink, RouterLinkActive, DatePipe],
   templateUrl: './formateur.component.html',
   styleUrl: './formateur.component.css',
 })
 export class FormateurComponent implements OnInit {
   formateurs: Formateur[] = [];
+
+  indexAjoutDisponibilite: number = -1;
+
+  disponibiliteFormateur: DisponibiliteFormateur = new DisponibiliteFormateur();
 
   showInfo: boolean[][] = [];
 
@@ -41,4 +47,15 @@ export class FormateurComponent implements OnInit {
   inverse(i: number, j: number) {
     this.showInfo[i][j] = !this.showInfo[i][j];
   }
+
+  affichageAjoutEdition(index: number) {
+    if (this.indexAjoutDisponibilite < 0) {
+      this.indexAjoutDisponibilite = index;
+    } else {
+      this.indexAjoutDisponibilite = -1;
+    }
+    // this.indexAjoutDisponibilite = index;
+  }
+
+  AjoutDisponibilite(idFormateur: number) {}
 }

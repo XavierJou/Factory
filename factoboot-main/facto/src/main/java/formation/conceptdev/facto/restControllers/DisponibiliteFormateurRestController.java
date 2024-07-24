@@ -24,7 +24,9 @@ import formation.conceptdev.facto.dto.request.DisponibiliteFormateurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.DisponibiliteFormateurResponse;
 import formation.conceptdev.facto.entities.DisponibiliteFormateur;
+import formation.conceptdev.facto.entities.Formateur;
 import formation.conceptdev.facto.services.DisponibiliteFormateurService;
+import formation.conceptdev.facto.services.FormateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
@@ -36,6 +38,9 @@ public class DisponibiliteFormateurRestController {
 
     @Autowired
     private DisponibiliteFormateurService disponibiliteFormateurService;
+    
+    @Autowired
+    private FormateurService formateurService;
 
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
@@ -58,6 +63,8 @@ public class DisponibiliteFormateurRestController {
         }
         DisponibiliteFormateur disponibiliteFormateur = new DisponibiliteFormateur();
         BeanUtils.copyProperties(disponibiliteFormateurRequest, disponibiliteFormateur);
+        Formateur formateur = formateurService.getById(disponibiliteFormateurRequest.getFormateurId());
+        disponibiliteFormateur.setFormateur(formateur);
         return new DisponibiliteFormateurResponse(disponibiliteFormateurService.insert(disponibiliteFormateur),false);
     }
 
