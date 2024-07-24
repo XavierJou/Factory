@@ -42,7 +42,7 @@ public class FormationResponse {
 		if (besoinStagiaire) {
 			if (formation.getStagiaires() != null) {
 				this.setStagiaires(formation.getStagiaires().stream()
-						.map(entity -> new StagiaireResponse(entity, false))
+						.map(entity -> new StagiaireResponse(entity, false,false))
 						.collect(Collectors.toList()));
 			}
 

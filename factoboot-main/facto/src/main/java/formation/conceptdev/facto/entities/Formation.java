@@ -1,6 +1,6 @@
 package formation.conceptdev.facto.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -26,7 +26,7 @@ public class Formation {
 	private String objectif;
 	private String contenu;
 	@Column(name = "date_debut")
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
 	private Integer capacite;
 	
 	@OneToMany(mappedBy = "formation", fetch = FetchType.LAZY)
@@ -43,7 +43,7 @@ public class Formation {
 	public Formation() {
 	}
 
-	public Formation(String titre, Integer duree, String objectif, String contenu, LocalDateTime dateDebut, Integer capacite) {
+	public Formation(String titre, Integer duree, String objectif, String contenu, LocalDate dateDebut, Integer capacite) {
 		this.titre = titre;
 		this.duree = duree;
 		this.objectif = objectif;
@@ -94,11 +94,11 @@ public class Formation {
 		this.contenu = contenu;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 

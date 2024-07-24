@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { StagiaireService } from '../../../services/stagiaire.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Stagiaire } from '../../../models/stagiaire';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-stagiaire',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, DatePipe],
   templateUrl: './stagiaire.component.html',
   styleUrl: './stagiaire.component.css',
 })
@@ -24,7 +25,7 @@ export class StagiaireComponent {
   }
 
   initStagiaire() {
-    this.stagiaireSrv.getAll().subscribe((stagiaires) => {
+    this.stagiaireSrv.getWithDetails().subscribe((stagiaires) => {
       this.stagiaires = stagiaires;
     });
   }

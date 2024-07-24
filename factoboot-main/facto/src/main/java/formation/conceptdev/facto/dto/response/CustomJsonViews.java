@@ -108,7 +108,9 @@ public class CustomJsonViews {
 	
 	public interface StagiaireWithFormation extends Common {}
 	
-	public interface StagiaireWithDetails extends StagiaireWithFormation {}
+	public interface StagiaireWithUtilisateur extends Common {}
+	
+	public interface StagiaireWithDetails extends StagiaireWithFormation,StagiaireWithUtilisateur {}
 
 	
 	public interface UtilisateurResponseWithFormateur extends Common {}

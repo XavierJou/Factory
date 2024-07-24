@@ -12,20 +12,28 @@ public class StagiaireResponse {
 
 	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	private FormationResponse formation;
+	
+	@JsonView(CustomJsonViews.StagiaireWithUtilisateur.class)
+	private UtilisateurResponse utilisateur;
 
 	public StagiaireResponse() {
 
 	}
 
 	public StagiaireResponse(Stagiaire stagiaire) {
-		this(stagiaire, true);
+		this(stagiaire, true,true);
 	}
 
-	public StagiaireResponse(Stagiaire stagiaireEntity, boolean bool) {
-		BeanUtils.copyProperties(stagiaireEntity, this, "formation");
-		if (bool) {
+	public StagiaireResponse(Stagiaire stagiaireEntity, boolean besoinFormation, boolean besoinUtilisateur) {
+		BeanUtils.copyProperties(stagiaireEntity, this, "formation","utilisateur");
+		if (besoinFormation) {
 			if (stagiaireEntity.getFormation() != null) {
 				this.setFormation(new FormationResponse(stagiaireEntity.getFormation(), false, false, false));
+			}
+		}
+		if (besoinUtilisateur) {
+			if (stagiaireEntity.getUtilisateur() != null) {
+				this.setUtilisateur(new UtilisateurResponse(stagiaireEntity.getUtilisateur(), false, false));
 			}
 		}
 	}
@@ -45,5 +53,15 @@ public class StagiaireResponse {
 	public void setFormation(FormationResponse formation) {
 		this.formation = formation;
 	}
+
+	public UtilisateurResponse getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(UtilisateurResponse utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
+	
 
 }

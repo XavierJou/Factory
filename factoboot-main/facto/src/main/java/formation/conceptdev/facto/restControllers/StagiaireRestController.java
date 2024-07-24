@@ -48,6 +48,12 @@ public class StagiaireRestController {
 		return stagiaireSrv.getAll().stream().map(entity -> new StagiaireResponse(entity)).collect(Collectors.toList());
 	}
 	
+	@GetMapping("/details")
+	//@JsonView(CustomJsonViews.StagiaireWithDetails.class)
+	public List<StagiaireResponse> getWithDetails() {
+		return stagiaireSrv.getAll().stream().map(entity -> new StagiaireResponse(entity)).collect(Collectors.toList());
+	}
+	
 	 @GetMapping("/{id}")
 	    @JsonView(CustomJsonViews.StagiaireWithFormation.class)
 	    public StagiaireResponse getById(@PathVariable Integer id) {

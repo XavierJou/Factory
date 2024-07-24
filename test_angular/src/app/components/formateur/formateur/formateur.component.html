@@ -1,114 +1,126 @@
 <div class="container">
   <h2>Liste des Formateurs</h2>
-  @for(formateur of formateurs;track formateur.id) {
+  <a routerLink="/utilisateurs" routerLinkActive="active" class="btn btn-link"
+    >Ajouter</a
+  >
+</div>
 
-  <div class="card mb-3">
-    <div class="card-header">
-      <Table>
+@for(formateur of formateurs;track formateur.id) {
+
+<div class="card mb-3">
+  <div class="card-header">
+    <Table class="w-100">
+      <tr>
+        <td>
+          <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
+        </td>
+
+        @if(formateur.cours && formateur.cours.length>0) {
+        <td>
+          <button
+            class="btn btn-outline-danger btn-sm"
+            (click)="delete(formateur.id!)"
+          >
+            Supprimer
+          </button>
+        </td>
+
+        }
+      </tr>
+    </Table>
+  </div>
+  <div class="card-body">
+    <!-- Utilisateur Infos -->
+    <div>
+      <table class="table table-sm">
+        <th>ID</th>
+        <th>Login</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
         <tr>
-          <td>
-            <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
-          </td>
+          <td>{{ formateur.utilisateur?.id }}</td>
+          <td>{{ formateur.utilisateur?.login }}</td>
 
-          @if(formateur.cours && formateur.cours.length>0) {
-          <td>
-            <button
-              class="btn btn-outline-danger btn-sm"
-              (click)="delete(formateur.id!)"
-            >
-              Supprimer
-            </button>
-          </td>
+          <td>{{ formateur.utilisateur?.nom }}</td>
 
-          }
+          <td>{{ formateur.utilisateur?.prenom }}</td>
+
+          <td>{{ formateur.utilisateur?.email }}</td>
         </tr>
-      </Table>
+      </table>
     </div>
-    <div class="card-body">
-      <!-- Utilisateur Infos -->
-      <div>
-        <table class="table table-sm">
-          <th>ID</th>
-          <th>Login</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Email</th>
-          <tr>
-            <td>{{ formateur.utilisateur?.id }}</td>
-            <td>{{ formateur.utilisateur?.login }}</td>
 
-            <td>{{ formateur.utilisateur?.nom }}</td>
+    <!-- Cours Infos -->
+    @if(formateur.cours && formateur.cours.length>0) {
+    <div>
+      <h6>
+        <button class="btn btn-link p-0" (click)="inverse($index, 0)">
+          Cours Infos
+        </button>
+      </h6>
+      @if(showInfo[$index ][0]) {
 
-            <td>{{ formateur.utilisateur?.prenom }}</td>
+      <table class="table table-sm">
+        <th>Titre</th>
+        <th>Date de début</th>
+        <th>titre</th>
+        <th>Matiére</th>
 
-            <td>{{ formateur.utilisateur?.email }}</td>
-          </tr>
-        </table>
-      </div>
-
-      <!-- Cours Infos -->
-      <div>
-        <h6>
-          <a (click)="inverse($index, 0)">Cours Infos</a>
-        </h6>
-        @if(showInfo[$index ][0]) {
-
-        <table class="table table-sm">
-          <th>Titre</th>
-          <th>Date de début</th>
-          <th>titre</th>
-          <th>Matiére</th>
-
-          @for(cours of formateur.cours;track cours.id) {
-          <tr>
-            <td>{{ cours.titre }}</td>
-            <td>{{ cours.dateDebut | date }}</td>
-            <td>{{ cours.matiere?.titre }}</td>
-            <!-- Ajoutez d'autres colonnes selon vos besoins -->
-          </tr>
-          }
-        </table>
+        @for(cours of formateur.cours;track cours.id) {
+        <tr>
+          <td>{{ cours.titre }}</td>
+          <td>{{ cours.dateDebut | date }}</td>
+          <td>{{ cours.matiere?.titre }}</td>
+          <!-- Ajoutez d'autres colonnes selon vos besoins -->
+        </tr>
         }
-      </div>
+      </table>
+      }
+    </div>
+    }
 
-      <!-- Disponibilité Infos -->
-      <div>
-        <h6>
-          <a (click)="inverse($index, 1)">Disponibilité Infos</a>
-        </h6>
-        @if(showInfo[$index ][1]) {
-        <table class="table table-sm">
-          <th>Date de début</th>
-          <th>Date de fin</th>
-          @for(disponibiliteFormateur of formateur.disponibiliteFormateur;track
-          disponibiliteFormateur.id) {
-          <tr>
-            <td>{{ disponibiliteFormateur.dateDebut | date }}</td>
-            <td>{{ disponibiliteFormateur.dateFin | date }}</td>
-          </tr>
-          }
-        </table>
+    <!-- Disponibilité Infos -->
+    <div>
+      <h6>
+        <button class="btn btn-link p-0" (click)="inverse($index, 1)">
+          Disponibilité Infos
+        </button>
+      </h6>
+      @if(showInfo[$index ][1]) {
+      <table class="table table-sm">
+        <th>Date de début</th>
+        <th>Date de fin</th>
+        @for(disponibiliteFormateur of formateur.disponibiliteFormateur;track
+        disponibiliteFormateur.id) {
+        <tr>
+          <td>{{ disponibiliteFormateur.dateDebut | date }}</td>
+          <td>{{ disponibiliteFormateur.dateFin | date }}</td>
+        </tr>
         }
-      </div>
+      </table>
+      }
+    </div>
 
-      <!-- Compétence Infos -->
-      <div>
-        <h6>
-          <a (click)="inverse($index, 2)">Compétence Infos</a>
-        </h6>
-        @if(showInfo[$index ][2]) {
-        <table class="table table-sm">
-          @for(competenceFormateur of formateur.competenceFormateur;track
-          competenceFormateur.id) {
-          <tr>
-            <td>{{ competenceFormateur.id }}</td>
-            <td>{{ competenceFormateur.competence?.nom }}</td>
-          </tr>
-          }
-        </table>
+    <!-- Compétence Infos -->
+    <div>
+      <h6>
+        <button class="btn btn-link p-0" (click)="inverse($index, 2)">
+          Compétence Infos
+        </button>
+      </h6>
+      @if(showInfo[$index ][2]) {
+      <table class="table table-sm">
+        @for(competenceFormateur of formateur.competenceFormateur;track
+        competenceFormateur.id) {
+        <tr>
+          <td>{{ competenceFormateur.id }}</td>
+          <td>{{ competenceFormateur.competence?.nom }}</td>
+        </tr>
         }
-      </div>
+      </table>
+      }
     </div>
   </div>
-  }
 </div>
+}

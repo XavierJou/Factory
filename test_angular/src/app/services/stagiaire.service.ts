@@ -15,6 +15,10 @@ export class StagiaireService {
     return this.httpClient.get<Stagiaire[]>(this.url);
   }
 
+  public getWithDetails(): Observable<Stagiaire[]> {
+    return this.httpClient.get<Stagiaire[]>(this.url + '/details');
+  }
+
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }

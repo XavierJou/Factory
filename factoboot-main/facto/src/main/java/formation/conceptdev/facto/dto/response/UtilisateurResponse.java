@@ -44,7 +44,7 @@ public class UtilisateurResponse {
 		
 		if (besoinStagiaire) {
 			if (utilisateurEntity.getStagiaire() != null) {
-				this.setStagiaire(new StagiaireResponse(utilisateurEntity.getStagiaire(),false));
+				this.setStagiaire(new StagiaireResponse(utilisateurEntity.getStagiaire(),false,false));
 			}
 		}
 	}

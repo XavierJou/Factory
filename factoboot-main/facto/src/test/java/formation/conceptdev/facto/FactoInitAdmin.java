@@ -138,7 +138,7 @@ class FactoinitAdmin {
 		        // ajout données Formations
 		        for (int i = 1; i <= 5; i++) 
 		        {        	
-		        	Formation formation = new Formation("Formation " + i, i*50, "Objectif " + i, "Contenu " + i, LocalDateTime.now().plusMonths(-i*8),  20 + new java.util.Random().nextInt(50));
+		        	Formation formation = new Formation("Formation " + i, i*50, "Objectif " + i, "Contenu " + i, LocalDate.now().plusMonths(-i*8),  20 + new java.util.Random().nextInt(50));
 		        	formations.add(formation);
 		        	formationService.insert(formation);
 		        	 // ajout données Prerequis

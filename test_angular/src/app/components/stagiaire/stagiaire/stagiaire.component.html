@@ -1,29 +1,81 @@
 <div class="container">
   <div class="container-fluid">
-    <a
-      routerLink="/stagiaire/edit"
-      routerLinkActive="active"
-      class="btn btn-link-primary btn-outline-primary btn-sm"
-      >Nouveau stagiaire</a
+    <a routerLink="/utilisateurs" routerLinkActive="active" class="btn btn-link"
+      >Ajouter</a
     >
   </div>
-  <p></p>
-  <div class="container">
-    @for(s of stagiaires;track s.id){
-    <div class="alert alert-dismissible alert-secondary">
-      <p>{{ s.id }} : {{ s.formation?.titre }}</p>
-      <p>
-        <button class="btn btn-outline-danger btn-sm" (click)="delete(s.id!)">
-          Supprimer
-        </button>
-        &nbsp;
-        <a
-          class="btn btn-outline-warning btn-sm"
-          routerLink="/stagiaire/edit/{{ s.id }}"
-          >editer</a
-        >
-      </p>
+
+  @for(stagiaire of stagiaires;track stagiaire.id) {
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <Table class="w-100">
+        <tr>
+          <td>
+            <h5 class="card-title">SATGIAIRE ID: {{ stagiaire.id }}</h5>
+          </td>
+
+          @if(stagiaire.formation) {
+          <td>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="delete(stagiaire.id!)"
+            >
+              Supprimer
+            </button>
+          </td>
+
+          }
+        </tr>
+      </Table>
     </div>
-    }
+    <div class="card-body">
+      <div>Utilisateur Infos</div>
+      <!--  -->
+      <div>
+        <table class="table table-sm">
+          <th>ID</th>
+          <th>Login</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <tr>
+            <td>{{ stagiaire.utilisateur?.id }}</td>
+            <td>{{ stagiaire.utilisateur?.login }}</td>
+
+            <td>{{ stagiaire.utilisateur?.nom }}</td>
+
+            <td>{{ stagiaire.utilisateur?.prenom }}</td>
+
+            <td>{{ stagiaire.utilisateur?.email }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div>Formation Infos</div>
+
+      <div>
+        <table class="table table-sm">
+          <th>Id</th>
+          <th>Titre</th>
+          <th>Durée</th>
+          <th>Objectif</th>
+          <th>Contenu</th>
+          <th>Date de début</th>
+
+          <tr>
+            <td>{{ stagiaire.formation?.id }}</td>
+            <td>{{ stagiaire.formation?.titre }}</td>
+            <td>{{ stagiaire.formation?.duree }}</td>
+            <td>{{ stagiaire.formation?.objectif }}</td>
+            <td>{{ stagiaire.formation?.contenu | date }}</td>
+            <td>{{ stagiaire.formation?.dateDebut | date }}</td>
+
+            <!-- Ajoutez d'autres colonnes selon vos besoins -->
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
+  }
 </div>

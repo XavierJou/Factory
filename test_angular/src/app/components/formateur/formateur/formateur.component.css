@@ -1,0 +1,19 @@
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: 1em;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  text-decoration: underline;
+}
