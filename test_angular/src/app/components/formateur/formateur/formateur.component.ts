@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Formateur } from '../../../models/formateur';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -11,11 +11,13 @@ import { FormateurService } from '../../../services/formateur.service';
   templateUrl: './formateur.component.html',
   styleUrl: './formateur.component.css',
 })
-export class FormateurComponent {
+export class FormateurComponent implements OnInit{
   formateurs: Formateur[] = [];
 
-  constructor(private formateurSrv: FormateurService) {
+  constructor(private formateurSrv: FormateurService) {}
+  ngOnInit(): void {
     this.initFormateur();
+
   }
 
   delete(id: number) {
