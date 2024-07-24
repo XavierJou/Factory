@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,9 +21,13 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import formation.conceptdev.facto.dto.request.CompetenceRequest;
 import formation.conceptdev.facto.dto.request.UtilisateurRequest;
+import formation.conceptdev.facto.dto.response.CompetenceResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
+import formation.conceptdev.facto.dto.response.MatiereResponse;
 import formation.conceptdev.facto.dto.response.UtilisateurResponse;
+import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.entities.Role;
 import formation.conceptdev.facto.entities.Utilisateur;
 import formation.conceptdev.facto.services.UtilisateurService;
@@ -42,6 +49,11 @@ public class UtilisateurRestController {
 		return utilisateurSrv.getAll().stream().map(u -> new UtilisateurResponse(u)).collect(Collectors.toList());
 	}
 
+	 @GetMapping("/{id}")
+	    @JsonView(CustomJsonViews.Common.class)
+	    public UtilisateurResponse getById(@PathVariable Integer id) {
+	        return new UtilisateurResponse(utilisateurSrv.getById(id),false,false);
+	    }
 	
 	@GetMapping("/details")
 	@JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
@@ -71,4 +83,24 @@ public class UtilisateurRestController {
 		utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
 		return new UtilisateurResponse(utilisateurSrv.create(utilisateur),false,false);
 	}
+	
+	 @PutMapping("/{id}")
+	    @ResponseStatus(code = HttpStatus.OK)
+	    @JsonView(CustomJsonViews.Common.class)
+	    public UtilisateurResponse update(@PathVariable Integer id, @Valid @RequestBody UtilisateurRequest utilisateurRequest, BindingResult br) {
+	        if (br.hasErrors()) {
+	            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+	        }
+	        Utilisateur utilisateur = utilisateurSrv.getById(id);
+	        BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role");
+	        utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
+	        return new UtilisateurResponse(utilisateurSrv.update(utilisateur), false, false);
+	    }
+	 
+	 @DeleteMapping("/{id}")
+		@ResponseStatus(code = HttpStatus.OK)
+		public void deleteById(@PathVariable("id") Integer id) {
+		 System.out.println("ici");
+		 utilisateurSrv.deleteById(id);
+		}
 }
