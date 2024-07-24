@@ -40,7 +40,7 @@ public class FormationRestController {
 	@GetMapping("")
 	@JsonView(CustomJsonViews.Common.class)
 	public List<FormationResponse> getAll() {
-		return formationSrv.getAll().stream().map(formation -> new FormationResponse(formation,false)).collect(Collectors.toList());
+		return formationSrv.getAll().stream().map(formation -> new FormationResponse(formation,false, false, false)).collect(Collectors.toList());
 	}
 
 	@PostMapping("")
@@ -52,7 +52,7 @@ public class FormationRestController {
 		}
 		Formation formation = new Formation();
 		BeanUtils.copyProperties(formationRequest, formation);
-		return new FormationResponse(formationSrv.insert(formation),false);
+		return new FormationResponse(formationSrv.insert(formation),false, false, false);
 	}
 	
 	@PutMapping("/{id}")
@@ -71,7 +71,7 @@ public class FormationRestController {
 	@GetMapping("/{id}")
 	@JsonView(CustomJsonViews.Common.class)
 	public FormationResponse getById(@PathVariable Integer id) {
-		return new FormationResponse(formationSrv.getById(id),false);
+		return new FormationResponse(formationSrv.getById(id),false, false, false);
 	}
 
 	@GetMapping("/{id}/stagiaire")
@@ -83,6 +83,12 @@ public class FormationRestController {
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable("id") Integer id) {
 		formationSrv.deleteById(id);
+	}
+	
+	@GetMapping("/{id}/cours")
+	@JsonView(CustomJsonViews.FormationWithCours.class)
+	public FormationResponse getByIdWithCours(@PathVariable Integer id) {
+		return new FormationResponse(formationSrv.getByIdWithCours(id));
 	}
 	
 }

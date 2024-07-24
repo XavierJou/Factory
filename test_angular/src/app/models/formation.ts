@@ -1,4 +1,5 @@
 import { Cours } from './cours';
+import { Formateur } from './formateur';
 import { Prerequis } from './prerequis';
 import { Stagiaire } from './stagiaire';
 

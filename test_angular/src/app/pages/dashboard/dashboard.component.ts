@@ -1,12 +1,7 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  Router,
-  RouterLink,
-  RouterLinkActive,
-  ActivatedRoute,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Formation } from '../../models/formation';
 import { DashboardService } from '../../services/dashboard.service';
@@ -27,11 +22,24 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.formationsObservable = this.dashboardSrv.getAllFormations();
+    this.servedCount = this.getServedCount(this.formation);
   }
 
-  // nbPrerequis = this.formation.prerequis?.map((p) => p.id).length;
+  public servedCount = 0;
 
-  onChangeSelect(optionsValue: any) {}
+  private getServedCount(formation: Formation): number {
+    let count = 0;
+    formation.cours?.forEach((c) => {
+      if (c.formateur !== null) {
+        count++;
+      }
+    });
+    return count;
+  }
+
+  onChangeSelect(optionsValue: any) {
+    this.servedCount = this.getServedCount(optionsValue);
+  }
 
   compareFn(ent1: Formation, ent2: Formation): boolean {
     if (ent1 && ent2) {

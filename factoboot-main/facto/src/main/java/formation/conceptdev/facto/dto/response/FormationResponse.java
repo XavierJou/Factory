@@ -37,19 +37,24 @@ public class FormationResponse {
 	public FormationResponse() {
 	}
 
-	public FormationResponse(Formation formation, boolean bool) {
+	public FormationResponse(Formation formation, boolean besoinStagiaire, boolean besoinCours, boolean besoinPrerequis) {
 		BeanUtils.copyProperties(formation, this, "stagiaires", "cours", "prerequis");
-		if (bool) {
+		if (besoinStagiaire) {
 			if (formation.getStagiaires() != null) {
 				this.setStagiaires(formation.getStagiaires().stream()
 						.map(entity -> new StagiaireResponse(entity, false))
 						.collect(Collectors.toList()));
 			}
+
+		}
+		if (besoinCours) {
 			if (formation.getCours() != null) {
 				this.setCours(formation.getCours().stream()
-						.map(entity -> new CoursResponse(entity, false, false, false, false, false, false,false))
+						.map(entity -> new CoursResponse(entity, false, true, true, false, false, false,false))
 						.collect(Collectors.toList()));
 			}
+		}
+		if(besoinPrerequis) {
 			if (formation.getPrerequis() != null) {
 				this.setPrerequis(formation.getPrerequis().stream()
 						.map(entity -> new PrerequisResponse(entity, false))
@@ -59,7 +64,7 @@ public class FormationResponse {
 	}
 	
 	public FormationResponse(Formation formation) {
-		this(formation, true);
+		this(formation, true, true, true);
 	}
 	
 	

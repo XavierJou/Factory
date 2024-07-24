@@ -33,7 +33,7 @@ public class PrerequisResponse {
 		BeanUtils.copyProperties(prerequisEntity, this, "formation");
 		if (bool) {
 			if (prerequisEntity.getFormation() != null) {
-				this.setFormation(new FormationResponse(prerequisEntity.getFormation(),false));
+				this.setFormation(new FormationResponse(prerequisEntity.getFormation(),false, false, false));
 			}
 		}
 	}

@@ -25,7 +25,7 @@ public class StagiaireResponse {
 		BeanUtils.copyProperties(stagiaireEntity, this, "formation");
 		if (bool) {
 			if (stagiaireEntity.getFormation() != null) {
-				this.setFormation(new FormationResponse(stagiaireEntity.getFormation(), false));
+				this.setFormation(new FormationResponse(stagiaireEntity.getFormation(), false, false, false));
 			}
 		}
 	}

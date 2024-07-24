@@ -62,24 +62,28 @@
 
 <section class="container mt-5">
   <div class="m-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
+    <a
+      routerLink="../formation/{{ formation.id }}/cours"
+      routerLinkActive="active"
+    >
+      <div class="col">
+        <div class="card-group">
+          <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+            <div class="text-center card-body">
+              <div class="mb-3">
+                <span class="material-symbols-rounded fs-1"> your_trips </span>
+              </div>
+              <h4 class="card-title">Cours</h4>
+              <p class="mt-5 card-text">
+                <span class="badge bg-primary rounded-pill">{{
+                  formation.cours?.length
+                }}</span>
+              </p>
             </div>
-            <h4 class="card-title">Cours</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">{{
-                formation.cours?.length
-              }}</span>
-            </p>
           </div>
         </div>
       </div>
-    </div>
-
+    </a>
     <div class="col">
       <div class="card-group">
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
@@ -125,7 +129,9 @@
             </div>
             <h4 class="card-title">Formateurs</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">3</span>
+              <span class="badge bg-primary rounded-pill">
+                {{ servedCount }}
+              </span>
             </p>
           </div>
         </div>
@@ -143,9 +149,6 @@
             <h4 class="card-title">Stagiaires</h4>
             <p class="mt-5 card-text">
               <span class="badge bg-primary rounded-pill">
-                <!-- {{
-                formation.cours?.map((c) => c.stagiaires.length).reduce((a, b) => a + b, 0)
-              }} -->
                 {{ formation.stagiaires?.length }}
               </span>
             </p>

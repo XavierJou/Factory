@@ -4,7 +4,6 @@ import { Formation } from './formation';
 import { Matiere } from './matiere';
 import { Salle } from './salle';
 import { Ordinateur } from './ordinateur';
-import { Stagiaire } from './stagiaire';
 
 export class Cours {
   constructor(
