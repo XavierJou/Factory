@@ -1,57 +1,66 @@
-<p>edit-formation works!</p>
-<div>
-  <div class="form-group">
-    <label for="titre">Titre</label>
-    <input
-      type="text"
-      class="form-control"
-      id="titre"
-      name="titre"
-      [(ngModel)]="formation.titre"
-    />
+<div class="gap-5 mt-5 d-flex flex-column">
+  <h1 class="text-center">Edition d'une formation</h1>
+  <div class="gap-3 m-auto w-100 d-flex flex-column" style="max-width: 650px">
+    <div class="form-group">
+      <label for="titre">Titre</label>
+      <input
+        type="text"
+        class="form-control"
+        id="titre"
+        name="titre"
+        [(ngModel)]="formation.titre"
+      />
+    </div>
+    <div class="form-group">
+      <label for="duree">Durée</label>
+      <input
+        type="number"
+        class="form-control"
+        id="duree"
+        name="duree"
+        [(ngModel)]="formation.duree"
+      />
+    </div>
+    <div class="form-group">
+      <label for="objectif">Objectif</label>
+      <input
+        type="text"
+        class="form-control"
+        id="objectif"
+        name="objectif"
+        [(ngModel)]="formation.objectif"
+      />
+    </div>
+    <div class="form-group">
+      <label for="contenu">Contenu</label>
+      <input
+        type="text"
+        class="form-control"
+        id="contenu"
+        name="contenu"
+        [(ngModel)]="formation.contenu"
+      />
+    </div>
+    <div class="form-group">
+      <label for="dateDebut">Début</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dateDebut"
+        name="dateDebut"
+        [(ngModel)]="formation.dateDebut"
+      />
+    </div>
+    <div class="gap-3 mt-4 d-flex justify-content-end">
+      <a
+        routerLink="/formations"
+        routerLinkActive="active"
+        class="btn btn-outline-light"
+        >Retour</a
+      >
+      <button (click)="save()" class="btn btn-outline-primary">
+        Enregistrer
+      </button>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="duree">Durée</label>
-    <input
-      type="number"
-      class="form-control"
-      id="duree"
-      name="duree"
-      [(ngModel)]="formation.duree"
-    />
-  </div>
-  <div class="form-group">
-    <label for="objectif">Objectif</label>
-    <input
-      type="text"
-      class="form-control"
-      id="objectif"
-      name="objectif"
-      [(ngModel)]="formation.objectif"
-    />
-  </div>
-  <div class="form-group">
-    <label for="contenu">Contenu</label>
-    <input
-      type="text"
-      class="form-control"
-      id="contenu"
-      name="contenu"
-      [(ngModel)]="formation.contenu"
-    />
-  </div>
-  <div class="form-group">
-    <label for="dateDebut">Début</label>
-    <input
-      type="datetime-local"
-      class="form-control"
-      id="dateDebut"
-      name="dateDebut"
-      [(ngModel)]="formation.dateDebut"
-    />
-  </div>
-  <button (click)="save()">Enregistrer</button>
-  <a routerLink="/formations" routerLinkActive="active" class="btn btn-link"
-    >Retour</a
-  >
 </div>

@@ -7,7 +7,7 @@
         >
         <h3>{{ formation.titre }}</h3>
       </div>
-      <div class="col-md-9">
+      <div class="col">
         <div class="form-group">
           <select
             id="formation"
@@ -24,6 +24,15 @@
           </select>
         </div>
       </div>
+      <div class="col">
+        <a
+          routerLink="../formations/edit"
+          routerLinkActive="active"
+          class="btn btn-primary"
+          >Ajouter
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
