@@ -24,7 +24,9 @@ export class FormateurService {
   }
 
   public delete(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.url}/${id}`);
+    return this.httpClient.delete<void>(
+      `http://localhost:8080/factory/api/formateur/${id}`
+    );
   }
 
   public nullIdUtilisateur(id: number): Observable<void> {

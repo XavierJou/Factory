@@ -29,6 +29,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PlanificationComponent } from './components/planification/planification.component';
 import { EditUtilisateurComponent } from './components/utlisateur/edit-utilisateur/edit-utilisateur.component';
 import { CoursFormationComponent } from './components/cours/cours-formation/cours-formation.component';
+import { PrerequisFormationComponent } from './components/prerequis/prerequis-formation/prerequis-formation.component';
 
 export const routes: Routes = [
   {
@@ -120,7 +121,11 @@ export const routes: Routes = [
         component: CoursFormationComponent,
       },
       {
-        path: 'matiere',
+        path: 'formation/:id/prerequis',
+        component: PrerequisFormationComponent,
+      },
+      {
+        path: 'matieres',
         component: MatiereComponent,
       },
       {

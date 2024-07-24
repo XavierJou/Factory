@@ -7,7 +7,7 @@
         >
         <h3>{{ formation.titre }}</h3>
       </div>
-      <div class="col-md-9">
+      <div class="col">
         <div class="form-group">
           <select
             id="formation"
@@ -24,6 +24,15 @@
           </select>
         </div>
       </div>
+      <div class="col">
+        <a
+          routerLink="../formations/edit"
+          routerLinkActive="active"
+          class="btn btn-primary"
+          >Ajouter
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -99,6 +108,10 @@
         </div>
       </div>
     </div>
+    <a
+      routerLink="../formation/{{ formation.id }}/prerequis"
+      routerLinkActive="active"
+    >
     <div class="col">
       <div class="card-group">
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
@@ -118,6 +131,7 @@
         </div>
       </div>
     </div>
+  </a>
     <div class="col">
       <div class="card-group">
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">

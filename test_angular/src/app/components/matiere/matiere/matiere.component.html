@@ -1,39 +1,40 @@
-<<<<<<< HEAD
 <div class="container">
-  <div class="container-fluid">
+  <h1>Formations</h1>
+  <div class="gap-5 m-auto d-flex flex-column">
+  <div class="text-end">
     <a
       routerLink="/matiere/edit"
       routerLinkActive="active"
       class="btn btn-link-primary btn-outline-primary btn-sm"
-      >Nouvelle matiere</a
+      >+ matière</a
     >
   </div>
-  <p></p>
-  <div class="container">
+  <div class="gap-3 d-flex flex-column">
     @for(m of matieres;track m.id){
-    <div class="alert alert-dismissible alert-secondary">
-      <p>{{ m.id }} : {{ m.titre }}</p>
-      <p>
-        <button class="btn btn-outline-danger btn-sm" (click)="delete(m.id!)">
-          Supprimer
-        </button>
-      </p>
+      <div class="alert alert-dismissible alert-secondary">
+        <p>{{ m.id }} : {{ m.titre }}</p>
+        <div>
+          <div class="d-inline">
+            <button
+              class="p-2 btn btn-outline-danger btn-sm d-inline"
+              (click)="delete(m.id!)"
+            >
+              Supprimer
+            </button>
+          </div>
+          <div class="p-2 d-inline">
+            <button
+              class="p-2 btn btn-outline-warning btn-sm d-inline"
+              routerLink="/matiere/edit/{{ m.id }}"
+              routerLinkActive="active"
+            >
+              éditer
+            </button>
+          </div>
+        </div>
+      </div>
+      }
     </div>
-    }
+    </div>
   </div>
-</div>
-=======
-<a routerLink="/matiere/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouveau matiere</a
->
 
-@for(m of matieres;track m.id){
-<p>
-  {{ m.id }} : {{ m.titre }}
-  <button routerLink="/matiere/edit/{{ m.id }}" routerLinkActive="active">
-    éditer
-  </button>
-</p>
-<p><button (click)="delete(m.id!)">Supprimer</button></p>
-}
->>>>>>> 89b6baa0c52f4a5a4d16354b752e517cc5d368eb

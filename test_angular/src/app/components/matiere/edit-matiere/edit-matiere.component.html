@@ -1,49 +1,59 @@
-<h1>Édition matiere</h1>
-<div>
-  <div class="form-group">
-    <label for="titre">Titre</label>
-    <input
-      type="text"
-      class="form-control"
-      id="titre"
-      name="titre"
-      [(ngModel)]="matiere.titre"
-    />
+<div class="container">
+  <div class="gap-5 mt-5 d-flex flex-column">
+    <h1 class="text-center">Édition d'une matiere</h1>
+    <div class="gap-3 m-auto w-100 d-flex flex-column" style="max-width: 650px">
+      <div>
+        <div class="form-group">
+          <label for="titre">Titre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titre"
+            name="titre"
+            [(ngModel)]="matiere.titre"
+          />
+        </div>
+        <div class="form-group">
+          <label for="duree">Durée</label>
+          <input
+            type="number"
+            class="form-control"
+            id="duree"
+            name="duree"
+            [(ngModel)]="matiere.duree"
+          />
+        </div>
+        <div class="form-group">
+          <label for="objectif">Objectif</label>
+          <input
+            type="text"
+            class="form-control"
+            id="objectif"
+            name="objectif"
+            [(ngModel)]="matiere.objectif"
+          />
+        </div>
+        <div class="form-group">
+          <label for="contenu">Contenu</label>
+          <input
+            type="text"
+            class="form-control"
+            id="contenu"
+            name="contenu"
+            [(ngModel)]="matiere.contenu"
+          />
+        </div>
+        <div class="gap-3 mt-4 d-flex justify-content-end">
+        <a
+          routerLink="/matieres"
+          routerLinkActive="active"
+          class="btn btn-outline-light"
+          >Retour</a
+        >
+        <button (click)="save()" class="btn btn-outline-primary">
+          Enregistrer
+        </button>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="duree">Durée</label>
-    <input
-      type="number"
-      class="form-control"
-      id="duree"
-      name="duree"
-      [(ngModel)]="matiere.duree"
-    />
-  </div>
-  <div class="form-group">
-    <label for="objectif">Objectif</label>
-    <input
-      type="text"
-      class="form-control"
-      id="objectif"
-      name="objectif"
-      [(ngModel)]="matiere.objectif"
-    />
-  </div>
-  <div class="form-group">
-    <label for="contenu">Contenu</label>
-    <input
-      type="text"
-      class="form-control"
-      id="contenu"
-      name="contenu"
-      [(ngModel)]="matiere.contenu"
-    />
-  </div>
-  <button class="btn btn-outline-success btn-sm" (click)="save()">
-    Enregistrer
-  </button>
-  <a routerLink="/matiere" routerLinkActive="active" class="btn btn-link"
-    >Retour</a
-  >
 </div>

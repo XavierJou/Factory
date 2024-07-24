@@ -4,7 +4,25 @@
 
   <div class="card mb-3">
     <div class="card-header">
-      <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
+      <Table>
+        <tr>
+          <td>
+            <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
+          </td>
+
+          @if(formateur.cours && formateur.cours.length>0) {
+          <td>
+            <button
+              class="btn btn-outline-danger btn-sm"
+              (click)="delete(formateur.id!)"
+            >
+              Supprimer
+            </button>
+          </td>
+
+          }
+        </tr>
+      </Table>
     </div>
     <div class="card-body">
       <!-- Utilisateur Infos -->
@@ -92,9 +110,5 @@
       </div>
     </div>
   </div>
-
-  <button class="btn btn-outline-danger btn-sm" (click)="delete(formateur.id!)">
-    Supprimer
-  </button>
   }
 </div>
