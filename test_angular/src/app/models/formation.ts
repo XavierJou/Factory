@@ -1,4 +1,6 @@
+import { Cours } from './cours';
 import { Prerequis } from './prerequis';
+import { Stagiaire } from './stagiaire';
 
 export class Formation {
   constructor(
@@ -9,6 +11,8 @@ export class Formation {
     public contenu?: string,
     public dateDebut?: Date,
     public capacite?: number,
-    public prerequis?: Prerequis[]
+    public prerequis?: Prerequis[],
+    public cours?: Cours[],
+    public stagiaires?: Stagiaire[]
   ) {}
 }

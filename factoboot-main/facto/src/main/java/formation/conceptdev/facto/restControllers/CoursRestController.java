@@ -46,20 +46,6 @@ public class CoursRestController {
 
 	@Autowired
 	private CoursService coursSrv;
-
-    @GetMapping("")
-    @JsonView(CustomJsonViews.Common.class)
-    public List<CoursResponse> getAll() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false,false)).collect(Collectors.toList());
-    }
-    
-    
-    @GetMapping("/formateur")
-    @JsonView(CustomJsonViews.CoursResponseWithFormateur.class)
-    public List<CoursResponse> getAllCoursWithFormateurAndUtilisateur() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, true, false, false, false, false,true)).collect(Collectors.toList());
-    }
-    
     
     @GetMapping("/countFormateur/{idFormateur}")
     public Integer getCountCoursByFormateurId(@PathVariable Integer idFormateur) {

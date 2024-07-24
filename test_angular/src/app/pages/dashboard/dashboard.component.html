@@ -69,14 +69,17 @@
             <div class="mb-3">
               <span class="material-symbols-rounded fs-1"> your_trips </span>
             </div>
-            <h4 class="card-title">Compétences</h4>
+            <h4 class="card-title">Cours</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">6</span>
+              <span class="badge bg-primary rounded-pill">{{
+                formation.cours?.length
+              }}</span>
             </p>
           </div>
         </div>
       </div>
     </div>
+
     <div class="col">
       <div class="card-group">
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
@@ -86,7 +89,7 @@
             </div>
             <h4 class="card-title">Matières</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">9</span>
+              <span class="badge bg-primary rounded-pill">6</span>
             </p>
           </div>
         </div>
@@ -139,7 +142,12 @@
             </div>
             <h4 class="card-title">Stagiaires</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">18</span>
+              <span class="badge bg-primary rounded-pill">
+                <!-- {{
+                formation.cours?.map((c) => c.stagiaires.length).reduce((a, b) => a + b, 0)
+              }} -->
+                {{ formation.stagiaires?.length }}
+              </span>
             </p>
           </div>
         </div>
@@ -152,12 +160,22 @@
             <div class="mb-3">
               <span class="material-symbols-rounded fs-1"> share_reviews </span>
             </div>
-            <h4 class="card-title">Messages/Demandes</h4>
+            <h4 class="card-title">Messages</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">1</span>
+              <span class="badge bg-primary rounded-pill">6</span>
             </p>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+} @else{
+<section>
+  <div class="container">
+    <div class="gap-3 d-flex">
+      <div class="col-md-9" style="min-height: 120px">
+        <h2>Veuillez sélectionner une formation</h2>
       </div>
     </div>
   </div>
