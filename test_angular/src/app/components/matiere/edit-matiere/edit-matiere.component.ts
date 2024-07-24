@@ -39,11 +39,11 @@ export class EditMatiereComponent implements OnInit {
   save() {
     if (this.matiere.id) {
       this.matiereSrv.update(this.matiere).subscribe((matiere) => {
-        this.router.navigateByUrl('/matiere');
+        this.router.navigateByUrl('/matieres');
       });
     } else {
       this.matiereSrv.create(this.matiere).subscribe((matiere) => {
-        this.router.navigateByUrl('/matiere');
+        this.router.navigateByUrl('/matieres');
       });
     }
   }

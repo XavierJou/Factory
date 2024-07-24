@@ -17,7 +17,6 @@ export class FormateurComponent implements OnInit{
   constructor(private formateurSrv: FormateurService) {}
   ngOnInit(): void {
     this.initFormateur();
-
   }
 
   delete(id: number) {
