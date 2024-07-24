@@ -9,6 +9,6 @@ public interface IDAOOrdinateur extends JpaRepository<Ordinateur, Integer> {
 
 	public List<Ordinateur> findAllByNom(String nom);
 
-	public List<Ordinateur> findByNomContaining(String recherche);
+	public List<Ordinateur> findByNomContaining(String nom);
 
 }

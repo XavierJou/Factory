@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.repositories.IDAOOrdinateur;
 
@@ -27,6 +28,10 @@ public class OrdinateurService {
 
 	public List<Ordinateur> getAllByNom(String nom) {
 		return daoOrdinateur.findAllByNom(nom);
+	}
+	
+	public List<Ordinateur> searchByNom(String nom) {
+	    return daoOrdinateur.findByNomContaining(nom);
 	}
 
 	public Ordinateur insert(Ordinateur ordinateur) {

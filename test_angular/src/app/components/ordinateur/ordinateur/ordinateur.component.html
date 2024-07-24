@@ -8,6 +8,18 @@
         >Nouvel ordinateur</a
       >
     </div>
+    <div class="search-bar">
+      <div class="input-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Rechercher une compétence"
+          [(ngModel)]="searchTerm"
+          (input)="searchOrdinateurs()"
+        />
+        <!-- Boutton pour effacer la recherche -->
+      </div>
+    </div>
     <p></p>
     <div class="container">
       @for(o of ordinateurs;track o.id){

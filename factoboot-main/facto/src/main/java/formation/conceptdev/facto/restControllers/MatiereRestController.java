@@ -51,34 +51,6 @@ public class MatiereRestController {
         return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,true,true)).collect(Collectors.toList());
     }
 
-<<<<<<< HEAD
-=======
-    @PostMapping("")
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @JsonView(CustomJsonViews.Common.class)
-    public MatiereResponse create(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br) {
-        if (br.hasErrors()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-        Matiere matiere = new Matiere();
-        BeanUtils.copyProperties(matiereRequest, matiere);
-        return new MatiereResponse(matiereService.insert(matiere),false,false);
-    }
-    
-    @PutMapping("/{id}")
-	@JsonView(CustomJsonViews.Common.class)
-	public MatiereResponse update(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br,
-			@PathVariable Integer id) {
-		if (br.hasErrors()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-		}
-		Matiere matiere = new Matiere();
-		BeanUtils.copyProperties(matiereRequest, matiere);
-		matiere.setId(id);
-		return new MatiereResponse(matiereService.update(matiere));
-	}
->>>>>>> 89b6baa0c52f4a5a4d16354b752e517cc5d368eb
-
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
     public MatiereResponse getById(@PathVariable Integer id) {

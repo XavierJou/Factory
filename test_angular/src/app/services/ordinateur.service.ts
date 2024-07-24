@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Ordinateur } from '../models/ordinateur';
@@ -32,5 +32,10 @@ export class OrdinateurService {
       `${this.url}/${ordinateur.id}`,
       ordinateur
     );
+  }
+
+  public searchByNom(search: string): Observable<Ordinateur[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Ordinateur[]>(this.url, { params });
   }
 }
