@@ -1,3 +1,5 @@
+import { Prerequis } from './prerequis';
+
 export class Formation {
   constructor(
     public id?: number,
@@ -6,6 +8,7 @@ export class Formation {
     public objectif?: string,
     public contenu?: string,
     public dateDebut?: Date,
-    public capacite?: number
+    public capacite?: number,
+    public prerequis?: Prerequis[]
   ) {}
 }
