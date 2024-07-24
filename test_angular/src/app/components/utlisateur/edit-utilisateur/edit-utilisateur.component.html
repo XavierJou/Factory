@@ -9,33 +9,41 @@
 }
 <div>
   <div class="form-group">
-    <label for="id">Id:</label>
-    {{ utilisateur.id }}
+    <label class="input-large" for="id">Id:</label>
+    <div class="bordered-box">{{ utilisateur.id }}</div>
   </div>
   <div class="form-group">
-    <label for="login">Login:</label>
-    <input id="login" [(ngModel)]="utilisateur.login" class="form-control" />
+    <label class="input-large" for="login">Login:</label>
+    <div class="bordered-box">{{ utilisateur.login }}</div>
   </div>
   <div class="form-group">
-    <label for="nom">Nom:</label>
-    <input id="nom" [(ngModel)]="utilisateur.nom" class="form-control" />
+    <label class="input-large" for="nom">Nom:</label>
+    <input
+      id="nom"
+      [(ngModel)]="utilisateur.nom"
+      class="form-control input-large"
+    />
   </div>
   <div class="form-group">
-    <label for="prenom">Prenom:</label>
-    <input id="prenom" [(ngModel)]="utilisateur.prenom" class="form-control" />
+    <label class="input-large" for="prenom">Prenom:</label>
+    <input
+      id="prenom"
+      [(ngModel)]="utilisateur.prenom"
+      class="form-control input-large"
+    />
   </div>
 
   <div class="form-group">
-    <label for="email">email:</label>
+    <label class="input-large" for="email">email:</label>
     <input
       id="email"
       type="email"
       [(ngModel)]="utilisateur.email"
-      class="form-control"
+      class="form-control input-large"
     />
   </div>
   <div class="form-group">
-    <label for="role">filiere:</label>
+    <label class="input-large" for="role">Role :</label>
     <select
       id="role"
       [(ngModel)]="utilisateur.role"
@@ -58,11 +66,13 @@
   </div>
   }
 
-  <button class="btn btn-outline-info" (click)="save()">enregistrer</button>
-  <a
-    routerLink="/utilisateurs"
-    routerLinkActive="active"
-    class="btn btn-outline-warning"
-    >annuler</a
-  >
+  <div class="form-actions">
+    <button class="btn btn-outline-info" (click)="save()">enregistrer</button>
+    <a
+      routerLink="/utilisateurs"
+      routerLinkActive="active"
+      class="btn btn-outline-warning"
+      >annuler</a
+    >
+  </div>
 </div>

@@ -1,7 +1,24 @@
 .table th,
 .table td {
   vertical-align: middle;
+  text-align: center;
 }
 .table th select {
   width: 100%;
+}
+
+.sort-button {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.table th {
+  font-size: 1.1rem;
+}
+
+.table td {
+  font-size: 1.2rem;
 }

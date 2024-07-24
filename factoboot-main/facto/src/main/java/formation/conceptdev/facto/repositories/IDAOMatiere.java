@@ -12,6 +12,8 @@ import formation.conceptdev.facto.entities.Matiere;
 public interface IDAOMatiere extends JpaRepository<Matiere, Integer> {
 
 	public List<Matiere> findAllByTitre(String titre);
+	
+	public List<Matiere> findAllByTitreIgnoreCase(String titre);
 
 	public List<Matiere> findByTitreContaining(String recherche);
 

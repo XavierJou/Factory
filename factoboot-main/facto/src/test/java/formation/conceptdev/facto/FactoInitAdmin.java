@@ -106,21 +106,14 @@ class FactoinitAdmin {
 
 				List<Competence> competences= new ArrayList<Competence>();		
 				// ajout données Competences
-		        for (int i = 1; i <= 100; i++) 
+		        for (int i = 1; i <= 20; i++) 
 		        {
 		            Competence competence = new Competence("Competence " + i);
 		            competences.add(competence);
 		            competenceService.insert(competence);
 		        }
 
-		        List<Formateur> formateurs= new ArrayList<Formateur>();
-		        // ajout données Formateurs
-		        for (int i = 1; i <= 20; i++) 
-		        {
-		            Formateur formateur = new Formateur();
-		            formateurs.add(formateur);
-		            formateurService.insert(formateur);
-		        }
+		        
 		        
 		        List<Videoprojecteur> videoprojecteurs= new ArrayList<Videoprojecteur>();
 		        // ajout données Videoprojecteurs
@@ -136,7 +129,7 @@ class FactoinitAdmin {
 		        // ajout données Matieres
 		        for (int i = 1; i <= 10; i++) 
 		        {
-		            Matiere matiere = new Matiere("Titre " + i,i*50, "Objectif " + i, "Contenu " + i);
+		            Matiere matiere = new Matiere("Titre " + i,1+new java.util.Random().nextInt(3), "Objectif " + i, "Contenu " + i);
 		            matieres.add(matiere);
 		            matiereService.insert(matiere);
 		        }
@@ -175,58 +168,15 @@ class FactoinitAdmin {
 		            salleService.insert(salle);
 		        }
 		        
-		        // ajout données Cours
-		        for (int i = 1; i <= 10; i++) {
-		        	
-		        	Collections.shuffle(formations);        	
-		            Formation formation = formations.get(0);
-		             
-		            Collections.shuffle(formateurs);  
-		            Formateur formateur = formateurs.get(0);
-		            
-		            Collections.shuffle(matieres);
-		            Matiere matiere = matieres.get(0);
-		            
-		            Collections.shuffle(videoprojecteurs);
-		            Videoprojecteur videoprojecteur = videoprojecteurs.get(0);
-		            
-		            Collections.shuffle(salles);
-		            Salle salle = salles.get(0);
-		            
-		            
-		            Cours cours = new Cours(LocalDate.now(), "titre" +i,true, true, true,true, matiere, formateur,formation,null,videoprojecteur,salle);
-		            coursService.insert(cours);
-		        }
+		       
 
 		        
 
-		        // ajout données CoursOrdinateurs
-		        for (int i = 1; i <= 10; i++) {
-		            Cours cours = coursService.getById(i);
-		            Ordinateur ordinateur = ordinateurService.getById(i);
-		            CoursOrdinateurs coursOrdinateurs = new CoursOrdinateurs();
-		            coursOrdinateurs.setOrdinateur(ordinateur);
-		            coursOrdinateurs.setCours(cours);
-		            coursOrdinateursService.insert(coursOrdinateurs);
-		        }
+		
 		        
 		        
 
-		        // ajout données DisponibiliteFormateurs
-		        for (int i = 1; i <= 10; i++) {
-		            Formateur formateur = formateurService.getById(i);
-		            int debut=0;
-		            int fin=0;
-		            for (int j=1;j<=10;j++)
-		            {
-		            	debut =  new java.util.Random().nextInt(8);
-		            	fin = debut+2+new java.util.Random().nextInt(8);
-		            	DisponibiliteFormateur disponibiliteFormateur = new DisponibiliteFormateur(formateur, LocalDate.now().plusWeeks(debut), LocalDate.now().plusWeeks(fin));
-		                disponibiliteFormateurService.insert(disponibiliteFormateur);
-		                debut=fin;
-		            }
-		            
-		        }
+		       
 
 		        
 		       
@@ -239,8 +189,12 @@ class FactoinitAdmin {
 		        	Collections.shuffle(formations);
 		            Stagiaire stagiaire = new Stagiaire(formations.get(0));            
 		            stagiaireService.insert(stagiaire);
+		            
 		            Utilisateur utilisateur = new Utilisateur("user"+i, "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",stagiaire,Role.ROLE_STAGIAIRE);
 		            utilisateurService.create(utilisateur);
+		            
+		            stagiaire.setUtilisateur(utilisateur);
+		            stagiaireService.update(stagiaire);
 		        }
 		        
 		       
@@ -266,15 +220,24 @@ class FactoinitAdmin {
 		     
 		  
 		        
+		     
 		        	
 		            
 		        
-		        
+		        List<Formateur> formateurs= new ArrayList<Formateur>();
 		        // ajout données Utilisateurs
 		        for (int i = 116; i <= 126; i++) {
-		        	Formateur formateur = formateurService.getById(i-115);    
+		        	
+		        	Formateur formateur = new Formateur();
+		            formateurs.add(formateur);
+		            formateurService.insert(formateur);
+		            
+		        	
 		            Utilisateur utilisateur = new Utilisateur("user"+i, "user", "nom" + i, "prenom" + i, "email" + i+"@mail"+i+".com",formateur,Role.ROLE_FORMATEUR);
 		            utilisateurService.create(utilisateur);
+		            
+		            formateur.setUtilisateur(utilisateur);
+		            formateurService.update(formateur);
 		            
 		            Collections.shuffle(competences);
 			    	
@@ -284,9 +247,40 @@ class FactoinitAdmin {
 		                competenceFormateurService.insert(competenceFormateur);
 		        	}  
 		        }
+		        
+		        // ajout données Cours
+		        for (int i = 1; i <= 10; i++) {
+		        	
+		        	Collections.shuffle(formations);        	
+		            Formation formation = formations.get(0);
+		             
+		            Collections.shuffle(formateurs);  
+		            Formateur formateur = formateurs.get(0);
+		            
+		            Collections.shuffle(matieres);
+		            Matiere matiere = matieres.get(0);
+		            
+		            Collections.shuffle(videoprojecteurs);
+		            Videoprojecteur videoprojecteur = videoprojecteurs.get(0);
+		            
+		            Collections.shuffle(salles);
+		            Salle salle = salles.get(0);
+		            
+		            
+		            Cours cours = new Cours(LocalDate.now(), "titre" +i,true, true, true,true, matiere, formateur,formation,null,videoprojecteur,salle);
+		            coursService.insert(cours);
+		        }
 
 		       
-
+		        // ajout données CoursOrdinateurs
+		        for (int i = 1; i <= 10; i++) {
+		            Cours cours = coursService.getById(i);
+		            Ordinateur ordinateur = ordinateurService.getById(i);
+		            CoursOrdinateurs coursOrdinateurs = new CoursOrdinateurs();
+		            coursOrdinateurs.setOrdinateur(ordinateur);
+		            coursOrdinateurs.setCours(cours);
+		            coursOrdinateursService.insert(coursOrdinateurs);
+		        }
 		       
 
 		        // ajout données CompetenceMatieres
@@ -301,6 +295,22 @@ class FactoinitAdmin {
 		            	CompetenceMatiere competenceMatiere = new CompetenceMatiere(competences.get(j), matiere);
 		        		competenceMatiererService.insert(competenceMatiere);
 		        	}  
+		        }
+		        
+		        // ajout données DisponibiliteFormateurs
+		        for (Formateur formateur : formateurs) {
+		           // Formateur formateur = formateurService.getById(i);
+		            int debut=0;
+		            int fin=0;
+		            for (int j=1;j<=10;j++)
+		            {
+		            	debut =  new java.util.Random().nextInt(8);
+		            	fin = debut+2+new java.util.Random().nextInt(8);
+		            	DisponibiliteFormateur disponibiliteFormateur = new DisponibiliteFormateur(formateur, LocalDate.now().plusWeeks(debut), LocalDate.now().plusWeeks(fin));
+		                disponibiliteFormateurService.insert(disponibiliteFormateur);
+		                debut=fin;
+		            }
+		            
 		        }
 		        
 		        

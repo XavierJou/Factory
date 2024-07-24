@@ -57,6 +57,12 @@ public class FormateurRestController {
         return formateurService.getAll().stream().map(formateur -> new FormateurResponse(formateur,false,false,false,true)).collect(Collectors.toList());
     }
     
+    @GetMapping("/details")
+    @JsonView(CustomJsonViews.FormateurWithDetails.class)
+    public List<FormateurResponse> getWithDetails() {
+        return formateurService.getAll().stream().map(formateur -> new FormateurResponse(formateur,true,true,true,true)).collect(Collectors.toList());
+    }
+    
     
 
     @PostMapping("")

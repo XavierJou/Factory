@@ -1,23 +1,100 @@
 <div class="container">
-  <div class="container-fluid">
-    <a
-      routerLink="/formateur/edit"
-      routerLinkActive="active"
-      class="btn btn-link-primary btn-outline-primary btn-sm"
-      >Nouveau formateur</a
-    >
-  </div>
-  <p></p>
-  <div class="container">
-    @for(f of formateurs;track f.id){
-    <div class="alert alert-dismissible alert-secondary">
-      <p>{{ f.id }}</p>
-      <p>
-        <button class="btn btn-outline-danger btn-sm" (click)="delete(f.id!)">
-          Supprimer
-        </button>
-      </p>
+  <h2>Liste des Formateurs</h2>
+  @for(formateur of formateurs;track formateur.id) {
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
     </div>
-    }
+    <div class="card-body">
+      <!-- Utilisateur Infos -->
+      <div>
+        <table class="table table-sm">
+          <th>ID</th>
+          <th>Login</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Email</th>
+          <tr>
+            <td>{{ formateur.utilisateur?.id }}</td>
+            <td>{{ formateur.utilisateur?.login }}</td>
+
+            <td>{{ formateur.utilisateur?.nom }}</td>
+
+            <td>{{ formateur.utilisateur?.prenom }}</td>
+
+            <td>{{ formateur.utilisateur?.email }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Cours Infos -->
+      <div>
+        <h6>
+          <a (click)="inverse($index, 0)">Cours Infos</a>
+        </h6>
+        @if(showInfo[$index ][0]) {
+
+        <table class="table table-sm">
+          <th>Titre</th>
+          <th>Date de début</th>
+          <th>titre</th>
+          <th>Matiére</th>
+
+          @for(cours of formateur.cours;track cours.id) {
+          <tr>
+            <td>{{ cours.titre }}</td>
+            <td>{{ cours.dateDebut | date }}</td>
+            <td>{{ cours.matiere?.titre }}</td>
+            <!-- Ajoutez d'autres colonnes selon vos besoins -->
+          </tr>
+          }
+        </table>
+        }
+      </div>
+
+      <!-- Disponibilité Infos -->
+      <div>
+        <h6>
+          <a (click)="inverse($index, 1)">Disponibilité Infos</a>
+        </h6>
+        @if(showInfo[$index ][1]) {
+        <table class="table table-sm">
+          <th>Date de début</th>
+          <th>Date de fin</th>
+          @for(disponibiliteFormateur of formateur.disponibiliteFormateur;track
+          disponibiliteFormateur.id) {
+          <tr>
+            <td>{{ disponibiliteFormateur.dateDebut | date }}</td>
+            <td>{{ disponibiliteFormateur.dateFin | date }}</td>
+          </tr>
+          }
+        </table>
+        }
+      </div>
+
+      <!-- Compétence Infos -->
+      <div>
+        <h6>
+          <a (click)="inverse($index, 2)">Compétence Infos</a>
+        </h6>
+        @if(showInfo[$index ][2]) {
+        <table class="table table-sm">
+          @for(competenceFormateur of formateur.competenceFormateur;track
+          competenceFormateur.id) {
+          <tr>
+            <td>{{ competenceFormateur.id }}</td>
+            <td>{{ competenceFormateur.competence?.nom }}</td>
+          </tr>
+          }
+        </table>
+        }
+      </div>
+    </div>
   </div>
+
+  <button class="btn btn-outline-danger btn-sm" (click)="delete(formateur.id!)">
+    Supprimer
+  </button>
+  }
 </div>

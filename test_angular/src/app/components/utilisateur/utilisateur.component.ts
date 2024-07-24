@@ -131,4 +131,50 @@ export class UtilisateurComponent {
       );
     }
   }
+
+  sortBy(column: string, ascending: boolean) {
+    if (column === 'login') {
+      this.sortByLogin(ascending);
+    } else if (column === 'nom') {
+      this.sortByNom(ascending);
+    } else if (column === 'prenom') {
+      this.sortByPrenom(ascending);
+    }
+  }
+
+  private sortByLogin(ascending: boolean) {
+    this.filteredUtilisateurs.sort((a, b) => {
+      if (a.login! < b.login!) {
+        return ascending ? -1 : 1;
+      } else if (a.login! > b.login!) {
+        return ascending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  private sortByNom(ascending: boolean) {
+    this.filteredUtilisateurs.sort((a, b) => {
+      if (a.nom! < b.nom!) {
+        return ascending ? -1 : 1;
+      } else if (a.nom! > b.nom!) {
+        return ascending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  private sortByPrenom(ascending: boolean) {
+    this.filteredUtilisateurs.sort((a, b) => {
+      if (a.prenom! < b.prenom!) {
+        return ascending ? -1 : 1;
+      } else if (a.prenom! > b.prenom!) {
+        return ascending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
 }

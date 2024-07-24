@@ -19,10 +19,10 @@ public class FormateurResponse {
     private List<CoursResponse> cours;
     
     @JsonView(CustomJsonViews.FormateurResponseWithCompetenceFormateur.class)
-    private List<CompetenceFormateurResponse> competenceFormateurResponse;
+    private List<CompetenceFormateurResponse> competenceFormateur;
     
     @JsonView(CustomJsonViews.FormateurResponseWithDisponibiliteFormateur.class) 
-    private List<DisponibiliteFormateurResponse> disponibiliteFormateurResponse;
+    private List<DisponibiliteFormateurResponse> disponibiliteFormateur;
     
     @JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class) 
     private UtilisateurResponse utilisateur;
@@ -53,15 +53,15 @@ public class FormateurResponse {
 	 	
 	 	if (besoinCompetenceFormateurResponses) {
 			if (formateurEntity.getCompetenceFormateurs() != null) {
-				this.setCompetenceFormateurResponse(formateurEntity.getCompetenceFormateurs().stream()
-						.map(formateur -> new CompetenceFormateurResponse(formateur, false,false))
+				this.setCompetenceFormateur(formateurEntity.getCompetenceFormateurs().stream()
+						.map(formateur -> new CompetenceFormateurResponse(formateur, true,false))
 						.collect(Collectors.toList()));
 			}
 		}
 	 	
 	 	if (besoinDisponibiliteFormateurResponse) {
 			if (formateurEntity.getDisponibiliteFormateurs() != null) {
-				this.setDisponibiliteFormateurResponse(formateurEntity.getDisponibiliteFormateurs().stream()
+				this .setDisponibiliteFormateur(formateurEntity.getDisponibiliteFormateurs().stream()
 						.map(formateur -> new DisponibiliteFormateurResponse(formateur, false))
 						.collect(Collectors.toList()));
 			}
@@ -91,21 +91,7 @@ public void setCours(List<CoursResponse> cours) {
 	this.cours = cours;
 }
 
-public List<CompetenceFormateurResponse> getCompetenceFormateurResponse() {
-	return competenceFormateurResponse;
-}
 
-public void setCompetenceFormateurResponse(List<CompetenceFormateurResponse> competenceFormateurResponse) {
-	this.competenceFormateurResponse = competenceFormateurResponse;
-}
-
-public List<DisponibiliteFormateurResponse> getDisponibiliteFormateurResponse() {
-	return disponibiliteFormateurResponse;
-}
-
-public void setDisponibiliteFormateurResponse(List<DisponibiliteFormateurResponse> disponibiliteFormateurResponse) {
-	this.disponibiliteFormateurResponse = disponibiliteFormateurResponse;
-}
 
 public UtilisateurResponse getUtilisateur() {
 	return utilisateur;
@@ -113,6 +99,22 @@ public UtilisateurResponse getUtilisateur() {
 
 public void setUtilisateur(UtilisateurResponse utilisateur) {
 	this.utilisateur = utilisateur;
+}
+
+public List<CompetenceFormateurResponse> getCompetenceFormateur() {
+	return competenceFormateur;
+}
+
+public void setCompetenceFormateur(List<CompetenceFormateurResponse> competenceFormateur) {
+	this.competenceFormateur = competenceFormateur;
+}
+
+public List<DisponibiliteFormateurResponse> getDisponibiliteFormateur() {
+	return disponibiliteFormateur;
+}
+
+public void setDisponibiliteFormateur(List<DisponibiliteFormateurResponse> disponibiliteFormateur) {
+	this.disponibiliteFormateur = disponibiliteFormateur;
 }
  
  

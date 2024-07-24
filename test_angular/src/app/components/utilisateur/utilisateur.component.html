@@ -15,9 +15,34 @@
       </tr>
       <tr>
         <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>
+          <div>
+            <button (click)="sortBy('login', true)" class="sort-button">
+              ▲
+            </button>
+            <button (click)="sortBy('login', false)" class="sort-button">
+              ▼
+            </button>
+          </div>
+        </th>
+        <th>
+          <div>
+            <button (click)="sortBy('nom', true)" class="sort-button">▲</button>
+            <button (click)="sortBy('nom', false)" class="sort-button">
+              ▼
+            </button>
+          </div>
+        </th>
+        <th>
+          <div>
+            <button (click)="sortBy('prenom', true)" class="sort-button">
+              ▲
+            </button>
+            <button (click)="sortBy('prenom', false)" class="sort-button">
+              ▼
+            </button>
+          </div>
+        </th>
         <th>
           <select
             id="role"

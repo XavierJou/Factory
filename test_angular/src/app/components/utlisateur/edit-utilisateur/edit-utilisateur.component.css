@@ -1,0 +1,24 @@
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bordered-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #d3d8de;
+  border-radius: 4px;
+}
+
+.input-large {
+  font-size: 1.5em; /* Augmente la taille de la police */
+}
+
+.form-actions {
+  margin-top: 20px; /* Espace entre les boutons et les champs de saisie */
+}
+
+.form-actions .btn {
+  margin-right: 10px; /* Espace entre les boutons */
+}

@@ -7,12 +7,20 @@ import { Formateur } from '../models/formateur';
   providedIn: 'root',
 })
 export class FormateurService {
-  url = 'http://localhost:8080/factory/api/formateur/utilisateur';
+  url = 'http://localhost:8080/factory/api/formateur';
 
   constructor(private httpClient: HttpClient) {}
 
   public getAll(): Observable<Formateur[]> {
     return this.httpClient.get<Formateur[]>(this.url);
+  }
+
+  public getWithUtilisateur(): Observable<Formateur[]> {
+    return this.httpClient.get<Formateur[]>(this.url + '/utilisateur');
+  }
+
+  public getWithDetails(): Observable<Formateur[]> {
+    return this.httpClient.get<Formateur[]>(this.url + '/details');
   }
 
   public delete(id: number): Observable<void> {

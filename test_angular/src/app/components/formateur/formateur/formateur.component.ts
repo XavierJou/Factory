@@ -14,6 +14,8 @@ import { FormateurService } from '../../../services/formateur.service';
 export class FormateurComponent {
   formateurs: Formateur[] = [];
 
+  showInfo: boolean[][] = [];
+
   constructor(private formateurSrv: FormateurService) {
     this.initFormateur();
   }
@@ -25,8 +27,17 @@ export class FormateurComponent {
   }
 
   initFormateur() {
-    this.formateurSrv.getAll().subscribe((formateurs) => {
+    this.formateurSrv.getWithDetails().subscribe((formateurs) => {
       this.formateurs = formateurs;
+      this.showInfo = [];
+
+      for (const formateur in this.formateurs) {
+        this.showInfo.push([false, false, false]);
+      }
     });
+  }
+
+  inverse(i: number, j: number) {
+    this.showInfo[i][j] = !this.showInfo[i][j];
   }
 }

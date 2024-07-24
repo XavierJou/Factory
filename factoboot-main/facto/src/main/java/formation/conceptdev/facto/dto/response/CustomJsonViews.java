@@ -69,7 +69,7 @@ public class CustomJsonViews {
 
 	public interface FormateurResponseWithUtilisateur extends Common {}
 
-	public interface FormateurWithDetails extends FormateurResponseWithCours ,FormateurResponseWithCompetenceFormateur ,FormateurResponseWithDisponibiliteFormateur ,FormateurResponseWithUtilisateur {}
+	public interface FormateurWithDetails extends CompetenceFormateurResponseWithCompetence,FormateurResponseWithCours ,FormateurResponseWithCompetenceFormateur ,FormateurResponseWithDisponibiliteFormateur ,FormateurResponseWithUtilisateur {}
 
 	
 	public interface FormationWithStagiaire extends Common {}

@@ -9,14 +9,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { UtilisateurService } from '../../services/utilisateur.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UtilisateurInscription } from '../../models/utilisateur-inscription';
 import { utcFridays } from 'd3';
 
 @Component({
   selector: 'app-inscription',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, ReactiveFormsModule],
   templateUrl: './inscription.component.html',
   styleUrl: './inscription.component.css',
 })
