@@ -22,6 +22,17 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: factory.jee@gmail.com
+    password: ofalldbahpqpdgis 
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 server:
   servlet:
     context-path: /factory
