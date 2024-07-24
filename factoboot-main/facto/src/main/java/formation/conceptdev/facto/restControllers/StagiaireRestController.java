@@ -77,6 +77,12 @@ public class StagiaireRestController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer id) {
+		stagiaireSrv.detachUtilisateurFromFormateur(id);
 		stagiaireSrv.deleteById(id);
 	}
+	
+	@DeleteMapping("/nullIdUtilisateur/{idStagiaire}")
+    public void detachUtilisateurFromStagiaire(@PathVariable Integer idStagiaire) {
+		stagiaireSrv.detachUtilisateurFromFormateur(idStagiaire);
+    }
 }

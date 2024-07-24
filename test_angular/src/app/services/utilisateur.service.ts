@@ -44,6 +44,14 @@ export class UtilisateurService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
+  public nullIdFormateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdFormateur/${id}`);
+  }
+
+  public nullIdStagiaire(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdStagiaire/${id}`);
+  }
+
   private utilsateureToUtilisateurRequest(utilisateur: Utilisateur): any {
     let obj = {
       id: utilisateur.id,

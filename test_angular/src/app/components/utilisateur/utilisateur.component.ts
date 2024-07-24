@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { StagiaireService } from '../../services/stagiaire.service';
 import { CoursService } from '../../services/cours.service';
+import { FormateurService } from '../../services/formateur.service';
 
 @Component({
   selector: 'app-utilisateur',
@@ -36,7 +37,8 @@ export class UtilisateurComponent {
 
   constructor(
     private utilisateurServ: UtilisateurService,
-    private formateurSrv: CoursService,
+    private coursService: CoursService,
+    private formateurSrv: FormateurService,
     private stagiaireSrv: StagiaireService
   ) {
     this.initUtilisateurs();
@@ -49,16 +51,39 @@ export class UtilisateurComponent {
     });
   }
 
-  delete(idUtilisateur: number, idFormateur: any, idStagiaire: any) {
+  delete(idUtilisateur: number, formateur: any, Stagiaire: any) {
+    this.messageID = idUtilisateur;
+    this.messageInfo = '';
     // controle formateur /et stagiaire
-    if (idFormateur) {
-      this.formateurSrv.getById(idFormateur).subscribe((formateur) => {});
+    if (formateur) {
+      this.coursService
+        .getCountFormateurById(formateur.id)
+        .subscribe((nbcours) => {
+          // on peut l'effacer
+          if (nbcours > 0) {
+            this.messageID = idUtilisateur;
+            this.messageInfo = 'ce formateur est associé à un cours';
+          } else {
+            this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
+              this.formateurSrv.delete(formateur.id).subscribe(() => {
+                this.initUtilisateurs();
+              });
+            });
+          }
+        });
+    } else {
+      if (Stagiaire) {
+        this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
+          this.stagiaireSrv.delete(Stagiaire.id).subscribe(() => {
+            this.initUtilisateurs();
+          });
+        });
+      } else {
+        this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
+          this.initUtilisateurs();
+        });
+      }
     }
-    if (idStagiaire) {
-    }
-    this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
-      this.initUtilisateurs();
-    });
   }
 
   compareFn(f1: string, f2: string): boolean {

@@ -59,5 +59,10 @@ public class CompetenceFormateurService {
 	public void delete(CompetenceFormateur competenceMatiere) {
 		deleteById(competenceMatiere.getId());
 	}
+	
+	public void deleteCompetenceByFormateurId(Integer idFormateur) {
+		daoCompetenceFormateur.deleteAllByFormateurId(idFormateur);
+    }
+	
 
 }

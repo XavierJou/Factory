@@ -97,5 +97,13 @@ public class UtilisateurService implements UserDetailsService {
 	{
 		deleteById(utilisateur.getId());
 	}
+	
+	public void detachFormateurFromUtilisateur(Integer idUtilisateur) {
+		daoUtilisateur.detachFormateurFromUtilisateur(idUtilisateur);
+    }
+	
+	public void detachStagiaireFromUtilisateur(Integer idUtilisateur) {
+		daoUtilisateur.detachStagiaireFromUtilisateur(idUtilisateur);
+    }
 
 }

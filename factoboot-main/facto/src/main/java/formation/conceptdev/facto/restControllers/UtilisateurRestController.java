@@ -100,7 +100,18 @@ public class UtilisateurRestController {
 	 @DeleteMapping("/{id}")
 		@ResponseStatus(code = HttpStatus.OK)
 		public void deleteById(@PathVariable("id") Integer id) {
-		 System.out.println("ici");
+		
 		 utilisateurSrv.deleteById(id);
 		}
+	 
+	 @DeleteMapping("/nullIdFormateur/{idUtilisateur}")
+	    public void detachUtilisateurFromStagiaire(@PathVariable Integer idUtilisateur) {
+		 utilisateurSrv.detachFormateurFromUtilisateur(idUtilisateur);
+	    }
+	 
+	 @DeleteMapping("/nullIdStagiaire/{idUtilisateur}")
+	    public void detachStagiaireFromStagiaire(@PathVariable Integer idUtilisateur) {
+		 utilisateurSrv.detachStagiaireFromUtilisateur(idUtilisateur);
+	    }
+	 
 }

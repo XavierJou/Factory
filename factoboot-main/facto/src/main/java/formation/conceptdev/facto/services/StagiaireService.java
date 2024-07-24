@@ -48,5 +48,10 @@ public class StagiaireService {
 	public void delete(Stagiaire stagiaire) {
 		deleteById(stagiaire.getId());
 	}
+	
+	public void detachUtilisateurFromFormateur(Integer idFormateur) {
+		daoStagiaire.detachUtilisateurFromStagiaire(idFormateur);
+    }
+
 
 }

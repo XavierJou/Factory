@@ -36,13 +36,7 @@
       </tr>
     </thead>
     <tbody>
-      @for(u of filteredUtilisateurs;track u.id){ @if(messageID==u.id){
-      <tr class="alert alert-danger">
-        {{
-          messageInfo
-        }}
-      </tr>
-      }
+      @for(u of filteredUtilisateurs;track u.id){
       <tr>
         <td>{{ u.id }}</td>
         <td>{{ u.login }}</td>
@@ -70,7 +64,14 @@
           </button>
         </td>
       </tr>
-      }
+
+      @if(messageID==u.id){
+      <tr class="alert alert-danger">
+        {{
+          messageInfo
+        }}
+      </tr>
+      } }
     </tbody>
   </table>
 </div>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import formation.conceptdev.facto.dto.request.FormateurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.FormateurResponse;
+import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.entities.Formateur;
+import formation.conceptdev.facto.services.CompetenceFormateurService;
+import formation.conceptdev.facto.services.DisponibiliteFormateurService;
 import formation.conceptdev.facto.services.FormateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -35,7 +39,12 @@ public class FormateurRestController {
 
     @Autowired
     private FormateurService formateurService;
+    @Autowired
+    private DisponibiliteFormateurService disponibiliteFormateurService;
 
+    @Autowired
+    private CompetenceFormateurService competenceFormateurService;
+    
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
     public List<FormateurResponse> getAll() {
@@ -72,4 +81,19 @@ public class FormateurRestController {
     public FormateurResponse getByIdWithCours(@PathVariable Integer id) {
         return new FormateurResponse(formateurService.getByIdWithCours(id),false,false,false,false);
     }
+    
+    @DeleteMapping("/nullIdUtilisateur/{idFormateur}")
+    public void detachUtilisateurFromFormateur(@PathVariable Integer idFormateur) {
+        formateurService.detachUtilisateurFromFormateur(idFormateur);
+    }
+    
+    @DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Integer id) {
+    	
+    	 disponibiliteFormateurService.deleteDisponibiliteByFormateurId(id);
+    	 competenceFormateurService.deleteCompetenceByFormateurId(id);
+    	 formateurService.detachUtilisateurFromFormateur(id);
+		 formateurService.deleteById(id);
+	}
 }

@@ -10,6 +10,9 @@ import { UtilisateurService } from '../../../services/utilisateur.service';
 import { FormateurService } from '../../../services/formateur.service';
 import { StagiaireService } from '../../../services/stagiaire.service';
 import { Utilisateur } from '../../../models/utilisateur';
+import { Stagiaire } from '../../../models/stagiaire';
+import { CoursService } from '../../../services/cours.service';
+import { Formateur } from '../../../models/formateur';
 
 @Component({
   selector: 'app-edit-utilisateur',
@@ -28,11 +31,17 @@ export class EditUtilisateurComponent {
     'ROLE_STAGIAIRE',
     'ROLE_USER',
   ];
+
+  roleAvant!: string;
+
+  messageInfo: string = '';
+
   constructor(
     private utilisateurSrv: UtilisateurService,
     private formateurSrv: FormateurService,
     private stagiaireSrv: StagiaireService,
     private router: Router,
+    private coursService: CoursService,
     private ActivatedRoute: ActivatedRoute
   ) {}
 
@@ -41,6 +50,7 @@ export class EditUtilisateurComponent {
       if (params['id']) {
         this.utilisateurSrv.getById(params['id']).subscribe((utilisateur) => {
           this.utilisateur = utilisateur;
+          this.roleAvant != this.utilisateur.role;
         });
       }
     });
@@ -55,10 +65,77 @@ export class EditUtilisateurComponent {
     }
   }
   save() {
+    this.messageInfo = '';
+
     if (this.utilisateur.id) {
-      this.utilisateurSrv.update(this.utilisateur).subscribe((utilisateur) => {
-        this.router.navigateByUrl('/utilisateur?q=update&id=' + utilisateur.id);
-      });
+      if (
+        this.roleAvant == 'ROLE_STAGIARE' &&
+        this.roleAvant != this.utilisateur.role
+      ) {
+        // annulation id stagiaire dans utilisateur
+        this.utilisateurSrv
+          .nullIdStagiaire(this.utilisateur.id)
+          .subscribe(() => {
+            let stagiaire = this.utilisateur.stagiaire ?? new Stagiaire();
+            let id_stagiaire = stagiaire.id ?? 0;
+            if (id_stagiaire > 0) {
+              // annulation id utilisateur dans stagiare
+              this.stagiaireSrv
+                .nullIdUtilisateur(id_stagiaire)
+                .subscribe(() => {
+                  // suppression stagiaire
+                  this.stagiaireSrv.delete(id_stagiaire).subscribe(() => {
+                    this.miseAJour();
+                    return;
+                  });
+                });
+            }
+          });
+      } else {
+        if (
+          this.roleAvant == 'ROLE_FORMATEUR' &&
+          this.roleAvant != this.utilisateur.role
+        ) {
+          let formateur = this.utilisateur.formateur ?? new Formateur();
+          let id_formateur = formateur.id ?? 0;
+          if (id_formateur > 0) {
+            this.coursService
+              .getCountFormateurById(id_formateur)
+              .subscribe((nbcours) => {
+                // on peut l'effacer le formateur
+                if (nbcours > 0) {
+                  this.messageInfo = 'ce formateur est associé à un cours';
+                } else {
+                  // effaceement formateur
+                  this.utilisateurSrv
+                    .nullIdFormateur(this.utilisateur.id ?? 0)
+                    .subscribe(() => {
+                      // effaceement formateur
+                      this.formateurSrv.delete(id_formateur).subscribe(() => {
+                        this.miseAJour();
+                        return;
+                      });
+                    });
+                }
+              });
+          }
+        } else {
+          this.miseAJour();
+        }
+      }
     }
+  }
+
+  miseAJour() {
+    if (
+      this.utilisateur.role == 'ROLE_FORMATEUR' &&
+      this.roleAvant != this.utilisateur.role
+    ) {
+    } else {
+    }
+
+    this.utilisateurSrv.update(this.utilisateur).subscribe((utilisateur) => {
+      this.router.navigateByUrl('/utilisateur?q=update&id=' + utilisateur.id);
+    });
   }
 }
