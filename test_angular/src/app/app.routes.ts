@@ -28,6 +28,7 @@ import { InscriptionComponent } from './components/inscription/inscription.compo
 import { LoginComponent } from './components/login/login.component';
 import { PlanificationComponent } from './components/planification/planification.component';
 import { EditUtilisateurComponent } from './components/utlisateur/edit-utilisateur/edit-utilisateur.component';
+import { CoursFormationComponent } from './components/cours/cours-formation/cours-formation.component';
 
 export const routes: Routes = [
   {
@@ -113,6 +114,10 @@ export const routes: Routes = [
       {
         path: 'formations/edit/:id',
         component: EditFormationComponent,
+      },
+      {
+        path: 'formation/:id/cours',
+        component: CoursFormationComponent,
       },
       {
         path: 'matiere',

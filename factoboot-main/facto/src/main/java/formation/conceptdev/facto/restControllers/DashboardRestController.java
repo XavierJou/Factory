@@ -28,7 +28,7 @@ public class DashboardRestController {
 	@GetMapping("")
 	@JsonView(CustomJsonViews.FormationWithAll.class)
 	public List<FormationResponse> getAllWithDetails() {
-		return formationSrv.getAll().stream().map(formation -> new FormationResponse(formation, true))
+		return formationSrv.getAll().stream().map(formation -> new FormationResponse(formation, true, true, true))
 				.collect(Collectors.toList());
 	}
 

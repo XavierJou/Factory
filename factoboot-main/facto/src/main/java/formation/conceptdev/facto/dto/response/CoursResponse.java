@@ -78,7 +78,7 @@ public class CoursResponse {
 		
 		if (besoinFormation) {
 			if (coursEntity.getFormation() != null) {
-				this.setFormation(new FormationResponse(coursEntity.getFormation(), false));
+				this.setFormation(new FormationResponse(coursEntity.getFormation(), false, false, false));
 			}
 		}
 		

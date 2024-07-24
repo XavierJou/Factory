@@ -78,7 +78,7 @@ public class CustomJsonViews {
 	
 	public interface FormationWithPrerequis extends Common {}
 	
-	public interface FormationWithAll extends FormationWithStagiaire,FormationWithCours, FormationWithPrerequis {}
+	public interface FormationWithAll extends FormationWithStagiaire,FormationWithCours, FormationWithPrerequis, CoursResponseWithDetails {}
 
 
 	public interface FormationsWithDetails extends FormationWithStagiaire , FormationWithCours , FormationWithPrerequis{}

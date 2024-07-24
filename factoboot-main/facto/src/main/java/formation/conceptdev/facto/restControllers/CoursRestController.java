@@ -47,10 +47,6 @@ public class CoursRestController {
 	@Autowired
 	private CoursService coursSrv;
     
-    @GetMapping("/countFormateur/{idFormateur}")
-    public Integer getCountCoursByFormateurId(@PathVariable Integer idFormateur) {
-        return coursSrv.NombreCoursFormateurId(idFormateur);
-    }
 	@Autowired
 	private FormationService formationSrv;
 
@@ -71,6 +67,11 @@ public class CoursRestController {
 
 	@Autowired
 	private VideoprojecteurService videoprojecteurSrv;
+	
+    @GetMapping("/countFormateur/{idFormateur}")
+    public Integer getCountCoursByFormateurId(@PathVariable Integer idFormateur) {
+        return coursSrv.NombreCoursFormateurId(idFormateur);
+    }
 
 	@GetMapping("")
 	@JsonView(CustomJsonViews.Common.class)
@@ -85,6 +86,14 @@ public class CoursRestController {
 	public List<CoursResponse> getAllCoursWithFormateurAndUtilisateur() {
 		return coursSrv.getAll().stream()
 				.map(cours -> new CoursResponse(cours, false, true, false, false, false, false, true))
+				.collect(Collectors.toList());
+	}
+	
+	@GetMapping("/formation")
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
+	public List<CoursResponse> getAllCoursWithFormation() {
+		return coursSrv.getAll().stream()
+				.map(cours -> new CoursResponse(cours, true, true, true, true, true, true, true))
 				.collect(Collectors.toList());
 	}
 
