@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { StagiaireService } from '../../services/stagiaire.service';
 import { CoursService } from '../../services/cours.service';
+import { FormateurService } from '../../services/formateur.service';
 
 @Component({
   selector: 'app-utilisateur',
@@ -36,7 +37,8 @@ export class UtilisateurComponent {
 
   constructor(
     private utilisateurServ: UtilisateurService,
-    private formateurSrv: CoursService,
+    private coursService: CoursService,
+    private formateurSrv: FormateurService,
     private stagiaireSrv: StagiaireService
   ) {
     this.initUtilisateurs();
@@ -49,13 +51,63 @@ export class UtilisateurComponent {
     });
   }
 
-  delete(idUtilisateur: number, idFormateur: any, idStagiaire: any) {
+  delete(idUtilisateur: number, formateur: any, stagiaire: any) {
+    this.messageID = idUtilisateur;
+    this.messageInfo = '';
     // controle formateur /et stagiaire
-    if (idFormateur) {
-      this.formateurSrv.getById(idFormateur).subscribe((formateur) => {});
+    if (formateur) {
+      this.coursService
+        .getCountFormateurById(formateur.id)
+        .subscribe((nbcours) => {
+          // on peut l'effacer
+          if (nbcours > 0) {
+            this.messageID = idUtilisateur;
+            this.messageInfo = 'ce formateur est associé à un cours';
+          } else {
+            this.utilisateurServ
+              .nullIdFormateur(idUtilisateur)
+              .subscribe(() => {
+                this.formateurSrv
+                  .nullIdUtilisateur(formateur.id)
+                  .subscribe(() => {
+                    this.formateurSrv.delete(formateur.id).subscribe(() => {
+                      this.effacementUtilisateur(idUtilisateur);
+                    });
+                  });
+              });
+          }
+        });
+    } else {
+      if (stagiaire) {
+        // controle pas relié à une formation
+        this.stagiaireSrv.getById(stagiaire.id).subscribe((stagiaireRecup) => {
+          if (stagiaireRecup.formation) {
+            this.messageID = idUtilisateur;
+            this.messageInfo = 'ce stagiaire est associé à une formation';
+          } else {
+            console.log('debut traitement');
+            this.utilisateurServ
+              .nullIdStagiaire(idUtilisateur)
+              .subscribe(() => {
+                console.log('nullIdStagiaire');
+                this.stagiaireSrv
+                  .nullIdUtilisateur(stagiaire.id)
+                  .subscribe(() => {
+                    console.log('nullIdUtilisateur');
+                    this.stagiaireSrv.delete(stagiaire.id).subscribe(() => {
+                      this.effacementUtilisateur(idUtilisateur);
+                    });
+                  });
+              });
+          }
+        });
+      } else {
+        this.effacementUtilisateur(idUtilisateur);
+      }
     }
-    if (idStagiaire) {
-    }
+  }
+
+  effacementUtilisateur(idUtilisateur: number) {
     this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
       this.initUtilisateurs();
     });

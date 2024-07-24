@@ -1,6 +1,6 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Form, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import {
   Router,
   RouterLink,
@@ -9,12 +9,12 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Formation } from '../../models/formation';
-import { FormationService } from '../../services/formation.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, RouterLink, RouterLinkActive, AsyncPipe],
+  imports: [FormsModule, RouterLink, RouterLinkActive, AsyncPipe, DatePipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -23,15 +23,13 @@ export class DashboardComponent implements OnInit {
 
   formationsObservable!: Observable<Formation[]>;
 
-  constructor(
-    private formationSrv: FormationService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private dashboardSrv: DashboardService) {}
 
   ngOnInit(): void {
-    this.formationsObservable = this.formationSrv.getAll();
+    this.formationsObservable = this.dashboardSrv.getAllFormations();
   }
+
+  // nbPrerequis = this.formation.prerequis?.map((p) => p.id).length;
 
   onChangeSelect(optionsValue: any) {}
 

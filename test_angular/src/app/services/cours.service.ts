@@ -30,6 +30,10 @@ export class CoursService {
     return this.httpClient.get<Cours>(`${this.url}/${id}/details`);
   }
 
+  public getCountFormateurById(id: number): Observable<number> {
+    return this.httpClient.get<number>(`${this.url}/countFormateur/${id}`);
+  }
+
   public update(cours: Cours): Observable<Cours> {
     return this.httpClient.put<Cours>(
       `${this.url}/${cours.id}`,

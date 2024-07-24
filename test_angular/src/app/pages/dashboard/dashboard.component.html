@@ -5,7 +5,7 @@
         <label for="exampleSelect1" class="mt-4 form-label"
           ><h2>Formations</h2></label
         >
-        <p>{{ formation.titre }}</p>
+        <h3>{{ formation.titre }}</h3>
       </div>
       <div class="col-md-9">
         <div class="form-group">
@@ -27,6 +27,38 @@
     </div>
   </div>
 </section>
+@if(formation.id!=null){
+<section class="gap-4 d-flex flex-column">
+  <div class="p-3 list-group">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Contenu</h5>
+      <small>Màj 20/02/2024</small>
+    </div>
+    <p class="mb-1">
+      {{ formation.contenu }}
+    </p>
+  </div>
+  <div class="p-3 list-group">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Objectif</h5>
+      <small>Màj 20/02/2024</small>
+    </div>
+    <p class="mb-1">
+      {{ formation.objectif }}
+    </p>
+  </div>
+  <div class="p-3 list-group">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Informations</h5>
+      <small>Màj 20/02/2024</small>
+    </div>
+    <p class="mb-1"><b>Capacité</b> {{ formation.capacite }}</p>
+    <p class="mb-1"><b>Durée</b> {{ formation.duree }}</p>
+    <p class="mb-1">
+      <b>Date de début</b> {{ formation.dateDebut | date : "dd/MM/yyyy" }}
+    </p>
+  </div>
+</section>
 
 <section class="container mt-5">
   <div class="m-auto row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
@@ -37,7 +69,25 @@
             <div class="mb-3">
               <span class="material-symbols-rounded fs-1"> your_trips </span>
             </div>
-            <h4 class="card-title">Compétences</h4>
+            <h4 class="card-title">Cours</h4>
+            <p class="mt-5 card-text">
+              <span class="badge bg-primary rounded-pill">{{
+                formation.cours?.length
+              }}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card-group">
+        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+          <div class="text-center card-body">
+            <div class="mb-3">
+              <span class="material-symbols-rounded fs-1"> token </span>
+            </div>
+            <h4 class="card-title">Matières</h4>
             <p class="mt-5 card-text">
               <span class="badge bg-primary rounded-pill">6</span>
             </p>
@@ -50,11 +100,15 @@
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
           <div class="text-center card-body">
             <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
+              <span class="material-symbols-rounded fs-1">
+                category_search
+              </span>
             </div>
-            <h4 class="card-title">Matières</h4>
+            <h4 class="card-title">Prérequis</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">9</span>
+              <span class="badge bg-primary rounded-pill">{{
+                formation.prerequis?.length
+              }}</span>
             </p>
           </div>
         </div>
@@ -65,22 +119,9 @@
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
           <div class="text-center card-body">
             <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
-            </div>
-            <h4 class="card-title">Objectifs</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">4</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
+              <span class="material-symbols-rounded fs-1">
+                settings_accessibility
+              </span>
             </div>
             <h4 class="card-title">Formateurs</h4>
             <p class="mt-5 card-text">
@@ -95,11 +136,18 @@
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
           <div class="text-center card-body">
             <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
+              <span class="material-symbols-rounded fs-1">
+                deployed_code_account
+              </span>
             </div>
             <h4 class="card-title">Stagiaires</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">18</span>
+              <span class="badge bg-primary rounded-pill">
+                <!-- {{
+                formation.cours?.map((c) => c.stagiaires.length).reduce((a, b) => a + b, 0)
+              }} -->
+                {{ formation.stagiaires?.length }}
+              </span>
             </p>
           </div>
         </div>
@@ -110,11 +158,11 @@
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">
           <div class="text-center card-body">
             <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> your_trips </span>
+              <span class="material-symbols-rounded fs-1"> share_reviews </span>
             </div>
-            <h4 class="card-title">Demandes</h4>
+            <h4 class="card-title">Messages</h4>
             <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">1</span>
+              <span class="badge bg-primary rounded-pill">6</span>
             </p>
           </div>
         </div>
@@ -122,3 +170,14 @@
     </div>
   </div>
 </section>
+} @else{
+<section>
+  <div class="container">
+    <div class="gap-3 d-flex">
+      <div class="col-md-9" style="min-height: 120px">
+        <h2>Veuillez sélectionner une formation</h2>
+      </div>
+    </div>
+  </div>
+</section>
+}

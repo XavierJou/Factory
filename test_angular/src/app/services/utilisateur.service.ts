@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
 import { UtilisateurInscription } from '../models/utilisateur-inscription';
+import { Formateur } from '../models/formateur';
 
 @Injectable({
   providedIn: 'root',
@@ -44,7 +45,26 @@ export class UtilisateurService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
+  public nullIdFormateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdFormateur/${id}`);
+  }
+
+  public nullIdStagiaire(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdStagiaire/${id}`);
+  }
+
   private utilsateureToUtilisateurRequest(utilisateur: Utilisateur): any {
+    let ajoutFormateur = false;
+    let ajoutStagiaire = false;
+
+    if (utilisateur.formateur) {
+      ajoutFormateur = true;
+    }
+
+    if (utilisateur.stagiaire) {
+      ajoutStagiaire = true;
+    }
+
     let obj = {
       id: utilisateur.id,
       login: utilisateur.login,
@@ -52,6 +72,8 @@ export class UtilisateurService {
       nom: utilisateur.nom,
       email: utilisateur.email,
       role: utilisateur.role,
+      ajoutFormateur: ajoutFormateur,
+      ajoutStagiaire: ajoutStagiaire,
     };
     return obj;
   }

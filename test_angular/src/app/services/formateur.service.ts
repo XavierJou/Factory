@@ -19,6 +19,10 @@ export class FormateurService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
+  public nullIdUtilisateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdUtilisateur/${id}`);
+  }
+
   public create(formateur: Formateur): Observable<Formateur> {
     return this.httpClient.post<Formateur>(this.url, formateur);
   }

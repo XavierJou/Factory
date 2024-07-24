@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,20 +46,6 @@ public class CoursRestController {
 
 	@Autowired
 	private CoursService coursSrv;
-
-    @GetMapping("")
-    @JsonView(CustomJsonViews.Common.class)
-    public List<CoursResponse> getAll() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, false, false, false, false, false,false)).collect(Collectors.toList());
-    }
-    
-    
-    @GetMapping("/formateur")
-    @JsonView(CustomJsonViews.CoursResponseWithFormateur.class)
-    public List<CoursResponse> getAllCoursWithFormateurAndUtilisateur() {
-        return coursSrv.getAll().stream().map(cours -> new CoursResponse(cours,false, true, false, false, false, false,true)).collect(Collectors.toList());
-    }
-    
     
     @GetMapping("/countFormateur/{idFormateur}")
     public Integer getCountCoursByFormateurId(@PathVariable Integer idFormateur) {
@@ -177,5 +164,11 @@ public class CoursRestController {
 		}
 			
 		return new CoursResponse(coursOrdi, true, true, true, true, true, true, false);
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void deleteById(@PathVariable("id") Integer id) {
+		coursSrv.deleteById(id);
 	}
 }

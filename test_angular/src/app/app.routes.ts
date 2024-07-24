@@ -107,11 +107,11 @@ export const routes: Routes = [
         component: FormationComponent,
       },
       {
-        path: 'formation/edit',
+        path: 'formations/edit',
         component: EditFormationComponent,
       },
       {
-        path: 'formation/edit/:id',
+        path: 'formations/edit/:id',
         component: EditFormationComponent,
       },
       {

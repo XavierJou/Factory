@@ -19,6 +19,10 @@ export class StagiaireService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
+  public nullIdUtilisateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/nullIdUtilisateur/${id}`);
+  }
+
   public create(stagiaire: Stagiaire): Observable<Stagiaire> {
     return this.httpClient.post<Stagiaire>(
       this.url,

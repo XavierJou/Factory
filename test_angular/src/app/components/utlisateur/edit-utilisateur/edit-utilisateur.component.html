@@ -1,4 +1,12 @@
 <h1>edition stagiaire</h1>
+
+@if(messageInfo!=""){
+<tr class="alert alert-danger">
+  {{
+    messageInfo
+  }}
+</tr>
+}
 <div>
   <div class="form-group">
     <label for="id">Id:</label>

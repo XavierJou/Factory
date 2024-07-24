@@ -15,6 +15,9 @@ public class UtilisateurRequest {
 	private String email;
 	@NotNull
 	private String role;
+	private boolean ajoutFormateur;
+	private boolean ajoutStagiaire;
+	
 
 
 	public UtilisateurRequest() {
@@ -83,6 +86,31 @@ public class UtilisateurRequest {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+
+	public boolean isAjoutFormateur() {
+		return ajoutFormateur;
+	}
+
+
+	public void setAjoutFormateur(boolean ajoutFormateur) {
+		this.ajoutFormateur = ajoutFormateur;
+	}
+
+
+	public boolean isAjoutStagiaire() {
+		return ajoutStagiaire;
+	}
+
+
+	public void setAjoutStagiaire(boolean ajoutStagiaire) {
+		this.ajoutStagiaire = ajoutStagiaire;
+	}
+
+
+
+
+		
 
 	
 

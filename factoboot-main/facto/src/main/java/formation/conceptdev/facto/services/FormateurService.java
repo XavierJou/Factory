@@ -53,5 +53,9 @@ public class FormateurService {
 	public void delete(Formateur formateur) {
 		deleteById(formateur.getId());
 	}
+	
+	public void detachUtilisateurFromFormateur(Integer idFormateur) {
+		daoFormateur.detachUtilisateurFromFormateur(idFormateur);
+    }
 
 }

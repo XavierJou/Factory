@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -52,6 +54,19 @@ public class FormationRestController {
 		BeanUtils.copyProperties(formationRequest, formation);
 		return new FormationResponse(formationSrv.insert(formation),false);
 	}
+	
+	@PutMapping("/{id}")
+	@JsonView(CustomJsonViews.Common.class)
+	public FormationResponse update(@Valid @RequestBody FormationRequest formationRequest, BindingResult br,
+			@PathVariable Integer id) {
+		if (br.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		Formation formation = new Formation();
+		BeanUtils.copyProperties(formationRequest, formation);
+		formation.setId(id);
+		return new FormationResponse(formationSrv.update(formation));
+	}
 
 	@GetMapping("/{id}")
 	@JsonView(CustomJsonViews.Common.class)
@@ -62,6 +77,12 @@ public class FormationRestController {
 	@GetMapping("/{id}/stagiaire")
 	public FormationResponse getByIdWithStagiaire(@PathVariable Integer id) {
 		return new FormationResponse(formationSrv.getByIdWithStagiaire(id));
+	}
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void deleteById(@PathVariable("id") Integer id) {
+		formationSrv.deleteById(id);
 	}
 	
 }

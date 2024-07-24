@@ -54,5 +54,10 @@ public class DisponibiliteFormateurService {
 	public void delete(DisponibiliteFormateur disponibiliteFormateur) {
 		deleteById(disponibiliteFormateur.getId());
 	}
+	
+	public void deleteDisponibiliteByFormateurId(Integer idFormateur) {
+		daoDisponibiliteFormateur.deleteAllByFormateurId(idFormateur);
+    }
+	
 
 }
