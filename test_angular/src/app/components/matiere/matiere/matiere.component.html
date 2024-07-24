@@ -3,6 +3,11 @@
 >
 
 @for(m of matieres;track m.id){
-<p>{{ m.id }} : {{ m.titre }}</p>
+<p>
+  {{ m.id }} : {{ m.titre }}
+  <button routerLink="/matiere/edit/{{ m.id }}" routerLinkActive="active">
+    éditer
+  </button>
+</p>
 <p><button (click)="delete(m.id!)">Supprimer</button></p>
 }

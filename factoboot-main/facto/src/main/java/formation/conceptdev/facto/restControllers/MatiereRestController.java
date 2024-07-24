@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -60,6 +61,19 @@ public class MatiereRestController {
         BeanUtils.copyProperties(matiereRequest, matiere);
         return new MatiereResponse(matiereService.insert(matiere),false,false);
     }
+    
+    @PutMapping("/{id}")
+	@JsonView(CustomJsonViews.Common.class)
+	public MatiereResponse update(@Valid @RequestBody MatiereRequest matiereRequest, BindingResult br,
+			@PathVariable Integer id) {
+		if (br.hasErrors()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		}
+		Matiere matiere = new Matiere();
+		BeanUtils.copyProperties(matiereRequest, matiere);
+		matiere.setId(id);
+		return new MatiereResponse(matiereService.update(matiere));
+	}
 
     @GetMapping("/{id}")
     @JsonView(CustomJsonViews.Common.class)
