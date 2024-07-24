@@ -1,4 +1,3 @@
-import { Formation } from './../../../../../../../factory-angular-sauv04/src/app/models/formation';
 import { Component, OnInit } from '@angular/core';
 import { Cours } from '../../../models/cours';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
@@ -6,6 +5,7 @@ import { DatePipe } from '@angular/common';
 import { CoursService } from '../../../services/cours.service';
 import { FormationService } from '../../../services/formation.service';
 import { Observable } from 'rxjs';
+import { Formation } from '../../../models/formation';
 
 @Component({
   selector: 'app-cours',
