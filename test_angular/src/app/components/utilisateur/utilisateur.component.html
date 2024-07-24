@@ -1,1 +1,76 @@
-<p>utilisateur works!</p>
+<div class="container mt-4">
+  <h2 class="mb-3">Liste des Utilisateurs</h2>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Login</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Rôle</th>
+        <th>Formateur</th>
+        <th>Stagiaire</th>
+        <th>Actions</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+          <select
+            id="role"
+            [(ngModel)]="selectedRole"
+            class="form-control"
+            [compareWith]="compareFn"
+            (change)="filterUtilisateurs()"
+          >
+            @for(f of valeurSelect ;track $index){
+            <option [ngValue]="f">{{ f }}</option>
+            }
+          </select>
+        </th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for(u of filteredUtilisateurs;track u.id){ @if(messageID==u.id){
+      <tr class="alert alert-danger">
+        {{
+          messageInfo
+        }}
+      </tr>
+      }
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.login }}</td>
+        <td>{{ u.nom }}</td>
+        <td>{{ u.prenom }}</td>
+        <td>{{ u.role }}</td>
+        <td>
+          @if(u.formateur){<span> {{ u.formateur.id }}</span> }
+        </td>
+        <td>
+          @if(u.stagiaire){<span> {{ u.stagiaire.id }}</span> }
+        </td>
+        <td>
+          <a
+            [routerLink]="['/utilisateurs/edit', u.id]"
+            routerLinkActive="active"
+            class="btn btn-outline-primary"
+            >Éditer</a
+          >
+          <button
+            class="btn btn-outline-danger"
+            (click)="delete(u.id!, u.formateur!, u.stagiaire!)"
+          >
+            Supprimer
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -16,14 +16,14 @@ public class VideoprojecteurService {
 
 	public Videoprojecteur getByIdWithCours(Integer id) {
 		if (id == null) {
-			throw new RuntimeException("Impossible de find Utilisateur sans id");
+			throw new RuntimeException("Impossible de find Videoprojecteur sans id");
 		}
 		return daoVideoprojecteur.findById(id).orElseThrow(RuntimeException::new);
 	}
 	
 	public Videoprojecteur getById(Integer id) {
 		if (id == null) {
-			throw new RuntimeException("Impossible de find Utilisateur sans id");
+			throw new RuntimeException("Impossible de find Videoprojecteur sans id");
 		}
 		return daoVideoprojecteur.findById(id).orElseThrow(RuntimeException::new);
 	}
@@ -42,21 +42,21 @@ public class VideoprojecteurService {
 
 	public Videoprojecteur insert(Videoprojecteur videoprojecteur) {
 		if (videoprojecteur.getNom() == null) {
-			throw new RuntimeException("Impossible d'insert Utilisateur sans nom");
+			throw new RuntimeException("Impossible d'insert Videoprojecteur sans nom");
 		}
 		return daoVideoprojecteur.save(videoprojecteur);
 	}
 
 	public Videoprojecteur update(Videoprojecteur videoprojecteur) {
 		if (videoprojecteur.getNom() == null) {
-			throw new RuntimeException("Impossible d'insert Utilisateur sans nom");
+			throw new RuntimeException("Impossible d'insert Videoprojecteur sans nom");
 		}
 		return daoVideoprojecteur.save(videoprojecteur);
 	}
 
 	public void deleteById(Integer id) {
 		if (id == null) {
-			throw new RuntimeException("Impossible de delete Utilisateur sans id");
+			throw new RuntimeException("Impossible de delete Videoprojecteur sans id");
 		}
 		daoVideoprojecteur.deleteById(id);
 	}

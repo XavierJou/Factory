@@ -50,6 +50,13 @@ public class CoursService {
 		return daoCours.findById(id).orElseThrow(RuntimeException::new);
 	}
 	
+	public Integer NombreCoursFormateurId(Integer idFormateur) {
+		if (idFormateur == null) {
+			throw new RuntimeException("Impossible de find Cours sans id");
+		}
+		return daoCours.countCoursByFormateurId(idFormateur);
+	}
+	
 
 	public List<Formateur> getFormateurComptenceCours(Integer id_cours)
 	{

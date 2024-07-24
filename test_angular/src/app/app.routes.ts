@@ -27,6 +27,7 @@ import { EditCoursComponent } from './components/cours/edit-cours/edit-cours.com
 import { InscriptionComponent } from './components/inscription/inscription.component';
 import { LoginComponent } from './components/login/login.component';
 import { PlanificationComponent } from './components/planification/planification.component';
+import { EditUtilisateurComponent } from './components/utlisateur/edit-utilisateur/edit-utilisateur.component';
 
 export const routes: Routes = [
   {
@@ -56,6 +57,14 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
+      },
+      {
+        path: 'utilisateurs/edit/:id',
+        component: EditUtilisateurComponent,
+      },
+      {
+        path: 'utilisateurs',
+        component: UtilisateurComponent,
       },
       {
         path: 'competence',

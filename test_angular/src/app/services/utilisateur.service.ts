@@ -8,14 +8,16 @@ import { UtilisateurInscription } from '../models/utilisateur-inscription';
   providedIn: 'root',
 })
 export class UtilisateurService {
-  constructor(private http: HttpClient) {}
+  url = 'http://localhost:8080/factory/api/utilisateur';
+
+  constructor(private httpClient: HttpClient) {}
 
   public inscription(
     utilisateurInscription: UtilisateurInscription
   ): Observable<Utilisateur> {
-    return this.http
+    return this.httpClient
       .post<UtilisateurInscription>(
-        'http://localhost:8080/factory/api/utilisateur/inscription',
+        this.url + '/inscription',
         utilisateurInscription
       )
       .pipe(catchError(this.gestionErreur));
@@ -28,5 +30,36 @@ export class UtilisateurService {
     } else {
       return throwError(() => new Error('Une erreur est survenue'));
     }
+  }
+
+  public getWtihDetail(): Observable<Utilisateur[]> {
+    return this.httpClient.get<Utilisateur[]>(this.url + '/details');
+  }
+
+  public getById(id: number): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(`${this.url}/${id}`);
+  }
+
+  public delete(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
+
+  private utilsateureToUtilisateurRequest(utilisateur: Utilisateur): any {
+    let obj = {
+      id: utilisateur.id,
+      login: utilisateur.login,
+      prenom: utilisateur.prenom,
+      nom: utilisateur.nom,
+      email: utilisateur.email,
+      role: utilisateur.role,
+    };
+    return obj;
+  }
+
+  public update(utilisateur: Utilisateur): Observable<Utilisateur> {
+    return this.httpClient.put<Utilisateur>(
+      `${this.url}/${utilisateur.id}`,
+      this.utilsateureToUtilisateurRequest(utilisateur)
+    );
   }
 }

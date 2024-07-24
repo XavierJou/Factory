@@ -1,11 +1,11 @@
 package formation.conceptdev.facto.dto.request;
 
-public class CoursOrdinateusRequest {
+public class CoursOrdinateursRequest {
 
 	private Integer coursId; 
 	private Integer ordinateuriId;
 	
-	public CoursOrdinateusRequest()
+	public CoursOrdinateursRequest()
 	{
 		
 	}
