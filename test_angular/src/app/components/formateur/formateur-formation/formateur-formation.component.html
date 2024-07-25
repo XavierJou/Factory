@@ -1,15 +1,40 @@
-<h1>[Formation] {{ formation.titre }}</h1>
-<div class="row">
-  <div class="col">
-    <a routerLink="/cours/edit" routerLinkActive="active" class="btn btn-link"
-      >Nouveau cours</a
-    >
+<div class="container">
+  <h1>Formateurs</h1>
+  <h3><b>Formation : </b> {{ formation.titre }}</h3>
+  <div class="gap-5 m-auto d-flex flex-column">
+    <div class="text-end">
+      <a
+        routerLink="/formateur/edit"
+        routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm"
+        >+ formateur</a
+      >
+    </div>
+    <div class="gap-3 d-flex flex-column">
+      @for(f of courss;track f.id){
+      <div class="alert alert-dismissible alert-secondary">
+        <p>{{ f.formateur?.id }} : {{ f.formateur?.utilisateur?.nom }}</p>
+        <div>
+          <div class="d-inline">
+            <button
+              class="p-2 btn btn-outline-danger btn-sm d-inline"
+              (click)="delete(f.id!)"
+            >
+              Supprimer
+            </button>
+          </div>
+          <div class="p-2 d-inline">
+            <button
+              class="p-2 btn btn-outline-warning btn-sm d-inline"
+              routerLink="/formateur/edit/{{ f.id }}"
+              routerLinkActive="active"
+            >
+              éditer
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
   </div>
 </div>
-
-<section>
-  @for(c of courss;track c.id){
-  <p>{{ c.id }} : {{ c.titre }}</p>
-  <p><button (click)="delete(c.id!)">Supprimer</button></p>
-  }
-</section>

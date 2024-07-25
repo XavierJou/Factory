@@ -25,6 +25,8 @@ public interface IDAOCours extends JpaRepository<Cours, Integer> {
 	@Query("SELECT DISTINCT c FROM Cours c LEFT JOIN FETCH c.matiere WHERE c.formation.id = :idFormation")
     List<Cours> findAllWithMatiere(@Param("idFormation") Integer idFormation);
 	
+	@Query("SELECT DISTINCT c FROM Cours c LEFT JOIN FETCH c.formateur WHERE c.formation.id = :idFormation")
+    List<Cours> findAllWithFormateur(@Param("idFormation") Integer idFormation);
 	
 	 @Query("SELECT COUNT(c) FROM Cours c WHERE c.formateur.id = :idFormateur")
 	  Integer countCoursByFormateurId(@Param("idFormateur") Integer idFormateur);

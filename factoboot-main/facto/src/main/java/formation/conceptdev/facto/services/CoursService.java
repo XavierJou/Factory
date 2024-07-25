@@ -46,6 +46,10 @@ public class CoursService {
         return daoCours.findAllWithMatiere(id);
     }
 	
+	public List<Cours> getAllCoursWithFormateur(Integer id) {
+        return daoCours.findAllWithFormateur(id);
+    }
+	
 	public Cours getByIdWithStagiaire(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Cours sans id");
