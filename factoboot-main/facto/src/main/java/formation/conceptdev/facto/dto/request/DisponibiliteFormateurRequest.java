@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class DisponibiliteFormateurRequest {
 	
 	private Integer formateurId;
-	private LocalDate debut;
-	private LocalDate fin;
+	private LocalDate dateDebut;
+	private LocalDate dateFin;
 	
 	public DisponibiliteFormateurRequest()
 	{
@@ -21,21 +21,23 @@ public class DisponibiliteFormateurRequest {
 		this.formateurId = formateurId;
 	}
 
-	public LocalDate getDebut() {
-		return debut;
+	public LocalDate getDateDebut() {
+		return dateDebut;
 	}
 
-	public void setDebut(LocalDate debut) {
-		this.debut = debut;
+	public void setDateDebut(LocalDate dateDebut) {
+		this.dateDebut = dateDebut;
 	}
 
-	public LocalDate getFin() {
-		return fin;
+	public LocalDate getDateFin() {
+		return dateFin;
 	}
 
-	public void setFin(LocalDate fin) {
-		this.fin = fin;
+	public void setDateFin(LocalDate dateFin) {
+		this.dateFin = dateFin;
 	}
+
+	
 	
 	
 

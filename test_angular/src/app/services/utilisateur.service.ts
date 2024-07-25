@@ -53,7 +53,7 @@ export class UtilisateurService {
     return this.httpClient.delete<void>(`${this.url}/nullIdStagiaire/${id}`);
   }
 
-  private utilsateureToUtilisateurRequest(utilisateur: Utilisateur): any {
+  private utilsateurToUtilisateurRequest(utilisateur: Utilisateur): any {
     let ajoutFormateur = false;
     let ajoutStagiaire = false;
 
@@ -81,7 +81,7 @@ export class UtilisateurService {
   public update(utilisateur: Utilisateur): Observable<Utilisateur> {
     return this.httpClient.put<Utilisateur>(
       `${this.url}/${utilisateur.id}`,
-      this.utilsateureToUtilisateurRequest(utilisateur)
+      this.utilsateurToUtilisateurRequest(utilisateur)
     );
   }
 }

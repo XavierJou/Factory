@@ -70,7 +70,7 @@
         @for(cours of formateur.cours;track cours.id) {
         <tr>
           <td>{{ cours.titre }}</td>
-          <td>{{ cours.dateDebut | date }}</td>
+          <td>{{ cours.dateDebut | date : "dd/MM/yyyy" }}</td>
           <td>{{ cours.matiere?.titre }}</td>
           <!-- Ajoutez d'autres colonnes selon vos besoins -->
         </tr>
@@ -135,12 +135,21 @@
             <h6>
               <button
                 class="btn btn-outline-warning btn-sm"
-                (click)="inverse($index, 1)"
+                (click)="affichageAjoutEdition($index)"
               >
                 Annuler
               </button>
             </h6>
           </td>
+          @if(messageDisponibliteId==formateur.id){
+<tr class="alert alert-danger">
+  {{
+    messageDisponibilite
+  }}
+</tr>
+}
+
+
           }
         </tr>
       </table>
@@ -151,8 +160,8 @@
         @for(disponibiliteFormateur of formateur.disponibiliteFormateur;track
         disponibiliteFormateur.id) {
         <tr>
-          <td>{{ disponibiliteFormateur.dateDebut | date }}</td>
-          <td>{{ disponibiliteFormateur.dateFin | date }}</td>
+          <td>{{ disponibiliteFormateur.dateDebut | date : "dd/MM/yyyy" }}</td>
+          <td>{{ disponibiliteFormateur.dateFin | date : "dd/MM/yyyy" }}</td>
         </tr>
         }
       </table>
