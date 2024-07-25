@@ -75,7 +75,11 @@ export class UtilisateurService {
       role: utilisateur.role,
       ajoutFormateur: ajoutFormateur,
       ajoutStagiaire: ajoutStagiaire,
+      password: 'camembert',
     };
+
+    console.log(obj);
+
     return obj;
   }
 

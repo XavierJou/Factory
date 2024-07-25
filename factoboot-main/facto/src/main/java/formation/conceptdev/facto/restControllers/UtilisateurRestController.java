@@ -112,6 +112,8 @@ public class UtilisateurRestController {
 	        }
 	        Utilisateur utilisateur = utilisateurSrv.getById(id);
 	        
+	        
+	        
 	        if (utilisateurRequest.isAjoutFormateur())
 	        {
 	        	// ajout formateur
@@ -129,7 +131,7 @@ public class UtilisateurRestController {
 	        	utilisateur.setStagiaire(stagiaire);
 	        	
 	        }
-	        BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role");
+	        BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role","password");
 	        utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
 	        return new UtilisateurResponse(utilisateurSrv.update(utilisateur), false, false);
 	    }

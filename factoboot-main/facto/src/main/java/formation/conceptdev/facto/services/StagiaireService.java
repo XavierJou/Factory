@@ -49,7 +49,7 @@ public class StagiaireService {
 		deleteById(stagiaire.getId());
 	}
 	
-	public void detachUtilisateurFromFormateur(Integer idFormateur) {
+	public void detachUtilisateurFromSatgiaire(Integer idFormateur) {
 		daoStagiaire.detachUtilisateurFromStagiaire(idFormateur);
     }
 

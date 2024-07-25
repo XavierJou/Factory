@@ -81,21 +81,13 @@ export class EditUtilisateurComponent {
             return;
           } else {
             // annulation id stagiaire dans utilisateur
-            this.utilisateurSrv
-              .nullIdStagiaire(this.utilisateur.id ?? 0)
+
+            // suppression stagiaire
+            this.stagiaireSrv
+              .deleteStagiaireSeul(id_stagiaire)
               .subscribe(() => {
-                if (id_stagiaire > 0) {
-                  // annulation id utilisateur dans stagiare
-                  this.stagiaireSrv
-                    .nullIdUtilisateur(id_stagiaire)
-                    .subscribe(() => {
-                      // suppression stagiaire
-                      this.stagiaireSrv.delete(id_stagiaire).subscribe(() => {
-                        this.miseAJour();
-                        return;
-                      });
-                    });
-                }
+                this.miseAJour();
+                return;
               });
           }
         });
@@ -114,25 +106,12 @@ export class EditUtilisateurComponent {
                 if (nbcours > 0) {
                   this.messageInfo = 'ce formateur est associé à un cours';
                 } else {
-                  // effacement id formateur
-                  this.utilisateurSrv
-                    .nullIdFormateur(this.utilisateur.id ?? 0)
-                    .subscribe(() => {
-                      console.log('effacement id formateur');
-                      // effacement id utilisateur
-                      this.formateurSrv
-                        .nullIdUtilisateur(id_formateur)
-                        .subscribe(() => {
-                          // effacement formateur
-                          this.formateurSrv
-                            .delete(id_formateur)
-                            .subscribe(() => {
-                              console.log('effacement formateur');
-                              this.miseAJour();
-                              return;
-                            });
-                        });
-                    });
+                  // effacement formateur
+                  this.formateurSrv.deleteSeul(id_formateur).subscribe(() => {
+                    console.log('effacement formateur');
+                    this.miseAJour();
+                    return;
+                  });
                 }
               });
           }

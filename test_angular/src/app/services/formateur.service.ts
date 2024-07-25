@@ -23,9 +23,15 @@ export class FormateurService {
     return this.httpClient.get<Formateur[]>(this.url + '/details');
   }
 
-  public delete(id: number): Observable<void> {
+  public deleteSeul(id: number): Observable<void> {
     return this.httpClient.delete<void>(
       `http://localhost:8080/factory/api/formateur/${id}`
+    );
+  }
+
+  public deleteAvecUtilisateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(
+      `http://localhost:8080/factory/api/formateur/avec-utilisateur/${id}`
     );
   }
 

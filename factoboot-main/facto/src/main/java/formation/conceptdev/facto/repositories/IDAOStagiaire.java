@@ -15,6 +15,6 @@ public interface IDAOStagiaire extends JpaRepository<Stagiaire, Integer> {
 	
 	@Modifying
     @Transactional
-    @Query("UPDATE Stagiaire f SET f.utilisateur = null WHERE f.id = :idFormateur")
-    void detachUtilisateurFromStagiaire(@Param("idFormateur") Integer idFormateur);
+    @Query("UPDATE Stagiaire f SET f.utilisateur = null WHERE f.id = :idStagiaire")
+    void detachUtilisateurFromStagiaire(@Param("idStagiaire") Integer idStagiaire);
 }

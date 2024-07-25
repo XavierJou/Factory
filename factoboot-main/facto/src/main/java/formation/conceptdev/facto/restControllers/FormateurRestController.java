@@ -100,21 +100,63 @@ public class FormateurRestController {
     
     @DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable Integer idFormateur) {
     	
-    	 disponibiliteFormateurService.deleteDisponibiliteByFormateurId(id);
-    	 competenceFormateurService.deleteCompetenceByFormateurId(id);
-    	
-    	 
-    	 Formateur formateur = formateurService.getById(id);
-    	 
-    	 Integer idUtil= formateur.getUtilisateur().getId();
-    	 
-    	 formateurService.detachUtilisateurFromFormateur(id);
-    	 
-    	 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);
-    	 Utilisateur utilisateur = utilisateurSrv.getById(idUtil);
-    	 utilisateurSrv.deleteById(idUtil);
-		 formateurService.deleteById(id);
+    	 disponibiliteFormateurService.deleteDisponibiliteByFormateurId(idFormateur);
+       	 competenceFormateurService.deleteCompetenceByFormateurId(idFormateur);      	
+       	 
+       	 Formateur formateur = formateurService.getById(idFormateur);
+       	 
+       	 Integer idUtil= formateur.getUtilisateur().getId();
+       	 
+
+		 
+		 if (idUtil!=null)
+		 {				 
+			 // suppresion idutilisateur dans formateur
+			 formateurService.detachUtilisateurFromFormateur(idUtil);
+			
+		 }      	 
+       	
+		// suppresion idFormateur dans utilisateur
+       	 utilisateurSrv.detachFormateurFromUtilisateur(idFormateur);
+       	 
+       	
+       
+
+   		 formateurService.deleteById(idFormateur);
 	}
+    
+    @DeleteMapping("/avec-utilisateur/{id}")
+   	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+   	public void deleteWithUtilisateur(@PathVariable Integer idFormateur) {
+       	
+       	 disponibiliteFormateurService.deleteDisponibiliteByFormateurId(idFormateur);
+       	 competenceFormateurService.deleteCompetenceByFormateurId(idFormateur);      	
+       	 
+       	 Formateur formateur = formateurService.getById(idFormateur);
+       	 
+       	 Integer idUtil= formateur.getUtilisateur().getId();
+       	 
+
+		 
+		 if (idUtil!=null)
+		 {				 
+			 // suppresion idutilisateur dans formateur
+			 formateurService.detachUtilisateurFromFormateur(idUtil);
+			
+		 }      	 
+       	
+		// suppresion idFormateur dans utilisateur
+       	 utilisateurSrv.detachFormateurFromUtilisateur(idFormateur);
+       	 
+       	 if (idUtil!=null)
+		 {	
+       		 utilisateurSrv.deleteById(idUtil);
+		 }
+       	 
+       
+
+   		 formateurService.deleteById(idFormateur);
+   	}
 }

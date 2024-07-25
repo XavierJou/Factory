@@ -64,16 +64,10 @@ export class UtilisateurComponent {
             this.messageID = idUtilisateur;
             this.messageInfo = 'ce formateur est associé à un cours';
           } else {
-            this.utilisateurServ
-              .nullIdFormateur(idUtilisateur)
+            this.formateurSrv
+              .deleteAvecUtilisateur(formateur.id)
               .subscribe(() => {
-                this.formateurSrv
-                  .nullIdUtilisateur(formateur.id)
-                  .subscribe(() => {
-                    this.formateurSrv.delete(formateur.id).subscribe(() => {
-                      this.effacementUtilisateur(idUtilisateur);
-                    });
-                  });
+                this.initUtilisateurs();
               });
           }
         });
@@ -86,31 +80,20 @@ export class UtilisateurComponent {
             this.messageInfo = 'ce stagiaire est associé à une formation';
           } else {
             console.log('debut traitement');
-            this.utilisateurServ
-              .nullIdStagiaire(idUtilisateur)
+
+            this.stagiaireSrv
+              .deletAvecUtilisateur(stagiaire.id)
               .subscribe(() => {
-                console.log('nullIdStagiaire');
-                this.stagiaireSrv
-                  .nullIdUtilisateur(stagiaire.id)
-                  .subscribe(() => {
-                    console.log('nullIdUtilisateur');
-                    this.stagiaireSrv.delete(stagiaire.id).subscribe(() => {
-                      this.effacementUtilisateur(idUtilisateur);
-                    });
-                  });
+                this.initUtilisateurs();
               });
           }
         });
       } else {
-        this.effacementUtilisateur(idUtilisateur);
+        this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
+          this.initUtilisateurs();
+        });
       }
     }
-  }
-
-  effacementUtilisateur(idUtilisateur: number) {
-    this.utilisateurServ.delete(idUtilisateur).subscribe(() => {
-      this.initUtilisateurs();
-    });
   }
 
   compareFn(f1: string, f2: string): boolean {

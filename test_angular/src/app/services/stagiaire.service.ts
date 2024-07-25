@@ -23,8 +23,12 @@ export class StagiaireService {
   //   return this.httpClient.get<Stagiaire[]>(`${this.url}/formation`);
   // }
 
-  public delete(id: number): Observable<void> {
+  public deleteStagiaireSeul(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
+
+  public deletAvecUtilisateur(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/avec-utilisateur/${id}`);
   }
 
   public nullIdUtilisateur(id: number): Observable<void> {

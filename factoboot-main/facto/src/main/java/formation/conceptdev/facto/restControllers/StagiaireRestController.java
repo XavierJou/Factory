@@ -92,22 +92,70 @@ public class StagiaireRestController {
 		return new StagiaireResponse(stagiaireSrv.update(stagiaire));
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/avec-utilisateur/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Integer id) {
+	public void deleteWithUtilisateur(@PathVariable Integer idStagiaire) {
 		
 		
-		 Stagiaire stagiaire = stagiaireSrv.getById(id);		
+		 Stagiaire stagiaire = stagiaireSrv.getById(idStagiaire);
+		 
+
 		 Integer idUtil= stagiaire.getUtilisateur().getId();
 		 
-		 Utilisateur utilisateur = utilisateurSrv.getById(idUtil);
+		 if (idUtil!=null)
+		 {				 
+			 	stagiaireSrv.detachUtilisateurFromSatgiaire(idUtil); 
+			
+		 }
+		 
+		 
+		 utilisateurSrv.detachStagiaireFromUtilisateur(idStagiaire);
+		 
 		
-		 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);
-		 stagiaireSrv.detachUtilisateurFromFormateur(id);
+		 if (idUtil!=null)
+		 {	
+			 utilisateurSrv.deleteById(idUtil);
+		 }
+		 
 			
 	   	 
-	   	 utilisateurSrv.deleteById(idUtil);
-	   	 stagiaireSrv.deleteById(id);
+	   	 
+	   	 stagiaireSrv.deleteById(idStagiaire);
+
+   	
+   	 
+   	
+   	 
+
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Integer idStagiaire) {
+		
+		
+		 Stagiaire stagiaire = stagiaireSrv.getById(idStagiaire);
+		 
+		 Integer idUtil= stagiaire.getUtilisateur().getId();	 
+		 
+		
+		 System.out.println(idUtil);
+		 
+		 utilisateurSrv.detachFormateurFromUtilisateur(idStagiaire);
+		 
+		 /*
+		 
+		 
+		 if (idUtil!=null)
+		 {
+			 stagiaireSrv.detachUtilisateurFromSatgiaire(idUtil);
+		 }
+		 			
+	   	 
+	   	
+	   	 stagiaireSrv.deleteById(idStagiaire);
+	   	 */
 
    	
    	 
@@ -118,6 +166,6 @@ public class StagiaireRestController {
 	
 	@DeleteMapping("/nullIdUtilisateur/{idStagiaire}")
     public void detachUtilisateurFromStagiaire(@PathVariable Integer idStagiaire) {
-		stagiaireSrv.detachUtilisateurFromFormateur(idStagiaire);
+		stagiaireSrv.detachUtilisateurFromSatgiaire(idStagiaire);
     }
 }
