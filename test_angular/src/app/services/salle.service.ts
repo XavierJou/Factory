@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Salle } from '../models/salle';
 import { Injectable } from '@angular/core';
@@ -29,5 +29,10 @@ export class SalleService {
 
   public update(salle: Salle): Observable<Salle> {
     return this.httpClient.put<Salle>(`${this.url}/${salle.id}`, salle);
+  }
+
+  public searchByNom(search: string): Observable<Salle[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Salle[]>(this.url, { params });
   }
 }
