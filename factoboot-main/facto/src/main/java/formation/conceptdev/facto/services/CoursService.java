@@ -131,6 +131,10 @@ public class CoursService {
 		
 		
 	}
+	
+	public List<Cours> getCoursWithoutFormateur(Integer formateurId) {
+        return daoCours.findByFormateurNot(formateurId);
+    }
 
 	public List<Cours> getAll() {
 		return daoCours.findAll();

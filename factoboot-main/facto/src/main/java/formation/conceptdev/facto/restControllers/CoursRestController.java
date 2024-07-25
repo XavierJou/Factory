@@ -106,8 +106,17 @@ public class CoursRestController {
 	@GetMapping("/{id}/details")
 	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	public CoursResponse getByIdWithDetails(@PathVariable Integer id) {
-		return new CoursResponse(coursSrv.getById(id), true, true, true, true, true, true, true);
+		return new CoursResponse(coursSrv.getById(id));
 	}
+	
+	@GetMapping("/sans-formateur/{id}")
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
+    public List<CoursResponse> getCoursSansFormateur(@PathVariable Integer id) {
+		
+		return coursSrv.getCoursWithoutFormateur(id).stream()
+				.map(cours -> new CoursResponse(cours, true, true, true, true, true, true, false))
+				.collect(Collectors.toList());   
+    }
 
 	@GetMapping("/{id}/formateurComptence")
 	// @JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class)
@@ -149,10 +158,15 @@ public class CoursRestController {
 		}
 		Cours cours = new Cours();
 		BeanUtils.copyProperties(coursRequest, cours);
+		if (coursRequest.getIdFormation()!=null)			
 		cours.setFormation(formationSrv.getById(coursRequest.getIdFormation()));
+		if (coursRequest.getIdFormateur()!=null)
 		cours.setFormateur(formateurSrv.getById(coursRequest.getIdFormateur()));
+		if (coursRequest.getIdMatiere()!=null)
 		cours.setMatiere(matiereSrv.getById(coursRequest.getIdMatiere()));
-		cours.setSalle(salleSrv.getById(coursRequest.getIdSalle()));
+		if (coursRequest.getIdMatiere()!=null)
+		cours.setSalle(salleSrv.getById(coursRequest.getIdMatiere()));
+		if (coursRequest.getIdVideoprojecteur()!=null)
 		cours.setVideoprojecteur(videoprojecteurSrv.getById(coursRequest.getIdVideoprojecteur()));
 		cours.setId(id);
 

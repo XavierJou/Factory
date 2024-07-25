@@ -14,4 +14,8 @@ export class DisponibiliteFormateurService {
     console.log(obj);
     return this.httpClient.post<DisponibiliteFormateur>(this.url, obj);
   }
+
+  public delete(id: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
+  }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import formation.conceptdev.facto.entities.Competence;
+import formation.conceptdev.facto.entities.Cours;
 import formation.conceptdev.facto.repositories.IDAOCompetence;
 import formation.conceptdev.facto.repositories.IDAOCompetenceFormateur;
 import formation.conceptdev.facto.repositories.IDAOCompetenceMatiere;
@@ -41,6 +42,7 @@ public class CompetenceService {
 		return daoCompetence.findAll();
 	}
 	
+
 	public List<Competence> searchByNom(String nom) {
 	    return daoCompetence.findByNomContaining(nom);
 	}

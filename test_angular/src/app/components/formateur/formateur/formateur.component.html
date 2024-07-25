@@ -15,7 +15,7 @@
           <h5 class="card-title">Formateur ID: {{ formateur.id }}</h5>
         </td>
 
-        @if(formateur.cours && formateur.cours.length>0) {
+        @if(formateur.cours && formateur.cours.length==0) {
         <td>
           <button
             class="btn btn-outline-danger btn-sm"
@@ -52,33 +52,117 @@
     </div>
 
     <!-- Cours Infos -->
-    @if(formateur.cours && formateur.cours.length>0) {
+    
     <div>
+      <table class="table">
+        <tr>
+          <td>
+            @if(formateur.cours && formateur.cours.length>0) {
       <h6>
         <button class="btn btn-link p-0" (click)="inverse($index, 0)">
           Cours Infos
         </button>
+      
       </h6>
+    }
+     @if(formateur.cours && formateur.cours.length<=0) {
+      <h6>
+        
+          Cours Infos
+      
+      
+      </h6>
+    }
+      </td>
+      <td>
+            <button
+              class="btn btn-link p-0"
+              (click)="affichageAjoutCours($index,formateur.id ?? 0)"
+            >
+              Ajout Cours
+            </button>
+          </td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          @if(indexAjoutCours==$index) 
+          {
+          <td>
+            <div class="form-group">
+    Cours :
+    <select
+      id="cours"
+      [(ngModel)]="coursAjout"
+      class="form-control"
+     
+    >
+      @for(c of listcours ;track c.id ){
+      <option [ngValue]="c">{{ c.titre }}</option>
+      }
+    </select>
+  </div>
+          </td>
+          
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                (click)="AjoutCours(formateur.id!)"
+              >
+                Valider
+              </button>
+            </h6>
+          </td>
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-warning btn-sm"
+                 (click)="affichageAjoutCours($index,formateur.id ?? 0)"
+              >
+                Annuler
+              </button>
+            </h6>
+          </td>
+          @if(messageCoursId==formateur.id){
+          <tr class="alert alert-danger">
+            {{
+              messageCours
+            }}
+          </tr>
+        }
+
+
+          }
+        </tr>
+      </table>
+
       @if(showInfo[$index ][0]) {
 
       <table class="table table-sm">
         <th>Titre</th>
         <th>Date de début</th>
-        <th>titre</th>
-        <th>Matiére</th>
+  
+        
 
         @for(cours of formateur.cours;track cours.id) {
         <tr>
           <td>{{ cours.titre }}</td>
           <td>{{ cours.dateDebut | date : "dd/MM/yyyy" }}</td>
-          <td>{{ cours.matiere?.titre }}</td>
+          <td> <h6><button
+            class="btn btn-outline-danger btn-sm"
+            (click)="effaceCours(cours.id ?? 0)"
+          >
+            Supprimer
+          </button></h6></td>
+   
           <!-- Ajoutez d'autres colonnes selon vos besoins -->
         </tr>
         }
       </table>
       }
     </div>
-    }
+ 
 
     <!-- Disponibilité Infos -->
     <div>
@@ -101,7 +185,8 @@
       </table>
       <table>
         <tr>
-          @if(indexAjoutDisponibilite==$index) {
+          @if(indexAjoutDisponibilite==$index) 
+          {
           <td>
             Date de début
             <input
@@ -142,12 +227,12 @@
             </h6>
           </td>
           @if(messageDisponibliteId==formateur.id){
-<tr class="alert alert-danger">
-  {{
-    messageDisponibilite
-  }}
-</tr>
-}
+          <tr class="alert alert-danger">
+            {{
+              messageDisponibilite
+            }}
+          </tr>
+        }
 
 
           }
@@ -162,6 +247,12 @@
         <tr>
           <td>{{ disponibiliteFormateur.dateDebut | date : "dd/MM/yyyy" }}</td>
           <td>{{ disponibiliteFormateur.dateFin | date : "dd/MM/yyyy" }}</td>
+          <td> <h6><button
+            class="btn btn-outline-danger btn-sm"
+            (click)="effaceDisponibilite(disponibiliteFormateur.id ?? 0)"
+          >
+            Supprimer
+          </button></h6></td>
         </tr>
         }
       </table>

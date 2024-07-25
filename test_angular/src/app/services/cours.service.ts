@@ -15,6 +15,10 @@ export class CoursService {
     return this.httpClient.get<Cours[]>(this.url);
   }
 
+  public getWithOutFormateur(id: number): Observable<Cours[]> {
+    return this.httpClient.get<Cours[]>(`${this.url}/sans-formateur/${id}`);
+  }
+
   public getAllFromFormation(): Observable<Cours[]> {
     return this.httpClient.get<Cours[]>(`${this.url}/formation`);
   }

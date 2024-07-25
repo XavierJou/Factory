@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CompetenceRequest;
 import formation.conceptdev.facto.dto.response.CompetenceResponse;
+import formation.conceptdev.facto.dto.response.CoursResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.services.CompetenceService;
@@ -58,6 +59,8 @@ public class CompetenceRestController {
                           .map(competence -> new CompetenceResponse(competence, false, false))
                           .collect(Collectors.toList());
     }
+    
+    
 
     @PostMapping("")
     @ResponseStatus(code = HttpStatus.CREATED)

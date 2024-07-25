@@ -61,6 +61,7 @@ public class DisponibiliteFormateurRestController {
         if (br.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+        System.out.println();
         DisponibiliteFormateur disponibiliteFormateur = new DisponibiliteFormateur();
         BeanUtils.copyProperties(disponibiliteFormateurRequest, disponibiliteFormateur);
         Formateur formateur = formateurService.getById(disponibiliteFormateurRequest.getFormateurId());
@@ -85,6 +86,10 @@ public class DisponibiliteFormateurRestController {
     public void deleteDisponibiliteByFormateurId(@PathVariable Integer idFormateur) {
         disponibiliteFormateurService.deleteDisponibiliteByFormateurId(idFormateur);
     }
+    
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Integer id) {
+        disponibiliteFormateurService.deleteById(id);   }
     
     
 }
