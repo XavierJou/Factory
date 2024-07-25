@@ -45,13 +45,13 @@ export class MatieresFormationComponent implements OnInit {
         this.formation = formation;
       });
     });
-    this.matiereSrv.getAll().subscribe((matieres) => {
-      this.matieres = matieres;
-    });
+    // this.matiereSrv.getAll().subscribe((matieres) => {
+    //   this.matieres = matieres;
+    // });
     this.coursSrv
       .getAllMatieresFromFormation(this.formationId)
       .subscribe((cours) => {
-        this.courss = cours;
+        this.matieres = cours;
       });
   }
 }
