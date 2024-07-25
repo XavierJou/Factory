@@ -48,11 +48,12 @@ export class EditUtilisateurComponent {
   ngOnInit(): void {
     this.ActivatedRoute.params.subscribe((params) => {
       if (params['id']) {
-        this.utilisateurSrv.getById(params['id']).subscribe((utilisateur) => {
-          this.utilisateur = utilisateur;
-          this.roleAvant = this.utilisateur.role ?? '';
-          console.log(' init' + this.roleAvant);
-        });
+        this.utilisateurSrv
+          .getWithDetaileById(params['id'])
+          .subscribe((utilisateur) => {
+            this.utilisateur = utilisateur;
+            this.roleAvant = this.utilisateur.role ?? '';
+          });
       }
     });
   }
@@ -72,11 +73,15 @@ export class EditUtilisateurComponent {
       console.log(this.roleAvant);
       console.log(this.utilisateur.role);
 
+      console.log(this.roleAvant == 'ROLE_STAGIAIRE');
+      console.log(this.roleAvant != this.utilisateur.role);
+
       if (
         this.roleAvant == 'ROLE_STAGIAIRE' &&
         this.roleAvant != this.utilisateur.role
       ) {
         console.log('gestion stagiare');
+        console.log(this.utilisateur);
         let stagiaire = this.utilisateur.stagiaire ?? new Stagiaire();
         let id_stagiaire = stagiaire.id ?? 0;
 

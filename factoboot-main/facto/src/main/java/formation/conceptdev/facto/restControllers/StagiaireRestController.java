@@ -121,7 +121,7 @@ public class StagiaireRestController {
 	}
 	
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{idStagiaire}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer idStagiaire) {
 		

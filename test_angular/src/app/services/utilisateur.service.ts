@@ -46,6 +46,10 @@ export class UtilisateurService {
     return this.httpClient.get<Utilisateur>(`${this.url}/${id}`);
   }
 
+  public getWithDetailsById(id: number): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(`${this.url}/details/${id}`);
+  }
+
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }

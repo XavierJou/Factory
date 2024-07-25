@@ -98,7 +98,7 @@ public class FormateurRestController {
         formateurService.detachUtilisateurFromFormateur(idFormateur);
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{idFormateur}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer idFormateur) {
     	
@@ -121,7 +121,7 @@ public class FormateurRestController {
    		 formateurService.deleteById(idFormateur);
 	}
     
-    @DeleteMapping("/avec-utilisateur/{id}")
+    @DeleteMapping("/avec-utilisateur/{idFormateur}")
    	@ResponseStatus(code = HttpStatus.NO_CONTENT)
    	public void deleteWithUtilisateur(@PathVariable Integer idFormateur) {
        	

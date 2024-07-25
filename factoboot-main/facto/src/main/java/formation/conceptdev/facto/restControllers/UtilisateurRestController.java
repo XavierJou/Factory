@@ -74,6 +74,12 @@ public class UtilisateurRestController {
 	    public UtilisateurResponse getById(@PathVariable Integer id) {
 	        return new UtilisateurResponse(utilisateurSrv.getById(id),false,false);
 	    }
+	 
+	 @GetMapping("/details/{id}")
+	 @JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
+	    public UtilisateurResponse getWithDetailsById(@PathVariable Integer id) {
+	        return new UtilisateurResponse(utilisateurSrv.getById(id));
+	    }
 	
 	@GetMapping("/details")
 	@JsonView(CustomJsonViews.UtilisateurResponseWithDetails.class)
