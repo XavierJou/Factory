@@ -51,7 +51,7 @@ export class MatieresFormationComponent implements OnInit {
     this.coursSrv
       .getAllMatieresFromFormation(this.formationId)
       .subscribe((cours) => {
-        this.matieres = cours;
+        this.courss = cours;
       });
   }
 }

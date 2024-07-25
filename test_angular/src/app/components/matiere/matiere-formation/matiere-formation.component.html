@@ -11,9 +11,9 @@
       >
     </div>
     <div class="gap-3 d-flex flex-column">
-      @for(f of matieres;track f.id){
+      @for(f of courss;track f.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ f.id }} : {{ f.titre }}</p>
+        <p>{{ f.matiere?.id }} : {{ f.matiere?.titre }}</p>
         <div>
           <div class="d-inline">
             <button
