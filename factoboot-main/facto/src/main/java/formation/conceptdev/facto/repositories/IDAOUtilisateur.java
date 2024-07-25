@@ -35,7 +35,7 @@ public interface IDAOUtilisateur extends JpaRepository<Utilisateur, Integer> {
 	
 	@Modifying
     @Transactional
-    @Query("UPDATE Utilisateur f SET f.formateur = null WHERE f.id = :idUtilisateur")
+    @Query("UPDATE Utilisateur f SET f.formateur = null WHERE f.formateur = :idUtilisateur")
     void detachFormateurFromUtilisateur(@Param("idUtilisateur") Integer idUtilisateur);
 	
 	

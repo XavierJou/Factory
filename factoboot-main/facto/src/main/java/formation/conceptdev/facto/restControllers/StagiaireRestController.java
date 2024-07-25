@@ -104,28 +104,19 @@ public class StagiaireRestController {
 		 
 		 if (idUtil!=null)
 		 {				 
-			 	stagiaireSrv.detachUtilisateurFromSatgiaire(idUtil); 
-			
+			 utilisateurSrv.detachStagiaireFromUtilisateur(idUtil);			
 		 }
 		 
 		 
-		 utilisateurSrv.detachStagiaireFromUtilisateur(idStagiaire);
+		 stagiaireSrv.detachUtilisateurFromSatgiaire(idStagiaire);
 		 
 		
 		 if (idUtil!=null)
 		 {	
 			 utilisateurSrv.deleteById(idUtil);
 		 }
-		 
-			
 	   	 
-	   	 
-	   	 stagiaireSrv.deleteById(idStagiaire);
-
-   	
-   	 
-   	
-   	 
+	   	 stagiaireSrv.deleteById(idStagiaire);  	 
 
 	}
 	
@@ -135,32 +126,21 @@ public class StagiaireRestController {
 	public void delete(@PathVariable Integer idStagiaire) {
 		
 		
-		 Stagiaire stagiaire = stagiaireSrv.getById(idStagiaire);
-		 
-		 Integer idUtil= stagiaire.getUtilisateur().getId();	 
-		 
 		
-		 System.out.println(idUtil);
+		Stagiaire stagiaire = stagiaireSrv.getById(idStagiaire);
 		 
-		 utilisateurSrv.detachFormateurFromUtilisateur(idStagiaire);
-		 
-		 /*
-		 
+
+		 Integer idUtil= stagiaire.getUtilisateur().getId();
 		 
 		 if (idUtil!=null)
-		 {
-			 stagiaireSrv.detachUtilisateurFromSatgiaire(idUtil);
-		 }
+		 {				 
+			 utilisateurSrv.detachStagiaireFromUtilisateur(idUtil);
+			
+		 }		
 		 			
-	   	 
+		 stagiaireSrv.detachUtilisateurFromSatgiaire(idStagiaire);
 	   	
-	   	 stagiaireSrv.deleteById(idStagiaire);
-	   	 */
-
-   	
-   	 
-   	
-   	 
+	   	 stagiaireSrv.deleteById(idStagiaire);   	 
 
 	}
 	

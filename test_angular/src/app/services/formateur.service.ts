@@ -35,7 +35,7 @@ export class FormateurService {
     );
   }
 
-  public nullIdUtilisateur(id: number): Observable<void> {
+  public nullIdUtilisateur2(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/nullIdUtilisateur/${id}`);
   }
 

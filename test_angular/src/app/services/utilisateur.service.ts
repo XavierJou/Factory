@@ -50,11 +50,11 @@ export class UtilisateurService {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
-  public nullIdFormateur(id: number): Observable<void> {
+  public nullIdFormateur2(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/nullIdFormateur/${id}`);
   }
 
-  public nullIdStagiaire(id: number): Observable<void> {
+  public nullIdStagiaire2(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/nullIdStagiaire/${id}`);
   }
 
@@ -81,8 +81,6 @@ export class UtilisateurService {
       ajoutStagiaire: ajoutStagiaire,
       password: 'camembert',
     };
-
-    console.log(obj);
 
     return obj;
   }

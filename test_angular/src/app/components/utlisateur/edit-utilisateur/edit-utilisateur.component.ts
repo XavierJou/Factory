@@ -50,7 +50,8 @@ export class EditUtilisateurComponent {
       if (params['id']) {
         this.utilisateurSrv.getById(params['id']).subscribe((utilisateur) => {
           this.utilisateur = utilisateur;
-          this.roleAvant != this.utilisateur.role;
+          this.roleAvant = this.utilisateur.role ?? '';
+          console.log(' init' + this.roleAvant);
         });
       }
     });
@@ -68,26 +69,30 @@ export class EditUtilisateurComponent {
     this.messageInfo = '';
 
     if (this.utilisateur.id) {
+      console.log(this.roleAvant);
+      console.log(this.utilisateur.role);
+
       if (
-        this.roleAvant == 'ROLE_STAGIARE' &&
+        this.roleAvant == 'ROLE_STAGIAIRE' &&
         this.roleAvant != this.utilisateur.role
       ) {
+        console.log('gestion stagiare');
         let stagiaire = this.utilisateur.stagiaire ?? new Stagiaire();
         let id_stagiaire = stagiaire.id ?? 0;
 
+        console.log('id stagiare' + id_stagiaire);
         this.stagiaireSrv.getById(id_stagiaire).subscribe((stagiaireRecup) => {
           if (stagiaireRecup.formation) {
             this.messageInfo = 'ce stagiaire est associé à une formation';
             return;
           } else {
             // annulation id stagiaire dans utilisateur
-
+            console.log('suppresion stagiare');
             // suppression stagiaire
             this.stagiaireSrv
               .deleteStagiaireSeul(id_stagiaire)
               .subscribe(() => {
                 this.miseAJour();
-                return;
               });
           }
         });
@@ -110,7 +115,6 @@ export class EditUtilisateurComponent {
                   this.formateurSrv.deleteSeul(id_formateur).subscribe(() => {
                     console.log('effacement formateur');
                     this.miseAJour();
-                    return;
                   });
                 }
               });

@@ -107,22 +107,16 @@ public class FormateurRestController {
        	 
        	 Formateur formateur = formateurService.getById(idFormateur);
        	 
-       	 Integer idUtil= formateur.getUtilisateur().getId();
-       	 
+       	 Integer idUtil= formateur.getUtilisateur().getId();		 
 
-		 
 		 if (idUtil!=null)
 		 {				 
-			 // suppresion idutilisateur dans formateur
-			 formateurService.detachUtilisateurFromFormateur(idUtil);
-			
-		 }      	 
+			// suppresion idFormateur dans utilisateur
+	       	 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);   
+		 }    	 
        	
-		// suppresion idFormateur dans utilisateur
-       	 utilisateurSrv.detachFormateurFromUtilisateur(idFormateur);
-       	 
-       	
-       
+		 // suppresion idutilisateur dans formateur
+		 formateurService.detachUtilisateurFromFormateur(idFormateur);
 
    		 formateurService.deleteById(idFormateur);
 	}
@@ -142,13 +136,13 @@ public class FormateurRestController {
 		 
 		 if (idUtil!=null)
 		 {				 
-			 // suppresion idutilisateur dans formateur
-			 formateurService.detachUtilisateurFromFormateur(idUtil);
-			
+			// suppresion idFormateur dans utilisateur
+	       	 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);   
 		 }      	 
        	
-		// suppresion idFormateur dans utilisateur
-       	 utilisateurSrv.detachFormateurFromUtilisateur(idFormateur);
+		 // suppresion idutilisateur dans formateur
+		 formateurService.detachUtilisateurFromFormateur(idFormateur);
+		 
        	 
        	 if (idUtil!=null)
 		 {	
