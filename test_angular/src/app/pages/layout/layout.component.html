@@ -59,63 +59,76 @@
               class="dropdown-item"
               >Utilisateurs
             </a>
-            <a
-              routerLink="/formateurs"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-              class="dropdown-item"
-              >Formateurs
-            </a>
-            <a
-              routerLink="/stagiaires"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-              class="dropdown-item"
-              >Stagiaires
-            </a>
+            <ul>
+              <a
+                routerLink="/formateurs"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                class="dropdown-item"
+                >Formateurs
+              </a>
+
+              <a
+                routerLink="/stagiaires"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                class="dropdown-item"
+                >Stagiaires
+              </a>
+            </ul>
+            <div class="dropdown-divider"></div>
             <a
               routerLink="/competence"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               class="dropdown-item"
-              >Competences
+              >Compétences
             </a>
-            <div class="dropdown-divider"></div>
+            <a
+              routerLink="/salle"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Salle
+            </a>
             <a
               routerLink="/materiel"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               class="dropdown-item"
-              >Matériel</a
+              >Matériels</a
             >
+            <a
+              routerLink="/matieres"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Matières
+            </a>
             <a
               routerLink="/ordinateur"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               class="dropdown-item"
-              >Ordinateur
+              >Ordinateurs
             </a>
             <a
               routerLink="/videoprojecteur"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               class="dropdown-item"
-              >videoprojecteur
-            </a>
-            <a
-              routerLink="/matiere"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-              class="dropdown-item"
-              >matiere
+              >Videoprojecteurs
             </a>
           </div>
         </li>
       </ul>
-      <div class="my-3">
+      <div class="my-3 text-white">
+        @if (logged) {
+        <span class="me-3">Profil connecté : {{ login }}</span>
         <button (click)="logout()" class="btn btn-outline-primary btn-sm">
-          déconnexion
+          Déconnexion
         </button>
+        }
       </div>
     </div>
   </div>

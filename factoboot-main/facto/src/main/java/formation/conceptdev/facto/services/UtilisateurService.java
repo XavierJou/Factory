@@ -81,6 +81,11 @@ public class UtilisateurService implements UserDetailsService {
 	{
 		return daoUtilisateur.findAll();
 	}
+	
+	public List<Utilisateur> searchByKeyword(String keyword) {
+		  return daoUtilisateur.searchByKeyword(keyword.toLowerCase());
+		}
+	
 	/*
 	
 	public Utilisateur insert(Utilisateur utilisateur) 

@@ -1,4 +1,8 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Utilisateur } from '../models/utilisateur';
@@ -88,5 +92,10 @@ export class UtilisateurService {
       `${this.url}/${utilisateur.id}`,
       this.utilsateurToUtilisateurRequest(utilisateur)
     );
+  }
+
+  public searchByKeyword(keyword: string): Observable<Utilisateur[]> {
+    let params = new HttpParams().set('keyword', keyword);
+    return this.httpClient.get<Utilisateur[]>(`${this.url}/search`, { params });
   }
 }
