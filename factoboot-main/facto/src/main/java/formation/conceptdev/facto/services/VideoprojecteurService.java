@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.entities.Videoprojecteur;
 import formation.conceptdev.facto.repositories.IDAOVideoprojecteur;
 
@@ -26,6 +27,10 @@ public class VideoprojecteurService {
 			throw new RuntimeException("Impossible de find Videoprojecteur sans id");
 		}
 		return daoVideoprojecteur.findById(id).orElseThrow(RuntimeException::new);
+	}
+	
+	public List<Videoprojecteur> searchByNom(String nom) {
+	    return daoVideoprojecteur.findByNomContaining(nom);
 	}
 
 	public List<Videoprojecteur> getAll() {
