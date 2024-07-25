@@ -24,11 +24,23 @@
     @for(v of videoprojecteurs;track v.id){
     <div class="alert alert-dismissible alert-secondary">
       <p>{{ v.id }} : {{ v.nom }}</p>
-      <p>
-        <button class="btn btn-outline-danger btn-sm" (click)="delete(v.id!)">
+      <div class="d-inline">
+        <button
+          class="p-2 btn btn-outline-danger btn-sm d-inline"
+          (click)="delete(v.id!)"
+        >
           Supprimer
         </button>
-      </p>
+      </div>
+      <div class="p-2 d-inline">
+        <button
+          class="p-2 btn btn-outline-warning btn-sm d-inline"
+          routerLink="/videoprojecteur/edit/{{ v.id }}"
+          routerLinkActive="active"
+        >
+          éditer
+        </button>
+      </div>
     </div>
     }
   </div>

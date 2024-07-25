@@ -1,13 +1,22 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
   <div class="container">
     <div class="container-fluid">
-      <a routerLink="/ordinateur/edit" routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm">Nouvel ordinateur</a>
+      <a
+        routerLink="/ordinateur/edit"
+        routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm"
+        >Nouvel ordinateur</a
+      >
     </div>
     <div class="search-bar">
       <div class="input-group">
-        <input class="form-control" type="text" placeholder="Rechercher un ordinateur" [(ngModel)]="searchTerm"
-          (input)="searchOrdinateurs()" />
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Rechercher un ordinateur"
+          [(ngModel)]="searchTerm"
+          (input)="searchOrdinateurs()"
+        />
         <!-- Boutton pour effacer la recherche -->
       </div>
     </div>
@@ -16,11 +25,23 @@
       @for(o of ordinateurs;track o.id){
       <div class="alert alert-dismissible alert-secondary">
         <p>{{ o.id }} : {{ o.nom }}</p>
-        <p>
-          <button class="btn btn-outline-danger btn-sm" (click)="delete(o.id!)">
+        <div class="d-inline">
+          <button
+            class="p-2 btn btn-outline-danger btn-sm d-inline"
+            (click)="delete(o.id!)"
+          >
             Supprimer
           </button>
-        </p>
+        </div>
+        <div class="p-2 d-inline">
+          <button
+            class="p-2 btn btn-outline-warning btn-sm d-inline"
+            routerLink="/ordinateur/edit/{{ o.id }}"
+            routerLinkActive="active"
+          >
+            éditer
+          </button>
+        </div>
       </div>
       }
     </div>
