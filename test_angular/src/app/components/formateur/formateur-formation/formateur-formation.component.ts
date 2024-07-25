@@ -34,7 +34,7 @@ export class FormateursFormationComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.formateurSrv.delete(id).subscribe(() => {
+    this.formateurSrv.deleteAvecUtilisateur(id).subscribe(() => {
       this.initFormateur();
     });
   }
