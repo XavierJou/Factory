@@ -41,16 +41,6 @@ export class PlanificationComponent implements OnInit {
       true
     ),
 
-    new PlanifSalle(
-      4,
-      'Salle 1',
-      new Date('2024-07-06'),
-      new Date('2024-07-07'),
-      'black', // Couleur du rectangle
-      '',
-      false
-    ),
-
     // Ajoutez d'autres données selon vos besoins
   ];
 
@@ -58,19 +48,42 @@ export class PlanificationComponent implements OnInit {
   salles: string[] = ['Salle 1', 'Salle 2', 'Salle 3'];
   private bornesX!: d3.ScaleTime<number, number>;
 
+  decalageJour: number = 0;
+
   @ViewChild('chart', { static: true }) private chartContainer!: ElementRef;
 
   private marges = { top: 20, right: 20, bottom: 30, left: 50 };
   private largeur!: number;
   private hauteur!: number;
   private x!: d3.ScaleTime<number, number>;
-  dateDebut: string = this.convertiDateString(new Date('2024-07-01'));
-  dateFin: string = this.convertiDateString(new Date('2024-07-31'));
+
+  dateDebut: Date = new Date('2024-06-25');
+
+  dateDebutString: string = this.convertiDateString(new Date('2024-06-24'));
+  dateFinString: string = this.convertiDateString(new Date('2024-07-31'));
   private borneX!: d3.ScaleTime<number, number>;
   private svg!: d3.Selection<SVGSVGElement, unknown, null, undefined>;
   private g!: d3.Selection<SVGGElement, unknown, null, undefined>;
 
+  calculDateDebutFin(dateDepart: Date) {
+    this.dateDebutString = this.trouverLundiProche(dateDepart).toDateString();
+    this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
+  }
+
+  private trouverLundiProche(date: Date): Date {
+    const jour = date.getDay(); // 0 = Dimanche, 1 = Lundi, ..., 6 = Samedi
+
+    // Calculer la différence en jours pour atteindre le lundi
+    const diff = (jour === 0 ? -6 : 1) - jour;
+
+    // Créer une nouvelle date pour le lundi le plus proche
+    const lundiProche = new Date(date);
+    lundiProche.setDate(date.getDate() + diff);
+
+    return lundiProche;
+  }
   ngOnInit(): void {
+    this.calculDateDebutFin(this.dateDebut);
     this.createChart();
   }
 
@@ -96,19 +109,14 @@ export class PlanificationComponent implements OnInit {
     // Configurer l'échelle de l'axe X avec une plage de dates fixe
     this.borneX = d3
       .scaleTime()
-      .domain([new Date(this.dateDebut), new Date(this.dateFin)]) // Plage de dates fixe
+      .domain([new Date(this.dateDebutString), new Date(this.dateFinString)]) // Plage de dates fixe
       .range([0, this.largeur]);
 
     // Configurer l'échelle de l'axe Y avec les noms des salles
     const y = d3
       .scaleBand()
       .domain(this.salles)
-      /*
-      .domain(
-        this.planifSalles
-          .map((d) => d.nom!)
-          .filter((nom): nom is string => nom !== undefined)
-      )*/
+
       .range([0, this.hauteur])
       .padding(0.1);
 
@@ -162,20 +170,63 @@ export class PlanificationComponent implements OnInit {
       .text((d) => d.texte ?? '') // Utiliser le texte spécifié
       .attr('fill', 'white'); // Couleur du texte
 
+    // Ajouter les rectangles pour les week-ends
+    this.addWeekendRectangles(y);
+
     // Rendre les barres déplaçables
     this.rendreDragable(bars, this.borneX, y);
   }
 
+  // Ajouter des rectangles pour les week-ends
+  private addWeekendRectangles(y: d3.ScaleBand<string>) {
+    const weekends = this.generateWeekendData();
+    this.g
+      .selectAll('.weekend')
+      .data(weekends)
+      .enter()
+      .append('rect')
+      .attr('class', 'weekend')
+      .attr('x', (d) => this.borneX(d.debut) ?? 0)
+      .attr('y', 0) // Couvrir toute la hauteur
+      .attr(
+        'width',
+        (d) => (this.borneX(d.fin) ?? 0) - (this.borneX(d.debut) ?? 0)
+      )
+      .attr('height', this.hauteur)
+      .attr('fill', 'black')
+      .attr('opacity', 0.1); // Ajuster l'opacité pour rendre les rectangles moins intrusifs
+  }
+
+  // Générer des données pour les week-ends
+  private generateWeekendData(): { debut: Date; fin: Date }[] {
+    const weekends = [];
+    let currentDate = new Date(this.dateDebutString);
+    const endDate = new Date(this.dateFinString);
+
+    while (currentDate <= endDate) {
+      let numJour = currentDate.getDay() + this.decalageJour;
+      if (numJour > 7) numJour = numJour - 7;
+      if (numJour === 6) {
+        const samedi = new Date(currentDate);
+        const dimanche = new Date(currentDate);
+        dimanche.setDate(samedi.getDate() + 2);
+        weekends.push({ debut: samedi, fin: dimanche });
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return weekends;
+  }
+
   public semaineSuivante() {
-    this.dateDebut = this.ajouterJour(this.dateDebut, 7);
-    this.dateFin = this.ajouterJour(this.dateFin, 7);
+    this.dateDebutString = this.ajouterJour(this.dateDebutString, 7);
+    this.dateFinString = this.ajouterJour(this.dateFinString, 7);
     this.ChangementBorne();
   }
 
   public semainePrecedente() {
-    this.dateDebut = this.ajouterJour(this.dateDebut, -7);
+    this.dateDebutString = this.ajouterJour(this.dateDebutString, -7);
 
-    this.dateFin = this.ajouterJour(this.dateFin, -7);
+    this.dateFinString = this.ajouterJour(this.dateFinString, -7);
     this.ChangementBorne();
   }
 
@@ -196,17 +247,20 @@ export class PlanificationComponent implements OnInit {
   }
 
   ChangementBorneDebut() {
-    this.dateFin = this.ajouterMois(this.dateDebut, 1);
+    this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
     this.ChangementBorne();
   }
 
   ChangementBorneFin() {
-    this.dateDebut = this.ajouterMois(this.dateFin, -1);
+    this.dateDebutString = this.ajouterMois(this.dateFinString, -1);
     this.ChangementBorne();
   }
 
   ChangementBorne() {
-    this.borneX.domain([new Date(this.dateDebut), new Date(this.dateFin)]);
+    this.borneX.domain([
+      new Date(this.dateDebutString),
+      new Date(this.dateFinString),
+    ]);
 
     // Mettre à jour l'axe X
     (
@@ -238,7 +292,6 @@ export class PlanificationComponent implements OnInit {
     );
   }
 
-  // Rendre les barres déplaçables avec D3 Drag
   private rendreDragable(
     bars: d3.Selection<SVGGElement, PlanifSalle, SVGGElement, any>,
     x: d3.ScaleTime<number, number>,
@@ -255,10 +308,8 @@ export class PlanificationComponent implements OnInit {
           if (!d.estDragable) return;
 
           // Ajouter une classe et changer la couleur de la barre lorsqu'elle est déplacée
-          d3.select(event.sourceEvent.target.parentElement)
-            .classed('dragging', true)
-            .select('rect');
-          d.couleur = 'orange';
+          d3.select(event.sourceEvent.target).classed('dragging', true);
+          // .attr('fill', 'orange');
         }
       )
       .on(
@@ -267,7 +318,6 @@ export class PlanificationComponent implements OnInit {
           event: d3.D3DragEvent<SVGGElement, PlanifSalle, any>,
           d: PlanifSalle
         ) => {
-          // Mettre à jour la position de la barre pendant le déplacement
           if (!d.estDragable) return;
 
           // Déplacement horizontal (arrondi au jour le plus proche)
@@ -278,7 +328,7 @@ export class PlanificationComponent implements OnInit {
           d.fin = new Date(newX.getTime() + duration);
 
           // Déplacement vertical
-          const newY = y.domain().find((nom, index) => {
+          const newY = y.domain().find((nom) => {
             const bandY = y(nom) ?? 0;
             return (
               event.y - this.marges.top >= bandY &&
@@ -299,15 +349,11 @@ export class PlanificationComponent implements OnInit {
           event: d3.D3DragEvent<SVGGElement, PlanifSalle, any>,
           d: PlanifSalle
         ) => {
-          // Retirer la classe et restaurer la couleur de la barre après le déplacement
           if (!d.estDragable) return;
 
-          d3.select(event.sourceEvent.target.parentElement)
-            .classed('dragging', false)
-            .select('rect');
+          d3.select(event.sourceEvent.target).classed('dragging', false);
           //  .attr('fill', d.couleur ?? 'steelblue');
 
-          // d.fin = new Date(d.fin!.getTime() + 24 * 60 * 60 * 1000);
           this.redessineBarres(bars, x, y);
         }
       );

@@ -2,14 +2,14 @@ debut
 <input
   type="date"
   id="dateDebut"
-  [(ngModel)]="dateDebut"
+  [(ngModel)]="dateDebutString"
   (ngModelChange)="ChangementBorneDebut()"
 />
 fin
 <input
   type="date"
   id="dateFin"
-  [(ngModel)]="dateFin"
+  [(ngModel)]="dateFinString"
   (ngModelChange)="ChangementBorneFin()"
 />
 <button (click)="semainePrecedente()">precedent</button>
