@@ -20,6 +20,8 @@ export class UtilisateurComponent {
 
   filteredUtilisateurs: Utilisateur[] = [];
 
+  searchTerm: string = ''; // recherche
+
   selectedRole: string = 'TOUS LES ROLES';
 
   valeurSelect: string[] = [
@@ -176,5 +178,17 @@ export class UtilisateurComponent {
         return 0;
       }
     });
+  }
+
+  searchUtilisateurs(): void {
+    if (this.searchTerm) {
+      this.utilisateurServ
+        .searchByKeyword(this.searchTerm)
+        .subscribe((data: Utilisateur[]) => {
+          this.filteredUtilisateurs = data;
+        });
+    } else {
+      this.filterUtilisateurs();
+    }
   }
 }

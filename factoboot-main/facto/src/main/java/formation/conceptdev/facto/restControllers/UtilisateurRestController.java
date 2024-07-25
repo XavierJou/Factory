@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -54,6 +55,19 @@ public class UtilisateurRestController {
 	public List<UtilisateurResponse> getAll() {
 		return utilisateurSrv.getAll().stream().map(u -> new UtilisateurResponse(u)).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/search")
+	@JsonView(CustomJsonViews.Common.class)
+	public List<UtilisateurResponse> getAll(@RequestParam(value = "keyword", required = false) String keyword) {
+	    List<Utilisateur> utilisateurs;
+	    if (keyword != null && !keyword.trim().isEmpty()) {
+	        utilisateurs = utilisateurSrv.searchByKeyword(keyword);
+	    } else {
+	        utilisateurs = utilisateurSrv.getAll();
+	    }
+	    return utilisateurs.stream().map(UtilisateurResponse::new).collect(Collectors.toList());
+	}
+	
 
 	 @GetMapping("/{id}")
 	    @JsonView(CustomJsonViews.Common.class)
