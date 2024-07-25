@@ -49,7 +49,7 @@ export class EditUtilisateurComponent {
     this.ActivatedRoute.params.subscribe((params) => {
       if (params['id']) {
         this.utilisateurSrv
-          .getWithDetaileById(params['id'])
+          .getWithDetailsById(params['id'])
           .subscribe((utilisateur) => {
             this.utilisateur = utilisateur;
             this.roleAvant = this.utilisateur.role ?? '';
