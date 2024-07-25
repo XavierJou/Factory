@@ -32,7 +32,6 @@
           >Ajouter
         </a>
       </div>
-
     </div>
   </div>
 </section>
@@ -93,83 +92,98 @@
         </div>
       </div>
     </a>
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1"> token </span>
+    <a
+      routerLink="../formation/{{ formation.id }}/matieres"
+      routerLinkActive="active"
+    >
+      <div class="col">
+        <div class="card-group">
+          <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+            <div class="text-center card-body">
+              <div class="mb-3">
+                <span class="material-symbols-rounded fs-1"> token </span>
+              </div>
+              <h4 class="card-title">Matières</h4>
+              <p class="mt-5 card-text">
+                <span class="badge bg-primary rounded-pill">6</span>
+              </p>
             </div>
-            <h4 class="card-title">Matières</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">6</span>
-            </p>
           </div>
         </div>
       </div>
-    </div>
+    </a>
     <a
       routerLink="../formation/{{ formation.id }}/prerequis"
       routerLinkActive="active"
     >
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1">
-                category_search
-              </span>
+      <div class="col">
+        <div class="card-group">
+          <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+            <div class="text-center card-body">
+              <div class="mb-3">
+                <span class="material-symbols-rounded fs-1">
+                  category_search
+                </span>
+              </div>
+              <h4 class="card-title">Prérequis</h4>
+              <p class="mt-5 card-text">
+                <span class="badge bg-primary rounded-pill">{{
+                  formation.prerequis?.length
+                }}</span>
+              </p>
             </div>
-            <h4 class="card-title">Prérequis</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">{{
-                formation.prerequis?.length
-              }}</span>
-            </p>
           </div>
         </div>
       </div>
-    </div>
-  </a>
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1">
-                settings_accessibility
-              </span>
+    </a>
+    <a
+      routerLink="../formation/{{ formation.id }}/formateurs"
+      routerLinkActive="active"
+    >
+      <div class="col">
+        <div class="card-group">
+          <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+            <div class="text-center card-body">
+              <div class="mb-3">
+                <span class="material-symbols-rounded fs-1">
+                  settings_accessibility
+                </span>
+              </div>
+              <h4 class="card-title">Formateurs</h4>
+              <p class="mt-5 card-text">
+                <span class="badge bg-primary rounded-pill">
+                  {{ servedCount }}
+                </span>
+              </p>
             </div>
-            <h4 class="card-title">Formateurs</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">
-                {{ servedCount }}
-              </span>
-            </p>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="card-group">
-        <div class="mb-3 card bg-secondary" style="max-width: 20rem">
-          <div class="text-center card-body">
-            <div class="mb-3">
-              <span class="material-symbols-rounded fs-1">
-                deployed_code_account
-              </span>
+    </a>
+    <a
+      routerLink="../formation/{{ formation.id }}/stagiaires"
+      routerLinkActive="active"
+    >
+      <div class="col">
+        <div class="card-group">
+          <div class="mb-3 card bg-secondary" style="max-width: 20rem">
+            <div class="text-center card-body">
+              <div class="mb-3">
+                <span class="material-symbols-rounded fs-1">
+                  deployed_code_account
+                </span>
+              </div>
+              <h4 class="card-title">Stagiaires</h4>
+              <p class="mt-5 card-text">
+                <span class="badge bg-primary rounded-pill">
+                  {{ formation.stagiaires?.length }}
+                </span>
+              </p>
             </div>
-            <h4 class="card-title">Stagiaires</h4>
-            <p class="mt-5 card-text">
-              <span class="badge bg-primary rounded-pill">
-                {{ formation.stagiaires?.length }}
-              </span>
-            </p>
           </div>
         </div>
       </div>
-    </div>
+    </a>
     <div class="col">
       <div class="card-group">
         <div class="mb-3 card bg-secondary" style="max-width: 20rem">

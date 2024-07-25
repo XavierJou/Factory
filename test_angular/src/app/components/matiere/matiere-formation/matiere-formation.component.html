@@ -1,19 +1,19 @@
 <div class="container">
-  <h1>Prérequis</h1>
+  <h1>Matières</h1>
   <h3><b>Formation : </b> {{ formation.titre }}</h3>
   <div class="gap-5 m-auto d-flex flex-column">
     <div class="text-end">
       <a
-        routerLink="/prerequis/edit"
+        routerLink="/matiere/edit"
         routerLinkActive="active"
         class="btn btn-link-primary btn-outline-primary btn-sm"
-        >+ prérequis</a
+        >+ matière</a
       >
     </div>
     <div class="gap-3 d-flex flex-column">
-      @for(f of prerequiss;track f.id){
+      @for(f of matieres;track f.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ f.id }} : {{ f.nom }}</p>
+        <p>{{ f.id }} : {{ f.titre }}</p>
         <div>
           <div class="d-inline">
             <button
@@ -26,7 +26,7 @@
           <div class="p-2 d-inline">
             <button
               class="p-2 btn btn-outline-warning btn-sm d-inline"
-              routerLink="/formations/edit/{{ f.id }}"
+              routerLink="/matiere/edit/{{ f.id }}"
               routerLinkActive="active"
             >
               éditer

@@ -5,6 +5,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
+import { Utilisateur } from '../../models/utilisateur';
 
 @Component({
   selector: 'app-layout',
@@ -16,8 +17,22 @@ import {
 export class LayoutComponent {
   constructor(private router: Router) {}
 
+  get login(): string {
+    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
+    return u.login!;
+  }
+
+  get prenom(): string {
+    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
+    return u.prenom!;
+  }
+
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/home');
+  }
+
+  get logged(): boolean {
+    return localStorage.getItem('token') != null;
   }
 }

@@ -1,0 +1,15 @@
+<h1>[Formation] {{ formation.titre }}</h1>
+<div class="row">
+  <div class="col">
+    <a routerLink="/cours/edit" routerLinkActive="active" class="btn btn-link"
+      >Nouveau cours</a
+    >
+  </div>
+</div>
+
+<section>
+  @for(c of courss;track c.id){
+  <p>{{ c.id }} : {{ c.titre }}</p>
+  <p><button (click)="delete(c.id!)">Supprimer</button></p>
+  }
+</section>

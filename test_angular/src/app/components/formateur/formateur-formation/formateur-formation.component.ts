@@ -7,13 +7,13 @@ import { FormationService } from '../../../services/formation.service';
 import { Formation } from '../../../models/formation';
 
 @Component({
-  selector: 'app-cours',
+  selector: 'app-formateur-formation',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, DatePipe],
-  templateUrl: './cours-formation.component.html',
-  styleUrl: './cours-formation.component.css',
+  templateUrl: './formateur-formation.component.html',
+  styleUrl: './formateur-formation.component.css',
 })
-export class CoursFormationComponent implements OnInit {
+export class FormateursFormationComponent implements OnInit {
   courss: Cours[] = [];
   formation: Formation = new Formation();
 

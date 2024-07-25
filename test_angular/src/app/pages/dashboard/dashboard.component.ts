@@ -5,6 +5,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Formation } from '../../models/formation';
 import { DashboardService } from '../../services/dashboard.service';
+import { Utilisateur } from '../../models/utilisateur';
 
 @Component({
   selector: 'app-dashboard',
