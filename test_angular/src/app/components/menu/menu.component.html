@@ -14,7 +14,7 @@
         </li>
         <li class="mx-2 nav-item">
           <a routerLink="/formations" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Nos
-            formations
+            Formations
           </a>
         </li>
         <li class="mx-2 nav-item">
@@ -23,20 +23,20 @@
         </li>
         <li class="mx-2 nav-item">
           <a routerLink="/planification" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Test
-            graphique
+            Graphique
           </a>
         </li>
       </ul>
       <div class="my-3">
         @if(logged){
         <button (click)="logout()" class="btn btn-outline-primary btn-sm">
-          deconnexion
+          Déconnexion
         </button>
         }@else{
         <span><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="mx-2 btn btn-outline-primary btn-sm">connexion</a></span>
+            class="mx-2 btn btn-outline-primary btn-sm">Connexion</a></span>
         <span><a routerLink="/inscription" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="mx-2 btn btn-primary btn-sm">inscription</a></span>
+            class="mx-2 btn btn-primary btn-sm">Inscription</a></span>
         }
       </div>
     </div>

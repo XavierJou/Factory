@@ -55,10 +55,13 @@
           </div>
         </li>
       </ul>
-      <div class="my-3">
+      <div class="my-3 text-white">
+        @if (logged) {
+        <span class="me-3">Profil connecté : {{ login }}</span>
         <button (click)="logout()" class="btn btn-outline-primary btn-sm">
-          déconnexion
+          Déconnexion
         </button>
+        }
       </div>
     </div>
   </div>

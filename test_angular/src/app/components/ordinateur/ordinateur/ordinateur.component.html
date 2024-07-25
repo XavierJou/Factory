@@ -1,22 +1,13 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
   <div class="container">
     <div class="container-fluid">
-      <a
-        routerLink="/ordinateur/edit"
-        routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm"
-        >Nouvel ordinateur</a
-      >
+      <a routerLink="/ordinateur/edit" routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm">Nouvel ordinateur</a>
     </div>
     <div class="search-bar">
       <div class="input-group">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Rechercher une compétence"
-          [(ngModel)]="searchTerm"
-          (input)="searchOrdinateurs()"
-        />
+        <input class="form-control" type="text" placeholder="Rechercher un ordinateur" [(ngModel)]="searchTerm"
+          (input)="searchOrdinateurs()" />
         <!-- Boutton pour effacer la recherche -->
       </div>
     </div>
