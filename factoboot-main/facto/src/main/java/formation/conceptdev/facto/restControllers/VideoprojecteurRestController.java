@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.VideoprojecteurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
-import formation.conceptdev.facto.dto.response.OrdinateurResponse;
 import formation.conceptdev.facto.dto.response.VideoprojecteurResponse;
-import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.entities.Videoprojecteur;
 import formation.conceptdev.facto.services.VideoprojecteurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
