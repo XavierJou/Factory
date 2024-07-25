@@ -7,6 +7,18 @@
       >Nouveau videoprojecteur</a
     >
   </div>
+  <div class="search-bar">
+    <div class="input-group">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Rechercher une compétence"
+        [(ngModel)]="searchTerm"
+        (input)="searchOrdinateurs()"
+      />
+      <!-- Boutton pour effacer la recherche -->
+    </div>
+  </div>
   <p></p>
   <div class="container">
     @for(v of videoprojecteurs;track v.id){
@@ -21,8 +33,3 @@
     }
   </div>
 </div>
-
-@for(v of videoprojecteurs;track v.id){
-<p>{{ v.id }} : {{ v.nom }}</p>
-<p><button (click)="delete(v.id!)">Supprimer</button></p>
-}

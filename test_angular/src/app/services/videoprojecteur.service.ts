@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Videoprojecteur } from '../models/videoprojecteur';
@@ -32,5 +32,10 @@ export default class VideoprojecteurService {
       `${this.url}/${videoprojecteur.id}`,
       videoprojecteur
     );
+  }
+
+  public searchByNom(search: string): Observable<Videoprojecteur[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Videoprojecteur[]>(this.url, { params });
   }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,7 +24,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.VideoprojecteurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
+import formation.conceptdev.facto.dto.response.OrdinateurResponse;
 import formation.conceptdev.facto.dto.response.VideoprojecteurResponse;
+import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.entities.Videoprojecteur;
 import formation.conceptdev.facto.services.VideoprojecteurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -40,8 +43,16 @@ public class VideoprojecteurRestController {
 
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
-    public List<VideoprojecteurResponse> getAll() {
-        return videoprojecteurService.getAll().stream().map(videoprojecteur -> new VideoprojecteurResponse(videoprojecteur,false)).collect(Collectors.toList());
+    public List<VideoprojecteurResponse> getAll(@RequestParam(value = "search", required = false) String search) {
+        List<Videoprojecteur> videoprojecteurs;
+        if (search != null && !search.trim().isEmpty()) {
+        	videoprojecteurs = videoprojecteurService.searchByNom(search);
+        } else {
+        	videoprojecteurs = videoprojecteurService.getAll();
+        }
+        return videoprojecteurs.stream()
+                          .map(videoprojecteur -> new VideoprojecteurResponse(videoprojecteur, false))
+                          .collect(Collectors.toList());
     }
 
     @PostMapping("")
