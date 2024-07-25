@@ -1,6 +1,6 @@
 <div class="container">
   <div class="gap-5 mt-5 d-flex flex-column">
-    <h1 class="text-center">Edition d'une formation</h1>
+    <h1 class="text-center">Édition d'une formation</h1>
     <div class="gap-3 m-auto w-100 d-flex flex-column" style="max-width: 650px">
       <div class="form-group">
         <label for="titre">Titre</label>
@@ -20,6 +20,16 @@
           id="duree"
           name="duree"
           [(ngModel)]="formation.duree"
+        />
+      </div>
+      <div class="form-group">
+        <label for="capacite">Capacité</label>
+        <input
+          type="number"
+          class="form-control"
+          id="capacite"
+          name="capacite"
+          [(ngModel)]="formation.capacite"
         />
       </div>
       <div class="form-group">

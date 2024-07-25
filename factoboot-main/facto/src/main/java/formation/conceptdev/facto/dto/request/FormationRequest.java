@@ -1,6 +1,6 @@
 package formation.conceptdev.facto.dto.request;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -11,7 +11,8 @@ public class FormationRequest {
 	private Integer duree;
 	private String objectif;
 	private String contenu;
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
+	private Integer capacite;
 
 	public FormationRequest() {
 	}
@@ -56,14 +57,20 @@ public class FormationRequest {
 		this.contenu = contenu;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
-	
-	
+
+	public Integer getCapacite() {
+		return capacite;
+	}
+
+	public void setCapacite(Integer capacite) {
+		this.capacite = capacite;
+	}
 
 }
