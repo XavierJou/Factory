@@ -261,11 +261,77 @@
 
     <!-- Compétence Infos -->
     <div>
+<table class="table">
+        <tr>
+          <td>
+
       <h6>
         <button class="btn btn-link p-0" (click)="inverse($index, 2)">
           Compétence Infos
         </button>
       </h6>
+      </td>
+      <td>
+            <button
+              class="btn btn-link p-0"
+              (click)="affichageAjoutCompetence($index,formateur.id ?? 0)"
+            >
+              Ajout compétence
+            </button>
+          </td>
+      </tr>
+      
+      </table>
+<table>
+        <tr>
+          @if(indexAjoutComptence==$index) 
+          {
+           <div class="form-group">
+    Competence :
+    <select
+      id="competence"
+      [(ngModel)]="competenceAjout"
+      class="form-control"
+     
+    >
+      @for(c of listcomptence ;track c.id ){
+      <option [ngValue]="c">{{ c.nom }}</option>
+      }
+    </select>
+  </div>
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-primary btn-sm"
+                (click)="AjoutCompetence(formateur.id!)"
+              >
+                Valider
+              </button>
+            </h6>
+          </td>
+          <td>
+            <h6>
+              <button
+                class="btn btn-outline-warning btn-sm"
+                (click)="affichageAjoutEdition($index)"
+              >
+                Annuler
+              </button>
+            </h6>
+          </td>
+          @if(messageDisponibliteId==formateur.id){
+          <tr class="alert alert-danger">
+            {{
+              messageDisponibilite
+            }}
+          </tr>
+        }
+
+
+          }
+        </tr>
+      </table>
+      
       @if(showInfo[$index ][2]) {
       <table class="table table-sm">
         @for(competenceFormateur of formateur.competenceFormateur;track
@@ -273,6 +339,12 @@
         <tr>
           <td>{{ competenceFormateur.id }}</td>
           <td>{{ competenceFormateur.competence?.nom }}</td>
+          <td> <h6><button
+            class="btn btn-outline-danger btn-sm"
+            (click)="effaceCompetenceFormateur(competenceFormateur.id ?? 0)"
+          >
+            Supprimer
+          </button></h6></td>
         </tr>
         }
       </table>

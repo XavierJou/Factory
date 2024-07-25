@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.CompetenceRequest;
+import formation.conceptdev.facto.dto.response.CompetenceFormateurResponse;
 import formation.conceptdev.facto.dto.response.CompetenceResponse;
 import formation.conceptdev.facto.dto.response.CoursResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
@@ -60,6 +61,13 @@ public class CompetenceRestController {
                           .collect(Collectors.toList());
     }
     
+    
+    @GetMapping("/not-linked-to-formateur/{formateurId}")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<CompetenceResponse> getCompetencesNotLinkedToFormateur(@PathVariable Integer formateurId) {
+    	return competenceSrv.getCompetencesNotLinkedToFormateur(formateurId).stream().map(competence -> new CompetenceResponse(competence,false,false)).collect(Collectors.toList());
+    	
+    }
     
 
     @PostMapping("")

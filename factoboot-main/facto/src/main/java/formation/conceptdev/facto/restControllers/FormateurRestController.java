@@ -23,11 +23,12 @@ import com.fasterxml.jackson.annotation.JsonView;
 import formation.conceptdev.facto.dto.request.FormateurRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.FormateurResponse;
-import formation.conceptdev.facto.entities.Competence;
 import formation.conceptdev.facto.entities.Formateur;
+import formation.conceptdev.facto.entities.Utilisateur;
 import formation.conceptdev.facto.services.CompetenceFormateurService;
 import formation.conceptdev.facto.services.DisponibiliteFormateurService;
 import formation.conceptdev.facto.services.FormateurService;
+import formation.conceptdev.facto.services.UtilisateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
@@ -44,6 +45,10 @@ public class FormateurRestController {
 
     @Autowired
     private CompetenceFormateurService competenceFormateurService;
+    
+
+	@Autowired
+	private UtilisateurService utilisateurSrv;
     
     @GetMapping("")
     @JsonView(CustomJsonViews.Common.class)
@@ -99,7 +104,16 @@ public class FormateurRestController {
     	
     	 disponibiliteFormateurService.deleteDisponibiliteByFormateurId(id);
     	 competenceFormateurService.deleteCompetenceByFormateurId(id);
+    	
+    	 
+    	 Formateur formateur = formateurService.getById(id);
+    	 Integer idUtil= formateur.getUtilisateur().getId();
+    	 
     	 formateurService.detachUtilisateurFromFormateur(id);
+    	 
+    	 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);
+    	 Utilisateur utilisateur = utilisateurSrv.getById(idUtil);
+    	 utilisateurSrv.deleteById(idUtil);
 		 formateurService.deleteById(id);
 	}
 }

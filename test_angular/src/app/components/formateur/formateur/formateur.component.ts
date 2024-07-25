@@ -9,6 +9,9 @@ import { DisponibiliteFormateurService } from '../../../services/disponibilite-f
 import { Cours } from '../../../models/cours';
 import { CoursService } from '../../../services/cours.service';
 import { Competence } from '../../../models/competence';
+import { CompetenceFormateur } from '../../../models/competence-formateur';
+import { CompetenceFormateurService } from '../../../services/competence-formateur.service';
+import { CompetenceService } from '../../../services/competence.service';
 
 @Component({
   selector: 'app-formateur',
@@ -30,8 +33,11 @@ export class FormateurComponent implements OnInit {
   messageCours: string = '';
   coursAjout: Cours = new Cours();
 
+  competenceAjout: Competence = new Competence();
+
   indexAjoutDisponibilite: number = -1;
   indexAjoutCours: number = -1;
+  indexAjoutComptence: number = -1;
 
   disponibiliteFormateur: DisponibiliteFormateur = new DisponibiliteFormateur();
 
@@ -40,19 +46,21 @@ export class FormateurComponent implements OnInit {
   constructor(
     private formateurSrv: FormateurService,
     private disponibiliteFormateurSrv: DisponibiliteFormateurService,
+    private competenceFormateurSrv: CompetenceFormateurService,
+    private competenceServ: CompetenceService,
     private coursSrv: CoursService
   ) {}
   ngOnInit(): void {
-    this.initFormateur();
+    this.initFormateurComplet();
   }
 
   delete(id: number) {
     this.formateurSrv.delete(id).subscribe(() => {
-      this.initFormateur();
+      this.initFormateurComplet();
     });
   }
 
-  initFormateur() {
+  initFormateurComplet() {
     this.formateurSrv.getWithDetails().subscribe((formateurs) => {
       this.formateurs = formateurs;
       this.showInfo = [];
@@ -60,6 +68,12 @@ export class FormateurComponent implements OnInit {
       for (const formateur in this.formateurs) {
         this.showInfo.push([false, false, false]);
       }
+    });
+  }
+
+  initFormateurMini() {
+    this.formateurSrv.getWithDetails().subscribe((formateurs) => {
+      this.formateurs = formateurs;
     });
   }
 
@@ -71,6 +85,7 @@ export class FormateurComponent implements OnInit {
     if (this.indexAjoutDisponibilite < 0) {
       this.indexAjoutDisponibilite = index;
       this.indexAjoutCours = -1;
+      this.indexAjoutComptence = -1;
     } else {
       this.indexAjoutDisponibilite = -1;
     }
@@ -80,11 +95,29 @@ export class FormateurComponent implements OnInit {
   affichageAjoutCours(index: number, idFormateur: number) {
     if (this.indexAjoutCours < 0) {
       this.indexAjoutDisponibilite = -1;
+      this.indexAjoutComptence = -1;
       this.coursSrv.getWithOutFormateur(idFormateur).subscribe((cours) => {
         this.listcours = cours;
 
         this.indexAjoutCours = index;
       });
+    } else {
+      this.indexAjoutCours = -1;
+    }
+    // this.indexAjoutDisponibilite = index;
+  }
+
+  affichageAjoutCompetence(index: number, idFormateur: number) {
+    if (this.indexAjoutCours < 0) {
+      this.indexAjoutDisponibilite = -1;
+      this.indexAjoutComptence = -1;
+      this.competenceServ
+        .getNotLinkedFormateur(idFormateur)
+        .subscribe((competences) => {
+          this.listcomptence = competences;
+
+          this.indexAjoutComptence = index;
+        });
     } else {
       this.indexAjoutCours = -1;
     }
@@ -123,25 +156,24 @@ export class FormateurComponent implements OnInit {
         .create(obj)
         .subscribe((disponibiliteFormateur_retour) => {
           this.indexAjoutDisponibilite = -1;
-          this.initFormateur();
+          this.indexAjoutCours = -1;
+          this.indexAjoutComptence = -1;
+          this.initFormateurMini();
         });
     }
   }
 
-  effaceDisponibilite(idDisponibilteFormateur: number) {
-    this.disponibiliteFormateurSrv
-      .delete(idDisponibilteFormateur)
-      .subscribe(() => {
-        this.initFormateur();
-      });
-  }
+  AjoutCompetence(idFormateur: number) {
+    let obj = {
+      competenceId: this.competenceAjout.id,
+      formateurId: idFormateur,
+    };
 
-  effaceCours(idcours: number) {
-    this.coursSrv.getById(idcours).subscribe((cours) => {
-      cours.formateur = undefined;
-      this.coursSrv.update(cours).subscribe((disponibiliteFormateur_retour) => {
-        this.initFormateur();
-      });
+    this.competenceFormateurSrv.create(obj).subscribe((competence_retour) => {
+      this.indexAjoutDisponibilite = -1;
+      this.indexAjoutCours = -1;
+      this.indexAjoutComptence = -1;
+      this.initFormateurMini();
     });
   }
 
@@ -155,7 +187,31 @@ export class FormateurComponent implements OnInit {
       .subscribe((disponibiliteFormateur_retour) => {
         this.indexAjoutDisponibilite = -1;
         this.indexAjoutCours = -1;
-        this.initFormateur();
+        this.indexAjoutComptence = -1;
+        this.initFormateurMini();
       });
+  }
+
+  effaceDisponibilite(idDisponibilteFormateur: number) {
+    this.disponibiliteFormateurSrv
+      .delete(idDisponibilteFormateur)
+      .subscribe(() => {
+        this.initFormateurMini();
+      });
+  }
+
+  effaceCompetenceFormateur(idCompetenceFormateur: number) {
+    this.competenceFormateurSrv.delete(idCompetenceFormateur).subscribe(() => {
+      this.initFormateurMini();
+    });
+  }
+
+  effaceCours(idcours: number) {
+    this.coursSrv.getById(idcours).subscribe((cours) => {
+      cours.formateur = undefined;
+      this.coursSrv.update(cours).subscribe((disponibiliteFormateur_retour) => {
+        this.initFormateurMini();
+      });
+    });
   }
 }

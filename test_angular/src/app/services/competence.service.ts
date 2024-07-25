@@ -27,6 +27,12 @@ export class CompetenceService {
     return this.httpClient.get<Competence>(`${this.url}/${id}`);
   }
 
+  public getNotLinkedFormateur(idFormateur: number): Observable<Competence[]> {
+    return this.httpClient.get<Competence[]>(
+      `${this.url}/not-linked-to-formateur/${idFormateur}`
+    );
+  }
+
   public update(competence: Competence): Observable<Competence> {
     return this.httpClient.put<Competence>(
       `${this.url}/${competence.id}`,

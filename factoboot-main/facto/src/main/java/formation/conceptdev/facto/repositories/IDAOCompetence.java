@@ -15,6 +15,7 @@ public interface IDAOCompetence extends JpaRepository<Competence, Integer> {
 
 	public List<Competence> findByNomContaining(String nom);
 	
-	
+	 @Query("SELECT c FROM Competence c WHERE c.id NOT IN (SELECT cf.competence.id FROM CompetenceFormateur cf WHERE cf.formateur.id = :formateurId)")
+	    List<Competence> findCompetencesNotLinkedToFormateur(@Param("formateurId") Integer formateurId);
 
 }
