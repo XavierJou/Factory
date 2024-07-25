@@ -51,7 +51,7 @@ export class OrdinateurComponent {
     this.searchOrdinateurs();
   }
 
-  trackById(index: number, competence: Ordinateur) {
-    return competence.id;
+  trackById(index: number, ordinateur: Ordinateur) {
+    return ordinateur.id;
   }
 }

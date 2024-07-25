@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -40,9 +41,17 @@ public class OrdinateurRestController {
 
 	@GetMapping("")
 	@JsonView(CustomJsonViews.Common.class)
-	public List<OrdinateurResponse> getAll() {
-		return ordinateurSrv.getAll().stream().map(o -> new OrdinateurResponse(o,false)).collect(Collectors.toList());
-	}
+	public List<OrdinateurResponse> getAll(@RequestParam(value = "search", required = false) String search) {
+        List<Ordinateur> ordinateurs;
+        if (search != null && !search.trim().isEmpty()) {
+            ordinateurs = ordinateurSrv.searchByNom(search);
+        } else {
+            ordinateurs = ordinateurSrv.getAll();
+        }
+        return ordinateurs.stream()
+                          .map(ordinateur -> new OrdinateurResponse(ordinateur, false))
+                          .collect(Collectors.toList());
+    }
 	
 	@GetMapping("/details")
 	@JsonView(CustomJsonViews.OrdinateurWithDetails.class)
