@@ -87,6 +87,12 @@ public class FormateurRestController {
     public FormateurResponse getById(@PathVariable Integer id) {
         return new FormateurResponse(formateurService.getById(id),false,false,false,false);
     }
+    
+    @GetMapping("/utilisateur/{id}")
+    @JsonView(CustomJsonViews.Common.class)
+    public FormateurResponse getByUtilisateurId(@PathVariable Integer id) {
+        return new FormateurResponse(formateurService.getByUtilisateurId(id),false,false,false,false);
+    }
 
     @GetMapping("/{id}/cours")
     public FormateurResponse getByIdWithCours(@PathVariable Integer id) {

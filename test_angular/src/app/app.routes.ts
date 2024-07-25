@@ -33,6 +33,7 @@ import { PrerequisFormationComponent } from './components/prerequis/prerequis-fo
 import { MatieresFormationComponent } from './components/matiere/matiere-formation/matiere-formation.component';
 import { FormateursFormationComponent } from './components/formateur/formateur-formation/formateur-formation.component';
 import { StagiairesFormationComponent } from './components/stagiaire/stagiaire-formation/stagiaire-formation.component';
+import { animation } from '@angular/animations';
 
 export const routes: Routes = [
   {
@@ -43,17 +44,23 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    data: { animation: 'HomePage' },
   },
-
   {
     path: 'login',
     component: LoginComponent,
     canActivate: [isLoggedGuard],
+    data: { animation: 'LoginPage' },
   },
-  { path: 'inscription', component: InscriptionComponent },
+  {
+    path: 'inscription',
+    component: InscriptionComponent,
+    data: { animation: 'InscriptionPage' },
+  },
   {
     path: '',
     component: LayoutComponent,
+    data: { animation: 'LayoutPage' },
     children: [
       {
         path: 'planning',

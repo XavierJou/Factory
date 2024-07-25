@@ -42,6 +42,10 @@ public class FormationService {
 	public List<Formation> getAllByTitre(String titre) {
 		return daoFormation.findAllByTitre(titre);
 	}
+	
+	public List<Formation> getAllFetchCoursWithFormateurId(Integer id) {
+		return daoFormation.findAllFetchCoursWithFormateurId(id);
+	}
 
 	public Formation insert(Formation formation) {
 		if (formation.getTitre() == null) {

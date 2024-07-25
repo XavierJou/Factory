@@ -20,16 +20,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a
-            routerLink="/formations"
-            routerLinkActive="active"
-            ariaCurrentWhenActive="page"
-            class="nav-link active"
-            >Formations
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
+        @if(role == 'ROLE_ADMINISTRATEUR' || role == 'ROLE_FORMATEUR'){
         <li class="nav-item">
           <a
             routerLink="/planning"
@@ -40,7 +31,17 @@
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-
+        <li class="nav-item">
+          <a
+            routerLink="/formations"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link active"
+            >Formations
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        } @if(role == 'ROLE_ADMINISTRATEUR'){
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -121,6 +122,7 @@
             </a>
           </div>
         </li>
+        }
       </ul>
       <div class="my-3 text-white">
         @if (logged) {

@@ -21,6 +21,13 @@ public class FormateurService {
 		return daoFormateur.findById(id).orElseThrow(RuntimeException::new);
 	}
 	
+	public Formateur getByUtilisateurId(Integer id) {
+		if (id == null) {
+			throw new RuntimeException("Impossible de find Formateur sans utilisateur id");
+		}
+		return daoFormateur.findByUtilisateurId(id).orElseThrow(RuntimeException::new);
+	}
+	
 	public Formateur getByIdWithCours(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Formateur sans id");

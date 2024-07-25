@@ -50,7 +50,7 @@ public class FormationResponse {
 		if (besoinCours) {
 			if (formation.getCours() != null) {
 				this.setCours(formation.getCours().stream()
-						.map(entity -> new CoursResponse(entity, false, true, true, false, false, false,false))
+						.map(entity -> new CoursResponse(entity, true, true, true, false, false, false,false))
 						.collect(Collectors.toList()));
 			}
 		}

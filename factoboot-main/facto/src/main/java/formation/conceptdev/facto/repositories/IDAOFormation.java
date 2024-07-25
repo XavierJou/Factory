@@ -15,6 +15,9 @@ public interface IDAOFormation extends JpaRepository<Formation, Integer> {
 	
 	@Query("select f from Formation f left join fetch f.cours where f.id=:id")
 	Optional<Formation> findByIdFetchCours(@Param("id") Integer id);
+	
+	@Query("select distinct f from Formation f left join fetch f.cours c where c.formateur.id=:idFormateur")
+	public List<Formation> findAllFetchCoursWithFormateurId(@Param("idFormateur") Integer idFormateur);
 
 	public List<Formation> findAllByTitre(String titre);
 

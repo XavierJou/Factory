@@ -47,6 +47,10 @@ export class FormateurService {
     return this.httpClient.get<Formateur>(`${this.url}/${id}`);
   }
 
+  public getByUtilisateurId(id: number): Observable<Formateur> {
+    return this.httpClient.get<Formateur>(`${this.url}/utilisateur/${id}`);
+  }
+
   public update(formateur: Formateur): Observable<Formateur> {
     return this.httpClient.put<Formateur>(
       `${this.url}/${formateur.id}`,

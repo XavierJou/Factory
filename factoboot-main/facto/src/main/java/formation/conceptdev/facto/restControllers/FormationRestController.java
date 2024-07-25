@@ -42,6 +42,15 @@ public class FormationRestController {
 	public List<FormationResponse> getAll() {
 		return formationSrv.getAll().stream().map(formation -> new FormationResponse(formation,false, false, false)).collect(Collectors.toList());
 	}
+	
+	@GetMapping("/formateur/{id}")
+	@JsonView(CustomJsonViews.Common.class)
+	public List<FormationResponse> getAllFetchCoursWithFormateurId(@PathVariable Integer id) {
+		return formationSrv.getAllFetchCoursWithFormateurId(id).stream()
+				.map(formation -> new FormationResponse(formation,false, false, false))
+				.collect(Collectors.toList());
+
+	}
 
 	@PostMapping("")
 	@ResponseStatus(code = HttpStatus.CREATED)
