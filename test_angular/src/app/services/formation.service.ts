@@ -15,6 +15,10 @@ export class FormationService {
     return this.httpClient.get<Formation[]>(this.url);
   }
 
+  public getAllByFormateurId(id: number): Observable<Formation[]> {
+    return this.httpClient.get<Formation[]>(`${this.url}/formateur/${id}`);
+  }
+
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }

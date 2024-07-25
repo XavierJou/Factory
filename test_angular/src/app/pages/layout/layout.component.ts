@@ -27,6 +27,11 @@ export class LayoutComponent {
     return u.prenom!;
   }
 
+  get role(): string {
+    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
+    return u.role!;
+  }
+
   logout() {
     localStorage.clear();
     this.router.navigateByUrl('/home');

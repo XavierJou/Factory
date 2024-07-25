@@ -17,4 +17,8 @@ public interface IDAOFormateur extends JpaRepository<Formateur, Integer> {
     @Transactional
     @Query("UPDATE Formateur f SET f.utilisateur = null WHERE f.id = :idFormateur")
     void detachUtilisateurFromFormateur(@Param("idFormateur") Integer idFormateur);
+	
+	@Query("select f from Formateur f left join fetch f.utilisateur u where u.id=:id")
+	Optional<Formateur> findByUtilisateurId(@Param("id") Integer id);
+
 }

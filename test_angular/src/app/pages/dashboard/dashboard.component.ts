@@ -6,29 +6,42 @@ import { Observable } from 'rxjs';
 import { Formation } from '../../models/formation';
 import { DashboardService } from '../../services/dashboard.service';
 import { Utilisateur } from '../../models/utilisateur';
+import { PlanificationComponent } from '../../components/planification/planification.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, RouterLink, RouterLinkActive, AsyncPipe, DatePipe],
+  imports: [
+    FormsModule,
+    RouterLink,
+    RouterLinkActive,
+    AsyncPipe,
+    DatePipe,
+    PlanificationComponent,
+  ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
   formation: Formation = new Formation();
-
   formationsObservable!: Observable<Formation[]>;
 
   constructor(private dashboardSrv: DashboardService) {}
 
+  get role(): string {
+    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
+    return u.role!;
+  }
+  public servedCountFormateurs = 0;
+  public servedCountMatieres = 0;
+
   ngOnInit(): void {
     this.formationsObservable = this.dashboardSrv.getAllFormations();
-    this.servedCount = this.getServedCount(this.formation);
+    this.servedCountFormateurs = this.getServedCountFormateurs(this.formation);
+    this.servedCountMatieres = this.getServedCountMatieres(this.formation);
   }
 
-  public servedCount = 0;
-
-  private getServedCount(formation: Formation): number {
+  private getServedCountFormateurs(formation: Formation): number {
     let count = 0;
     formation.cours?.forEach((c) => {
       if (c.formateur !== null) {
@@ -38,8 +51,19 @@ export class DashboardComponent implements OnInit {
     return count;
   }
 
+  private getServedCountMatieres(formation: Formation): number {
+    let count = 0;
+    formation.cours?.forEach((c) => {
+      if (c.matiere !== null) {
+        count++;
+      }
+    });
+    return count;
+  }
+
   onChangeSelect(optionsValue: any) {
-    this.servedCount = this.getServedCount(optionsValue);
+    this.servedCountFormateurs = this.getServedCountFormateurs(optionsValue);
+    this.servedCountMatieres = this.getServedCountMatieres(optionsValue);
   }
 
   compareFn(ent1: Formation, ent2: Formation): boolean {

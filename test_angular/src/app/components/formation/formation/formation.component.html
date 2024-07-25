@@ -1,40 +1,51 @@
 <div class="container">
   <h1>Formations</h1>
   <div class="gap-5 m-auto d-flex flex-column">
-  <div class="text-end">
-    <a
-      routerLink="/formations/edit"
-      routerLinkActive="active"
-      class="btn btn-link-primary btn-outline-primary btn-sm"
-      >+ formation</a
-    >
-  </div>
-  <div class="gap-3 d-flex flex-column">
-    @for(f of formations;track f.id){
-    <div class="alert alert-dismissible alert-secondary">
-      <p>{{ f.id }} : {{ f.titre }}</p>
-      <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
-      <div>
-        <div class="d-inline">
-          <button
-            class="p-2 btn btn-outline-danger btn-sm d-inline"
-            (click)="delete(f.id!)"
-          >
-            Supprimer
-          </button>
-        </div>
-        <div class="p-2 d-inline">
-          <button
-            class="p-2 btn btn-outline-warning btn-sm d-inline"
-            routerLink="/formations/edit/{{ f.id }}"
-            routerLinkActive="active"
-          >
-            éditer
-          </button>
+    @if(role == 'ROLE_ADMINISTRATEUR'){
+    <div class="text-end">
+      <a
+        routerLink="/formations/edit"
+        routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm"
+        >+ formation</a
+      >
+    </div>
+    <div class="gap-3 d-flex flex-column">
+      @for(f of formations;track f.id){
+      <div class="alert alert-dismissible alert-secondary">
+        <p>{{ f.id }} : {{ f.titre }}</p>
+        <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
+        <div>
+          <div class="d-inline">
+            <button
+              class="p-2 btn btn-outline-danger btn-sm d-inline"
+              (click)="delete(f.id!)"
+            >
+              Supprimer
+            </button>
+          </div>
+          <div class="p-2 d-inline">
+            <button
+              class="p-2 btn btn-outline-warning btn-sm d-inline"
+              routerLink="/formations/edit/{{ f.id }}"
+              routerLinkActive="active"
+            >
+              éditer
+            </button>
+          </div>
         </div>
       </div>
+      }
+    </div>
+    } @if(role == 'ROLE_FORMATEUR'){
+    <div class="gap-3 d-flex flex-column">
+      @for(f of formationsFormateur;track f.id){
+      <div class="alert alert-dismissible alert-secondary">
+        <p>{{ f.id }} : {{ f.titre }}</p>
+        <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
+      </div>
+      }
     </div>
     }
-  </div>
   </div>
 </div>
