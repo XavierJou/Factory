@@ -31,10 +31,7 @@ export class LayoutComponent {
     localStorage.clear();
     this.router.navigateByUrl('/home');
   }
-  get login(): string {
-    let u: Utilisateur = JSON.parse(localStorage.getItem('utilisateur')!);
-    return u.login!;
-  }
+
   get logged(): boolean {
     return localStorage.getItem('token') != null;
   }
