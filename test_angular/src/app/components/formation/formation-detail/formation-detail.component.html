@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>{{ formation.titre }}</h1>
+  <div class="gap-5 m-auto d-flex flex-column">
+    <section class="gap-4 d-flex flex-column">
+      <div class="p-3 list-group">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Contenu</h5>
+          <small>Màj 20/02/2024</small>
+        </div>
+        <p class="mb-1">
+          {{ formation.contenu }}
+        </p>
+      </div>
+      <div class="p-3 list-group">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Objectif</h5>
+          <small>Màj 20/02/2024</small>
+        </div>
+        <p class="mb-1">
+          {{ formation.objectif }}
+        </p>
+      </div>
+      <div class="p-3 list-group">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Informations</h5>
+          <small>Màj 20/02/2024</small>
+        </div>
+        <p class="mb-1"><b>Capacité</b> {{ formation.capacite }}</p>
+        <p class="mb-1"><b>Durée</b> {{ formation.duree }}</p>
+        <p class="mb-1">
+          <b>Date de début</b> {{ formation.dateDebut | date : "dd/MM/yyyy" }}
+        </p>
+      </div>
+    </section>
+  </div>
+</div>

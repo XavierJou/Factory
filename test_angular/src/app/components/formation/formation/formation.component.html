@@ -43,6 +43,15 @@
       <div class="alert alert-dismissible alert-secondary">
         <p>{{ f.id }} : {{ f.titre }}</p>
         <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
+        <div class="p-2 d-inline">
+          <button
+            class="p-2 btn btn-outline-warning btn-sm d-inline"
+            routerLink="/formation/{{ f.id }}"
+            routerLinkActive="active"
+          >
+            details
+          </button>
+        </div>
       </div>
       }
     </div>

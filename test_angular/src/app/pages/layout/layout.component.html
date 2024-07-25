@@ -86,25 +86,19 @@
               >Compétences
             </a>
             <a
-              routerLink="/salle"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-              class="dropdown-item"
-              >Salle
-            </a>
-            <a
-              routerLink="/materiel"
-              routerLinkActive="active"
-              ariaCurrentWhenActive="page"
-              class="dropdown-item"
-              >Matériels</a
-            >
-            <a
               routerLink="/matieres"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
               class="dropdown-item"
               >Matières
+            </a>
+            <div class="dropdown-divider"></div>
+            <a
+              routerLink="/salle"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Salle
             </a>
             <a
               routerLink="/ordinateur"
@@ -135,7 +129,7 @@
     </div>
   </div>
 </nav>
-<div class="my-2 mx-4">
+<div class="mx-4 my-2">
   <h6>Bonjour {{ prenom }}</h6>
 </div>
 <div class="container my-4">
