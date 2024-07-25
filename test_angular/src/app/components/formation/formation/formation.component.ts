@@ -45,18 +45,22 @@ export class FormationComponent implements OnInit {
   }
 
   initFormation() {
-    this.formationSrv.getAll().subscribe((formations) => {
-      this.formations = formations;
-    });
-    this.formateurSrv
-      .getByUtilisateurId(this.utilisateurId)
-      .subscribe((formateur) => {
-        this.formateur = formateur;
-        this.formationSrv
-          .getAllByFormateurId(this.formateur.id!)
-          .subscribe((formations) => {
-            this.formationsFormateur = formations;
-          });
+    if (this.role === 'ROLE_ADMINISTRATEUR') {
+      this.formationSrv.getAll().subscribe((formations) => {
+        this.formations = formations;
       });
+    }
+    if (this.role === 'ROLE_FORMATEUR') {
+      this.formateurSrv
+        .getByUtilisateurId(this.utilisateurId)
+        .subscribe((formateur) => {
+          this.formateur = formateur;
+          this.formationSrv
+            .getAllByFormateurId(this.formateur.id!)
+            .subscribe((formations) => {
+              this.formationsFormateur = formations;
+            });
+        });
+    }
   }
 }

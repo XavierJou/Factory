@@ -7,7 +7,7 @@ import { FormationService } from '../../../services/formation.service';
 import { Formation } from '../../../models/formation';
 
 @Component({
-  selector: 'app-cours',
+  selector: 'app-cours-formation',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, DatePipe],
   templateUrl: './cours-formation.component.html',

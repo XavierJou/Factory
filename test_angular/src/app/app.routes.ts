@@ -34,6 +34,7 @@ import { MatieresFormationComponent } from './components/matiere/matiere-formati
 import { FormateursFormationComponent } from './components/formateur/formateur-formation/formateur-formation.component';
 import { StagiairesFormationComponent } from './components/stagiaire/stagiaire-formation/stagiaire-formation.component';
 import { animation } from '@angular/animations';
+import { FormationDetailComponent } from './components/formation/formation-detail/formation-detail.component';
 
 export const routes: Routes = [
   {
@@ -121,6 +122,10 @@ export const routes: Routes = [
       {
         path: 'formations',
         component: FormationComponent,
+      },
+      {
+        path: 'formation/:id',
+        component: FormationDetailComponent,
       },
       {
         path: 'formations/edit',

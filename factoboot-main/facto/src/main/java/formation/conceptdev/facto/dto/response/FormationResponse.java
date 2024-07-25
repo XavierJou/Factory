@@ -1,5 +1,6 @@
 package formation.conceptdev.facto.dto.response;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,9 @@ public class FormationResponse {
 	@JsonView(CustomJsonViews.Common.class)
 	private String contenu;
 	@JsonView(CustomJsonViews.Common.class)
-	private LocalDateTime dateDebut;
+	private LocalDate dateDebut;
+	@JsonView(CustomJsonViews.Common.class)
+	private Integer capacite;
 
 	@JsonView(CustomJsonViews.FormationWithStagiaire.class)
 	private List<StagiaireResponse> stagiaires;
@@ -127,11 +130,19 @@ public class FormationResponse {
 		this.contenu = contenu;
 	}
 
-	public LocalDateTime getDateDebut() {
+	public LocalDate getDateDebut() {
 		return dateDebut;
 	}
 
-	public void setDateDebut(LocalDateTime dateDebut) {
+	public Integer getCapacite() {
+		return capacite;
+	}
+
+	public void setCapacite(Integer capacite) {
+		this.capacite = capacite;
+	}
+
+	public void setDateDebut(LocalDate dateDebut) {
 		this.dateDebut = dateDebut;
 	}
 
