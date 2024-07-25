@@ -19,7 +19,7 @@ export class StagiaireComponent {
   }
 
   delete(id: number) {
-    this.stagiaireSrv.delete(id).subscribe(() => {
+    this.stagiaireSrv.deletAvecUtilisateur(id).subscribe(() => {
       this.initStagiaire();
     });
   }
