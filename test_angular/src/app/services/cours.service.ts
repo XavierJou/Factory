@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cours } from '../models/cours';
@@ -75,5 +75,10 @@ export class CoursService {
       idVideoprojecteur: cours.videoprojecteur?.id,
     };
     return obj;
+  }
+
+  public searchByNom(search: string): Observable<Cours[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Cours[]>(this.url, { params });
   }
 }

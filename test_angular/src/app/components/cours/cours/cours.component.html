@@ -1,8 +1,49 @@
-<a routerLink="/cours/edit" routerLinkActive="active" class="btn btn-link"
-  >Nouveau cours</a
->
-
-@for(c of courss;track c.id){
-<p>{{ c.id }} : {{ c.titre }}</p>
-<p><button (click)="delete(c.id!)">Supprimer</button></p>
-}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="container">
+    <div class="container-fluid">
+      <a
+        routerLink="/cours/edit"
+        routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm"
+        >Nouveau cours</a
+      >
+    </div>
+    <div class="search-bar">
+      <div class="input-group">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Rechercher un ordinateur"
+          [(ngModel)]="searchTerm"
+          (input)="searchCourss()"
+        />
+        <!-- Boutton pour effacer la recherche -->
+      </div>
+    </div>
+    <p></p>
+    <div class="container">
+      @for(c of courss;track c.id){
+      <div class="alert alert-dismissible alert-secondary">
+        <p>{{ c.id }} : {{ c.titre }}</p>
+        <div class="d-inline">
+          <button
+            class="p-2 btn btn-outline-danger btn-sm d-inline"
+            (click)="delete(c.id!)"
+          >
+            Supprimer
+          </button>
+        </div>
+        <div class="p-2 d-inline">
+          <button
+            class="p-2 btn btn-outline-warning btn-sm d-inline"
+            routerLink="/cours/edit/{{ c.id }}"
+            routerLinkActive="active"
+          >
+            éditer
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
