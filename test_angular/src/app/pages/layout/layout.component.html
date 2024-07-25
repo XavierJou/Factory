@@ -1,56 +1,123 @@
 <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
   <div class="container-fluid">
-    <a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page"
-      class="navbar-brand nav-link">Dashboard</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="navbar-brand nav-link"
+      >Dashboard</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a routerLink="/formations" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="nav-link active">Formations
+          <a
+            routerLink="/formations"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link active"
+            >Formations
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a routerLink="/planning" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="nav-link active">Planning
+          <a
+            routerLink="/planning"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link active"
+            >Planning
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Gestion</a>
+          <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            >Gestion</a
+          >
           <div class="dropdown-menu">
-            <a routerLink="/utilisateurs" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Utilisateurs
+            <a
+              routerLink="/utilisateurs"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Utilisateurs
             </a>
             <ul>
-              <a routerLink="/formateurs" routerLinkActive="active" ariaCurrentWhenActive="page"
-                class="dropdown-item">Formateurs
+              <a
+                routerLink="/formateurs"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                class="dropdown-item"
+                >Formateurs
               </a>
 
-              <a routerLink="/stagiaires" routerLinkActive="active" ariaCurrentWhenActive="page"
-                class="dropdown-item">Stagiaires
+              <a
+                routerLink="/stagiaires"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                class="dropdown-item"
+                >Stagiaires
               </a>
             </ul>
             <div class="dropdown-divider"></div>
-            <a routerLink="/competence" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Compétences
+            <a
+              routerLink="/competence"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Compétences
             </a>
-            <a routerLink="/materiel" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Matériels</a>
-            <a routerLink="/matiere" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Matières
+            <a
+              routerLink="/salle"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Salle
             </a>
-            <a routerLink="/ordinateur" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Ordinateurs
+            <a
+              routerLink="/materiel"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Matériels</a
+            >
+            <a
+              routerLink="/matieres"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Matières
             </a>
-            <a routerLink="/videoprojecteur" routerLinkActive="active" ariaCurrentWhenActive="page"
-              class="dropdown-item">Videoprojecteurs
+            <a
+              routerLink="/ordinateur"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Ordinateurs
+            </a>
+            <a
+              routerLink="/videoprojecteur"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              class="dropdown-item"
+              >Videoprojecteurs
             </a>
           </div>
         </li>
