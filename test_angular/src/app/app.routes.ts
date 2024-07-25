@@ -30,6 +30,9 @@ import { PlanificationComponent } from './components/planification/planification
 import { EditUtilisateurComponent } from './components/utlisateur/edit-utilisateur/edit-utilisateur.component';
 import { CoursFormationComponent } from './components/cours/cours-formation/cours-formation.component';
 import { PrerequisFormationComponent } from './components/prerequis/prerequis-formation/prerequis-formation.component';
+import { MatieresFormationComponent } from './components/matiere/matiere-formation/matiere-formation.component';
+import { FormateursFormationComponent } from './components/formateur/formateur-formation/formateur-formation.component';
+import { StagiairesFormationComponent } from './components/stagiaire/stagiaire-formation/stagiaire-formation.component';
 
 export const routes: Routes = [
   {
@@ -119,6 +122,18 @@ export const routes: Routes = [
       {
         path: 'formation/:id/cours',
         component: CoursFormationComponent,
+      },
+      {
+        path: 'formation/:id/matieres',
+        component: MatieresFormationComponent,
+      },
+      {
+        path: 'formation/:id/formateurs',
+        component: FormateursFormationComponent,
+      },
+      {
+        path: 'formation/:id/stagiaires',
+        component: StagiairesFormationComponent,
       },
       {
         path: 'formation/:id/prerequis',

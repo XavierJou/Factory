@@ -96,6 +96,15 @@ public class CoursRestController {
 				.map(cours -> new CoursResponse(cours, true, true, true, true, true, true, true))
 				.collect(Collectors.toList());
 	}
+	
+	//Utilisé dans dashboard formation/matieres
+	@GetMapping("/formation/matieres/{idFormation}")
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
+	public List<CoursResponse> getAllCoursWithMatiere(@PathVariable Integer idFormation) {
+		return coursSrv.getAllCoursWithMatiere(idFormation).stream()
+				.map(cours -> new CoursResponse(cours, true, true, true, true, true, true, true))
+				.collect(Collectors.toList());
+	}
 
 	@GetMapping("/{id}")
 	@JsonView(CustomJsonViews.Common.class)

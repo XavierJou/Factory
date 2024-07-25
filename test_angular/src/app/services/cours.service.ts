@@ -23,6 +23,10 @@ export class CoursService {
     return this.httpClient.get<Cours[]>(`${this.url}/formation`);
   }
 
+  public getAllMatieresFromFormation(id: number): Observable<Cours[]> {
+    return this.httpClient.get<Cours[]>(`${this.url}/formation/matieres/${id}`);
+  }
+
   public create(cours: Cours): Observable<Cours> {
     return this.httpClient.post<Cours>(
       this.url,

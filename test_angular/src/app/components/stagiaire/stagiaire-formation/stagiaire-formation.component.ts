@@ -1,31 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Cours } from '../../../models/cours';
+import { Stagiaire } from '../../../models/stagiaire';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { CoursService } from '../../../services/cours.service';
+import { StagiaireService } from '../../../services/stagiaire.service';
 import { FormationService } from '../../../services/formation.service';
 import { Formation } from '../../../models/formation';
 
 @Component({
-  selector: 'app-cours',
+  selector: 'app-stagiaire-formation',
   standalone: true,
   imports: [RouterLink, RouterLinkActive, DatePipe],
-  templateUrl: './cours-formation.component.html',
-  styleUrl: './cours-formation.component.css',
+  templateUrl: './stagiaire-formation.component.html',
+  styleUrl: './stagiaire-formation.component.css',
 })
-export class CoursFormationComponent implements OnInit {
-  courss: Cours[] = [];
+export class StagiairesFormationComponent implements OnInit {
+  stagiaires: Stagiaire[] = [];
   formation: Formation = new Formation();
 
   formationId: number = 0;
 
   constructor(
-    private coursSrv: CoursService,
+    private stagiaireSrv: StagiaireService,
     private formationSrv: FormationService,
     private activatedRoute: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.initCours();
+    this.initStagiaire();
     this.initFormation();
   }
 
@@ -38,14 +38,14 @@ export class CoursFormationComponent implements OnInit {
   }
 
   delete(id: number) {
-    this.coursSrv.delete(id).subscribe(() => {
-      this.initCours();
+    this.stagiaireSrv.delete(id).subscribe(() => {
+      this.initStagiaire();
     });
   }
 
-  initCours() {
-    this.coursSrv.getAllFromFormation().subscribe((courss) => {
-      this.courss = courss;
+  initStagiaire() {
+    this.stagiaireSrv.getWithDetails().subscribe((stagiaires) => {
+      this.stagiaires = stagiaires;
     });
   }
 }
