@@ -107,6 +107,7 @@ public class FormateurRestController {
     	
     	 
     	 Formateur formateur = formateurService.getById(id);
+    	 
     	 Integer idUtil= formateur.getUtilisateur().getId();
     	 
     	 formateurService.detachUtilisateurFromFormateur(id);

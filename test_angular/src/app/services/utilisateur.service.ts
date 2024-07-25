@@ -16,6 +16,7 @@ export class UtilisateurService {
   public inscription(
     utilisateurInscription: UtilisateurInscription
   ): Observable<Utilisateur> {
+    console.log(utilisateurInscription);
     return this.httpClient
       .post<UtilisateurInscription>(
         this.url + '/inscription',

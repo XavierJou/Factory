@@ -72,6 +72,8 @@ public class UtilisateurRestController {
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public UtilisateurResponse inscription(@Valid @RequestBody UtilisateurRequest utilisateurRequest, BindingResult br) {
 		
+		
+		
 		if (br.hasErrors()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cette erreeur");
         }
@@ -84,10 +86,21 @@ public class UtilisateurRestController {
 	        throw new ResponseStatusException(HttpStatus.CONFLICT, "Login existe déjà");
 	    }
 	    
+	    if (utilisateurSrv.emailExists(utilisateurRequest.getEmail())) {
+	    	
+	        throw new ResponseStatusException(HttpStatus.CONFLICT, "email existe déjà");
+	    }
+	    
 		Utilisateur utilisateur = new Utilisateur();
 		BeanUtils.copyProperties(utilisateurRequest, utilisateur,"role","formateur","stagiaire");
 		utilisateur.setRole(Role.valueOf(utilisateurRequest.getRole()));
+		
+		System.out.println(utilisateur.toString());
+		
+		Utilisateur util_retour= new Utilisateur();
+		util_retour.setRole(Role.ROLE_USER);
 		return new UtilisateurResponse(utilisateurSrv.create(utilisateur),false,false);
+		
 	}
 	
 	 @PutMapping("/{id}")

@@ -213,6 +213,13 @@ public class Utilisateur implements UserDetails {
 	public void setStagiaire(Stagiaire stagiaire) {
 		this.stagiaire = stagiaire;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Utilisateur [id=" + id + ", login=" + login + ", password=" + password + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", role=" + role + "]";
+	}
 	
 	
 

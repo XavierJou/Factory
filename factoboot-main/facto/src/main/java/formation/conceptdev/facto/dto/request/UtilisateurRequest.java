@@ -14,6 +14,8 @@ public class UtilisateurRequest {
 	@NotNull
 	private String email;
 	@NotNull
+	private String password;
+	@NotNull
 	private String role;
 	private boolean ajoutFormateur;
 	private boolean ajoutStagiaire;
@@ -105,6 +107,24 @@ public class UtilisateurRequest {
 
 	public void setAjoutStagiaire(boolean ajoutStagiaire) {
 		this.ajoutStagiaire = ajoutStagiaire;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UtilisateurRequest [id=" + id + ", login=" + login + ", nom=" + nom + ", prenom=" + prenom + ", email="
+				+ email + ", role=" + role + ", ajoutFormateur=" + ajoutFormateur + ", ajoutStagiaire=" + ajoutStagiaire
+				+ "]";
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 

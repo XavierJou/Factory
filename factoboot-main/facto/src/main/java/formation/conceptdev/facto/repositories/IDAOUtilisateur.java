@@ -13,6 +13,7 @@ import formation.conceptdev.facto.entities.Utilisateur;
 public interface IDAOUtilisateur extends JpaRepository<Utilisateur, Integer> {
 	
 	Optional<Utilisateur> findByLogin(String login);
+	Optional<Utilisateur> findByEmail(String email);
 	
 	@Query("SELECT u FROM Utilisateur u WHERE u.formateur.id = :formateurId")
     Optional<Utilisateur> findByFormateurId(@Param("formateurId") Integer formateurId);

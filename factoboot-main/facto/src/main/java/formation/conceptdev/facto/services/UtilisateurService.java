@@ -34,6 +34,10 @@ public class UtilisateurService implements UserDetailsService {
 	public boolean loginExists(String login) {
 	    return daoUtilisateur.findByLogin(login).isPresent();
 	}
+	
+	public boolean emailExists(String email) {
+	    return daoUtilisateur.findByEmail(email).isPresent();
+	}
 
 	public void updatePassword(String login, String password) {
 		Utilisateur utilisateur = daoUtilisateur.findByLogin(login).orElseThrow(() -> {
@@ -58,6 +62,7 @@ public class UtilisateurService implements UserDetailsService {
 	}
 	
 	public Utilisateur create(Utilisateur utilisateur) {
+		
 		if (utilisateur.getLogin() == null || utilisateur.getLogin().isBlank()
 				|| daoUtilisateur.findByLogin(utilisateur.getLogin()).isPresent()) {
 			throw new UtilisateurException("problème login");

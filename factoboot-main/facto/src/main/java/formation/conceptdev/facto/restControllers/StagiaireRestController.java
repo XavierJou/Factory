@@ -25,9 +25,12 @@ import formation.conceptdev.facto.dto.request.StagiaireRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.FormateurResponse;
 import formation.conceptdev.facto.dto.response.StagiaireResponse;
+import formation.conceptdev.facto.entities.Formateur;
 import formation.conceptdev.facto.entities.Stagiaire;
+import formation.conceptdev.facto.entities.Utilisateur;
 import formation.conceptdev.facto.services.FormationService;
 import formation.conceptdev.facto.services.StagiaireService;
+import formation.conceptdev.facto.services.UtilisateurService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
@@ -41,6 +44,8 @@ public class StagiaireRestController {
 	private StagiaireService stagiaireSrv;
 	@Autowired
 	private FormationService formationSrv;
+	@Autowired
+	private UtilisateurService utilisateurSrv;
 
 	@GetMapping("")
 	@JsonView(CustomJsonViews.StagiaireWithFormation.class)
@@ -90,8 +95,25 @@ public class StagiaireRestController {
 	@DeleteMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable Integer id) {
-		stagiaireSrv.detachUtilisateurFromFormateur(id);
-		stagiaireSrv.deleteById(id);
+		
+		
+		 Stagiaire stagiaire = stagiaireSrv.getById(id);		
+		 Integer idUtil= stagiaire.getUtilisateur().getId();
+		 
+		 Utilisateur utilisateur = utilisateurSrv.getById(idUtil);
+		
+		 utilisateurSrv.detachFormateurFromUtilisateur(idUtil);
+		 stagiaireSrv.detachUtilisateurFromFormateur(id);
+			
+	   	 
+	   	 utilisateurSrv.deleteById(idUtil);
+	   	 stagiaireSrv.deleteById(id);
+
+   	
+   	 
+   	
+   	 
+
 	}
 	
 	@DeleteMapping("/nullIdUtilisateur/{idStagiaire}")
