@@ -32,7 +32,7 @@ export class VideoprojecteurComponent {
     });
   }
 
-  searchOrdinateurs() {
+  searchVideoprojecteurs() {
     if (this.searchTerm.length > 0) {
       this.videoprojecteurSrv
         .searchByNom(this.searchTerm)
@@ -46,7 +46,7 @@ export class VideoprojecteurComponent {
 
   clearSearch() {
     this.searchTerm = '';
-    this.searchOrdinateurs();
+    this.searchVideoprojecteurs();
   }
 
   trackById(index: number, videoprojecteur: Videoprojecteur) {

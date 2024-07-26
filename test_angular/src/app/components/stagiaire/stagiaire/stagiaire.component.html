@@ -1,8 +1,7 @@
 <div class="container">
+  <h2>Liste des Stagiaires</h2>
   <div class="container-fluid">
-    <a routerLink="/utilisateurs" routerLinkActive="active" class="btn btn-link"
-      >Ajouter</a
-    >
+    <a routerLink="/utilisateurs" routerLinkActive="active" class="btn btn-link">Ajouter</a>
   </div>
 
   @for(stagiaire of stagiaires;track stagiaire.id) {
@@ -17,10 +16,7 @@
 
           @if(stagiaire.formation) {
           <td>
-            <button
-              class="btn btn-outline-danger btn-sm"
-              (click)="delete(stagiaire.id!)"
-            >
+            <button class="btn btn-outline-danger btn-sm" (click)="delete(stagiaire.id!)">
               Supprimer
             </button>
           </td>

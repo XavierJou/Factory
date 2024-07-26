@@ -1,33 +1,28 @@
 <div class="container">
-  <h1>Matières</h1>
+  <h1>Liste des Matières</h1>
   <div class="gap-5 m-auto d-flex flex-column">
     <div class="text-end">
-      <a
-        routerLink="/matiere/edit"
-        routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm"
-        >+ matière</a
-      >
+      <a routerLink="/matiere/edit" routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm">nouvelle
+        matière</a>
     </div>
     <div class="gap-3 d-flex flex-column">
       @for(m of matieres;track m.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ m.id }} : {{ m.titre }}</p>
+        <p><strong>ID :</strong> {{ m.id }}</p>
+        <p><strong>Titre :</strong> {{ m.titre }}</p>
+        <p><strong>Durée :</strong> {{ m.duree }} heures</p>
+        <p><strong>Objectif :</strong> {{ m.objectif }}</p>
+        <p><strong>Contenu :</strong> {{ m.contenu }}</p>
         <div>
           <div class="d-inline">
-            <button
-              class="p-2 btn btn-outline-danger btn-sm d-inline"
-              (click)="delete(m.id!)"
-            >
+            <button class="p-2 btn btn-outline-danger btn-sm d-inline" (click)="delete(m.id!)">
               Supprimer
             </button>
           </div>
           <div class="p-2 d-inline">
-            <button
-              class="p-2 btn btn-outline-warning btn-sm d-inline"
-              routerLink="/matiere/edit/{{ m.id }}"
-              routerLinkActive="active"
-            >
+            <button class="p-2 btn btn-outline-warning btn-sm d-inline" routerLink="/matiere/edit/{{ m.id }}"
+              routerLinkActive="active">
               éditer
             </button>
           </div>

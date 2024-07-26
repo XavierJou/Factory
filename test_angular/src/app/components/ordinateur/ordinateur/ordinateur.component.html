@@ -1,44 +1,33 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="container">
-    <div class="container-fluid">
-      <a
-        routerLink="/ordinateur/edit"
-        routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm"
-        >Nouvel ordinateur</a
-      >
+<div class="container">
+  <h1>Liste des ordinateurs</h1>
+  <div class="gap-5 m-auto d-flex flex-column">
+    <div class="text-end">
+      <a routerLink="/ordinateur/edit" routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm">nouvel ordinateur</a>
     </div>
     <div class="search-bar">
       <div class="input-group">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Rechercher un ordinateur"
-          [(ngModel)]="searchTerm"
-          (input)="searchOrdinateurs()"
-        />
-        <!-- Boutton pour effacer la recherche -->
+        <input class="form-control" type="text" placeholder="Rechercher un ordinateur" [(ngModel)]="searchTerm"
+          (input)="searchOrdinateurs()" />
       </div>
     </div>
-    <p></p>
     <div class="container">
       @for(o of ordinateurs;track o.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ o.id }} : {{ o.nom }}</p>
+        <p><strong>ID :</strong> {{ o.id }}</p>
+        <p><strong>Nom :</strong> {{ o.nom }}</p>
+        <p><strong>Marque :</strong> {{ o.marque }}</p>
+        <p><strong>Os :</strong> {{ o.os }}</p>
+        <!-- <p><strong>Date d'achat :</strong> {{ o.dateAchat }}</p> -->
+
         <div class="d-inline">
-          <button
-            class="p-2 btn btn-outline-danger btn-sm d-inline"
-            (click)="delete(o.id!)"
-          >
+          <button class="p-2 btn btn-outline-danger btn-sm d-inline" (click)="delete(o.id!)">
             Supprimer
           </button>
         </div>
         <div class="p-2 d-inline">
-          <button
-            class="p-2 btn btn-outline-warning btn-sm d-inline"
-            routerLink="/ordinateur/edit/{{ o.id }}"
-            routerLinkActive="active"
-          >
+          <button class="p-2 btn btn-outline-warning btn-sm d-inline" routerLink="/ordinateur/edit/{{ o.id }}"
+            routerLinkActive="active">
             éditer
           </button>
         </div>

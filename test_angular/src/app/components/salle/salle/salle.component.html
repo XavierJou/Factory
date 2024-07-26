@@ -1,22 +1,14 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="container">
-    <div class="container-fluid">
-      <a
-        routerLink="/salle/edit"
-        routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm"
-        >Nouvelle salle</a
-      >
+<div class="container">
+  <h1>Liste des salles</h1>
+  <div class="gap-5 m-auto d-flex flex-column">
+    <div class="text-end">
+      <a routerLink="/salle/edit" routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm">Nouvelle salle</a>
     </div>
     <div class="search-bar">
       <div class="input-group">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Rechercher une salle"
-          [(ngModel)]="searchTerm"
-          (input)="searchSalles()"
-        />
+        <input class="form-control" type="text" placeholder="Rechercher une salle" [(ngModel)]="searchTerm"
+          (input)="searchSalles()" />
         <!-- Boutton pour effacer la recherche -->
       </div>
     </div>
@@ -24,21 +16,17 @@
     <div class="container">
       @for(s of salles;track s.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ s.id }} : {{ s.nom }}</p>
+        <p><strong>ID :</strong> {{ s.id }}</p>
+        <p><strong>Nom :</strong> {{ s.nom }}</p>
+        <p><strong>Capacité :</strong> {{ s.capacite }}</p>
         <div class="d-inline">
-          <button
-            class="p-2 btn btn-outline-danger btn-sm d-inline"
-            (click)="delete(s.id!)"
-          >
+          <button class="p-2 btn btn-outline-danger btn-sm d-inline" (click)="delete(s.id!)">
             Supprimer
           </button>
         </div>
         <div class="p-2 d-inline">
-          <button
-            class="p-2 btn btn-outline-warning btn-sm d-inline"
-            routerLink="/salle/edit/{{ s.id }}"
-            routerLinkActive="active"
-          >
+          <button class="p-2 btn btn-outline-warning btn-sm d-inline" routerLink="/salle/edit/{{ s.id }}"
+            routerLinkActive="active">
             éditer
           </button>
         </div>
