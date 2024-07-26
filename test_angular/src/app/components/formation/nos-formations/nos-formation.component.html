@@ -1,58 +1,73 @@
+<app-menu></app-menu>
 <div class="container">
-  <h1>Nos formations</h1>
-  <div class="gap-5 m-auto d-flex flex-column">
-    <div class="gap-3 d-flex flex-column">
-      @for(f of formations;track f.id){
-      <div class="alert alert-dismissible alert-secondary">
-        <div class="d-flex justify-content-between">
-          <p>{{ f.titre }}</p>
-          <p>màj : 28/06/2024</p>
-        </div>
-        <div class="container px-4 py-5" id="hanging-icons">
-          <h2 class="pb-2 border-bottom">Contenu</h2>
-          <p>{{ f.contenu }}</p>
-          <div class="py-5 mx-auto row g-4 row-cols-1 row-cols-lg-3">
-            <div class="col d-flex align-items-start">
-              <div class="flex-shrink-0 me-3">
-                <span class="material-symbols-rounded fs-1 text-info">
-                  bookmark_flag
-                </span>
+  <div class="px-4 pt-5 my-5 text-center border-bottom">
+    <h1>Nos formations</h1>
+    <div class="gap-5 m-auto mt-5 d-flex flex-column">
+      <div class="gap-3 d-flex flex-column">
+        @for(f of formations;track f.id){
+        <div class="alert alert-dismissible alert-secondary">
+          <div class="d-flex justify-content-between">
+            <p>{{ f.titre }}</p>
+            <p>màj : 28/06/2024</p>
+          </div>
+          <div class="container px-4 py-5" id="hanging-icons">
+            <h2 class="pb-2 border-bottom">Contenu</h2>
+            <p>{{ f.contenu }}</p>
+            <div class="py-5 mx-auto row g-4 row-cols-1 row-cols-lg-3">
+              <div class="col d-flex align-items-start">
+                <div class="flex-shrink-0 me-3">
+                  <span class="material-symbols-rounded fs-1 text-info">
+                    bookmark_flag
+                  </span>
+                </div>
+                <div>
+                  <h2 class="text-info">Objectifs</h2>
+                  <p>
+                    {{ f.objectif }}
+                  </p>
+                </div>
               </div>
-              <div>
-                <h2 class="text-info">Objectifs</h2>
-                <p>
-                  {{ f.objectif }}
-                </p>
+              <div class="col d-flex align-items-start">
+                <div class="flex-shrink-0 me-3">
+                  <span class="material-symbols-rounded fs-1 text-info">
+                    schedule
+                  </span>
+                </div>
+                <div>
+                  <h2 class="text-info">Durée</h2>
+                  <p>{{ f.duree }} jours</p>
+                </div>
               </div>
-            </div>
-            <div class="col d-flex align-items-start">
-              <div class="flex-shrink-0 me-3">
-                <span class="material-symbols-rounded fs-1 text-info">
-                  schedule
-                </span>
-              </div>
-              <div>
-                <h2 class="text-info">Durée</h2>
-                <p>{{ f.duree }} jours</p>
-              </div>
-            </div>
-            <div class="col d-flex align-items-start">
-              <div class="flex-shrink-0 me-3">
-                <span class="material-symbols-rounded fs-1 text-info">
-                  calendar_month
-                </span>
-              </div>
-              <div>
-                <h2 class="text-info">Début</h2>
-                <p>
-                  {{ f.dateDebut | date : "dd/MM/yyyy" }}
-                </p>
+              <div class="col d-flex align-items-start">
+                <div class="flex-shrink-0 me-3">
+                  <span class="material-symbols-rounded fs-1 text-info">
+                    calendar_month
+                  </span>
+                </div>
+                <div>
+                  <h2 class="text-info">Début</h2>
+                  <p>
+                    {{ f.dateDebut | date : "dd/MM/yyyy" }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        }
       </div>
-      }
+    </div>
+  </div>
+  <div class="flex-shrink-0">
+    <div class="container">
+      <h1 class="mt-5">
+        Factory, l'école qui forme des professionnels du code
+      </h1>
+      <p class="lead">
+        Avec des programmes innovants et immersifs, elle prépare les étudiants
+        aux défis du monde technologique moderne, garantissant des compétences
+        recherchées par les entreprises.
+      </p>
     </div>
   </div>
 </div>

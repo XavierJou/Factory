@@ -4,11 +4,12 @@ import { Formation } from '../../../models/formation';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Formateur } from '../../../models/formateur';
+import { MenuComponent } from '../../menu/menu.component';
 
 @Component({
   selector: 'app-nos-formation',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, DatePipe],
+  imports: [RouterLink, RouterLinkActive, DatePipe, MenuComponent],
   templateUrl: './nos-formation.component.html',
   styleUrl: './nos-formation.component.css',
 })
