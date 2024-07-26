@@ -82,25 +82,9 @@ export class PlanificationComponent implements OnInit {
         salles.forEach((salle) => {
           this.salles.push(salle.nom ?? '');
         });
-        console.log(this.salles);
+        this.calculDateDebutFin(this.dateDebut);
+        this.createChart();
       });
-
-      this.salles = [
-        'Salle 1',
-        'Salle 2',
-        'Salle 3',
-        'Salle 4',
-        'Salle 5',
-        'Salle 6',
-        'Salle 7',
-        'Salle 8',
-        'Salle 9',
-        'Salle 10',
-      ];
-
-      console.log(this.salles);
-      this.calculDateDebutFin(this.dateDebut);
-      this.createChart();
     });
   }
 
