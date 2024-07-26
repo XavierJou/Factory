@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  ActivatedRoute,
-  ChildrenOutletContexts,
-  RouterOutlet,
-} from '@angular/router';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
 import { slideInAnimation } from './animations';
 

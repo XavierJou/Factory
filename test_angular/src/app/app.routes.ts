@@ -33,15 +33,10 @@ import { PrerequisFormationComponent } from './components/prerequis/prerequis-fo
 import { MatieresFormationComponent } from './components/matiere/matiere-formation/matiere-formation.component';
 import { FormateursFormationComponent } from './components/formateur/formateur-formation/formateur-formation.component';
 import { StagiairesFormationComponent } from './components/stagiaire/stagiaire-formation/stagiaire-formation.component';
-import { animation } from '@angular/animations';
 import { FormationDetailComponent } from './components/formation/formation-detail/formation-detail.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
-  },
   {
     path: 'home',
     component: HomeComponent,
@@ -62,6 +57,7 @@ export const routes: Routes = [
     path: '',
     component: LayoutComponent,
     data: { animation: 'LayoutPage' },
+    canActivate: [authGuard],
     children: [
       {
         path: 'planning',
@@ -232,5 +228,11 @@ export const routes: Routes = [
         component: EditVideoprojecteurComponent,
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full',
+    data: { animation: 'Page' },
   },
 ];

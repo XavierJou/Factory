@@ -3,7 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 
 export const isLoggedGuard: CanActivateFn = (route, state) => {
   if (localStorage.getItem('token') != null) {
-    return inject(Router).createUrlTree(['/dashboard']);
+    return inject(Router).createUrlTree(['/home']);
   }
   return true;
 };
