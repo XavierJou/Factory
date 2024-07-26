@@ -89,6 +89,15 @@ public class CoursRestController {
 				.collect(Collectors.toList());
 	}
 	
+	@GetMapping("/formation/{idFormation}")
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
+    public List<CoursResponse> getCoursByFormationId(@PathVariable Integer idFormation) {
+		return coursSrv.getCoursByFormationId(idFormation).stream()
+				.map(cours -> new CoursResponse(cours, true, false, false, false, false, true, false))
+		.collect(Collectors.toList());
+       
+    }
+	
 	@GetMapping("/formation")
 	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	public List<CoursResponse> getAllCoursWithFormation() {

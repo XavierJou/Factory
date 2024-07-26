@@ -33,6 +33,9 @@ public interface IDAOCours extends JpaRepository<Cours, Integer> {
 	 
 	 @Query("SELECT c FROM Cours c WHERE c.formateur.id <> :formateurId OR c.formateur IS NULL")
 	    List<Cours> findByFormateurNot(@Param("formateurId") Integer formateurId);
+	 
+	 @Query("SELECT c FROM Cours c WHERE c.formation.id = :idFormation")
+	    List<Cours> findAllByFormationId(@Param("idFormation") Integer idFormation);
 	
 
 }

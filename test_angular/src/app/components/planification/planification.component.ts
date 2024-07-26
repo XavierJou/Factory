@@ -3,6 +3,12 @@ import * as d3 from 'd3';
 import { PlanifSalle } from '../../models/planif-salle';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Formation } from '../../models/formation';
+import { Salle } from '../../models/salle';
+import { CoursService } from '../../services/cours.service';
+import { FormationService } from '../../services/formation.service';
+import { Cours } from '../../models/cours';
+import { SalleService } from '../../services/salle.service';
 
 @Component({
   selector: 'app-planification',
@@ -12,6 +18,100 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './planification.component.css',
 })
 export class PlanificationComponent implements OnInit {
+  formations: Formation[] = [];
+  formationSelection: Formation = new Formation();
+  listCours: Cours[] = [];
+
+  // Liste des salles
+  salles: string[] = []; //['Salle 1', 'Salle 2', 'Salle 3'];
+
+  planifSalles: PlanifSalle[] = [];
+
+  private bornesX!: d3.ScaleTime<number, number>;
+
+  decalageJour: number = 0;
+
+  @ViewChild('chart', { static: true }) private chartContainer!: ElementRef;
+
+  private marges = { top: 20, right: 20, bottom: 30, left: 50 };
+  private largeur!: number;
+  private hauteur!: number;
+  private x!: d3.ScaleTime<number, number>;
+
+  dateDebut: Date = new Date('2024-07-01');
+
+  dateDebutString: string = '';
+  dateFinString: string = '';
+
+  private borneX!: d3.ScaleTime<number, number>;
+  private svg!: d3.Selection<SVGSVGElement, unknown, null, undefined>;
+  private g!: d3.Selection<SVGGElement, unknown, null, undefined>;
+
+  constructor(
+    private formationSrv: FormationService,
+    private coursService: CoursService,
+    private salleService: SalleService
+  ) {}
+
+  calculDateDebutFin(dateDepart: Date) {
+    this.dateDebutString = this.convertiDateString(
+      this.trouverLundiProche(dateDepart)
+    );
+
+    this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
+  }
+
+  private trouverLundiProche(date: Date): Date {
+    const jour = date.getDay(); // 0 = Dimanche, 1 = Lundi, ..., 6 = Samedi
+
+    // Calculer la différence en jours pour atteindre le lundi
+    const diff = (jour === 0 ? -6 : 1) - jour;
+
+    // Créer une nouvelle date pour le lundi le plus proche
+    const lundiProche = new Date(date);
+    lundiProche.setDate(date.getDate() + diff);
+
+    return lundiProche;
+  }
+  ngOnInit(): void {
+    this.formationSrv.getAll().subscribe((formations) => {
+      this.formations = formations;
+
+      this.salleService.getAll().subscribe((salles) => {
+        this.salles = [];
+        salles.forEach((salle) => {
+          this.salles.push(salle.nom ?? '');
+        });
+        console.log(this.salles);
+      });
+
+      this.salles = [
+        'Salle 1',
+        'Salle 2',
+        'Salle 3',
+        'Salle 4',
+        'Salle 5',
+        'Salle 6',
+        'Salle 7',
+        'Salle 8',
+        'Salle 9',
+        'Salle 10',
+      ];
+
+      console.log(this.salles);
+      this.calculDateDebutFin(this.dateDebut);
+      this.createChart();
+    });
+  }
+
+  choixFormation(idFormation: number) {
+    this.coursService.getCoursByFormationId(idFormation).subscribe((cours) => {
+      this.listCours = cours;
+      this.updatePlanifSalles();
+      this.updateChart();
+    });
+  }
+  /*
   planifSalles: PlanifSalle[] = [
     new PlanifSalle(
       1,
@@ -42,48 +142,32 @@ export class PlanificationComponent implements OnInit {
     ),
 
     // Ajoutez d'autres données selon vos besoins
-  ];
+  ];*/
 
-  // Liste des salles
-  salles: string[] = ['Salle 1', 'Salle 2', 'Salle 3'];
-  private bornesX!: d3.ScaleTime<number, number>;
-
-  decalageJour: number = 0;
-
-  @ViewChild('chart', { static: true }) private chartContainer!: ElementRef;
-
-  private marges = { top: 20, right: 20, bottom: 30, left: 50 };
-  private largeur!: number;
-  private hauteur!: number;
-  private x!: d3.ScaleTime<number, number>;
-
-  dateDebut: Date = new Date('2024-06-25');
-
-  dateDebutString: string = this.convertiDateString(new Date('2024-06-24'));
-  dateFinString: string = this.convertiDateString(new Date('2024-07-31'));
-  private borneX!: d3.ScaleTime<number, number>;
-  private svg!: d3.Selection<SVGSVGElement, unknown, null, undefined>;
-  private g!: d3.Selection<SVGGElement, unknown, null, undefined>;
-
-  calculDateDebutFin(dateDepart: Date) {
-    this.dateDebutString = this.trouverLundiProche(dateDepart).toDateString();
-    this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
+  private updatePlanifSalles() {
+    this.planifSalles = this.listCours.map((cours) => {
+      return new PlanifSalle(
+        cours.id,
+        cours.salle?.nom ?? 'distanciel', // Assign a room in a round-robin fashion
+        new Date(cours.dateDebut ?? '2024-07-04'),
+        new Date(
+          this.ajouterJour(
+            this.convertiDateString(new Date(cours.dateDebut ?? '2024-07-04')),
+            cours.matiere?.duree ?? 0
+          )
+        ),
+        'steelblue', // Assign a default color
+        cours.titre,
+        true
+      );
+    });
   }
 
-  private trouverLundiProche(date: Date): Date {
-    const jour = date.getDay(); // 0 = Dimanche, 1 = Lundi, ..., 6 = Samedi
+  private updateChart() {
+    // Clear the existing chart
+    this.g.selectAll('*').remove();
 
-    // Calculer la différence en jours pour atteindre le lundi
-    const diff = (jour === 0 ? -6 : 1) - jour;
-
-    // Créer une nouvelle date pour le lundi le plus proche
-    const lundiProche = new Date(date);
-    lundiProche.setDate(date.getDate() + diff);
-
-    return lundiProche;
-  }
-  ngOnInit(): void {
-    this.calculDateDebutFin(this.dateDebut);
+    // Recreate the chart elements
     this.createChart();
   }
 
@@ -247,12 +331,16 @@ export class PlanificationComponent implements OnInit {
   }
 
   ChangementBorneDebut() {
-    this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
+    // this.dateFinString = this.ajouterMois(this.dateDebutString, 1);
+
+    this.calculDateDebutFin(new Date(this.dateDebutString));
+
     this.ChangementBorne();
   }
 
   ChangementBorneFin() {
     this.dateDebutString = this.ajouterMois(this.dateFinString, -1);
+    this.calculDateDebutFin(new Date(this.dateDebutString));
     this.ChangementBorne();
   }
 

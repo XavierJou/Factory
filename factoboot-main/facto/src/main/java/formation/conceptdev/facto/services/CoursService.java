@@ -50,6 +50,10 @@ public class CoursService {
         return daoCours.findAllWithFormateur(id);
     }
 	
+	public List<Cours> getCoursByFormationId(Integer idFormation) {
+        return daoCours.findAllByFormationId(idFormation);
+    }
+	
 	public Cours getByIdWithStagiaire(Integer id) {
 		if (id == null) {
 			throw new RuntimeException("Impossible de find Cours sans id");

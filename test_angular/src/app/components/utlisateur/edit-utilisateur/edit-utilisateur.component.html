@@ -10,7 +10,7 @@
 <div>
   <div class="form-group">
     <label class="input-large" for="id">Id:</label>
-    <div class="bordered-box">{{ utilisateur.id }}</div>
+    <div class="bordered-box">{{ utilisateur.login }}</div>
   </div>
   <div class="form-group">
     <label class="input-large" for="login">Login:</label>
@@ -58,11 +58,11 @@
 
   @if(utilisateur.formateur){
   <div lass="form-group">
-    <label for="formateur">filiere:</label> {{ utilisateur.formateur.id }}
+    <label for="formateur">formateur:</label> {{ utilisateur.formateur.id }}
   </div>
   } @if(utilisateur.stagiaire){
   <div lass="form-group">
-    <label for="stagiaire">filiere:</label> {{ utilisateur.stagiaire.id }}
+    <label for="stagiaire">satgiaire:</label> {{ utilisateur.stagiaire.id }}
   </div>
   }
 

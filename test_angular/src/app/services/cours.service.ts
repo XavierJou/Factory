@@ -19,6 +19,10 @@ export class CoursService {
     return this.httpClient.get<Cours[]>(`${this.url}/sans-formateur/${id}`);
   }
 
+  public getCoursByFormationId(id: number): Observable<Cours[]> {
+    return this.httpClient.get<Cours[]>(`${this.url}/formation/${id}`);
+  }
+
   public getAllFromFormation(): Observable<Cours[]> {
     return this.httpClient.get<Cours[]>(`${this.url}/formation`);
   }

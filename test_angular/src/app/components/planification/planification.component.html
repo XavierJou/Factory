@@ -1,18 +1,57 @@
 <h1>Planning</h1>
-debut
-<input
-  type="date"
-  id="dateDebut"
-  [(ngModel)]="dateDebutString"
-  (ngModelChange)="ChangementBorneDebut()"
-/>
-fin
-<input
-  type="date"
-  id="dateFin"
-  [(ngModel)]="dateFinString"
-  (ngModelChange)="ChangementBorneFin()"
-/>
-<button (click)="semainePrecedente()">precedent</button>
-<button (click)="semaineSuivante()">suivant</button>
+<div class="container">
+  <div class="row align-items-center">
+    <!-- Champ de date début -->
+    <div class="col-auto">
+      <label for="dateDebutString">Début</label>
+      <input
+        type="date"
+        id="dateDebutString"
+        [(ngModel)]="dateDebutString"
+        (ngModelChange)="ChangementBorneDebut()"
+        class="form-control"
+      />
+    </div>
+
+    <!-- Champ de date fin -->
+    <div class="col-auto">
+      <label for="dateFinString">Fin</label>
+      <input
+        type="date"
+        id="dateFinString"
+        [(ngModel)]="dateFinString"
+        (ngModelChange)="ChangementBorneFin()"
+        class="form-control"
+      />
+    </div>
+
+    <!-- Boutons précédent et suivant -->
+    <div class="col-auto">
+      <button (click)="semainePrecedente()" class="btn btn-primary">
+        Précédent
+      </button>
+    </div>
+    <div class="col-auto">
+      <button (click)="semaineSuivante()" class="btn btn-primary">
+        Suivant
+      </button>
+    </div>
+
+    <!-- Sélection de formation -->
+    <div class="col-auto">
+      <label for="formationSelect">Formation</label>
+      <select
+        id="formationSelect"
+        [(ngModel)]="formationSelection"
+        class="form-control"
+        (ngModelChange)="choixFormation($event)"
+      >
+        @for(f of formations ;track $index){
+        <option [ngValue]="f.id">{{ f.titre }}</option>
+        }
+      </select>
+    </div>
+  </div>
+</div>
+
 <div #chart class="chart-container"></div>
