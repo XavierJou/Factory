@@ -3,13 +3,17 @@
   <div class="gap-5 m-auto d-flex flex-column">
     @if(role == 'ROLE_ADMINISTRATEUR'){
     <div class="text-end">
-      <a routerLink="/formations/edit" routerLinkActive="active"
-        class="btn btn-link-primary btn-outline-primary btn-sm">+ formation</a>
+      <a
+        routerLink="/formations/edit"
+        routerLinkActive="active"
+        class="btn btn-link-primary btn-outline-primary btn-sm"
+        >+ formation</a
+      >
     </div>
     <div class="gap-3 d-flex flex-column">
       @for(f of formations;track f.id){
       <div class="alert alert-dismissible alert-secondary">
-        <div class="d-flex flex-wrap">
+        <div class="flex-wrap d-flex">
           <!-- <p class="m-2"><strong>ID :</strong> {{ f.id }}</p> -->
           <!-- <p class="m-2"><strong>Titre :</strong> {{ f.titre }}</p> -->
           <!-- <p class="m-2"><strong>Durée :</strong> {{ f.duree }} heures</p> -->
@@ -24,16 +28,25 @@
         <p><strong>Objectif :</strong> {{ f.objectif }}</p>
         <p><strong>Contenu :</strong> {{ f.contenu }}</p>
         <p><strong>Capacité :</strong> {{ f.capacite }} stagiaires</p>
-        <p><strong>Date de début :</strong> {{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
+        <p>
+          <strong>Date de début :</strong>
+          {{ f.dateDebut | date : "dd/MM/yyyy" }}
+        </p>
         <div>
           <div class="d-inline">
-            <button class="p-2 btn btn-outline-danger btn-sm d-inline" (click)="delete(f.id!)">
+            <button
+              class="p-2 btn btn-outline-danger btn-sm d-inline"
+              (click)="delete(f.id!)"
+            >
               Supprimer
             </button>
           </div>
           <div class="p-2 d-inline">
-            <button class="p-2 btn btn-outline-warning btn-sm d-inline" routerLink="/formations/edit/{{ f.id }}"
-              routerLinkActive="active">
+            <button
+              class="p-2 btn btn-outline-warning btn-sm d-inline"
+              routerLink="/formations/edit/{{ f.id }}"
+              routerLinkActive="active"
+            >
               éditer
             </button>
           </div>
@@ -45,13 +58,63 @@
     <div class="gap-3 d-flex flex-column">
       @for(f of formationsFormateur;track f.id){
       <div class="alert alert-dismissible alert-secondary">
-        <p>{{ f.id }} : {{ f.titre }}</p>
-        <p>{{ f.dateDebut | date : "dd/MM/yyyy" }}</p>
-        <div class="p-2 d-inline">
-          <button class="p-2 btn btn-outline-warning btn-sm d-inline" routerLink="/formation/{{ f.id }}"
-            routerLinkActive="active">
-            details
-          </button>
+        <div class="d-flex justify-content-between">
+          <p>{{ f.titre }}</p>
+          <p>màj : 28/06/2024</p>
+        </div>
+        <div class="container px-4 py-5" id="hanging-icons">
+          <h2 class="pb-2 border-bottom">Contenu</h2>
+          <div class="gap-3 d-flex">
+            <p class="col-10">{{ f.contenu }}</p>
+            <div class="p-2">
+              <button
+                class="px-4 py-2 btn btn-outline-warning btn-sm"
+                routerLink="/formation/{{ f.id }}"
+                routerLinkActive="active"
+              >
+                details
+              </button>
+            </div>
+          </div>
+          <div class="py-5 mx-auto row g-4 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start">
+              <div class="flex-shrink-0 me-3">
+                <span class="material-symbols-rounded fs-1 text-info">
+                  bookmark_flag
+                </span>
+              </div>
+              <div>
+                <h2 class="text-info">Objectifs</h2>
+                <p>
+                  {{ f.objectif }}
+                </p>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="flex-shrink-0 me-3">
+                <span class="material-symbols-rounded fs-1 text-info">
+                  schedule
+                </span>
+              </div>
+              <div>
+                <h2 class="text-info">Durée</h2>
+                <p>{{ f.duree }} jours</p>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="flex-shrink-0 me-3">
+                <span class="material-symbols-rounded fs-1 text-info">
+                  calendar_month
+                </span>
+              </div>
+              <div>
+                <h2 class="text-info">Début</h2>
+                <p>
+                  {{ f.dateDebut | date : "dd/MM/yyyy" }}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       }
