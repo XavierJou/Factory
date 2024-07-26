@@ -25,6 +25,7 @@ export class PlanificationComponent implements OnInit {
   // Liste des salles
   salles: string[] = []; //['Salle 1', 'Salle 2', 'Salle 3'];
   dictionnaireSalle: { [key: string]: number } = {};
+  dictionnaireCours: { [key: number]: Cours } = {};
 
   planifSalles: PlanifSalle[] = [];
 
@@ -104,38 +105,6 @@ export class PlanificationComponent implements OnInit {
       this.updateChart();
     });
   }
-  /*
-  planifSalles: PlanifSalle[] = [
-    new PlanifSalle(
-      1,
-      'Salle 1',
-      new Date('2024-07-01'),
-      new Date('2024-07-03'),
-      'steelblue', // Couleur du rectangle
-      'Cours 1',
-      true
-    ),
-    new PlanifSalle(
-      2,
-      'Salle 2',
-      new Date('2024-07-02'),
-      new Date('2024-07-04'),
-      'green', // Couleur du rectangle
-      'Cour 2',
-      true
-    ),
-    new PlanifSalle(
-      3,
-      'Salle 1',
-      new Date('2024-07-04'),
-      new Date('2024-07-05'),
-      'red', // Couleur du rectangle
-      'Cours 3',
-      true
-    ),
-
-    // Ajoutez d'autres données selon vos besoins
-  ];*/
 
   private updatePlanifSalles() {
     this.planifSalles = this.listCours.map((cours) => {
@@ -151,7 +120,8 @@ export class PlanificationComponent implements OnInit {
         ),
         'steelblue', // Assign a default color
         cours.titre,
-        true
+        true,
+        cours.matiere?.duree ?? 0
       );
     });
   }
@@ -435,6 +405,28 @@ export class PlanificationComponent implements OnInit {
           if (!d.estDragable) return;
 
           d3.select(event.sourceEvent.target).classed('dragging', false);
+          const debut_test: Date = d.debut ?? new Date();
+          console.log(debut_test.getDay());
+
+          if (debut_test.getDay() == 0) {
+            d.debut = this.ajouterJourDate(d.debut, 1);
+            d.fin = this.ajouterJourDate(d.debut, d.duree ?? 1);
+          } else {
+            if (debut_test.getDay() == 6) {
+              d.debut = this.ajouterJourDate(d.debut, 2);
+              d.fin = this.ajouterJourDate(d.debut, d.duree ?? 1);
+            }
+          }
+
+          const ajout: number = this.includesWeekend(
+            d.debut ?? new Date(),
+            d.fin ?? new Date()
+          );
+
+          d.fin = this.ajouterJourDate(d.debut, (d.duree ?? 1) + ajout);
+
+          // d.debut = this.ajouterJourDate(d.fin, 1);
+          //  d.fin = this.ajouterJourDate(d.fin, 1);
 
           //   d.fin = this.ajouterJourDate(d.fin, 1);
 
@@ -446,15 +438,33 @@ export class PlanificationComponent implements OnInit {
             if (!cours.salle) cours.salle = new Salle();
             cours.salle.id = this.dictionnaireSalle[nom_salle];
 
-            this.coursService.update(cours).subscribe((cours_retour) => {
-              console.log('sauuvegarde demandée');
-              console.log(cours_retour);
-            });
+            this.coursService.update(cours).subscribe((cours_retour) => {});
+
+            this.redessineBarres(bars, x, y);
           });
         }
       );
-    this.redessineBarres(bars, x, y);
+
     bars.call(drag);
+  }
+
+  private includesWeekend(startDate: Date, endDate: Date): number {
+    let currentDate = new Date(startDate);
+    let ajout = 0;
+    currentDate.setDate(currentDate.getDate() + 1);
+
+    while (currentDate <= endDate) {
+      const day = currentDate.getDay();
+      if (day === 0 || day === 1) {
+        // 0 = dimanche, 6 = samedi
+        ajout = ajout + 1;
+        endDate.setDate(endDate.getDate() + 1);
+        console.log('+1');
+      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    return ajout;
   }
 
   private ajouterJourDate(date: Date | undefined, nbJour: number): Date {

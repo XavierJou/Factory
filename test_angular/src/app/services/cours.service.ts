@@ -79,7 +79,6 @@ export class CoursService {
       idVideoprojecteur: cours.videoprojecteur?.id,
     };
 
-    console.log(obj);
     return obj;
   }
 
