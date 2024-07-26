@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import formation.conceptdev.facto.entities.Matiere;
+import formation.conceptdev.facto.entities.Ordinateur;
+import formation.conceptdev.facto.entities.Utilisateur;
 import formation.conceptdev.facto.repositories.IDAOMatiere;
 
 @Service
@@ -34,6 +36,10 @@ public class MatiereService {
 
 	public List<Matiere> getAllByTitre(String titre) {
 		return daoMatiere.findAllByTitre(titre);
+	}
+	
+	public List<Matiere> searchByTitre(String titre) {
+	    return daoMatiere.findByTitreContaining(titre);
 	}
 
 	public Matiere insert(Matiere matiere) {

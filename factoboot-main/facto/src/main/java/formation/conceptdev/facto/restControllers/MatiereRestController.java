@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,7 +25,9 @@ import com.fasterxml.jackson.annotation.JsonView;
 import formation.conceptdev.facto.dto.request.MatiereRequest;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.MatiereResponse;
+import formation.conceptdev.facto.dto.response.OrdinateurResponse;
 import formation.conceptdev.facto.entities.Matiere;
+import formation.conceptdev.facto.entities.Ordinateur;
 import formation.conceptdev.facto.services.MatiereService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -43,6 +46,20 @@ public class MatiereRestController {
     @JsonView(CustomJsonViews.Common.class)
     public List<MatiereResponse> getAll() {
         return matiereService.getAll().stream().map(matiere -> new MatiereResponse(matiere,false,false)).collect(Collectors.toList());
+    }
+    
+    @GetMapping("/search")
+    @JsonView(CustomJsonViews.Common.class)
+    public List<MatiereResponse> getAll(@RequestParam(value = "search", required = false) String search) {
+        List<Matiere> matieres;
+        if (search != null && !search.trim().isEmpty()) {
+            matieres = matiereService.searchByTitre(search);
+        } else {
+            matieres = matiereService.getAll();
+        }
+        return matieres.stream()
+                       .map(matiere -> new MatiereResponse(matiere, false, false))
+                       .collect(Collectors.toList());
     }
     
     @GetMapping("/details")

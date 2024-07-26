@@ -6,7 +6,13 @@
         class="btn btn-link-primary btn-outline-primary btn-sm">nouvelle
         matière</a>
     </div>
-    <div class="gap-3 d-flex flex-column">
+    <div class="search-bar">
+      <div class="input-group">
+        <input class="form-control" type="text" placeholder="Rechercher une matière" [(ngModel)]="searchTerm"
+          (input)="searchMatieres()" />
+      </div>
+    </div>
+    <div class="container">
       @for(m of matieres;track m.id){
       <div class="alert alert-dismissible alert-secondary">
         <p><strong>ID :</strong> {{ m.id }}</p>

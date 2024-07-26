@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Matiere } from '../models/matiere';
@@ -29,5 +29,10 @@ export class MatiereService {
 
   public update(matiere: Matiere): Observable<Matiere> {
     return this.httpClient.put<Matiere>(`${this.url}/${matiere.id}`, matiere);
+  }
+
+  public searchByTitre(search: string): Observable<Matiere[]> {
+    let params = new HttpParams().set('search', search);
+    return this.httpClient.get<Matiere[]>(this.url + '/search', { params });
   }
 }
