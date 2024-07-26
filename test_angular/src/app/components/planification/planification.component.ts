@@ -24,6 +24,7 @@ export class PlanificationComponent implements OnInit {
 
   // Liste des salles
   salles: string[] = []; //['Salle 1', 'Salle 2', 'Salle 3'];
+  dictionnaireSalle: { [key: string]: number } = {};
 
   planifSalles: PlanifSalle[] = [];
 
@@ -82,9 +83,17 @@ export class PlanificationComponent implements OnInit {
         salles.forEach((salle) => {
           this.salles.push(salle.nom ?? '');
         });
+        this.createSallDictionnaire(salles);
+
         this.calculDateDebutFin(this.dateDebut);
         this.createChart();
       });
+    });
+  }
+  private createSallDictionnaire(salles: Salle[]): void {
+    salles.forEach((salle) => {
+      let nom_salle: string = salle.nom ?? '';
+      this.dictionnaireSalle[nom_salle] = salle.id ?? 0;
     });
   }
 
@@ -149,6 +158,8 @@ export class PlanificationComponent implements OnInit {
 
   private updateChart() {
     // Clear the existing chart
+
+    d3.select(this.chartContainer.nativeElement).select('svg').remove();
     this.g.selectAll('*').remove();
 
     // Recreate the chart elements
@@ -424,13 +435,33 @@ export class PlanificationComponent implements OnInit {
           if (!d.estDragable) return;
 
           d3.select(event.sourceEvent.target).classed('dragging', false);
-          //  .attr('fill', d.couleur ?? 'steelblue');
 
-          this.redessineBarres(bars, x, y);
+          //   d.fin = this.ajouterJourDate(d.fin, 1);
+
+          this.coursService.getById(d.id ?? 0).subscribe((cours) => {
+            const newDateDebut = new Date(d.debut ?? new Date());
+            newDateDebut.setDate(newDateDebut.getDate() + 1);
+            cours.dateDebut = newDateDebut;
+            const nom_salle: string = d.nom ?? '';
+            if (!cours.salle) cours.salle = new Salle();
+            cours.salle.id = this.dictionnaireSalle[nom_salle];
+
+            this.coursService.update(cours).subscribe((cours_retour) => {
+              console.log('sauuvegarde demandée');
+              console.log(cours_retour);
+            });
+          });
         }
       );
-
+    this.redessineBarres(bars, x, y);
     bars.call(drag);
+  }
+
+  private ajouterJourDate(date: Date | undefined, nbJour: number): Date {
+    if (!date) return new Date();
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + nbJour);
+    return newDate;
   }
 
   // Arrondir une date à la date entière la plus proche

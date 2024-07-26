@@ -15,6 +15,10 @@ export class SalleService {
     return this.httpClient.get<Salle[]>(this.url);
   }
 
+  public getByNom(): Observable<Salle> {
+    return this.httpClient.get<Salle>(this.url + '/recherche-nom');
+  }
+
   public delete(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }

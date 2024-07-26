@@ -78,6 +78,8 @@ export class CoursService {
       idsOrdinateurs: cours.ordinateurs?.map((o) => o.id),
       idVideoprojecteur: cours.videoprojecteur?.id,
     };
+
+    console.log(obj);
     return obj;
   }
 

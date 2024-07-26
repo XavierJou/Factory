@@ -127,7 +127,7 @@ export class FormateurComponent implements OnInit {
   AjoutDisponibilite(idFormateur: number) {
     this.messageDisponibilite = '';
     this.messageDisponibliteId = -1;
-    let ajoutOk: boolean = false;
+    let ajoutOk: boolean = true;
 
     if (!this.disponibiliteFormateur || !this.disponibiliteFormateur) {
       this.messageDisponibilite = ' info incomplete';
@@ -135,16 +135,25 @@ export class FormateurComponent implements OnInit {
       ajoutOk = false;
     }
 
+    console.log(this.disponibiliteFormateur.dateDebut);
+    console.log(this.disponibiliteFormateur.dateFin);
+
     if (
       ajoutOk ||
-      (this.disponibiliteFormateur.dateDebut ?? new Date()) >
-        (this.disponibiliteFormateur.dateFin ?? new Date())
+      (this.disponibiliteFormateur.dateDebut &&
+        this.disponibiliteFormateur.dateFin)
     ) {
-      this.messageDisponibilite = ' date incorrectes';
-      this.messageDisponibliteId = idFormateur;
-      ajoutOk = false;
+      const db: Date = this.disponibiliteFormateur.dateDebut ?? new Date();
+      const df: Date = this.disponibiliteFormateur.dateFin ?? new Date();
+
+      if (db >= df) {
+        this.messageDisponibilite = ' date incorrectes';
+        this.messageDisponibliteId = idFormateur;
+        ajoutOk = false;
+      }
     }
 
+    console.log('ici');
     if (ajoutOk) {
       let obj = {
         formateurId: idFormateur,

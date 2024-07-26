@@ -1,5 +1,6 @@
 package formation.conceptdev.facto.restControllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import formation.conceptdev.facto.dto.request.SalleRequest;
+import formation.conceptdev.facto.dto.response.CoursResponse;
 import formation.conceptdev.facto.dto.response.CustomJsonViews;
 import formation.conceptdev.facto.dto.response.SalleResponse;
 import formation.conceptdev.facto.entities.Salle;
@@ -52,6 +54,9 @@ public class SalleRestController {
                           .map(salle -> new SalleResponse(salle, false))
                           .collect(Collectors.toList());
     }
+    
+    
+    
     
     @GetMapping("/cours")
     @JsonView(CustomJsonViews.Common.class)

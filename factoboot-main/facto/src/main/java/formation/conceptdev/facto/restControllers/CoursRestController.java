@@ -145,8 +145,7 @@ public class CoursRestController {
 				.collect(Collectors.toList());   
     }
 
-	@GetMapping("/{id}/formateurComptence")
-	// @JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class)
+	@GetMapping("/{id}/formateurComptence")	
 	@JsonView(CustomJsonViews.FormateurResponseWithUtilisateur.class)
 	public List<FormateurResponse> getFormateurComptence(@PathVariable Integer id) {
 		return coursSrv.getFormateurComptenceCours(id).stream()
@@ -177,7 +176,7 @@ public class CoursRestController {
 	}
 
 	@PutMapping("/{id}")
-	@JsonView(CustomJsonViews.Common.class)
+	@JsonView(CustomJsonViews.CoursResponseWithDetails.class)
 	public CoursResponse update(@Valid @RequestBody CoursRequest coursRequest, BindingResult br,
 			@PathVariable Integer id) {
 		if (br.hasErrors()) {
@@ -191,8 +190,8 @@ public class CoursRestController {
 		cours.setFormateur(formateurSrv.getById(coursRequest.getIdFormateur()));
 		if (coursRequest.getIdMatiere()!=null)
 		cours.setMatiere(matiereSrv.getById(coursRequest.getIdMatiere()));
-		if (coursRequest.getIdMatiere()!=null)
-		cours.setSalle(salleSrv.getById(coursRequest.getIdMatiere()));
+		if (coursRequest.getIdSalle()!=null)
+		cours.setSalle(salleSrv.getById(coursRequest.getIdSalle()));
 		if (coursRequest.getIdVideoprojecteur()!=null)
 		cours.setVideoprojecteur(videoprojecteurSrv.getById(coursRequest.getIdVideoprojecteur()));
 		cours.setId(id);
