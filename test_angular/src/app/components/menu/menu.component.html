@@ -1,42 +1,85 @@
 <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
   <div class="container-fluid">
-    <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="navbar-brand">Factory</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
-      aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <a
+      routerLink="/home"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      class="navbar-brand"
+      >Factory</a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarColor02"
+      aria-controls="navbarColor02"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
         <li class="mx-2 nav-item">
-          <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link active">Accueil
+          <a
+            routerLink="/home"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link active"
+            >Accueil
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
         <li class="mx-2 nav-item">
-          <a routerLink="/formations" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Nos
-            Formations
+          <a
+            routerLink="/nos-formations"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link"
+            >Nos Formations
           </a>
         </li>
         <li class="mx-2 nav-item">
-          <a routerLink="/about" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">A propos
-          </a>
-        </li>
-        <li class="mx-2 nav-item">
-          <a routerLink="/planification" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Test
-            Graphique
+          <a
+            routerLink="/about"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="nav-link"
+            >A propos
           </a>
         </li>
       </ul>
-      <div class="my-3">
+      <div class="gap-3 my-3 d-flex">
         @if(logged){
-        <button (click)="logout()" class="btn btn-outline-primary btn-sm">
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          class="btn btn-outline-primary btn-sm"
+          >Dashboard
+        </a>
+        <button (click)="logout()" class="btn btn-outline-light btn-sm">
           Déconnexion
         </button>
         }@else{
-        <span><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="mx-2 btn btn-outline-primary btn-sm">Connexion</a></span>
-        <span><a routerLink="/inscription" routerLinkActive="active" ariaCurrentWhenActive="page"
-            class="mx-2 btn btn-primary btn-sm">Inscription</a></span>
+        <span
+          ><a
+            routerLink="/login"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="mx-2 btn btn-outline-primary btn-sm"
+            >Connexion</a
+          ></span
+        >
+        <span
+          ><a
+            routerLink="/inscription"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="mx-2 btn btn-primary btn-sm"
+            >Inscription</a
+          ></span
+        >
         }
       </div>
     </div>

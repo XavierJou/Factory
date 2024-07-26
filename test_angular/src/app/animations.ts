@@ -3,6 +3,7 @@ import {
   animateChild,
   group,
   query,
+  state,
   style,
   transition,
   trigger,
@@ -10,20 +11,35 @@ import {
 
 export const slideInAnimation = trigger('routeAnimations', [
   transition('* <=> *', [
-    style({ position: 'relative' }),
-    query(
-      ':enter, :leave',
-      [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-        }),
-      ],
-      { optional: true }
+    state(
+      '*',
+      style({
+        top: 0,
+        right: 0,
+        width: '100%',
+        bottom: 0,
+      })
     ),
-    //query(':enter', [style({ left: '-100%' })], { optional: true }),
-    //query(':leave', animateChild(), { optional: true }),
+
+    transition(':enter', [
+      style({
+        right: '-100%',
+      }),
+      animate(
+        '.5s ease-in-out',
+        style({
+          right: 0,
+        })
+      ),
+    ]),
+
+    transition(':leave', [
+      animate(
+        '.5s ease-in-out',
+        style({
+          right: '-100%',
+        })
+      ),
+    ]),
   ]),
 ]);

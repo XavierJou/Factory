@@ -35,6 +35,7 @@ import { FormateursFormationComponent } from './components/formateur/formateur-f
 import { StagiairesFormationComponent } from './components/stagiaire/stagiaire-formation/stagiaire-formation.component';
 import { FormationDetailComponent } from './components/formation/formation-detail/formation-detail.component';
 import { authGuard } from './guards/auth.guard';
+import { NosFormationComponent } from './components/formation/nos-formations/nos-formation.component';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,10 @@ export const routes: Routes = [
     path: 'inscription',
     component: InscriptionComponent,
     data: { animation: 'InscriptionPage' },
+  },
+  {
+    path: 'nos-formations',
+    component: NosFormationComponent,
   },
   {
     path: '',
